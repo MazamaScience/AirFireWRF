@@ -17,10 +17,16 @@ BugReports: https://github.com/MazamaScience/WRFmet/issues
 Depends:
     R (>= 3.5.0)
 Imports:
+    cowplot,
     dplyr,
+    ggplot2,
     lubridate,
     magrittr,
     MazamaCoreUtils,
+    ncdf4,
+    raster,
+    rasterVis,
+    RColorBrewer,
     readr,
     rlang,
     stringr
