@@ -2,7 +2,7 @@
 % Please edit documentation in R/raster_map.R
 \name{raster_ggmap}
 \alias{raster_ggmap}
-\alias{raster_ggmap.RasterLayer}
+\alias{raster_ggmap.Raster}
 \alias{raster_ggmap.list}
 \title{Geographic map of BlueSky model output}
 \usage{
@@ -20,7 +20,7 @@ raster_ggmap(
   verbose = TRUE
 )
 
-\method{raster_ggmap}{RasterLayer}(
+\method{raster_ggmap}{Raster}(
   raster,
   index = 1,
   palette = "Greys",
@@ -68,6 +68,8 @@ of the palettes available through \code{ggplot2::scale_colour_brewer()}.}
 
 \item{col_county}{Color of county lines. (use \code{'transparent'} to hide them.)}
 
+\item{col_na}{Color of NA cells. (use \code{'transparent'} to hide them.)}
+
 \item{verbose}{Logical to display messages.}
 }
 \value{
@@ -87,19 +89,21 @@ e.g \code{index = 1} is the first hour of a model.
 }
 \section{Methods (by class)}{
 \itemize{
-\item \code{RasterLayer}: Method for Raster* objects.
+\item \code{Raster}: Method for Raster* objects.
 
 \item \code{list}: Multi-threaded method for a list of Raster* objects.
 }}
 
 \examples{
 \donttest{
-
-# Load model data
-raster <- wrf_load(
-  localPath = "~/Data/WRF/wrfout_d3-2020071512-f07-0000.nc"
+library(WRFmet)
+nc <- ncdf4::nc_open("~/Data/WRF/wrfout_d3-2020071512-f07-0000.nc")
+raster <- wrf_createRaster(nc, c("HGT", "TSK"))
+raster_ggmap(
+  raster$HGT,
+  title = "PNW-4km",
+  col_county = 'transparent',
+  col_na = 'transparent'
 )
-
-raster_ggmap(raster, title="PNW-4km")
 }
 }

@@ -28,13 +28,15 @@
 #'
 #' @examples
 #' \donttest{
-#'
-#' # Load model data
-#' raster <- wrf_load(
-#'   localPath = "~/Data/WRF/wrfout_d3-2020071512-f07-0000.nc"
+#' library(WRFmet)
+#' nc <- ncdf4::nc_open("~/Data/WRF/wrfout_d3-2020071512-f07-0000.nc")
+#' raster <- wrf_createRaster(nc, c("HGT", "TSK"))
+#' raster_ggmap(
+#'   raster$HGT,
+#'   title = "PNW-4km",
+#'   col_county = 'transparent',
+#'   col_na = 'transparent'
 #' )
-#'
-#' raster_ggmap(raster, title="PNW-4km", col_county = 'transparent', col_na = 'transparent')
 #' }
 
 raster_ggmap <- function(
@@ -94,7 +96,7 @@ raster_ggmap <- function(
 
 #' @describeIn raster_ggmap Method for Raster* objects.
 #' @export
-raster_ggmap.RasterLayer <- function(
+raster_ggmap.Raster <- function(
   raster, # a single RasterBrick
   index = 1,
   palette = 'Greys',
@@ -213,7 +215,7 @@ raster_ggmap.list <- function(
       title = title,
       x = 'Longitude',
       y = 'Latitude',
-      fill = 'Variable'
+      fill = 'value'
     ) +
     ggplot2::coord_fixed(ratio = 1.3, xlim = xlim, ylim = ylim) +
     ggplot2::theme_classic() +
