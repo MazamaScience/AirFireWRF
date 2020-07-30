@@ -78,7 +78,7 @@ A ggplot object.
 \description{
 Creates a \pkg{ggplot2} plot object from a Raster\*
 object. The returned plot object can be plotted or can be enhanced with
-additional \pkg{ggplot2} intructions.
+additional \pkg{ggplot2} instructions.
 }
 \details{
 If a list of Raster\* objects is provided, a small-multiples

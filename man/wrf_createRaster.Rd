@@ -2,7 +2,15 @@
 % Please edit documentation in R/wrf_createRaster.R
 \name{wrf_createRaster}
 \alias{wrf_createRaster}
-\title{Load rasterized data for a WRF model}
+\title{Load rasterized data for a WRF model
+
+#' On 2020-7-30, available variables include the following:
+\itemize{
+  \item{HGT - Terrain height}
+  \item{TSK - Surface skin temperature}
+  \item{U10 - Wind X component at 10m}
+  \item{V10 - Wind Y component at 10m}
+}}
 \usage{
 wrf_createRaster(
   nc = NULL,
@@ -28,6 +36,14 @@ A \pkg{raster} package \emph{RasterBrick} object.
 }
 \description{
 Load rasterized data for a WRF model
+
+#' On 2020-7-30, available variables include the following:
+\itemize{
+  \item{HGT - Terrain height}
+  \item{TSK - Surface skin temperature}
+  \item{U10 - Wind X component at 10m}
+  \item{V10 - Wind Y component at 10m}
+}
 }
 \examples{
 \donttest{

@@ -2,8 +2,17 @@
 #'
 #' @title Load rasterized data for a WRF model
 #'
+#'#' On 2020-7-30, available variables include the following:
+#' \itemize{
+#'   \item{HGT - Terrain height}
+#'   \item{TSK - Surface skin temperature}
+#'   \item{U10 - Wind X component at 10m}
+#'   \item{V10 - Wind Y component at 10m}
+#' }
+#'
 #' @param nc WRF NetCDF file.
 #' @param vars WRF variable(s) to load.
+#' @param res Resolution of raster in degrees.
 #' @param xlim A vector of coordinate longitude bounds.
 #' @param ylim A vector of coordinate latitude bounds.
 #' @param verbose Logical to display messages.
@@ -14,13 +23,20 @@
 #' \donttest{
 #' library(WRFmet)
 #' nc <- ncdf4::nc_open("~/Data/WRF/wrfout_d3-2020071512-f07-0000.nc")
-#' raster <- wrf_createRaster(nc, c("HGT", "TSK"))
+#' raster <- wrf_createRaster(
+#'   nc = nc,
+#'   vars = c("HGT", "TSK"),
+#'   res = 0.1,
+#'   xlim = c(-125, -116),
+#'   ylim = c(45, 50)
+#' )
 #' print(raster)
 #' }
 
 wrf_createRaster <- function(
   nc = NULL,
   vars = NULL,
+  res = NULL,
   xlim = NULL,
   ylim = NULL,
   verbose = TRUE
@@ -28,12 +44,14 @@ wrf_createRaster <- function(
   
   # ----- Validate parameters --------------------------------------------------
   
-  if (typeof(vars))
-    stop(sprintf("vars must be a character vector of variable names"))
+  #if (typeof(vars))
+  #  stop(sprintf("vars must be a character vector of variable names"))
   
   if ( !is.logical(verbose) ) verbose <- TRUE
   
   # ----- Define raster grid ---------------------------------------------------
+  
+  # TODO: Make sure all provided vars share the same lon/lat dimensions
   
   # Get reading coordinates
   lon <- ncdf4::ncvar_get(nc, varid = "XLONG")
@@ -44,9 +62,25 @@ wrf_createRaster <- function(
     y = as.vector(lat)
   )
   
-   # Define grid dimensions
-  colCount <- dim(lon)[1]
-  rowCount <- dim(lon)[2]
+  # Determine grid dimensions from resolution
+  if (is.null(res)) {
+    left <- c(lon[1, 141], lat[1, 141])
+    right <- c(lon[405, 141], lat[405, 141])
+    top <- c(lon[202, 1], lat[202, 1])
+    bottom <- c(lon[202, 282], lat[202, 282])
+    
+    lonDist <- geosphere::distGeo(left, right)
+    latDist <- geosphere::distGeo(top, bottom)
+    
+    # TODO: extract cell dimensions from NetCDF 'DX' and 'DY'
+    colCount <- floor(lonDist / 4000)
+    rowCount <- floor(latDist / 4000)
+  } else {
+    ext <- raster::extent(coords)
+    
+    colCount <- (ext@xmax - ext@xmin) / res
+    rowCount <- (ext@ymax - ext@ymin) / res
+  }
   
   # ----- Read in variable data ------------------------------------------------
   
