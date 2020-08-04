@@ -15,6 +15,7 @@
 wrf_createRaster(
   nc = NULL,
   vars = NULL,
+  res = NULL,
   xlim = NULL,
   ylim = NULL,
   verbose = TRUE
@@ -24,6 +25,8 @@ wrf_createRaster(
 \item{nc}{WRF NetCDF file.}
 
 \item{vars}{WRF variable(s) to load.}
+
+\item{res}{Resolution of raster in degrees.}
 
 \item{xlim}{A vector of coordinate longitude bounds.}
 
@@ -49,7 +52,13 @@ Load rasterized data for a WRF model
 \donttest{
 library(WRFmet)
 nc <- ncdf4::nc_open("~/Data/WRF/wrfout_d3-2020071512-f07-0000.nc")
-raster <- wrf_createRaster(nc, c("HGT", "TSK"))
+raster <- wrf_createRaster(
+  nc = nc,
+  vars = c("HGT", "TSK"),
+  res = 0.1,
+  xlim = c(-125, -116),
+  ylim = c(45, 50)
+)
 print(raster)
 }
 }

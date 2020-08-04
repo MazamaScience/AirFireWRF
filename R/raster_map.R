@@ -1,4 +1,6 @@
 #' @export
+#' @importFrom rlang .data
+#' 
 #' @title Geographic map of BlueSky model output
 #'
 #' @description Creates a \pkg{ggplot2} plot object from a Raster\*
