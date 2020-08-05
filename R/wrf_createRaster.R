@@ -4,10 +4,10 @@
 #'
 #'#' On 2020-7-30, available variables include the following:
 #' \itemize{
-#'   \item{HGT - Terrain height}
-#'   \item{TSK - Surface skin temperature}
-#'   \item{U10 - Wind X component at 10m}
-#'   \item{V10 - Wind Y component at 10m}
+#'   \item{HGT - Terrain height (m)}
+#'   \item{TSK - Surface skin temperature (K)}
+#'   \item{U10 - Wind X component at 10m, (m/s)}
+#'   \item{V10 - Wind Y component at 10m, (m/s)}
 #' }
 #'
 #' @param nc WRF NetCDF file.
@@ -51,7 +51,7 @@ wrf_createRaster <- function(
   
   # ----- Define raster grid ---------------------------------------------------
   
-  # TODO: Make sure all provided vars share the same lon/lat dimensions
+  # TODO: Make sure all provided vars share the same grid dimensions
   
   # Get reading coordinates
   lon <- ncdf4::ncvar_get(nc, varid = "XLONG")
