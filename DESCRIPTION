@@ -19,6 +19,7 @@ Depends:
 Imports:
     cowplot,
     dplyr,
+    geosphere,
     ggplot2,
     lubridate,
     magrittr,
