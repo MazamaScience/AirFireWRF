@@ -6,10 +6,10 @@
 
 #' On 2020-7-30, available variables include the following:
 \itemize{
-  \item{HGT - Terrain height}
-  \item{TSK - Surface skin temperature}
-  \item{U10 - Wind X component at 10m}
-  \item{V10 - Wind Y component at 10m}
+  \item{HGT - Terrain height (m)}
+  \item{TSK - Surface skin temperature (K)}
+  \item{U10 - Wind X component at 10m, (m/s)}
+  \item{V10 - Wind Y component at 10m, (m/s)}
 }}
 \usage{
 wrf_createRaster(
@@ -42,10 +42,10 @@ Load rasterized data for a WRF model
 
 #' On 2020-7-30, available variables include the following:
 \itemize{
-  \item{HGT - Terrain height}
-  \item{TSK - Surface skin temperature}
-  \item{U10 - Wind X component at 10m}
-  \item{V10 - Wind Y component at 10m}
+  \item{HGT - Terrain height (m)}
+  \item{TSK - Surface skin temperature (K)}
+  \item{U10 - Wind X component at 10m, (m/s)}
+  \item{V10 - Wind Y component at 10m, (m/s)}
 }
 }
 \examples{
