@@ -16,8 +16,7 @@ layer_raster <- function(
       x = .data$x,
       y = .data$y,
       fill = .data$value
-    ),
-    alpha = 0.3
+    )
   ) 
   
   return(res)
