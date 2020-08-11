@@ -1,16 +1,24 @@
+#' @export
+#' @title Create a Raster layer for plotting
+#'
+#' @param raster A RasterBrick.
+#' @param alpha Transparency of layer.
+#'
+#' @return A geom_tile ggproto object.
+
 layer_raster <- function(
   raster = NULL,
   alpha = 1
 ) {
-  x <- raster::sampleRegular(raster, 50000, asRaster = TRUE)
-  
-  coords <- raster::xyFromCell(x, seq_len(ncell(x)))
-  readings <- stack(as.data.frame(getValues(x)))
+  # TODO: Look into potentially using ggspatial::layer_spatial
+  # https://paleolimbot.github.io/ggspatial/
+  coords <- raster::xyFromCell(raster, seq_len(raster::ncell(raster)))
+  readings <- raster::stack(as.data.frame(raster::getValues(raster)))
   names(readings) <- c('value', 'variable')
   
   df <- cbind(coords, readings)
   
-  res <- ggplot2::geom_raster(
+  res <- ggplot2::geom_tile(
     data = df,
     ggplot2::aes(
       x = .data$x,
@@ -21,6 +29,14 @@ layer_raster <- function(
   
   return(res)
 }
+
+#' @export
+#' @title Create a state polygons layer for plotting
+#'
+#' @param xlim A vector of coordinate longitude bounds.
+#' @param ylim A vector of coordinate latitude bounds.
+#'
+#' @return A geom_polygon ggproto object.
 
 layer_states <- function(
   xlim = NULL,
@@ -45,6 +61,20 @@ layer_states <- function(
   
   return(res)
 }
+
+#' @export
+#' @title Create a vectorfield layer for plotting
+#'
+#' @param uvRaster A RasterBrick with 2 RasterLayers: U and V vector components.
+#' @param xlim A vector of coordinate longitude bounds.
+#' @param ylim A vector of coordinate latitude bounds.
+#' @param arrowCount Number of arrows to draw.
+#' @param arrowScale Arrow length scale factor.
+#' @param arrowColor Arrow color.
+#' @param headSize Arrow head size.
+#' @param alpha Transparency of layer.
+#'
+#' @return An annotation_custom ggproto object.
 
 layer_vectorField <- function(
   uvRaster = NULL,
@@ -108,59 +138,4 @@ layer_vectorField <- function(
   )
   
   return(res)
-}
-
-# Debug
-if (TRUE) {
-  library(WRFmet)
-  library(magrittr)
-  
-  nc <- ncdf4::nc_open('~/Data/WRF/wrfout_d3-2020071512-f07-0000.nc')
-  
-  xlim <- c(-132, -105)
-  ylim <- c(39, 51)
-  rasterRes <- 0.06
-  
-  elevRaster <- wrf_createRaster(
-    nc = nc,
-    vars = 'HGT',
-    xlim = xlim,
-    ylim = ylim,
-    res = rasterRes
-  )
-  
-  windRaster <- wrf_createRaster(
-    nc = nc,
-    vars = c('U10', 'V10'),
-    xlim = xlim,
-    ylim = ylim,
-    res = rasterRes
-  )
-  
-  map <- 
-    ggplot2::ggplot() +
-    ggplot2::scale_fill_continuous(na.value = 'transparent') +
-    layer_raster(
-      raster = elevRaster
-    ) +
-    layer_states(
-      xlim = xlim,
-      ylim = ylim
-    ) +
-    layer_vectorField(
-      uvRaster = windRaster,
-      alpha = 0.75
-    ) +
-    ggplot2::coord_cartesian(
-      xlim = xlim,
-      ylim = ylim
-    ) +
-    ggplot2::labs(
-      title = 'Elevation & Wind Map',
-      x = 'Longitude',
-      y = 'Latitude',
-      fill = 'Elev (m)'
-    )
-  
-  map
 }

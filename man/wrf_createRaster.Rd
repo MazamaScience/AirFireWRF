@@ -4,12 +4,30 @@
 \alias{wrf_createRaster}
 \title{Load rasterized data for a WRF model
 
-#' On 2020-7-30, available variables include the following:
+Some useful variables:
 \itemize{
+  \item{XLAT}
+  \item{XLONG}
+  \item{XLAT_U}   
+  \item{XLAT_V}
+  \item{XLONG_U}
+  \item{XLONG_V}
+  \item{U - Wind X component (m/s)}
+  \item{V - Wind Y component (m/s)}
+  \item{W - Wind Z component (m/s)}
+  \item{U10 - Wind X component at 10 meters (m/s)}
+  \item{V10 - Wind Y component at 10 meters (m/s)}
+  \item{ZNU}
+  \item{ZNW}
+  \item{LU_INDEX - Land use category}
+  \item{Q2}
+  \item{T - Perturbation potential temperature theta-t0 (K)}
+  \item{T2 - Temperature at 2 meters (K)}
+  \item{TH2 - Potential temperature at 2 meters (K)}
   \item{HGT - Terrain height (m)}
-  \item{TSK - Surface skin temperature (K)}
-  \item{U10 - Wind X component at 10m, (m/s)}
-  \item{V10 - Wind Y component at 10m, (m/s)}
+  \item{RAINNC - Accumulated total grid scale precipitation (mm)}
+  \item{CFRACT - Total cloud fraction}
+  \item{PBLH - Planetary boundary layer height (m)}
 }}
 \usage{
 wrf_createRaster(
@@ -40,12 +58,30 @@ A \pkg{raster} package \emph{RasterBrick} object.
 \description{
 Load rasterized data for a WRF model
 
-#' On 2020-7-30, available variables include the following:
+Some useful variables:
 \itemize{
+  \item{XLAT}
+  \item{XLONG}
+  \item{XLAT_U}   
+  \item{XLAT_V}
+  \item{XLONG_U}
+  \item{XLONG_V}
+  \item{U - Wind X component (m/s)}
+  \item{V - Wind Y component (m/s)}
+  \item{W - Wind Z component (m/s)}
+  \item{U10 - Wind X component at 10 meters (m/s)}
+  \item{V10 - Wind Y component at 10 meters (m/s)}
+  \item{ZNU}
+  \item{ZNW}
+  \item{LU_INDEX - Land use category}
+  \item{Q2}
+  \item{T - Perturbation potential temperature theta-t0 (K)}
+  \item{T2 - Temperature at 2 meters (K)}
+  \item{TH2 - Potential temperature at 2 meters (K)}
   \item{HGT - Terrain height (m)}
-  \item{TSK - Surface skin temperature (K)}
-  \item{U10 - Wind X component at 10m, (m/s)}
-  \item{V10 - Wind Y component at 10m, (m/s)}
+  \item{RAINNC - Accumulated total grid scale precipitation (mm)}
+  \item{CFRACT - Total cloud fraction}
+  \item{PBLH - Planetary boundary layer height (m)}
 }
 }
 \examples{

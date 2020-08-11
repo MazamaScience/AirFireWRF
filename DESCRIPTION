@@ -21,6 +21,7 @@ Imports:
     dplyr,
     geosphere,
     ggplot2,
+    ggplotify,
     lubridate,
     magrittr,
     MazamaCoreUtils,

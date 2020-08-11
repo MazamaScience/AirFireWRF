@@ -2,6 +2,9 @@
 
 S3method(raster_ggmap,Raster)
 S3method(raster_ggmap,list)
+export(layer_raster)
+export(layer_states)
+export(layer_vectorField)
 export(raster_ggmap)
 export(wrf_createRaster)
 export(wrf_windField)

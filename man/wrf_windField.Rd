@@ -46,7 +46,7 @@ Plot a vectorfield of wind velocity
 \donttest{
 library(WRFmet)
 nc <- ncdf4::nc_open("~/Data/WRF/wrfout_d3-2020071512-f07-0000.nc")
-w <- wrf_windField(
+wrf_windField(
   nc = nc,
   res = 0.08,
   xlim = c(-126, -115),
