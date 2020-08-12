@@ -63,6 +63,29 @@ layer_states <- function(
 }
 
 #' @export
+#' @title Create a points layer for plotting
+#'
+#' @param points A SpatialPointsDataFrame of coordinates and data.
+#'
+#' @return A geom_point ggproto object.
+
+layer_points <- function(
+  points = NULL
+) {
+  
+  res <- ggplot2::geom_point(
+    data = points,
+    ggplot2::aes(
+      x = .data$x,
+      y = .data$y,
+      color = .data$value
+    )
+  )
+  
+  return(res)
+}
+
+#' @export
 #' @title Create a vectorfield layer for plotting
 #'
 #' @param uvRaster A RasterBrick with 2 RasterLayers: U and V vector components.
@@ -138,4 +161,76 @@ layer_vectorField <- function(
   )
   
   return(res)
+}
+
+if (FALSE) {
+  library(WRFmet)
+  
+  nc <- ncdf4::nc_open('~/Data/WRF/wrfout_d3-2020071512-f07-0000.nc')
+  
+  xlim <- c(-133, -106)
+  ylim <- c(40, 51)
+  rasterRes <- 0.06
+  
+  elevRaster <- wrf_createRaster(
+    nc = nc,
+    vars = 'HGT',
+    xlim = xlim,
+    ylim = ylim,
+    res = rasterRes
+  )
+  
+  windRaster <- wrf_createRaster(
+    nc = nc,
+    vars = c('U10', 'V10'),
+    xlim = xlim,
+    ylim = ylim,
+    res = rasterRes
+  )
+  
+  points <- data.frame(
+    x = c(-120, -110, -112),
+    y = c(42, 45, 48),
+    value = c(20, 11000, 68)
+  )
+  
+  wrfMap <- 
+    ggplot2::ggplot() +
+    ggplot2::scale_fill_gradient(
+      low = 'black',
+      high = 'white',
+      na.value = 'transparent'
+    ) +
+    ggplot2::scale_color_gradient(
+      low = 'green',
+      high = 'red',
+      na.value = 'transparent'
+    ) +
+    layer_raster(
+      raster = elevRaster
+    ) +
+    layer_states(
+      xlim = xlim,
+      ylim = ylim
+    ) +
+    layer_points(
+      points = points
+    ) +
+    layer_vectorField(
+      uvRaster = windRaster,
+      alpha = 0.75
+    ) +
+    ggplot2::coord_cartesian(
+      xlim = xlim,
+      ylim = ylim
+    ) +
+    ggplot2::labs(
+      title = 'Elevation & Wind Map',
+      x = 'Longitude',
+      y = 'Latitude',
+      fill = 'Elev (m)',
+      color  = 'PM2.5'
+    )
+  
+  wrfMap
 }

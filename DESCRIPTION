@@ -17,6 +17,7 @@ BugReports: https://github.com/MazamaScience/WRFmet/issues
 Depends:
     R (>= 3.5.0)
 Imports:
+    AirFireModeling,
     cowplot,
     dplyr,
     geosphere,
