@@ -19,20 +19,52 @@ knitr::opts_chunk$set(
 )
 ```
 
-This vignette will walk through the process of creating layered static plots 
-with the WRFmet package.
+This article will walk through the process of plotting meteorological data using
+the WRFmet package.
 
-## Layered WRF Plots
+## Plotting Outline
 
-WRF datasets contain a wide variety of gridded meteorological readings. WRFmet 
-provides a way to plot gridded data with several features--building up a static
-image layer-by-layer.
+The Weather Research and Forecast (WRF) model is used to predict meteorological 
+conditions over the Earth. These forecasts are output as a grid of spatial 
+points that store readings for a wide variety of variables, such as temperature,
+wind velocity, moisture levels, and many others. The WRFmet package provides an
+easy way to converting these collections of points into Raster objects that can 
+then be sampled and/or plotted.
+
+WRFmet allows you to build up static WRF plots using a layered approach which 
+builds off of GGPlot. You can create a Raster layer for individual WRF 
+variables, a vectorfield layer for WRF vector components, and layers for spatial
+points and polygons. Let's outline an example plot to showcase these different
+features.
+
+Our plot will cover Washington, Oregon, and Idaho on July 15, 2020, and will 
+include the following features:
+
+1. A raster for temperature
+2. A vectorfield for wind velocity
+3. Spatial points for air quality monitors
+4. Spatial polygons for state boundaries
+
+## WRF Plotting Example
+
+To start with, let's first load the WRFmet library and open the July 15, 2020 
+WRF file (recent runs available [here](http://m2.airfire.org/PNW/)). This will
+let us access elevation and wind data:
 
 ```{r wrf_rasters}
 library(WRFmet)
 
 # Access a WRF NetCDF file
 nc <- ncdf4::nc_open('~/Data/WRF/wrfout_d3-2020071512-f07-0000.nc')
+```
+
+Now let's load the elevation and wind data as Raster objects. For this we must 
+first define a grid to use when rasterizing the spatial points. Then we can use
+`wrf_createRaster()` to create a temperature RasterBrick (from the WRF 'T2' 
+variable), and a wind velocity RasterBrick (from the WRF 'U10' and 'V10' vector
+component variables):
+
+```{r rasterize_wrf_vars}
 
 # Define a common Raster grid
 xlim <- c(-125, -111)
@@ -40,9 +72,9 @@ ylim <- c(42, 49)
 rasterRes <- 0.06
 
 # A RasterBrick with a single layer for elevation
-elevRaster <- wrf_createRaster(
+tempRaster <- wrf_createRaster(
   nc = nc,
-  vars = 'HGT',
+  vars = 'T2',
   xlim = xlim,
   ylim = ylim,
   res = rasterRes
@@ -58,47 +90,181 @@ windRaster <- wrf_createRaster(
 )
 ```
 
-We can use the PWFSLSmoke package to collect monitor readings and the 
-MazamaSpatialUtils package for state and county polygons:
+We can get a quick idea of what these Rasters look like with the `levelPlot()` 
+function from RasterVis.
+
+```{r}
+rasterVis::levelplot(windRaster, margin = FALSE)
+```
+
+Given that wind velocity is broken up between its Norht and South components, 
+it's not immediately clear what these two plots are telling us. Let's also take
+a look at the temperature Raster:
+
+```{r}
+rasterVis::levelplot(tempRaster, margin = FALSE)
+```
+
+Temperature defines the landscape a bit more--outlining coastlines and mountain 
+ranges. Ideally though, we should be able to draw some state borders and 
+visualize wind velocity in a way that is easier to read. This can be done using 
+WRFmet's layered plotting capabilities.
+
+WRFmet provides a series of `layer_*()` functions, which produce GGPlot elements
+much like `ggplot2::geom_*()`. The layers currently available are:
+
+* `layer_raster`
+* `layer_vectorfield`
+* `layer_points`
+* `layer_states`
+
+We can make a plot by creating an empty GGplot object, then "+" on our `layer_*` elements and any
+other GGplot elements we might want, like color palettes, labels, grid limits, 
+etc.
+
+Let's draw the elevation Raster using this approach:
+
+```{r elevation_plot}
+temp_plot <- 
+  # Define an empty plotting space
+  ggplot2::ggplot() +
+  # Draw the elevation raster
+  layer_raster(
+    raster = tempRaster
+  ) +
+  # Crop the plot area
+  ggplot2::coord_fixed(
+    ratio = 1.4,
+    xlim = xlim,
+    ylim = ylim
+  ) +
+  # Set raster color palette
+  ggplot2::scale_fill_gradientn(
+    colors = c('violet', 'blue', 'green', 'yellow', 'orange', 'red'),
+    na.value = 'transparent'
+  ) +
+  # Set the plot labels
+  ggplot2::labs(
+    title = 'WRF Elevation',
+    x = 'Longitude',
+    y = 'Latitude',
+    fill = 'Temp (K)'
+  )
+
+temp_plot
+```
+
+Now we can begin to add additional layers to help understand this information.
+Let's draw the same plot, but this time we'll add in state lines:
+
+```{r}
+temp_state_plot <- 
+  temp_plot + 
+  # Then draw state borders
+  layer_states(
+    xlim = xlim,
+    ylim = ylim,
+    color = 'red'
+  )
+
+temp_state_plot
+```
+
+That's a bit better! Next, let's make our wind Raster a bit more useful by using
+it to draw vector arrows with `layer_vectorfield()`. This function assumes the 
+provided Raster has two layers representing the U (North) and V (East) 
+components of vectors: 
+
+```{r}
+temp_state_wind_plot <- 
+  temp_state_plot + 
+  # Draw the wind vectorfield
+  layer_vectorField(
+    uvRaster = windRaster,
+    arrowCount = 500,
+    arrowColor = 'black',
+    arrowScale = 0.08,
+    headSize = 0.06
+  )
+
+temp_state_wind_plot
+```
+
+Finally, lets plot some monitor air quality readings. We can use the PWFSLSmoke 
+package to collect monitor coordinates and averaged PM 2.5 data on 
+July 15, 2020:
 
 ```{r spatial_points}
 library(PWFSLSmoke)
 
+# Load monitor data
 monitors <- monitor_load(
   startdate = "2020-07-15",
   enddate = "2020-07-16"
 ) %>% monitor_subset(stateCodes = c('WA', 'OR', 'ID'))
 
+# Find each monitor's average reading from July 15, 2020 
 means <- monitor_getDailyMean(monitors, startdate = "2020-07-15")
 
+# Link monitor coordinates and their averages for July 15, 2020
 monitorPoints <- data.frame(
   x = monitors$meta$longitude,
   y = monitors$meta$latitude,
   value = as.numeric(means[1, 2:ncol(means)])
 )
+
+temp_state_monitors_wind_plot <-
+  temp_state_wind_plot +
+  # Draw the monitor points
+  layer_points(
+    points = monitorPoints
+  ) +
+  # Set the point color palette
+  ggplot2::scale_color_gradient(
+    low = 'green',
+    high = 'red',
+    na.value = 'transparent'
+  )
+
+temp_state_monitors_wind_plot
 ```
 
-Now we can build up a plot layer by layer:
-1. Base plot
-2. Elevation raster
-3. State borders
-4. Monitor points
-5. Wind vectorfield
-6. Additional GGPlot features, such as color scales, coordinate systems, labels,
-etc.
+I don't want these monitor points to cover up the wind vectors though. To fix
+this I could simply go back and build off of `temp_state_plot` like:
+
+```
+temp_state_monitors_wind_plot <-
+  temp_state_plot +
+  # Draw the monitor points
+  layer_points(
+    points = monitorPoints
+  ) +
+  # Draw the wind vectorfield
+  layer_vectorField(
+    uvRaster = windRaster,
+    arrowCount = 500,
+    arrowColor = 'black',
+    arrowScale = 0.08,
+    headSize = 0.06
+  )
+```
+
+However, let's take a step back and see what it would look like to create this 
+entire plot at once:
 
 ```{r wrf_plot}
 wrfMap <- 
   # Define an empty plotting space
   ggplot2::ggplot() +
-  # Draw the elevation raster
+  # Draw the temperature raster
   layer_raster(
-    raster = elevRaster
+    raster = tempRaster
   ) +
   # Then draw state borders
   layer_states(
     xlim = xlim,
-    ylim = ylim
+    ylim = ylim,
+    color = 'red'
   ) +
   # Then draw the points
   layer_points(
@@ -107,7 +273,10 @@ wrfMap <-
   # Then draw the wind vectorfield
   layer_vectorField(
     uvRaster = windRaster,
-    alpha = 0.75
+    arrowCount = 500,
+    arrowColor = 'black',
+    arrowScale = 0.08,
+    headSize = 0.06
   ) +
   # Crop the plot area
   ggplot2::coord_fixed(
@@ -116,9 +285,8 @@ wrfMap <-
     ylim = ylim
   ) +
   # Set raster color palette
-  ggplot2::scale_fill_gradient(
-    low = 'darkblue',
-    high = 'cornflowerblue',
+  ggplot2::scale_fill_gradientn(
+    colors = c('violet', 'blue', 'green', 'yellow', 'orange', 'red'),
     na.value = 'transparent'
   ) +
   # Set the point color palette
@@ -132,15 +300,16 @@ wrfMap <-
     title = 'Elevation & Wind Map',
     x = 'Longitude',
     y = 'Latitude',
-    fill = 'Elev (m)',
-    color  = 'PM2.5'
+    fill = 'Temp (K)',
+    color  = 'PM 2.5'
   )
 
 wrfMap
 ```
 
-The AirFireModeling package allows us to load air quality data as Raster
-objects.
+The `layer_raster()` function can work with Rasters beyond those we create 
+through WRFmet. For instance, we can also plot BlueSky air quality Rasters 
+produced by the AirFireModeling package:
 
 ```{r}
 library(AirFireModeling)
@@ -157,11 +326,7 @@ rasterList <- AirFireModeling::raster_load(
 
 # Extract a single RasterLayer from the BlueSky run RasterBrick
 smokeRaster <- rasterList$`PNW-4km_2020071500`$X1594839600
-```
 
-And now let's plot that
-
-```{r bluesky_plot}
 blueskyMap <- 
   ggplot2::ggplot() +
   ggplot2::scale_fill_gradientn(
@@ -176,12 +341,12 @@ blueskyMap <-
     ylim = ylim
   ) +
   ggplot2::coord_fixed(
-    ratio = 1.3,
+    ratio = 1.4,
     xlim = xlim,
     ylim = ylim
   ) +
   ggplot2::labs(
-    title = 'Air Quality & Wind Map',
+    title = 'Air QualityMap',
     x = 'Longitude',
     y = 'Latitude',
     fill = 'Air quality (pm 2.5)'
@@ -191,13 +356,13 @@ blueskyMap
 ```
 
 It looks like there's a bit of action in Washington--particularly around the
-Tri-cities area with a spot of deep red. Let's zoom into that area for a better
-visual. This time, let's do the following:
+Tri-cities area with a spot of deep red. Let's zoom into that region for a better
+visual and do the following:
 
-1. Load a higher resolution BlueSky Raster.
-2. Load the wind component rasters again, but with a smaller extent.
-3. Since the air quality readings are heavily skewed, lets filter out cells with
-PM2.5 values < 2.
+1. Load and plot a higher resolution BlueSky Raster.
+2. Load and plot the wind Raster again, but this time with a smaller extent.
+3. Since the air quality readings are heavily skewed towards lower values, let's
+filter out cells with PM2.5 readings < 2.
 
 ```{r}
 xlim <- c(-120, -118)
@@ -213,7 +378,10 @@ rasterList <- AirFireModeling::raster_load(
 
 # Extract a single RasterLayer from the BlueSky run RasterBrick
 smokeRaster <- rasterList$`PNW-1.33km_2020071500`$X1594839600
+
+# Remove low values and cap high values
 smokeRaster[smokeRaster < 2] <- NA
+smokeRaster[smokeRaster > 250] <- 250
 
 # A RasterBrick with layers for both U and V wind vector components
 windRaster <- wrf_createRaster(
@@ -238,13 +406,16 @@ blueskyMap <-
     xlim = xlim,
     ylim = ylim
   ) +
+  # Then draw the wind vectorfield
   layer_vectorField(
     uvRaster = windRaster,
+    arrowCount = 500,
     arrowColor = 'black',
-    alpha = 0.6
+    arrowScale = 0.03,
+    headSize = 0.06
   ) +
   ggplot2::coord_fixed(
-    ratio = 1.3,
+    ratio = 1.4,
     xlim = xlim,
     ylim = ylim
   ) +

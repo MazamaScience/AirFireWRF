@@ -35,12 +35,14 @@ layer_raster <- function(
 #'
 #' @param xlim A vector of coordinate longitude bounds.
 #' @param ylim A vector of coordinate latitude bounds.
+#' @param color Line color.
 #'
 #' @return A geom_polygon ggproto object.
 
 layer_states <- function(
   xlim = NULL,
-  ylim = NULL
+  ylim = NULL,
+  color = 'black'
 ) {
   states <- ggplot2::map_data(
     'state',
@@ -56,7 +58,7 @@ layer_states <- function(
       group = .data$group
     ),
     fill = 'NA',
-    color = 'black'
+    color = color
   )
   
   return(res)

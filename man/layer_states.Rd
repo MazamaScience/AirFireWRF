@@ -4,12 +4,14 @@
 \alias{layer_states}
 \title{Create a state polygons layer for plotting}
 \usage{
-layer_states(xlim = NULL, ylim = NULL)
+layer_states(xlim = NULL, ylim = NULL, color = "black")
 }
 \arguments{
 \item{xlim}{A vector of coordinate longitude bounds.}
 
 \item{ylim}{A vector of coordinate latitude bounds.}
+
+\item{color}{Line color.}
 }
 \value{
 A geom_polygon ggproto object.
