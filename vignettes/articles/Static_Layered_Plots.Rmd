@@ -55,7 +55,7 @@ nc <- ncdf4::nc_open('~/Data/WRF/wrfout_d3-2020071512-f07-0000.nc')
 ```
 
 Now let's rasterize the WRF temperature and wind data. For this we must define a
-grid, then use `wrf_createRaster()` to create RasterBricks for the specified 
+grid, then use `wrf_load()` to create RasterBricks for the specified 
 variables. For temperature we will specify the 'T2' WRF variable, which gives us
 a RasterBrick with a single layer. For wind velocity, we will specify the 'U10' 
 and 'V10' WRF variables (North & East vector components) which will give us a 
@@ -69,7 +69,7 @@ ylim <- c(42, 49)
 res <- 0.06
 
 # A RasterBrick with a single layer for elevation
-tempRaster <- wrf_createRaster(
+tempRaster <- wrf_load(
   nc = nc,
   vars = 'T2',
   xlim = xlim,
@@ -78,7 +78,7 @@ tempRaster <- wrf_createRaster(
 )
 
 # A RasterBrick with layers for both U and V wind vector components
-windRaster <- wrf_createRaster(
+windRaster <- wrf_load(
   nc = nc,
   vars = c('U10', 'V10'),
   xlim = xlim,
@@ -183,7 +183,7 @@ temp_state_wind_plot <-
   # Draw the wind vectorfield
   layer_vectorField(
     uvRaster = windRaster,
-    arrowCount = 1000,
+    arrowCount = 500,
     arrowColor = 'black',
     arrowScale = 0.07,
     headSize = 0.06,
@@ -281,7 +281,7 @@ wrfMap <-
   # Then draw the wind vectorfield
   layer_vectorField(
     uvRaster = windRaster,
-    arrowCount = 1000,
+    arrowCount = 500,
     arrowColor = 'black',
     arrowScale = 0.08,
     headSize = 0.06,
@@ -300,8 +300,8 @@ wrfMap <-
   ) +
   # Set the point color palette
   ggplot2::scale_color_gradient(
-    low = 'green',
-    high = 'red',
+    low = 'white',
+    high = 'black',
     na.value = 'transparent'
   ) +
   # Set the plot labels
@@ -397,7 +397,7 @@ smokeRaster[smokeRaster < 2] <- NA
 smokeRaster[smokeRaster > 500] <- 500
 
 # A RasterBrick with layers for both U and V wind vector components
-windRaster <- wrf_createRaster(
+windRaster <- wrf_load(
   nc = nc,
   vars = c('U10', 'V10'),
   xlim = xlim,

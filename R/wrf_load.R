@@ -28,7 +28,10 @@
 #'   \item{PBLH - Planetary boundary layer height (m)}
 #' }
 #'
-#' @param nc WRF NetCDF file.
+#' @param modelName Model identifier.
+#' @param modelRun Model initialization datestamp as "YYYYMMDDHH".
+#' @param modelMode Hour forecasted from initial time as "HH", i.e. '07'.
+#' @param localPath Absolute path to a NetCDF file not found in `modelDataDir`.
 #' @param vars WRF variable(s) to load.
 #' @param res Resolution of raster in degrees.
 #' @param xlim A vector of coordinate longitude bounds.
@@ -40,19 +43,23 @@
 #' @examples
 #' \donttest{
 #' library(WRFmet)
-#' nc <- ncdf4::nc_open("~/Data/WRF/wrfout_d3-2020071512-f07-0000.nc")
-#' raster <- wrf_createRaster(
-#'   nc = nc,
+#' 
+#' raster <- wrf_load(
+#'   localPath = '~/Data/WRF/wrfout_d3-2020071512-f07-0000.nc',
 #'   vars = c("HGT", "TSK"),
 #'   res = 0.1,
 #'   xlim = c(-125, -116),
 #'   ylim = c(45, 50)
 #' )
+#' 
 #' print(raster)
 #' }
 
-wrf_createRaster <- function(
-  nc = NULL,
+wrf_load <- function(
+  modelName = NULL,
+  modelRun = NULL,
+  modelMode = NULL,
+  localPath = NULL,
   vars = NULL,
   res = NULL,
   xlim = NULL,
@@ -62,14 +69,43 @@ wrf_createRaster <- function(
   
   # ----- Validate parameters --------------------------------------------------
   
-  #if (typeof(vars))
-  #  stop(sprintf("vars must be a character vector of variable names"))
+  if ( is.null(localPath) ) {
+    
+    MazamaCoreUtils::stopIfNull(modelName)
+    MazamaCoreUtils::stopIfNull(modelRun)
+    MazamaCoreUtils::stopIfNull(modelMode)
+    
+  } else {
+    
+    clean <- FALSE
+    if ( !file.exists(localPath) )
+      stop(sprintf("File not found at localPath = '%s'", localPath))
+    
+  }
   
   if ( !is.logical(verbose) ) verbose <- TRUE
   
-  # ----- Define raster grid ---------------------------------------------------
+  # ----- Access WRF File ------------------------------------------------------
   
-  # TODO: Make sure all provided vars share the same grid dimensions
+  if ( is.null(localPath) ) { # No localPath
+    
+    fileName <- paste0('wrfout_d3-', modelRun, '-f', modelMode, '-0000.nc')
+    filePath <- file.path(getModelDataDir(), fileName)
+    
+    if ( !file.exists(filePath) ) {
+      # TODO: Download model run file from database
+      # filePath <- downloadedFilePath
+    }
+    
+  } else { # User specified localPath
+    
+    filePath <- localPath
+    
+  }
+  
+  nc <- ncdf4::nc_open(filePath)
+  
+  # ----- Define raster grid ---------------------------------------------------
   
   # Get reading coordinates
   lon <- ncdf4::ncvar_get(nc, varid = "XLONG")
@@ -79,28 +115,52 @@ wrf_createRaster <- function(
     x = as.vector(lon),
     y = as.vector(lat)
   )
-  
-  # Determine grid dimensions from resolution
+
   if (is.null(res)) {
-    left <- c(lon[1, 141], lat[1, 141])
-    right <- c(lon[405, 141], lat[405, 141])
-    top <- c(lon[202, 1], lat[202, 1])
-    bottom <- c(lon[202, 282], lat[202, 282])
+    # Approximate a grid that covers all the model run's sample points with a 
+    # single grid cell measuring DX x DY m^2:
+    #
+    # *****T*****
+    # *****|*****
+    # L----+----R
+    # *****|*****
+    # *****B*****
     
-    lonDist <- geosphere::distGeo(left, right)
-    latDist <- geosphere::distGeo(top, bottom)
+    # Rows and columns of WRF sample points
+    pColCount <- ncol(lon)
+    pRowCount <- nrow(lon)
+    pHalfColCount <- floor(pColCount / 2)
+    pHalfRowCount <- floor(pRowCount / 2)
     
-    # TODO: extract cell dimensions from NetCDF 'DX' and 'DY'
-    colCount <- floor(lonDist / 4000)
-    rowCount <- floor(latDist / 4000)
+    # Center points of the WRF scan's four edges
+    left   <- c(lon[            1, pHalfColCount], lat[            1, pHalfColCount])
+    right  <- c(lon[    pRowCount, pHalfColCount], lat[    pRowCount, pHalfColCount])
+    top    <- c(lon[pHalfRowCount,             1], lat[pHalfRowCount,             1])
+    bottom <- c(lon[pHalfRowCount,     pColCount], lat[pHalfRowCount,     pColCount])
+    
+    # Scan's midle lon and lat lengths
+    midLonLength <- geosphere::distGeo(left, right)
+    midLatLength <- geosphere::distGeo(top, bottom)
+    
+    # Grid delta dimensions
+    ncGlobals <- ncdf4::ncatt_get(nc, 0)
+    dX <- ncGlobals$DX
+    dY <- ncGlobals$DY
+    
+    # Raster cell rows and columns
+    rColCount <- floor(midLonLength / dX)
+    rRowCount <- floor(midLatLength / dY)
   } else {
     ext <- raster::extent(coords)
     
-    colCount <- (ext@xmax - ext@xmin) / res
-    rowCount <- (ext@ymax - ext@ymin) / res
+    # Approximated rows and columns of a Raster grid
+    rColCount <- (ext@xmax - ext@xmin) / res
+    rRowCount <- (ext@ymax - ext@ymin) / res
   }
   
   # ----- Read in variable data ------------------------------------------------
+  
+  # TODO: Make sure all the specified vars share the same grid dimensions
   
   rasterLayers <- sapply(vars, function(var) {
     # Read in the variable values
@@ -110,7 +170,7 @@ wrf_createRaster <- function(
     # could, for instance, rasterize WRF points onto a BlueSky model grid
     
     # Define an empty raster layer to use as a reference grid
-    referenceRaster <- raster::raster(nrows = rowCount, ncols = colCount)
+    referenceRaster <- raster::raster(nrows = rRowCount, ncols = rColCount)
     raster::extent(referenceRaster) <- raster::extent(coords)
     #raster::crs(rbase) <- "+proj=longlat +datum=WGS84 +ellps=WGS84 +towgs84=0,0,0 +units=m"
     
