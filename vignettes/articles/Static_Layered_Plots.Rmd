@@ -43,25 +43,16 @@ include the following layers:
 3. Spatial points for air quality monitors
 4. Spatial polygons for state boundaries
 
-To start with, let's load the WRFmet library and open the July 15, 2020 WRF file
-(recent runs available [here](http://m2.airfire.org/PNW/)). This will give us 
-access to read in meteorological data like temperature and wind velocity:
-
-```{r wrf_rasters}
-library(WRFmet)
-
-# Access a WRF NetCDF file
-nc <- ncdf4::nc_open('~/Data/WRF/wrfout_d3-2020071512-f07-0000.nc')
-```
-
-Now let's rasterize the WRF temperature and wind data. For this we must define a
-grid, then use `wrf_load()` to create RasterBricks for the specified 
-variables. For temperature we will specify the 'T2' WRF variable, which gives us
-a RasterBrick with a single layer. For wind velocity, we will specify the 'U10' 
-and 'V10' WRF variables (North & East vector components) which will give us a 
-RasterBrick with two layers:
+To start with, let's load the temperature and wind velocity data from a July 15,
+2020 WRF file (recent runs available [here](http://m2.airfire.org/PNW/)). To do 
+this, we must define a grid, then use `wrf_load()` to create RasterBricks for 
+the specified variables. For temperature we will specify the 'T2' WRF variable
+which gives us a RasterBrick with a single layer. For wind velocity, we will 
+specify the 'U10' and 'V10' WRF variables (North & East vector components) which
+will give us a RasterBrick with two layers:
 
 ```{r rasterize_wrf_vars}
+library(WRFmet)
 
 # Define a common Raster grid
 xlim <- c(-125, -111)
@@ -70,7 +61,7 @@ res <- 0.06
 
 # A RasterBrick with a single layer for elevation
 tempRaster <- wrf_load(
-  nc = nc,
+  localPath = '~/Data/WRF/wrfout_d3-2020071512-f07-0000.nc',
   vars = 'T2',
   xlim = xlim,
   ylim = ylim,
@@ -79,7 +70,7 @@ tempRaster <- wrf_load(
 
 # A RasterBrick with layers for both U and V wind vector components
 windRaster <- wrf_load(
-  nc = nc,
+  localPath = '~/Data/WRF/wrfout_d3-2020071512-f07-0000.nc',
   vars = c('U10', 'V10'),
   xlim = xlim,
   ylim = ylim,
@@ -398,7 +389,7 @@ smokeRaster[smokeRaster > 500] <- 500
 
 # A RasterBrick with layers for both U and V wind vector components
 windRaster <- wrf_load(
-  nc = nc,
+  localPath = '~/Data/WRF/wrfout_d3-2020071512-f07-0000.nc',
   vars = c('U10', 'V10'),
   xlim = xlim,
   ylim = ylim,

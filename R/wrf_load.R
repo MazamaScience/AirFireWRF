@@ -46,7 +46,7 @@
 #' 
 #' raster <- wrf_load(
 #'   localPath = '~/Data/WRF/wrfout_d3-2020071512-f07-0000.nc',
-#'   vars = c("HGT", "TSK"),
+#'   vars = c('HGT', 'TSK'),
 #'   res = 0.1,
 #'   xlim = c(-125, -116),
 #'   ylim = c(45, 50)
