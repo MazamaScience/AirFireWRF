@@ -1,4 +1,6 @@
 #' @export
+#' @importFrom rlang .data
+#' 
 #' @title Create a Raster layer for plotting
 #'
 #' @param raster A RasterBrick.
