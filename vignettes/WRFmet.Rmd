@@ -1,0 +1,25 @@
+---
+title: "WRFmet"
+author: "Mazama Science"
+date: "8/19/2020"
+output: html_document
+vignette: >
+  %\VignetteIndexEntry{WRFmet}
+  %\VignetteEngine{knitr::rmarkdown}
+  %\VignetteEncoding{UTF-8}
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+## Overview
+
+The Weather Research and Forecasting (WRF) model is used to predict 
+meteorological conditions over the Earth's surface.
+
+...
+
+The WRFmet package provides tools to load and visualize this information.
+
+...

@@ -27,6 +27,7 @@ Imports:
     magrittr,
     MazamaCoreUtils,
     ncdf4,
+    PWFSLSmoke,
     raster,
     rasterVis,
     RColorBrewer,
