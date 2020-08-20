@@ -31,7 +31,7 @@
 #' @param modelName Model identifier.
 #' @param modelRun Model initialization datestamp as "YYYYMMDDHH".
 #' @param modelMode Hour forecasted from initial time as "HH", i.e. '07'.
-#' @param localPath Absolute path to a NetCDF file not found in `modelDataDir`.
+#' @param localPath Absolute path to a NetCDF file not found in `WRFDataDir`.
 #' @param vars WRF variable(s) to load.
 #' @param res Resolution of raster in degrees.
 #' @param xlim A vector of coordinate longitude bounds.
@@ -90,7 +90,7 @@ wrf_load <- function(
   if ( is.null(localPath) ) { # No localPath
     
     fileName <- paste0('wrfout_d3-', modelRun, '-f', modelMode, '-0000.nc')
-    filePath <- file.path(getModelDataDir(), fileName)
+    filePath <- file.path(getWRFDataDir(), fileName)
     
     if ( !file.exists(filePath) ) {
       # TODO: Download model run file from database
