@@ -3,6 +3,24 @@
 #' @title Utilities for working with WRF model output
 #' @description A suite of utility functions providing functionality commonly
 #' needed for working with WRF model output in R.
+NULL
+
+# ----- Example datasets ------------------------------------------------------
+
+#' PNW-4km example dataset
+#'
+#' @docType data
+#' @keywords datasets
+#' @name PNW_Sample
+#' @title PNW Example Dataset
+#' @format A RasterBrick with four layers
+#' @description
+#' This dataset contains forecasted readings for temperature (TSK), elevation 
+#' (HGT), and wind velocity (U10 & V10) across the Pacific Northwest on July 15,
+#' 2020. Each variable is stored in its own \emph{RasterLayer} in an overlying
+#' \emph{RasterBrick} object. This data is used in some examples in the package
+#' documentation.
+NULL
 
 # ----- Internal Package State -------------------------------------------------
 

@@ -105,6 +105,7 @@ layer_points <- function(
 
 layer_vectorField <- function(
   uvRaster = NULL,
+  # TODO: add uLayerIndex and vLayerIndex
   xlim = NULL,
   ylim = NULL,
   arrowCount = 1000,

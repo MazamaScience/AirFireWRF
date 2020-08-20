@@ -3,16 +3,8 @@
 \docType{package}
 \name{WRFmet}
 \alias{WRFmet}
-\alias{WRFmetEnv}
 \title{Utilities for working with WRF model output}
-\format{
-An object of class \code{environment} of length 1.
-}
-\usage{
-WRFmetEnv
-}
 \description{
 A suite of utility functions providing functionality commonly
 needed for working with WRF model output in R.
 }
-\keyword{datasets}
