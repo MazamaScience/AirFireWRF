@@ -93,6 +93,8 @@ layer_points <- function(
 #' @title Create a vectorfield layer for plotting
 #'
 #' @param uvRaster A RasterBrick with 2 RasterLayers: U and V vector components.
+#' @param uLayer A RasterLayer of U vector components.
+#' @param vLayer A RasterLayer of V vector components.
 #' @param xlim A vector of coordinate longitude bounds.
 #' @param ylim A vector of coordinate latitude bounds.
 #' @param arrowCount Number of arrows to draw.
@@ -105,7 +107,8 @@ layer_points <- function(
 
 layer_vectorField <- function(
   uvRaster = NULL,
-  # TODO: add uLayerIndex and vLayerIndex
+  uLayer = NULL,
+  vLayer = NULL,
   xlim = NULL,
   ylim = NULL,
   arrowCount = 1000,
@@ -135,6 +138,14 @@ layer_vectorField <- function(
     ),
     axis.line = list(col = 'transparent')
   )
+  
+  if ( is.null(uvRaster) ) {
+    
+    if ( is.null(uLayer) || is.null(vLayer) )
+      stop(sprintf("Must provide either a uvRaster or a uLayer & vLayer"))
+    
+    uvRaster <- raster::brick(uLayer, vLayer)
+  }
   
   vectorField <- rasterVis::vectorplot(
     object = uvRaster,

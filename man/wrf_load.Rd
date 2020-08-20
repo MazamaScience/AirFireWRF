@@ -49,7 +49,7 @@ wrf_load(
 
 \item{modelMode}{Hour forecasted from initial time as "HH", i.e. '07'.}
 
-\item{localPath}{Absolute path to a NetCDF file not found in `modelDataDir`.}
+\item{localPath}{Absolute path to a NetCDF file not found in `WRFDataDir`.}
 
 \item{vars}{WRF variable(s) to load.}
 

@@ -6,6 +6,8 @@
 \usage{
 layer_vectorField(
   uvRaster = NULL,
+  uLayer = NULL,
+  vLayer = NULL,
   xlim = NULL,
   ylim = NULL,
   arrowCount = 1000,
@@ -17,6 +19,10 @@ layer_vectorField(
 }
 \arguments{
 \item{uvRaster}{A RasterBrick with 2 RasterLayers: U and V vector components.}
+
+\item{uLayer}{A RasterLayer of U vector components.}
+
+\item{vLayer}{A RasterLayer of V vector components.}
 
 \item{xlim}{A vector of coordinate longitude bounds.}
 
