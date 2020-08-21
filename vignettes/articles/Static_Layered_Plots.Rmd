@@ -29,9 +29,9 @@ conditions over the Earth. These forecasts output grids of spatial points that
 that track variables like temperature, wind velocity, moisture levels, and many 
 others. The WRFmet package provides an easy way to convert these collections of 
 points into Raster objects so they can then be plotted with additional features.
-For instance, you can build a plot with a Raster for a WRF variable, a 
-vectorfield for WRF vector components, and layers for spatial points and 
-polygons. Let's outline an example plot to showcase these different features.
+For instance, you can build a plot with a Raster for a WRF variable, a vector 
+field for WRF vector components, and layers for spatial points and polygons. 
+Let's outline an example plot to showcase these different features.
 
 ## WRF Plotting Example
 
@@ -39,7 +39,7 @@ Our plot will cover Washington, Oregon, and Idaho on July 15, 2020, and will
 include the following layers:
 
 1. A raster for temperature
-2. A vectorfield for wind velocity
+2. A vector field for wind velocity
 3. Spatial points for air quality monitors
 4. Spatial polygons for state boundaries
 
@@ -106,7 +106,7 @@ rasterVis::levelplot(tempRaster, main = 'Temperature (K)', margin = FALSE)
 ```
 
 And for wind velocity, we can use the North and East vector components in
-`vectorplot()` to make a vectorfield:
+`vectorplot()` to make a vector field:
 
 ```{r}
 rasterVis::vectorplot(
@@ -127,7 +127,7 @@ WRFmet's layered plotting capabilities. WRFmet provides a several helpful
 layers currently available are:
 
 * `layer_raster`
-* `layer_vectorfield`
+* `layer_vectorField`
 * `layer_points`
 * `layer_states`
 
@@ -185,14 +185,14 @@ temp_state_plot
 ```
 
 That's a little better! Let's also make our wind Rasters a bit more helpful by 
-using them to draw vector arrows with `layer_vectorfield()`. This function 
+using them to draw vector arrows with `layer_vectorField()`. This function 
 assumes the provided RasterBrick has two layers representing the U (North) and 
 V (East) components of vectors: 
 
 ```{r temperature_state_wind_plot}
 temp_state_wind_plot <- 
   temp_state_plot + 
-  # Draw the wind vectorfield
+  # Draw the wind vector field
   layer_vectorField(
     uvRaster = windRaster,
     arrowCount = 500,
@@ -258,7 +258,7 @@ temp_state_monitors_wind_plot <-
   layer_points(
     points = monitorPoints
   ) +
-  # Draw the wind vectorfield
+  # Draw the wind vector field
   layer_vectorField(
     uvRaster = windRaster,
     arrowCount = 500,
@@ -290,7 +290,7 @@ wrfMap <-
   layer_points(
     points = monitorPoints
   ) +
-  # Then draw the wind vectorfield
+  # Then draw the wind vector field
   layer_vectorField(
     uvRaster = windRaster,
     arrowCount = 500,
@@ -435,7 +435,7 @@ blueskyMap <-
     xlim = xlim,
     ylim = ylim
   ) +
-  # Then draw the wind vectorfield
+  # Then draw the wind vector field
   layer_vectorField(
     uvRaster = windRaster,
     arrowCount = 500,

@@ -90,7 +90,7 @@ layer_points <- function(
 }
 
 #' @export
-#' @title Create a vectorfield layer for plotting
+#' @title Create a vector field layer for plotting
 #'
 #' @param uvRaster A RasterBrick with 2 RasterLayers: U and V vector components.
 #' @param uLayer A RasterLayer of U vector components.
