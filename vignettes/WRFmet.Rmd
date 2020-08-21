@@ -15,11 +15,6 @@ knitr::opts_chunk$set(echo = TRUE)
 
 ## Overview
 
-The Weather Research and Forecasting (WRF) model is used to predict 
-meteorological conditions over the Earth's surface.
-
-...
-
-The WRFmet package provides tools to load and visualize WRF model runs
-
-...
+The Weather Research & Forecasting (WRF) model is a weather prediction system 
+used for atmospheric research and forecasting. The WRFmet package provides 
+simple tools for loading and visualizing WRF model runs with R.

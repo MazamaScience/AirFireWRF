@@ -4,10 +4,12 @@
 \alias{layer_points}
 \title{Create a points layer for plotting}
 \usage{
-layer_points(points = NULL)
+layer_points(points = NULL, size = 1)
 }
 \arguments{
 \item{points}{A SpatialPointsDataFrame of coordinates and data.}
+
+\item{size}{Point size.}
 }
 \value{
 A geom_point ggproto object.

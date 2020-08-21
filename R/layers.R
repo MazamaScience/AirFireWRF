@@ -53,9 +53,9 @@ layer_spPolys <- function(
   layer <- ggplot2::geom_polygon(
     data = df,
     ggplot2::aes(
-      x = long,
-      y = lat,
-      group = group
+      x = .data$long,
+      y = .data$lat,
+      group = .data$group
     ),
     color = color,
     fill = fill
@@ -102,6 +102,7 @@ layer_states <- function(
 #' @title Create a points layer for plotting
 #'
 #' @param points A SpatialPointsDataFrame of coordinates and data.
+#' @param size Point size.
 #'
 #' @return A geom_point ggproto object.
 
@@ -213,6 +214,7 @@ layer_vectorField <- function(
   return(res)
 }
 
+# Debug
 if (FALSE) {
   library(WRFmet)
   
