@@ -20,6 +20,6 @@ meteorological conditions over the Earth's surface.
 
 ...
 
-The WRFmet package provides tools to load and visualize this information.
+The WRFmet package provides tools to load and visualize WRF model runs
 
 ...

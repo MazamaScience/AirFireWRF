@@ -92,10 +92,10 @@ tempRaster <- raster::brick(PNW_Sample$TSK)
 windRaster <- raster::brick(PNW_Sample$U10, PNW_Sample$V10)
 
 # Extract the underlying grid these Rasters are using
-extent <- raster::extent(tempRaster)
+extent <- raster::extent(PNW_Sample)
 xlim <- c(round(extent@xmin), round(extent@xmax))
 ylim <- c(round(extent@ymin), round(extent@ymax))
-res <- round(mean(raster::res(tempRaster)), digits = 2)
+res <- round(mean(raster::res(PNW_Sample)), digits = 2)
 ```
 
 We can make some quick visualizations of these Rasters using the RasterVis

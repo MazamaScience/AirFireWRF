@@ -3,6 +3,7 @@
 export(getWRFDataDir)
 export(layer_points)
 export(layer_raster)
+export(layer_spPolys)
 export(layer_states)
 export(layer_vectorField)
 export(setWRFDataDir)

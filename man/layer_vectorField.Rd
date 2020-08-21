@@ -2,7 +2,7 @@
 % Please edit documentation in R/layers.R
 \name{layer_vectorField}
 \alias{layer_vectorField}
-\title{Create a vectorfield layer for plotting}
+\title{Create a vector field layer for plotting}
 \usage{
 layer_vectorField(
   uvRaster = NULL,
@@ -42,5 +42,5 @@ layer_vectorField(
 An annotation_custom ggproto object.
 }
 \description{
-Create a vectorfield layer for plotting
+Create a vector field layer for plotting
 }

@@ -33,6 +33,38 @@ layer_raster <- function(
 }
 
 #' @export
+#' @title Create a spatial polygons layer for plotting
+#'
+#' @param spdf A SpatialPolygonsDataFrame.
+#' @param color Outline color.
+#' @param fill Fill color.
+#'
+#' @return A geom_polygon ggproto object.
+
+layer_spPolys <- function(
+  spdf = NULL,
+  color = 'black',
+  fill = 'white'
+) {
+  spdf@data$id <- rownames(spdf@data)
+  points <- ggplot2::fortify(spdf, region = 'id')
+  df <- merge(points, spdf@data, by = 'id')
+  
+  layer <- ggplot2::geom_polygon(
+    data = df,
+    ggplot2::aes(
+      x = long,
+      y = lat,
+      group = group
+    ),
+    color = color,
+    fill = fill
+  )
+  
+  return(layer)
+}
+
+#' @export
 #' @title Create a state polygons layer for plotting
 #'
 #' @param xlim A vector of coordinate longitude bounds.
@@ -74,7 +106,8 @@ layer_states <- function(
 #' @return A geom_point ggproto object.
 
 layer_points <- function(
-  points = NULL
+  points = NULL,
+  size = 1
 ) {
   
   res <- ggplot2::geom_point(
@@ -83,7 +116,8 @@ layer_points <- function(
       x = .data$x,
       y = .data$y,
       color = .data$value
-    )
+    ),
+    size = size
   )
   
   return(res)
@@ -182,39 +216,28 @@ layer_vectorField <- function(
 if (FALSE) {
   library(WRFmet)
   
-  nc <- ncdf4::nc_open('~/Data/WRF/wrfout_d3-2020071512-f07-0000.nc')
+  data("PNW_Sample")
   
-  xlim <- c(-133, -106)
-  ylim <- c(40, 51)
-  rasterRes <- 0.06
-  
-  elevRaster <- wrf_createRaster(
-    nc = nc,
-    vars = 'HGT',
-    xlim = xlim,
-    ylim = ylim,
-    res = rasterRes
-  )
-  
-  windRaster <- wrf_createRaster(
-    nc = nc,
-    vars = c('U10', 'V10'),
-    xlim = xlim,
-    ylim = ylim,
-    res = rasterRes
-  )
+  extent <- raster::extent(PNW_Sample)
+  xlim <- c(round(extent@xmin), round(extent@xmax))
+  ylim <- c(round(extent@ymin), round(extent@ymax))
   
   points <- data.frame(
-    x = c(-120, -110, -112),
-    y = c(42, 45, 48),
-    value = c(20, 11000, 68)
+    x = c(-120, -118, -112),
+    y = c(43, 47, 48),
+    value = c(20, 110, 68)
   )
+  
+  MazamaSpatialUtils::setSpatialDataDir('~/Data/Spatial')
+  MazamaSpatialUtils::loadSpatialData('USCensusStates')
+  
+  waPoly <- USCensusStates[USCensusStates@data$stateCode == 'WA',]
   
   wrfMap <- 
     ggplot2::ggplot() +
     ggplot2::scale_fill_gradient(
       low = 'black',
-      high = 'white',
+      high = 'gray70',
       na.value = 'transparent'
     ) +
     ggplot2::scale_color_gradient(
@@ -223,20 +246,25 @@ if (FALSE) {
       na.value = 'transparent'
     ) +
     layer_raster(
-      raster = elevRaster
+      raster = PNW_Sample$HGT
     ) +
-    layer_states(
-      xlim = xlim,
-      ylim = ylim
+    layer_spPolys(
+      spdf = waPoly,
+      fill = 'transparent',
+      color = 'red'
     ) +
     layer_points(
-      points = points
+      points = points,
+      size = 3
     ) +
     layer_vectorField(
-      uvRaster = windRaster,
-      alpha = 0.75
+      uLayer = PNW_Sample$U10,
+      vLayer = PNW_Sample$V10,
+      arrowColor = 'yellow',
+      alpha = 0.9
     ) +
-    ggplot2::coord_cartesian(
+    ggplot2::coord_fixed(
+      ratio = 1.4,
       xlim = xlim,
       ylim = ylim
     ) +
