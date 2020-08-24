@@ -326,7 +326,7 @@ wrfMap <-
 wrfMap
 ```
 
-## BlueSky Plot Example
+## BlueSky Plotting Example
 
 The `layer_raster()` function can work with Rasters other than those we create 
 through WRFmet. For instance, we can also plot BlueSky air quality Rasters 

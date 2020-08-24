@@ -1,11 +1,12 @@
-#' @title Sample PNW Dataset
+#' @name sample_PNW
 #' @docType data
 #' @keywords datasets
+#' @title Sample dataset over the Pacific Northwest
 #' @format A RasterBrick containing 4 RasterLayers.
 #' @description The \code{sample_PNW} dataset contains forecasted readings for 
-#' temperature (TSK), elevation (HGT), and wind velocity (U10 & V10) across the 
-#' Pacific Northwest on July 15, 2020. This data is used in several examples in 
-#' the package documentation.
+#' temperature (\code{TSK}), elevation (\code{HGT}), and wind velocity 
+#' (\code{U10} & \code{V10}) across the Pacific Northwest on July 15, 2020. This
+#'  data is used in several examples in the package documentation.
 #' 
 #' This dataset was generated on 2020-08-24 by running:
 #'
@@ -21,4 +22,4 @@
 #' )
 #' }
 #' 
-"sample_PNW"
+NULL

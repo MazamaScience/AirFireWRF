@@ -2,7 +2,7 @@
 % Please edit documentation in R/wrf_load.R
 \name{wrf_load}
 \alias{wrf_load}
-\title{Load rasterized data for a WRF model
+\title{Load rasterized WRF model data
 
 Some useful variables:
 \itemize{
@@ -65,7 +65,7 @@ wrf_load(
 A \pkg{raster} package \emph{RasterBrick} object.
 }
 \description{
-Load rasterized data for a WRF model
+Load rasterized WRF model data
 
 Some useful variables:
 \itemize{

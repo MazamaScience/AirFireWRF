@@ -13,8 +13,42 @@ vignette: >
 knitr::opts_chunk$set(echo = TRUE)
 ```
 
-## Overview
+## Loading WRFmet Data
 
-The Weather Research & Forecasting (WRF) model is a weather prediction system 
-used for atmospheric research and forecasting. The WRFmet package provides 
-simple tools for loading and visualizing WRF model runs with R.
+Loading WRF data can be easily done using WRFmet's `wrf_load` function. This 
+function accesses WRF model run files ...[in progress]...
+
+```{r, load_example}
+library(WRFmet)
+
+# raster <- wrf_load(
+#  modelName = ...,
+#  modelRun = ...,
+#  modelMode = ...,
+#  vars = c('HGT', 'TSK'),
+#  res = 0.1
+# )
+```
+
+You can also load in WRF NetCDF files from anywhere on your machine by 
+specifying the `localPath` argument in `wrf_load()`. For example:
+
+```
+raster <- wrf_load(
+  localPath = '~/Data/WRF/wrfout_d3-2020071512-f07-0000.nc',
+  vars = c('HGT', 'TSK'),
+  res = 0.1
+)
+```
+
+## Standard Plots
+
+WRFmet provides several preset plot types for visualizing raster, vector, and 
+spatial point/polygon data. These include:
+
+...
+
+These plots are preset combinations of various building-block "layers". Custom
+plots can be built by stacking these layers which function similar to GGPlot's
+`geom_*` elements. This process is covered in more detail in the Static Layered
+Plots article.

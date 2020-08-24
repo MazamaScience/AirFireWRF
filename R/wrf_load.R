@@ -1,6 +1,6 @@
 #' @export
 #'
-#' @title Load rasterized data for a WRF model
+#' @title Load rasterized WRF model data
 #'
 #' Some useful variables:
 #' \itemize{
