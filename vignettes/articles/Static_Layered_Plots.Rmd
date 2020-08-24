@@ -86,16 +86,14 @@ But for now, let's use a sample Raster already included in the package:
 ```{r}
 library(WRFmet)
 
-data("PNW_Sample")
-
-tempRaster <- raster::brick(PNW_Sample$TSK)
-windRaster <- raster::brick(PNW_Sample$U10, PNW_Sample$V10)
+tempRaster <- raster::brick(WRFmet::sample_PNW$TSK)
+windRaster <- raster::brick(WRFmet::sample_PNW$U10, WRFmet::sample_PNW$V10)
 
 # Extract the underlying grid these Rasters are using
-extent <- raster::extent(PNW_Sample)
+extent <- raster::extent(WRFmet::sample_PNW)
 xlim <- c(round(extent@xmin), round(extent@xmax))
 ylim <- c(round(extent@ymin), round(extent@ymax))
-res <- round(mean(raster::res(PNW_Sample)), digits = 2)
+res <- round(mean(raster::res(WRFmet::sample_PNW)), digits = 2)
 ```
 
 We can make some quick visualizations of these Rasters using the RasterVis

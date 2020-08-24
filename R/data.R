@@ -1,0 +1,24 @@
+#' @title Sample PNW Dataset
+#' @docType data
+#' @keywords datasets
+#' @format A RasterBrick containing 4 RasterLayers.
+#' @description The \code{sample_PNW} dataset contains forecasted readings for 
+#' temperature (TSK), elevation (HGT), and wind velocity (U10 & V10) across the 
+#' Pacific Northwest on July 15, 2020. This data is used in several examples in 
+#' the package documentation.
+#' 
+#' This dataset was generated on 2020-08-24 by running:
+#'
+#' \preformatted{
+#' library(WRFmet)
+#'
+#' sample_PNW <- wrf_load(
+#'   localPath = '~/Data/WRF/wrfout_d3-2020071512-f07-0000.nc',
+#'   vars = c('HGT', 'TSK', 'U10', 'V10'),
+#'   res = 0.06,
+#'   xlim = c(-125, -111),
+#'   ylim = c(42, 49)
+#' )
+#' }
+#' 
+"sample_PNW"
