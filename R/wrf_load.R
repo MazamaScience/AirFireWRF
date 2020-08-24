@@ -1,8 +1,7 @@
 #' @export
 #'
 #' @title Load rasterized WRF model data
-#'
-#' Some useful variables:
+#' @description Some useful variables:
 #' \itemize{
 #'   \item{XLAT - Latitude (degrees North)}
 #'   \item{XLAT_U - Latitude (degrees North)}   

@@ -346,7 +346,7 @@ rasterList <- AirFireModeling::raster_load(
 )
 
 # Extract a single RasterLayer from the BlueSky run RasterBrick
-smokeRaster <- rasterList$`PNW-4km_2020071500`$X1594839600
+smokeRaster <- rasterList$`PNW-4km_2020071500`$X1020.07.16.19.00.00
 
 blueskyMap <- 
   ggplot2::ggplot() +
@@ -400,7 +400,7 @@ rasterList <- AirFireModeling::raster_load(
 )
 
 # Extract a single RasterLayer from the BlueSky run RasterBrick
-smokeRaster <- rasterList$`PNW-1.33km_2020071500`$X1594839600
+smokeRaster <- rasterList$`PNW-1.33km_2020071500`$X1020.07.16.19.00.00
 
 # Remove low values and cap high values
 smokeRaster[smokeRaster < 2] <- NA

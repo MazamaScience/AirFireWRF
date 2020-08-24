@@ -354,7 +354,7 @@ windRaster &lt;- wrf_load(
 )
 
 <span class="co"># Extract a single RasterLayer from the BlueSky run RasterBrick</span>
-<span class="no">smokeRaster</span> <span class="kw">&lt;-</span> <span class="no">rasterList</span>$<span class="no">`PNW-4km_2020071500`</span>$<span class="no">X1594839600</span>
+<span class="no">smokeRaster</span> <span class="kw">&lt;-</span> <span class="no">rasterList</span>$<span class="no">`PNW-4km_2020071500`</span>$<span class="no">X1020.07.16.19.00.00</span>
 
 <span class="no">blueskyMap</span> <span class="kw">&lt;-</span>
   <span class="kw pkg">ggplot2</span><span class="kw ns">::</span><span class="fu"><a href="https://ggplot2.tidyverse.org/reference/ggplot.html">ggplot</a></span>() +
@@ -402,7 +402,7 @@ windRaster &lt;- wrf_load(
 )
 
 <span class="co"># Extract a single RasterLayer from the BlueSky run RasterBrick</span>
-<span class="no">smokeRaster</span> <span class="kw">&lt;-</span> <span class="no">rasterList</span>$<span class="no">`PNW-1.33km_2020071500`</span>$<span class="no">X1594839600</span>
+<span class="no">smokeRaster</span> <span class="kw">&lt;-</span> <span class="no">rasterList</span>$<span class="no">`PNW-1.33km_2020071500`</span>$<span class="no">X1020.07.16.19.00.00</span>
 
 <span class="co"># Remove low values and cap high values</span>
 <span class="no">smokeRaster</span>[<span class="no">smokeRaster</span> <span class="kw">&lt;</span> <span class="fl">2</span>] <span class="kw">&lt;-</span> <span class="fl">NA</span>

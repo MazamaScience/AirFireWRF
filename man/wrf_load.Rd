@@ -2,33 +2,7 @@
 % Please edit documentation in R/wrf_load.R
 \name{wrf_load}
 \alias{wrf_load}
-\title{Load rasterized WRF model data
-
-Some useful variables:
-\itemize{
-  \item{XLAT - Latitude (degrees North)}
-  \item{XLAT_U - Latitude (degrees North)}   
-  \item{XLAT_V - Latitude (degrees North)}
-  \item{XLONG - Longitude (degrees East)}
-  \item{XLONG_U - Longitude (degrees East)}
-  \item{XLONG_V - Longitude (degrees East)}
-  \item{U - Wind X component (m/s)}
-  \item{V - Wind Y component (m/s)}
-  \item{W - Wind Z component (m/s)}
-  \item{U10 - Wind X component at 10 meters (m/s)}
-  \item{V10 - Wind Y component at 10 meters (m/s)}
-  \item{ZNU - eta values on half (mass) levels}
-  \item{ZNW - eta values on full (w) levels}
-  \item{LU_INDEX - Land use category}
-  \item{Q2 - QV at 2 M (kg)}
-  \item{T - Perturbation potential temperature theta-t0 (K)}
-  \item{T2 - Temperature at 2 meters (K)}
-  \item{TH2 - Potential temperature at 2 meters (K)}
-  \item{HGT - Terrain height (m)}
-  \item{RAINNC - Accumulated total grid scale precipitation (mm)}
-  \item{CFRACT - Total cloud fraction}
-  \item{PBLH - Planetary boundary layer height (m)}
-}}
+\title{Load rasterized WRF model data}
 \usage{
 wrf_load(
   modelName = NULL,
@@ -65,8 +39,6 @@ wrf_load(
 A \pkg{raster} package \emph{RasterBrick} object.
 }
 \description{
-Load rasterized WRF model data
-
 Some useful variables:
 \itemize{
   \item{XLAT - Latitude (degrees North)}
