@@ -3,7 +3,7 @@
 \docType{data}
 \name{WRFDataDir}
 \alias{WRFDataDir}
-\title{Directory for Modeling Data}
+\title{Directory for modeling data}
 \format{
 Absolute path string.
 }

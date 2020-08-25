@@ -15,7 +15,7 @@ WRFmetEnv$dataDir <- NULL
 #' @docType data
 #' @keywords environment
 #' @name WRFDataDir
-#' @title Directory for Modeling Data
+#' @title Directory for modeling data
 #' @format Absolute path string.
 #' @description This package maintains an internal directory location which
 #' users can set using \code{setWRFDataDir()}. All package functions use this
@@ -27,7 +27,7 @@ WRFmetEnv$dataDir <- NULL
 NULL
 
 #' @export
-#' @title Get Package Data Directory
+#' @title Get package data directory
 #' @description Returns the package data directory where model data is located.
 #' @return Absolute path string.
 #' @seealso \link{WRFDataDir}
@@ -45,7 +45,7 @@ getWRFDataDir <- function() {
 }
 
 #' @export
-#' @title Set Package Data Directory
+#' @title Set package data directory
 #' @param dataDir directory where model datasets are located
 #' @description Sets the package data directory where model data is located.
 #' If the directory does not exist, it will be created.
@@ -75,6 +75,7 @@ setWRFDataDir <- function(dataDir) {
 #' @seealso WRFDataDir
 #' @seealso getWRFDataDir
 #' @seealso setWRFDataDir
+
 removeWRFDataDir <- function() {
   old <- WRFmetEnv$dataDir
   WRFmetEnv$dataDir <- NULL

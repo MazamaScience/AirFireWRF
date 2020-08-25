@@ -1,6 +1,6 @@
 #' @export
 #'
-#' @title Load rasterized WRF model data
+#' @title Load WRF model run data
 #' @description Some useful variables:
 #' \itemize{
 #'   \item{XLAT - Latitude (degrees North)}
@@ -116,14 +116,14 @@ wrf_load <- function(
   )
 
   if (is.null(res)) {
-    # Approximate a grid that covers all the model run's sample points with a 
-    # single grid cell measuring DX x DY m^2:
+    # Define a grid to rasterize the model's sample points onto. A single grid 
+    # cell should measure approximately DX x DY meters (provided by the model):
     #
-    # *****T*****
-    # *****|*****
-    # L----+----R
-    # *****|*****
-    # *****B*****
+    # * * * * * T * * * * *
+    #  ** **  * | * **  **
+    #   L-------+-------R
+    #    *** ** | ** ***
+    #     *** **B** ***
     
     # Rows and columns of WRF sample points
     pColCount <- ncol(lon)
@@ -137,11 +137,11 @@ wrf_load <- function(
     top    <- c(lon[pHalfRowCount,             1], lat[pHalfRowCount,             1])
     bottom <- c(lon[pHalfRowCount,     pColCount], lat[pHalfRowCount,     pColCount])
     
-    # Scan's midle lon and lat lengths
+    # The swath's middle longitude and latitude lengths
     midLonLength <- geosphere::distGeo(left, right)
     midLatLength <- geosphere::distGeo(top, bottom)
     
-    # Grid delta dimensions
+    # Target grid cell dimensions
     ncGlobals <- ncdf4::ncatt_get(nc, 0)
     dX <- ncGlobals$DX
     dY <- ncGlobals$DY

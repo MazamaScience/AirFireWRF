@@ -2,7 +2,7 @@
 % Please edit documentation in R/wrf_load.R
 \name{wrf_load}
 \alias{wrf_load}
-\title{Load rasterized WRF model data}
+\title{Load WRF model run data}
 \usage{
 wrf_load(
   modelName = NULL,

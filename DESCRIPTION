@@ -28,7 +28,7 @@ Imports:
     MazamaCoreUtils,
     ncdf4,
     PWFSLSmoke,
-    raster,
+    raster (>= 3.3.13),
     rasterVis,
     RColorBrewer,
     readr,

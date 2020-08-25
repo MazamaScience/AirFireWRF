@@ -13,24 +13,26 @@ vignette: >
 knitr::opts_chunk$set(echo = TRUE)
 ```
 
-## Loading WRFmet Data
+## Loading WRF Data
 
 Loading WRF data can be easily done using WRFmet's `wrf_load` function. This 
 function accesses WRF model run files ...[in progress]...
+
+[Explain WRF data dir]
 
 ```{r, load_example}
 library(WRFmet)
 
 # raster <- wrf_load(
-#  modelName = ...,
-#  modelRun = ...,
-#  modelMode = ...,
-#  vars = c('HGT', 'TSK'),
-#  res = 0.1
+#   modelName = ...,
+#   modelRun = ...,
+#   modelMode = ...,
+#   vars = c('HGT', 'TSK'),
+#   res = 0.1
 # )
 ```
 
-You can also load in WRF NetCDF files from anywhere on your machine by 
+You can also load in existing WRF NetCDF files from anywhere on your machine by 
 specifying the `localPath` argument in `wrf_load()`. For example:
 
 ```
@@ -41,7 +43,7 @@ raster <- wrf_load(
 )
 ```
 
-## Standard Plots
+## Plotting WRF Data
 
 WRFmet provides several preset plot types for visualizing raster, vector, and 
 spatial point/polygon data. These include:
@@ -50,5 +52,5 @@ spatial point/polygon data. These include:
 
 These plots are preset combinations of various building-block "layers". Custom
 plots can be built by stacking these layers which function similar to GGPlot's
-`geom_*` elements. This process is covered in more detail in the Static Layered
-Plots article.
+`geom_*` elements. This process is covered in further detail in the "Static 
+Layered Plots" article.

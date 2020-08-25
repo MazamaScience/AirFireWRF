@@ -2,7 +2,7 @@
 % Please edit documentation in R/WRFmet.R
 \name{getWRFDataDir}
 \alias{getWRFDataDir}
-\title{Get Package Data Directory}
+\title{Get package data directory}
 \usage{
 getWRFDataDir()
 }

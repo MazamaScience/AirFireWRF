@@ -2,7 +2,7 @@
 % Please edit documentation in R/WRFmet.R
 \name{setWRFDataDir}
 \alias{setWRFDataDir}
-\title{Set Package Data Directory}
+\title{Set package data directory}
 \usage{
 setWRFDataDir(dataDir)
 }
