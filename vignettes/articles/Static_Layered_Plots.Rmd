@@ -405,15 +405,6 @@ smokeRaster <- rasterList$`PNW-1.33km_2020071500`$X1020.07.16.19.00.00
 # Remove low values and cap high values
 smokeRaster[smokeRaster < 2] <- NA
 smokeRaster[smokeRaster > 500] <- 500
-
-# A RasterBrick with layers for both U and V wind vector components
-windRaster <- wrf_load(
-  localPath = '~/Data/WRF/wrfout_d3-2020071512-f07-0000.nc',
-  vars = c('U10', 'V10'),
-  xlim = xlim,
-  ylim = ylim,
-  res = res
-)
 ```
 
 Now we can plot this information just like we did for the WRF example:
