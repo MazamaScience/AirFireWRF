@@ -1,7 +1,29 @@
 #' @export
 #'
 #' @title Load WRF model run data
-#' @description Some useful variables:
+#' 
+#' @param modelName Model identifier.
+#' @param modelRun Model initialization timestamp as "YYYYMMDDHH".
+#' @param modelRunHour Hour forecasted from initial time, i.e. 7.
+#' @param baseUrl Base URL for WRF output.
+#' @param localPath Absolute path to a NetCDF file not found in `WRFDataDir`.
+#' @param vars WRF variable(s) to load.
+#' @param res Resolution of raster in degrees.
+#' @param xlim A vector of coordinate longitude bounds.
+#' @param ylim A vector of coordinate latitude bounds.
+#' @param verbose Logical to display messages.
+#' 
+#' @description Loads WRF model run data as a \pkg{raster} package 
+#' \emph{RasterBrick}. If the specified data does not exist on the user's 
+#' machine, then it will try to be downloaded from the AirFire database.
+#' 
+#' On 2020-08-26, available model identifiers include the following:
+#' \itemize{
+#'   \item{PNW-1.33km}
+#'   \item{PNW-4km}
+#' }
+#' 
+#' Some useful variables provided by WRF:
 #' \itemize{
 #'   \item{XLAT - Latitude (degrees North)}
 #'   \item{XLAT_U - Latitude (degrees North)}   
@@ -27,16 +49,6 @@
 #'   \item{PBLH - Planetary boundary layer height (m)}
 #' }
 #'
-#' @param modelName Model identifier.
-#' @param modelRun Model initialization timestamp as "YYYYMMDDHH".
-#' @param modelMode Hour forecasted from initial time as "HH", i.e. '07'.
-#' @param localPath Absolute path to a NetCDF file not found in `WRFDataDir`.
-#' @param vars WRF variable(s) to load.
-#' @param res Resolution of raster in degrees.
-#' @param xlim A vector of coordinate longitude bounds.
-#' @param ylim A vector of coordinate latitude bounds.
-#' @param verbose Logical to display messages.
-#'
 #' @return A \pkg{raster} package \emph{RasterBrick} object.
 #'
 #' @examples
@@ -44,9 +56,11 @@
 #' library(WRFmet)
 #' 
 #' raster <- wrf_load(
-#'   localPath = '~/Data/WRF/wrfout_d3-2020071512-f07-0000.nc',
-#'   vars = c('HGT', 'TSK'),
-#'   res = 0.06,
+#'   modelName = "PNW-4km",
+#'   modelRun = "2020082612",
+#'   modelRunHour = 9,
+#'   vars = "TSK",
+#'   res = 0.1,
 #'   xlim = c(-125, -116),
 #'   ylim = c(45, 50)
 #' )
@@ -57,7 +71,8 @@
 wrf_load <- function(
   modelName = NULL,
   modelRun = NULL,
-  modelMode = NULL,
+  modelRunHour = NULL,
+  baseUrl = "http://m2.airfire.org/PNW/4km/WRF",
   localPath = NULL,
   vars = NULL,
   res = NULL,
@@ -72,7 +87,7 @@ wrf_load <- function(
     
     MazamaCoreUtils::stopIfNull(modelName)
     MazamaCoreUtils::stopIfNull(modelRun)
-    MazamaCoreUtils::stopIfNull(modelMode)
+    MazamaCoreUtils::stopIfNull(modelRunHour)
     
   } else {
     
@@ -84,27 +99,33 @@ wrf_load <- function(
   
   if ( !is.logical(verbose) ) verbose <- TRUE
   
-  # ----- Access WRF File ------------------------------------------------------
+  # ----- Download and convert -------------------------------------------------
   
   if ( is.null(localPath) ) { # No localPath
     
-    fileName <- paste0('wrfout_d3-', modelRun, '-f', modelMode, '-0000.nc')
+    fileName <- paste0('wrfout_d3-', modelRun, '-f', modelRunHour, '-0000.nc')
     filePath <- file.path(getWRFDataDir(), fileName)
     
     if ( !file.exists(filePath) ) {
-      # TODO: Download model run file from database
-      # filePath <- downloadedFilePath
+      rawFilePath <- wrf_download(
+        modelName = modelName,
+        modelRun = modelRun,
+        modelRunHour = modelRunHour,
+        baseUrl = baseUrl,
+        verbose = verbose
+      )
     }
     
   } else { # User specified localPath
     
-    filePath <- localPath
+    rawFilePath <- localPath
     
   }
   
-  nc <- ncdf4::nc_open(filePath)
-  
   # ----- Define raster grid ---------------------------------------------------
+  
+  # Define NetCDF file handle
+  nc <- ncdf4::nc_open(rawFilePath)
   
   # Get reading coordinates
   lon <- ncdf4::ncvar_get(nc, varid = "XLONG")

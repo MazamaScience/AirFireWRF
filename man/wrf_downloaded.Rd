@@ -35,5 +35,4 @@ modelRun <- wrf_latestModelRun("PNW-4km")
 filePath <- wrf_download("PNW-4km", modelRun, 7)
 wrf_downloaded()
 }
-
 }

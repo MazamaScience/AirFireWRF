@@ -17,10 +17,6 @@
 #'   \item{PNW-4km}
 #' }
 #'
-#' Users wanting the latest data will typically call this function first,
-#' followed by wrf_load().
-#'
-#'
 #' @return Timestamp of the latest model run.
 #'
 #' @examples

@@ -31,9 +31,6 @@ On 2020-08-26, available model identifiers include the following:
   \item{PNW-1.33km}
   \item{PNW-4km}
 }
-
-Users wanting the latest data will typically call this function first,
-followed by wrf_load().
 }
 \examples{
 \donttest{

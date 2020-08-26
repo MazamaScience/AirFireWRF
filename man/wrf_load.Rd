@@ -7,7 +7,8 @@
 wrf_load(
   modelName = NULL,
   modelRun = NULL,
-  modelMode = NULL,
+  modelRunHour = NULL,
+  baseUrl = "http://m2.airfire.org/PNW/4km/WRF",
   localPath = NULL,
   vars = NULL,
   res = NULL,
@@ -21,7 +22,9 @@ wrf_load(
 
 \item{modelRun}{Model initialization timestamp as "YYYYMMDDHH".}
 
-\item{modelMode}{Hour forecasted from initial time as "HH", i.e. '07'.}
+\item{modelRunHour}{Hour forecasted from initial time, i.e. 7.}
+
+\item{baseUrl}{Base URL for WRF output.}
 
 \item{localPath}{Absolute path to a NetCDF file not found in `WRFDataDir`.}
 
@@ -39,7 +42,17 @@ wrf_load(
 A \pkg{raster} package \emph{RasterBrick} object.
 }
 \description{
-Some useful variables:
+Loads WRF model run data as a \pkg{raster} package 
+\emph{RasterBrick}. If the specified data does not exist on the user's 
+machine, then it will try to be downloaded from the AirFire database.
+
+On 2020-08-26, available model identifiers include the following:
+\itemize{
+  \item{PNW-1.33km}
+  \item{PNW-4km}
+}
+
+Some useful variables provided by WRF:
 \itemize{
   \item{XLAT - Latitude (degrees North)}
   \item{XLAT_U - Latitude (degrees North)}   
@@ -70,9 +83,11 @@ Some useful variables:
 library(WRFmet)
 
 raster <- wrf_load(
-  localPath = '~/Data/WRF/wrfout_d3-2020071512-f07-0000.nc',
-  vars = c('HGT', 'TSK'),
-  res = 0.06,
+  modelName = "PNW-4km",
+  modelRun = "2020082612",
+  modelRunHour = 9,
+  vars = "TSK",
+  res = 0.1,
   xlim = c(-125, -116),
   ylim = c(45, 50)
 )
