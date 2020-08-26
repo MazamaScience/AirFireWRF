@@ -6,7 +6,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<title>Download WRf model data from AirFire — wrf_download • WRFmet</title>
+<title>List downloaded WRF model run files — wrf_downloaded • WRFmet</title>
 
 
 <!-- jquery -->
@@ -39,14 +39,8 @@
 
 
 
-<meta property="og:title" content="Download WRf model data from AirFire — wrf_download" />
-<meta property="og:description" content="Downloads a copy of the specified WRF model run to the package 
-data directory. The file data can then be loaded with wrf_load().
-On 2020-08-26, available model identifiers include the following:
-PNW-1.33km
-PNW-4km
-
-" />
+<meta property="og:title" content="List downloaded WRF model run files — wrf_downloaded" />
+<meta property="og:description" content="List downloaded WRF model run files" />
 
 
 
@@ -132,63 +126,56 @@ PNW-4km
 <div class="row">
   <div class="col-md-9 contents">
     <div class="page-header">
-    <h1>Download WRf model data from AirFire</h1>
-    <small class="dont-index">Source: <a href='https://github.com/MazamaScience/WRFmet/blob/master/R/wrf_download.R'><code>R/wrf_download.R</code></a></small>
-    <div class="hidden name"><code>wrf_download.Rd</code></div>
+    <h1>List downloaded WRF model run files</h1>
+    <small class="dont-index">Source: <a href='https://github.com/MazamaScience/WRFmet/blob/master/R/wrf_downloaded.R'><code>R/wrf_downloaded.R</code></a></small>
+    <div class="hidden name"><code>wrf_downloaded.Rd</code></div>
     </div>
 
     <div class="ref-description">
-    <p>Downloads a copy of the specified WRF model run to the package 
-data directory. The file data can then be loaded with <code><a href='wrf_load.html'>wrf_load()</a></code>.</p>
-<p>On 2020-08-26, available model identifiers include the following:</p><ul>
-<li><p>PNW-1.33km</p></li>
-<li><p>PNW-4km</p></li>
-</ul>
-
+    <p>List downloaded WRF model run files</p>
     </div>
 
-    <pre class="usage"><span class='fu'>wrf_download</span>(
-  <span class='kw'>modelName</span> <span class='kw'>=</span> <span class='st'>"PNW-4km"</span>,
-  <span class='kw'>modelRun</span> <span class='kw'>=</span> <span class='kw'>NULL</span>,
-  <span class='kw'>modelRunHour</span> <span class='kw'>=</span> <span class='kw'>NULL</span>,
-  <span class='kw'>baseUrl</span> <span class='kw'>=</span> <span class='st'>"http://m2.airfire.org/PNW/4km/WRF"</span>,
-  <span class='kw'>verbose</span> <span class='kw'>=</span> <span class='fl'>TRUE</span>
+    <pre class="usage"><span class='fu'>wrf_downloaded</span>(
+  <span class='kw'>WRFDataDir</span> <span class='kw'>=</span> <span class='fu'><a href='getWRFDataDir.html'>getWRFDataDir</a></span>(),
+  <span class='kw'>pattern</span> <span class='kw'>=</span> <span class='st'>".nc"</span>,
+  <span class='kw'>full</span> <span class='kw'>=</span> <span class='fl'>FALSE</span>,
+  <span class='no'>...</span>
 )</pre>
 
     <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a>Arguments</h2>
     <table class="ref-arguments">
     <colgroup><col class="name" /><col class="desc" /></colgroup>
     <tr>
-      <th>modelName</th>
-      <td><p>Model identifier.</p></td>
+      <th>WRFDataDir</th>
+      <td><p>Directory in which model run files are located.</p></td>
     </tr>
     <tr>
-      <th>modelRun</th>
-      <td><p>Model initialization timestamp as "YYYYMMDDHH".</p></td>
+      <th>pattern</th>
+      <td><p>A regex pattern to use for filtering model files.</p></td>
     </tr>
     <tr>
-      <th>modelRunHour</th>
-      <td><p>Hour forecasted from initial time, i.e. 7.</p></td>
+      <th>full</th>
+      <td><p>Logical. Show the full path of the model (used for local loading).</p></td>
     </tr>
     <tr>
-      <th>baseUrl</th>
-      <td><p>Base URL for WRF output.</p></td>
-    </tr>
-    <tr>
-      <th>verbose</th>
-      <td><p>If <code>FALSE</code>, suppress status messages (if any), and the
-progress bar.</p></td>
+      <th>...</th>
+      <td><p>Additional arguments to be passed to <code><a href='https://rdrr.io/r/base/list.files.html'>list.files()</a></code>.</p></td>
     </tr>
     </table>
 
+    <h2 class="hasAnchor" id="value"><a class="anchor" href="#value"></a>Value</h2>
+
+    <p>A list of downloaded model run files</p>
 
     <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
     <pre class="examples"><div class='input'><span class='co'># \donttest{</span>
 <span class='fu'><a href='https://rdrr.io/r/base/library.html'>library</a></span>(<span class='no'>WRFmet</span>)
-<span class='fu'><a href='setWRFDataDir.html'>setWRFDataDir</a></span>(<span class='st'>'~/Data/WRF'</span>)
+<span class='fu'><a href='setWRFDataDir.html'>setWRFDataDir</a></span>(<span class='st'>"~/Data/WRF"</span>)
 
 <span class='no'>modelRun</span> <span class='kw'>&lt;-</span> <span class='fu'><a href='wrf_latestModelRun.html'>wrf_latestModelRun</a></span>(<span class='st'>"PNW-4km"</span>)
-<span class='fu'>wrf_download</span>(<span class='st'>"PNW-4km"</span>, <span class='no'>modelRun</span>, <span class='fl'>8</span>)</div><div class='output co'>#&gt; <span class='message'>WRF model run exists at: /Users/mazama/Data/WRF/wrfout_d3.2020082612.f08.0000.nc</span></div><div class='output co'>#&gt; [1] "/Users/mazama/Data/WRF/wrfout_d3.2020082612.f08.0000.nc"</div><div class='input'># }
+<span class='no'>filePath</span> <span class='kw'>&lt;-</span> <span class='fu'><a href='wrf_download.html'>wrf_download</a></span>(<span class='st'>"PNW-4km"</span>, <span class='no'>modelRun</span>, <span class='fl'>7</span>)</div><div class='output co'>#&gt; <span class='message'>WRF model run exists at: /Users/mazama/Data/WRF/wrfout_d3.2020082612.f07.0000.nc</span></div><div class='input'><span class='fu'>wrf_downloaded</span>()</div><div class='output co'>#&gt; [1] "wrfout_d3-2020071512-f07-0000.nc" "wrfout_d3.2020082612.f07.0000.nc"
+#&gt; [3] "wrfout_d3.2020082612.f08.0000.nc"</div><div class='input'># }
+
 </div></pre>
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="pkgdown-sidebar">

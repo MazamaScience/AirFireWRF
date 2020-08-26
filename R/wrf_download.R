@@ -21,7 +21,6 @@
 #' @examples
 #' \donttest{
 #' library(WRFmet)
-#' 
 #' setWRFDataDir('~/Data/WRF')
 #' 
 #' modelRun <- wrf_latestModelRun("PNW-4km")
@@ -70,7 +69,7 @@ wrf_download <- function(
   
   fileName <- paste0("wrfout_d3.", modelRun, ".f", 
                      stringr::str_pad(modelRunHour, 2, pad = "0"), ".0000")
-  filePath <- file.path(getWRFDataDir(), fileName)
+  filePath <- file.path(getWRFDataDir(), paste0(fileName, ".nc"))
   
   # ----- Download data --------------------------------------------------------
   
