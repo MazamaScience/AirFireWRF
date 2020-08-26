@@ -28,7 +28,7 @@
 #' }
 #'
 #' @param modelName Model identifier.
-#' @param modelRun Model initialization datestamp as "YYYYMMDDHH".
+#' @param modelRun Model initialization timestamp as "YYYYMMDDHH".
 #' @param modelMode Hour forecasted from initial time as "HH", i.e. '07'.
 #' @param localPath Absolute path to a NetCDF file not found in `WRFDataDir`.
 #' @param vars WRF variable(s) to load.

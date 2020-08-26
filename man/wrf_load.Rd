@@ -19,7 +19,7 @@ wrf_load(
 \arguments{
 \item{modelName}{Model identifier.}
 
-\item{modelRun}{Model initialization datestamp as "YYYYMMDDHH".}
+\item{modelRun}{Model initialization timestamp as "YYYYMMDDHH".}
 
 \item{modelMode}{Hour forecasted from initial time as "HH", i.e. '07'.}
 

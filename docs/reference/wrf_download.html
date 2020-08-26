@@ -6,7 +6,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<title>Load WRF model run data — wrf_load • WRFmet</title>
+<title>Download WRf model data from AirFire — wrf_download • WRFmet</title>
 
 
 <!-- jquery -->
@@ -39,30 +39,12 @@
 
 
 
-<meta property="og:title" content="Load WRF model run data — wrf_load" />
-<meta property="og:description" content="Some useful variables:
-XLAT - Latitude (degrees North)
-XLAT_U - Latitude (degrees North)
-XLAT_V - Latitude (degrees North)
-XLONG - Longitude (degrees East)
-XLONG_U - Longitude (degrees East)
-XLONG_V - Longitude (degrees East)
-U - Wind X component (m/s)
-V - Wind Y component (m/s)
-W - Wind Z component (m/s)
-U10 - Wind X component at 10 meters (m/s)
-V10 - Wind Y component at 10 meters (m/s)
-ZNU - eta values on half (mass) levels
-ZNW - eta values on full (w) levels
-LU_INDEX - Land use category
-Q2 - QV at 2 M (kg)
-T - Perturbation potential temperature theta-t0 (K)
-T2 - Temperature at 2 meters (K)
-TH2 - Potential temperature at 2 meters (K)
-HGT - Terrain height (m)
-RAINNC - Accumulated total grid scale precipitation (mm)
-CFRACT - Total cloud fraction
-PBLH - Planetary boundary layer height (m)
+<meta property="og:title" content="Download WRf model data from AirFire — wrf_download" />
+<meta property="og:description" content="Downloads a copy of the specified WRF model run to the package 
+data directory. The file data can then be loaded with wrf_load().
+On 2020-08-26, available model identifiers include the following:
+PNW-1.33km
+PNW-4km
 
 " />
 
@@ -150,48 +132,26 @@ PBLH - Planetary boundary layer height (m)
 <div class="row">
   <div class="col-md-9 contents">
     <div class="page-header">
-    <h1>Load WRF model run data</h1>
-    <small class="dont-index">Source: <a href='https://github.com/MazamaScience/WRFmet/blob/master/R/wrf_load.R'><code>R/wrf_load.R</code></a></small>
-    <div class="hidden name"><code>wrf_load.Rd</code></div>
+    <h1>Download WRf model data from AirFire</h1>
+    <small class="dont-index">Source: <a href='https://github.com/MazamaScience/WRFmet/blob/master/R/wrf_download.R'><code>R/wrf_download.R</code></a></small>
+    <div class="hidden name"><code>wrf_download.Rd</code></div>
     </div>
 
     <div class="ref-description">
-    <p>Some useful variables:</p><ul>
-<li><p>XLAT - Latitude (degrees North)</p></li>
-<li><p>XLAT_U - Latitude (degrees North)</p></li>
-<li><p>XLAT_V - Latitude (degrees North)</p></li>
-<li><p>XLONG - Longitude (degrees East)</p></li>
-<li><p>XLONG_U - Longitude (degrees East)</p></li>
-<li><p>XLONG_V - Longitude (degrees East)</p></li>
-<li><p>U - Wind X component (m/s)</p></li>
-<li><p>V - Wind Y component (m/s)</p></li>
-<li><p>W - Wind Z component (m/s)</p></li>
-<li><p>U10 - Wind X component at 10 meters (m/s)</p></li>
-<li><p>V10 - Wind Y component at 10 meters (m/s)</p></li>
-<li><p>ZNU - eta values on half (mass) levels</p></li>
-<li><p>ZNW - eta values on full (w) levels</p></li>
-<li><p>LU_INDEX - Land use category</p></li>
-<li><p>Q2 - QV at 2 M (kg)</p></li>
-<li><p>T - Perturbation potential temperature theta-t0 (K)</p></li>
-<li><p>T2 - Temperature at 2 meters (K)</p></li>
-<li><p>TH2 - Potential temperature at 2 meters (K)</p></li>
-<li><p>HGT - Terrain height (m)</p></li>
-<li><p>RAINNC - Accumulated total grid scale precipitation (mm)</p></li>
-<li><p>CFRACT - Total cloud fraction</p></li>
-<li><p>PBLH - Planetary boundary layer height (m)</p></li>
+    <p>Downloads a copy of the specified WRF model run to the package 
+data directory. The file data can then be loaded with <code><a href='wrf_load.html'>wrf_load()</a></code>.</p>
+<p>On 2020-08-26, available model identifiers include the following:</p><ul>
+<li><p>PNW-1.33km</p></li>
+<li><p>PNW-4km</p></li>
 </ul>
 
     </div>
 
-    <pre class="usage"><span class='fu'>wrf_load</span>(
-  <span class='kw'>modelName</span> <span class='kw'>=</span> <span class='kw'>NULL</span>,
+    <pre class="usage"><span class='fu'>wrf_download</span>(
+  <span class='kw'>modelName</span> <span class='kw'>=</span> <span class='st'>"PNW-4km"</span>,
   <span class='kw'>modelRun</span> <span class='kw'>=</span> <span class='kw'>NULL</span>,
-  <span class='kw'>modelMode</span> <span class='kw'>=</span> <span class='kw'>NULL</span>,
-  <span class='kw'>localPath</span> <span class='kw'>=</span> <span class='kw'>NULL</span>,
-  <span class='kw'>vars</span> <span class='kw'>=</span> <span class='kw'>NULL</span>,
-  <span class='kw'>res</span> <span class='kw'>=</span> <span class='kw'>NULL</span>,
-  <span class='kw'>xlim</span> <span class='kw'>=</span> <span class='kw'>NULL</span>,
-  <span class='kw'>ylim</span> <span class='kw'>=</span> <span class='kw'>NULL</span>,
+  <span class='kw'>modelRunHour</span> <span class='kw'>=</span> <span class='kw'>NULL</span>,
+  <span class='kw'>baseUrl</span> <span class='kw'>=</span> <span class='st'>"http://m2.airfire.org/PNW/4km/WRF"</span>,
   <span class='kw'>verbose</span> <span class='kw'>=</span> <span class='fl'>TRUE</span>
 )</pre>
 
@@ -207,61 +167,29 @@ PBLH - Planetary boundary layer height (m)
       <td><p>Model initialization timestamp as "YYYYMMDDHH".</p></td>
     </tr>
     <tr>
-      <th>modelMode</th>
-      <td><p>Hour forecasted from initial time as "HH", i.e. '07'.</p></td>
+      <th>modelRunHour</th>
+      <td><p>Hour forecasted from initial time, i.e. 7.</p></td>
     </tr>
     <tr>
-      <th>localPath</th>
-      <td><p>Absolute path to a NetCDF file not found in `WRFDataDir`.</p></td>
-    </tr>
-    <tr>
-      <th>vars</th>
-      <td><p>WRF variable(s) to load.</p></td>
-    </tr>
-    <tr>
-      <th>res</th>
-      <td><p>Resolution of raster in degrees.</p></td>
-    </tr>
-    <tr>
-      <th>xlim</th>
-      <td><p>A vector of coordinate longitude bounds.</p></td>
-    </tr>
-    <tr>
-      <th>ylim</th>
-      <td><p>A vector of coordinate latitude bounds.</p></td>
+      <th>baseUrl</th>
+      <td><p>Base URL for WRF output.</p></td>
     </tr>
     <tr>
       <th>verbose</th>
-      <td><p>Logical to display messages.</p></td>
+      <td><p>If <code>FALSE</code>, suppress status messages (if any), and the
+progress bar.</p></td>
     </tr>
     </table>
 
-    <h2 class="hasAnchor" id="value"><a class="anchor" href="#value"></a>Value</h2>
-
-    <p>A <span class="pkg">raster</span> package <em>RasterBrick</em> object.</p>
 
     <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
     <pre class="examples"><div class='input'><span class='co'># \donttest{</span>
 <span class='fu'><a href='https://rdrr.io/r/base/library.html'>library</a></span>(<span class='no'>WRFmet</span>)
 
-<span class='no'>raster</span> <span class='kw'>&lt;-</span> <span class='fu'>wrf_load</span>(
-  <span class='kw'>localPath</span> <span class='kw'>=</span> <span class='st'>'~/Data/WRF/wrfout_d3-2020071512-f07-0000.nc'</span>,
-  <span class='kw'>vars</span> <span class='kw'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span>(<span class='st'>'HGT'</span>, <span class='st'>'TSK'</span>),
-  <span class='kw'>res</span> <span class='kw'>=</span> <span class='fl'>0.06</span>,
-  <span class='kw'>xlim</span> <span class='kw'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span>(-<span class='fl'>125</span>, -<span class='fl'>116</span>),
-  <span class='kw'>ylim</span> <span class='kw'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span>(<span class='fl'>45</span>, <span class='fl'>50</span>)
-)
+<span class='fu'><a href='setWRFDataDir.html'>setWRFDataDir</a></span>(<span class='st'>'~/Data/WRF'</span>)
 
-<span class='fu'><a href='https://rdrr.io/r/base/print.html'>print</a></span>(<span class='no'>raster</span>)</div><div class='output co'>#&gt; class      : RasterBrick 
-#&gt; dimensions : 85, 151, 12835, 2  (nrow, ncol, ncell, nlayers)
-#&gt; resolution : 0.05993953, 0.0600208  (x, y)
-#&gt; extent     : -125.0323, -115.9814, 44.95588, 50.05765  (xmin, xmax, ymin, ymax)
-#&gt; crs        : +proj=longlat +datum=WGS84 +ellps=WGS84 +towgs84=0,0,0 
-#&gt; source     : memory
-#&gt; names      :       HGT,       TSK 
-#&gt; min values :      0.00,    273.16 
-#&gt; max values : 2879.9337,  317.6662 
-#&gt; </div><div class='input'># }
+<span class='no'>modelRun</span> <span class='kw'>&lt;-</span> <span class='fu'><a href='wrf_latestModelRun.html'>wrf_latestModelRun</a></span>(<span class='st'>"PNW-4km"</span>)
+<span class='fu'>wrf_download</span>(<span class='st'>"PNW-4km"</span>, <span class='no'>modelRun</span>, <span class='fl'>8</span>)</div><div class='output co'>#&gt; <span class='message'>WRF model run exists at: /Users/mazama/Data/WRF/wrfout_d3.2020082612.f08.0000</span></div><div class='output co'>#&gt; [1] "/Users/mazama/Data/WRF/wrfout_d3.2020082612.f08.0000"</div><div class='input'># }
 </div></pre>
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="pkgdown-sidebar">

@@ -1,6 +1,12 @@
 #' @export
 #'
 #' @title Find latest WRF model run from AirFire
+#' 
+#' @param modelName Model identifier.
+#' @param count Number of most recent \code{modelRun} strings to return. Set to
+#' \code{Inf} to get \emph{all} of the available model runs.
+#' @param baseUrl Base URL for WRF output.
+#' 
 #' @description Scans the directory of WRF model output and returns the most 
 #' recent \code{modelRun} string(s). If \code{count > 1}, the most recent
 #' \code{count} will be returned in low-hi order.
@@ -14,10 +20,6 @@
 #' Users wanting the latest data will typically call this function first,
 #' followed by wrf_load().
 #'
-#' @param modelName Model identifier.
-#' @param count Number of most recent \code{modelRun} strings to return. Set to
-#' \code{Inf} to get \emph{all} of the available model runs.
-#' @param baseUrl Base URL for WRF output.
 #'
 #' @return Timestamp of the latest model run.
 #'
