@@ -54,6 +54,7 @@
 #' @examples
 #' \donttest{
 #' library(WRFmet)
+#' setWRFDataDir("~/Data/WRF")
 #' 
 #' raster <- wrf_load(
 #'   modelName = "PNW-4km",
@@ -88,6 +89,7 @@ wrf_load <- function(
     MazamaCoreUtils::stopIfNull(modelName)
     MazamaCoreUtils::stopIfNull(modelRun)
     MazamaCoreUtils::stopIfNull(modelRunHour)
+    MazamaCoreUtils::stopIfNull(baseUrl)
     
   } else {
     
@@ -97,17 +99,22 @@ wrf_load <- function(
     
   }
   
+  if ( length(vars) < 1 ) {
+    stop(sprintf("Must specify at least one WRF var"))
+  }
+  
   if ( !is.logical(verbose) ) verbose <- TRUE
   
   # ----- Download and convert -------------------------------------------------
   
   if ( is.null(localPath) ) { # No localPath
     
-    fileName <- paste0('wrfout_d3-', modelRun, '-f', modelRunHour, '-0000.nc')
+    fileName <- paste0(modelName, "_", modelRun, "_", 
+                       stringr::str_pad(modelRunHour, 2, pad = "0"), ".nc")
     filePath <- file.path(getWRFDataDir(), fileName)
     
     if ( !file.exists(filePath) ) {
-      rawFilePath <- wrf_download(
+      filePath <- wrf_download(
         modelName = modelName,
         modelRun = modelRun,
         modelRunHour = modelRunHour,
@@ -118,14 +125,14 @@ wrf_load <- function(
     
   } else { # User specified localPath
     
-    rawFilePath <- localPath
+    filePath <- localPath
     
   }
   
   # ----- Define raster grid ---------------------------------------------------
   
   # Define NetCDF file handle
-  nc <- ncdf4::nc_open(rawFilePath)
+  nc <- ncdf4::nc_open(filePath)
   
   # Get reading coordinates
   lon <- ncdf4::ncvar_get(nc, varid = "XLONG")

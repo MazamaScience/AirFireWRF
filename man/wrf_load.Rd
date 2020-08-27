@@ -81,6 +81,7 @@ Some useful variables provided by WRF:
 \examples{
 \donttest{
 library(WRFmet)
+setWRFDataDir("~/Data/WRF")
 
 raster <- wrf_load(
   modelName = "PNW-4km",

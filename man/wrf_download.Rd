@@ -5,7 +5,7 @@
 \title{Download WRf model data from AirFire}
 \usage{
 wrf_download(
-  modelName = "PNW-4km",
+  modelName = NULL,
   modelRun = NULL,
   modelRunHour = NULL,
   baseUrl = "http://m2.airfire.org/PNW/4km/WRF",

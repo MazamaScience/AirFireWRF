@@ -28,7 +28,7 @@
 #' }
 
 wrf_download <- function(
-  modelName = "PNW-4km",
+  modelName = NULL,
   modelRun = NULL,
   modelRunHour = NULL,
   baseUrl = "http://m2.airfire.org/PNW/4km/WRF",
@@ -39,6 +39,7 @@ wrf_download <- function(
   
   MazamaCoreUtils::stopIfNull(modelName)
   MazamaCoreUtils::stopIfNull(modelRun)
+  MazamaCoreUtils::stopIfNull(modelRunHour)
   MazamaCoreUtils::stopIfNull(baseUrl)
   
   # Just in case
@@ -64,12 +65,16 @@ wrf_download <- function(
   # Create directory URL
   dataDirUrl <- paste0(
     baseUrl, "/",
+    # modelName, "/",
     modelRun, "/"
   )
   
-  fileName <- paste0("wrfout_d3.", modelRun, ".f", 
+  remoteFileName <- paste0("wrfout_d3.", modelRun, ".f", 
                      stringr::str_pad(modelRunHour, 2, pad = "0"), ".0000")
-  filePath <- file.path(getWRFDataDir(), paste0(fileName, ".nc"))
+  localFileName <- paste0(modelName, "_", modelRun, "_", 
+                     stringr::str_pad(modelRunHour, 2, pad = "0"), ".nc")
+  
+  filePath <- file.path(getWRFDataDir(), localFileName)
   
   # ----- Download data --------------------------------------------------------
   
@@ -80,14 +85,24 @@ wrf_download <- function(
     
   } else {
     
-    fileUrl <- paste0(dataDirUrl, fileName)
-    modelRunFiles <- MazamaCoreUtils::html_getLinkNames(dataDirUrl)
+    fileUrl <- paste0(dataDirUrl, remoteFileName)
     
-    # Make sure the file exists in the database
-    if ( !(fileName %in% modelRunFiles) ) {
-      stop(paste0(fileName, " does not exist in: ", dataDirUrl))
+    # Make sure the WRF output directory exists
+    tryCatch(
+      expr = {
+        modelRunFiles <- MazamaCoreUtils::html_getLinkNames(dataDirUrl)
+      },
+      error = function(e) {
+        stop(paste0("Error accessing WRF output directory '", dataDirUrl, "': ", e))
+      }
+    )
+    
+    # Make sure the model run file exists in the WRF output directory
+    if ( !(remoteFileName %in% modelRunFiles) ) {
+      stop(paste0(remoteFileName, " does not exist in: ", dataDirUrl))
     }
     
+    # Download model run file
     tryCatch(
       expr = {
         utils::download.file(url = fileUrl, destfile = filePath, quiet = !verbose)
