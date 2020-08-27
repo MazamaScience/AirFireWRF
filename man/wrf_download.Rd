@@ -8,7 +8,7 @@ wrf_download(
   modelName = NULL,
   modelRun = NULL,
   modelRunHour = NULL,
-  baseUrl = "http://m2.airfire.org/",
+  baseUrl = "http://m2.airfire.org",
   verbose = TRUE
 )
 }
@@ -28,9 +28,8 @@ progress bar.}
 Downloads a copy of the specified WRF model run to the package 
 data directory. The file data can then be loaded with \code{wrf_load()}.
 
-On 2020-08-26, available model identifiers include the following:
+On 2020-08-27, available model identifiers include the following:
 \itemize{
-  \item{PNW-1.33km}
   \item{PNW-4km}
 }
 }

@@ -17,9 +17,8 @@
 #' \emph{RasterBrick}. If the specified data does not exist on the user's 
 #' machine, then it will try to be downloaded from the AirFire database.
 #' 
-#' On 2020-08-26, available model identifiers include the following:
+#' On 2020-08-27, available model identifiers include the following:
 #' \itemize{
-#'   \item{PNW-1.33km}
 #'   \item{PNW-4km}
 #' }
 #' 
@@ -73,7 +72,7 @@ wrf_load <- function(
   modelName = NULL,
   modelRun = NULL,
   modelRunHour = NULL,
-  baseUrl = "http://m2.airfire.org/",
+  baseUrl = "http://m2.airfire.org",
   localPath = NULL,
   vars = NULL,
   res = NULL,
@@ -109,8 +108,8 @@ wrf_load <- function(
   
   if ( is.null(localPath) ) { # No localPath
     
-    fileName <- paste0(modelName, "_", modelRun, "_", 
-                       stringr::str_pad(modelRunHour, 2, pad = "0"), ".nc")
+    paddedModelRunHour <- stringr::str_pad(modelRunHour, 2, pad = "0")
+    fileName <- paste0(modelName, "_", modelRun, "_", paddedModelRunHour, ".nc")
     filePath <- file.path(getWRFDataDir(), fileName)
     
     if ( !file.exists(filePath) ) {

@@ -7,7 +7,7 @@
 wrf_latestModelRun(
   modelName = NULL,
   count = 1,
-  baseUrl = "http://m2.airfire.org/"
+  baseUrl = "http://m2.airfire.org"
 )
 }
 \arguments{
@@ -26,9 +26,8 @@ Scans the directory of WRF model output and returns the most
 recent \code{modelRun} string(s). If \code{count > 1}, the most recent
 \code{count} will be returned in low-hi order.
 
-On 2020-08-26, available model identifiers include the following:
+On 2020-08-27, available model identifiers include the following:
 \itemize{
-  \item{PNW-1.33km}
   \item{PNW-4km}
 }
 }

@@ -11,9 +11,8 @@
 #' recent \code{modelRun} string(s). If \code{count > 1}, the most recent
 #' \code{count} will be returned in low-hi order.
 #' 
-#' On 2020-08-26, available model identifiers include the following:
+#' On 2020-08-27, available model identifiers include the following:
 #' \itemize{
-#'   \item{PNW-1.33km}
 #'   \item{PNW-4km}
 #' }
 #'
@@ -28,7 +27,7 @@
 wrf_latestModelRun <- function(
   modelName = NULL,
   count = 1,
-  baseUrl = "http://m2.airfire.org/"
+  baseUrl = "http://m2.airfire.org"
 ) {
   
   # ----- Validate parameters --------------------------------------------------
@@ -47,9 +46,7 @@ wrf_latestModelRun <- function(
   
   # ----- Download modelRun datestamps -----------------------------------------
   
-  if (modelName == "PNW-1.33km") {
-    modelNameWRFDir <- "PNW/1.33km/WRF"
-  } else if (modelName == "PNW-4km") {
+  if (modelName == "PNW-4km") {
     modelNameWRFDir <- "PNW/4km/WRF"
   } else {
     stop("No model named '", modelName, "'")

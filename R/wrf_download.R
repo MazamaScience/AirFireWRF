@@ -12,9 +12,8 @@
 #' @description Downloads a copy of the specified WRF model run to the package 
 #' data directory. The file data can then be loaded with \code{wrf_load()}.
 #'
-#' On 2020-08-26, available model identifiers include the following:
+#' On 2020-08-27, available model identifiers include the following:
 #' \itemize{
-#'   \item{PNW-1.33km}
 #'   \item{PNW-4km}
 #' }
 #'
@@ -31,7 +30,7 @@ wrf_download <- function(
   modelName = NULL,
   modelRun = NULL,
   modelRunHour = NULL,
-  baseUrl = "http://m2.airfire.org/",
+  baseUrl = "http://m2.airfire.org",
   verbose = TRUE
 ) {
   
@@ -62,10 +61,13 @@ wrf_download <- function(
   
   # ----- Create URL, name and path---------------------------------------------
   
-  if (modelName == "PNW-1.33km") {
-    modelNameWRFDir <- "PNW/1.33km/WRF"
-  } else if (modelName == "PNW-4km") {
+  paddedModelRunHour <- stringr::str_pad(modelRunHour, 2, pad = "0")
+  
+  if (modelName == "PNW-4km") {
+    
     modelNameWRFDir <- "PNW/4km/WRF"
+    remoteFileName <- paste0("wrfout_d3.", modelRun, ".f", paddedModelRunHour, ".0000")
+    
   } else {
     stop("No model named '", modelName, "'")
   }
@@ -77,10 +79,7 @@ wrf_download <- function(
     modelRun, "/"
   )
   
-  remoteFileName <- paste0("wrfout_d3.", modelRun, ".f", 
-                     stringr::str_pad(modelRunHour, 2, pad = "0"), ".0000")
-  localFileName <- paste0(modelName, "_", modelRun, "_", 
-                     stringr::str_pad(modelRunHour, 2, pad = "0"), ".nc")
+  localFileName <- paste0(modelName, "_", modelRun, "_", paddedModelRunHour, ".nc")
   
   filePath <- file.path(getWRFDataDir(), localFileName)
   
