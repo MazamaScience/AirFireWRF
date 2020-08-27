@@ -5,9 +5,9 @@
 \title{Find latest WRF model run from AirFire}
 \usage{
 wrf_latestModelRun(
-  modelName = "PNW-4km",
+  modelName = NULL,
   count = 1,
-  baseUrl = "http://m2.airfire.org/PNW/4km/WRF/"
+  baseUrl = "http://m2.airfire.org/"
 )
 }
 \arguments{

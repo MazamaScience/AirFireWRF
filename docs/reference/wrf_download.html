@@ -148,10 +148,10 @@ data directory. The file data can then be loaded with <code><a href='wrf_load.ht
     </div>
 
     <pre class="usage"><span class='fu'>wrf_download</span>(
-  <span class='kw'>modelName</span> <span class='kw'>=</span> <span class='st'>"PNW-4km"</span>,
+  <span class='kw'>modelName</span> <span class='kw'>=</span> <span class='kw'>NULL</span>,
   <span class='kw'>modelRun</span> <span class='kw'>=</span> <span class='kw'>NULL</span>,
   <span class='kw'>modelRunHour</span> <span class='kw'>=</span> <span class='kw'>NULL</span>,
-  <span class='kw'>baseUrl</span> <span class='kw'>=</span> <span class='st'>"http://m2.airfire.org/PNW/4km/WRF"</span>,
+  <span class='kw'>baseUrl</span> <span class='kw'>=</span> <span class='st'>"http://m2.airfire.org/"</span>,
   <span class='kw'>verbose</span> <span class='kw'>=</span> <span class='fl'>TRUE</span>
 )</pre>
 
@@ -188,7 +188,7 @@ progress bar.</p></td>
 <span class='fu'><a href='setWRFDataDir.html'>setWRFDataDir</a></span>(<span class='st'>'~/Data/WRF'</span>)
 
 <span class='no'>modelRun</span> <span class='kw'>&lt;-</span> <span class='fu'><a href='wrf_latestModelRun.html'>wrf_latestModelRun</a></span>(<span class='st'>"PNW-4km"</span>)
-<span class='fu'>wrf_download</span>(<span class='st'>"PNW-4km"</span>, <span class='no'>modelRun</span>, <span class='fl'>8</span>)</div><div class='output co'>#&gt; <span class='message'>WRF model run exists at: /Users/mazama/Data/WRF/PNW-4km_2020082712_08.nc</span></div><div class='output co'>#&gt; [1] "/Users/mazama/Data/WRF/PNW-4km_2020082712_08.nc"</div><div class='input'># }
+<span class='fu'>wrf_download</span>(<span class='st'>"PNW-4km"</span>, <span class='st'>"2020082500"</span>, <span class='fl'>11</span>)</div><div class='output co'>#&gt; <span class='message'>WRF model run exists at: /Users/mazama/Data/WRF/PNW-4km_2020082500_11.nc</span></div><div class='output co'>#&gt; [1] "/Users/mazama/Data/WRF/PNW-4km_2020082500_11.nc"</div><div class='input'># }
 </div></pre>
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="pkgdown-sidebar">

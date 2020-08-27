@@ -26,9 +26,9 @@
 #' }
 
 wrf_latestModelRun <- function(
-  modelName = "PNW-4km",
+  modelName = NULL,
   count = 1,
-  baseUrl = "http://m2.airfire.org/PNW/4km/WRF/"
+  baseUrl = "http://m2.airfire.org/"
 ) {
   
   # ----- Validate parameters --------------------------------------------------
@@ -47,10 +47,18 @@ wrf_latestModelRun <- function(
   
   # ----- Download modelRun datestamps -----------------------------------------
   
+  if (modelName == "PNW-1.33km") {
+    modelNameWRFDir <- "PNW/1.33km/WRF"
+  } else if (modelName == "PNW-4km") {
+    modelNameWRFDir <- "PNW/4km/WRF"
+  } else {
+    stop("No model named '", modelName, "'")
+  }
+  
   # Create directory URL
   dataDirUrl <- paste0(
-    baseUrl, "/"
-    #modelName
+    baseUrl, "/",
+    modelNameWRFDir, "/"
   )
   
   # Gather runs from specified model

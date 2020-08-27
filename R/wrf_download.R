@@ -24,14 +24,14 @@
 #' setWRFDataDir('~/Data/WRF')
 #' 
 #' modelRun <- wrf_latestModelRun("PNW-4km")
-#' wrf_download("PNW-4km", modelRun, 8)
+#' wrf_download("PNW-4km", "2020082500", 11)
 #' }
 
 wrf_download <- function(
   modelName = NULL,
   modelRun = NULL,
   modelRunHour = NULL,
-  baseUrl = "http://m2.airfire.org/PNW/4km/WRF",
+  baseUrl = "http://m2.airfire.org/",
   verbose = TRUE
 ) {
   
@@ -62,10 +62,18 @@ wrf_download <- function(
   
   # ----- Create URL, name and path---------------------------------------------
   
+  if (modelName == "PNW-1.33km") {
+    modelNameWRFDir <- "PNW/1.33km/WRF"
+  } else if (modelName == "PNW-4km") {
+    modelNameWRFDir <- "PNW/4km/WRF"
+  } else {
+    stop("No model named '", modelName, "'")
+  }
+  
   # Create directory URL
   dataDirUrl <- paste0(
     baseUrl, "/",
-    # modelName, "/",
+    modelNameWRFDir, "/",
     modelRun, "/"
   )
   

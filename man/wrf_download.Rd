@@ -8,7 +8,7 @@ wrf_download(
   modelName = NULL,
   modelRun = NULL,
   modelRunHour = NULL,
-  baseUrl = "http://m2.airfire.org/PNW/4km/WRF",
+  baseUrl = "http://m2.airfire.org/",
   verbose = TRUE
 )
 }
@@ -40,6 +40,6 @@ library(WRFmet)
 setWRFDataDir('~/Data/WRF')
 
 modelRun <- wrf_latestModelRun("PNW-4km")
-wrf_download("PNW-4km", modelRun, 8)
+wrf_download("PNW-4km", "2020082500", 11)
 }
 }

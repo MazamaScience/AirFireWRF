@@ -73,7 +73,7 @@ wrf_load <- function(
   modelName = NULL,
   modelRun = NULL,
   modelRunHour = NULL,
-  baseUrl = "http://m2.airfire.org/PNW/4km/WRF",
+  baseUrl = "http://m2.airfire.org/",
   localPath = NULL,
   vars = NULL,
   res = NULL,
