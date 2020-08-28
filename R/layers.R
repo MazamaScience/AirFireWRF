@@ -3,7 +3,7 @@
 #' 
 #' @title Create a Raster layer for plotting
 #'
-#' @param raster A RasterBrick.
+#' @param raster A RasterLayer.
 #' @param alpha Transparency of layer.
 #'
 #' @return A geom_tile ggproto object.

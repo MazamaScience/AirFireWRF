@@ -13,44 +13,130 @@ vignette: >
 knitr::opts_chunk$set(echo = TRUE)
 ```
 
+## WRF Model Run Files
+
+The AirFire team periodically runs meteorological forecasts using the Weather 
+Research & Forecasting (WRF) model. These "model runs" predict atmospheric
+conditions (nearly 150 variables) over the US for several dozen hours ahead. 
+AirFire model run output is stored as a collection of files containing data for 
+individual forecasted hours. For instance, a file named 
+`PNW-4km_2020082712_07.nc` would describe the PNW-4km atmosphere forecasted 7 
+hours after the start of the 2020-08-27 12pm model run. 
+
+The WRFmet package allows users to download, read, and visualize the contents of
+these individual WRF data files.
+
 ## Loading WRF Data
 
-Loading WRF data can be easily done using WRFmet's `wrf_load` function. This 
-function accesses WRF model run files ...[in progress]...
+In order to get started, we should first determine which model runs are
+available through AirFire. This can be done using the `wrf_latestModelRun()`
+function, in which we specify a model domain and the maximum number of recent 
+model runs to be listed (defaults to 1):
 
-[Explain WRF data dir]
-
-```{r, load_example}
+```{r}
 library(WRFmet)
 
-# raster <- wrf_load(
-#   modelName = ...,
-#   modelRun = ...,
-#   modelMode = ...,
-#   vars = c('HGT', 'TSK'),
-#   res = 0.1
-# )
+modelRun <- wrf_latestModelRun(modelName = "PNW-4km")
+modelRun
 ```
 
-You can also load in existing WRF NetCDF files from anywhere on your machine by 
-specifying the `localPath` argument in `wrf_load()`. For example:
+It looks like the most recent model run was initialized at 
+`r lubridate::ymd_h(modelRun)`. Before we try to download files from that run 
+though, we should first define a directory to hold all our WRF data. A file for 
+a single forecast hour can be upwards of a hundred Megabytes, so a whole model 
+run (AirFire's are ~80 hours) could take up quite a bit of space. Therefore, it 
+is nice to specify a dedicated place to hold all this information, and we can do 
+that using WRFmet's `setWRFDataDir()` function:
+
+```{r}
+setWRFDataDir("~/Data/WRF")
+```
+
+Now let's request one of the forecasted hours from the 
+`r lubridate::ymd_h(modelRun)` model run. Running `wrf_download()` will give us 
+a file name which we can use for later, and if the file already exists on our 
+machine then it will not be downloaded again.
+
+```{r}
+wrfFile <- wrf_download(
+  modelName = "PNW-4km",
+  modelRun = modelRun,
+  modelRunHour = 7       # 7 is the first hour available in most model runs
+)
+
+wrfFile
+```
+
+We can see what WRF files we've already downloaded into our `WRFDataDir/` with
+`wrf_downloaded()`:
+
+```{r}
+wrf_downloaded()
+```
+
+So now we have access to a single hour in a WRF model run. This file holds 
+readings for over a hundred different variables in a grid across the PNW-4km 
+domain. We can load this data in as a raster object to start analyzing and 
+plotting its contents. In addition to the model run identifiers (domain, run, 
+hour), we must also specify what variables we'd like to include and--if we 
+choose--the resolution and extent of the raster.
+
+```{r}
+raster <- wrf_load(
+  modelName = "PNW-4km",
+  modelRun = modelRun,
+  modelRunHour = 7,
+  vars = c("HGT", "TSK"), # Meter elevation (HGT) and Kelvin temperature (TSK)
+  res = 0.1               # Grid cells will be .1x.1 degrees lon/lat
+)
+```
+
+If you would like to simply provide the path of a WRF file, you can pass that 
+in with `wrf_load`'s `localPath` argument. If the specified model run hour is 
+not on your machine, it will be downloaded behind the scenes if it is available
+from AirFire.
 
 ```
 raster <- wrf_load(
-  localPath = '~/Data/WRF/wrfout_d3-2020071512-f07-0000.nc',
-  vars = c('HGT', 'TSK'),
+  localPath = '~/some/other/dir/PNW-4km_2020071512_07.nc',
+  vars = c("HGT", "TSK"),
   res = 0.1
 )
 ```
 
+The output of `wrf_load()` is a `RasterBrick` with separate `RasterLayer`s for
+each specified variable.
+
+```{r}
+raster
+```
+
 ## Plotting WRF Data
 
-WRFmet provides several preset plot types for visualizing raster, vector, and 
-spatial point/polygon data. These include:
+Let's find out what these atmospheric readings actually look like. WRFmet 
+provides several preset plotting functions for visualizing this information as 
+rasters and vector fields with spatial point/polygon overlays. These functions
+include:
+
+* `plot_raster()` - Plots a single RasterLayer.
+* `plot_standard()` - Plots a RasterLayer, SpatialPolygonsDataFrame, 
+SpatialPointsDataFrame, and a vector field, in that order. Any of these can be 
+missing, so this is more of a catch-all plot that can do the same as 
+`plot_raster()`, just with many more options.
+
+So let's throw together a plot for the elevation (HGT) field of our raster:
+
+```{r}
+plot_raster(
+  raster = raster$HGT, # Must provide a single layer
+  title = "Elevation",
+  ratio = 1.4
+)
+```
 
 ...
 
-These plots are preset combinations of various building-block "layers". Custom
+These plots are actually preset combinations of various building-block "layers". Custom
 plots can be built by stacking these layers which function similar to GGPlot's
 `geom_*` elements. This process is covered in further detail in the "Static 
 Layered Plots" article.

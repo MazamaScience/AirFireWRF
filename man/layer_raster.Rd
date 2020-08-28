@@ -7,7 +7,7 @@
 layer_raster(raster = NULL, alpha = 1)
 }
 \arguments{
-\item{raster}{A RasterBrick.}
+\item{raster}{A RasterLayer.}
 
 \item{alpha}{Transparency of layer.}
 }
