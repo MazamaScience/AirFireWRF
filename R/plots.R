@@ -10,7 +10,7 @@
 #' @param ylim A vector of coordinate latitude bounds.
 #' @param ratio Plot dimensions ratio (x/y).
 #'
-#' @return A GGPlot object.
+#' @return A ggplot object.
 
 plot_base <- function(
   title = NULL,
@@ -57,6 +57,7 @@ plot_base <- function(
   
 }
 
+
 #' @export
 #' @title Creates a plot for a single raster layer
 #'
@@ -72,7 +73,7 @@ plot_base <- function(
 #' @param ylim A vector of coordinate latitude bounds.
 #' @param ratio Plot dimensions ratio (x/y).
 #'
-#' @return A GGPlot object.
+#' @return A ggplot object.
 #' 
 #' @examples
 #' \donttest{

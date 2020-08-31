@@ -42,7 +42,7 @@ plot_raster(
 \item{ratio}{Plot dimensions ratio (x/y).}
 }
 \value{
-A GGPlot object.
+A ggplot object.
 }
 \description{
 Creates a plot for a single raster layer

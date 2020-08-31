@@ -6,7 +6,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<title>Sample dataset over the Pacific Northwest — sample_PNW • WRFmet</title>
+<title>Creates an empty plot — plot_base • WRFmet</title>
 
 
 <!-- jquery -->
@@ -35,24 +35,8 @@
 
 
 
-<meta property="og:title" content="Sample dataset over the Pacific Northwest — sample_PNW" />
-<meta property="og:description" content="The sample_PNW dataset contains forecasted readings for 
-temperature (TSK), elevation (HGT), and wind velocity 
-(U10 &amp;amp; V10) across the Pacific Northwest on July 15, 2020. This
- data is used in several examples in the package documentation.
-This dataset was generated on 2020-08-24 by running:
-
-library(WRFmet)
-
-sample_PNW &amp;lt;- wrf_load(
-  localPath = '~/Data/WRF/wrfout_d3-2020071512-f07-0000.nc',
-  vars = c('HGT', 'TSK', 'U10', 'V10'),
-  res = 0.06,
-  xlim = c(-125, -111),
-  ylim = c(42, 49)
-)
-
-" />
+<meta property="og:title" content="Creates an empty plot — plot_base" />
+<meta property="og:description" content="Creates an empty plot" />
 <meta name="twitter:card" content="summary" />
 
 
@@ -139,42 +123,73 @@ sample_PNW &amp;lt;- wrf_load(
 <div class="row">
   <div class="col-md-9 contents">
     <div class="page-header">
-    <h1>Sample dataset over the Pacific Northwest</h1>
-    <small class="dont-index">Source: <a href='https://github.com/MazamaScience/WRFmet/blob/master/R/data.R'><code>R/data.R</code></a></small>
-    <div class="hidden name"><code>sample_PNW.Rd</code></div>
+    <h1>Creates an empty plot</h1>
+    <small class="dont-index">Source: <a href='https://github.com/MazamaScience/WRFmet/blob/master/R/plots.R'><code>R/plots.R</code></a></small>
+    <div class="hidden name"><code>plot_base.Rd</code></div>
     </div>
 
     <div class="ref-description">
-    <p>The <code>sample_PNW</code> dataset contains forecasted readings for 
-temperature (<code>TSK</code>), elevation (<code>HGT</code>), and wind velocity 
-(<code>U10</code> &amp; <code>V10</code>) across the Pacific Northwest on July 15, 2020. This
- data is used in several examples in the package documentation.</p>
-<p>This dataset was generated on 2020-08-24 by running:</p>
-<pre>
-library(WRFmet)
-
-sample_PNW &lt;- wrf_load(
-  localPath = '~/Data/WRF/wrfout_d3-2020071512-f07-0000.nc',
-  vars = c('HGT', 'TSK', 'U10', 'V10'),
-  res = 0.06,
-  xlim = c(-125, -111),
-  ylim = c(42, 49)
-)
-</pre>
-
+    <p>Creates an empty plot</p>
     </div>
 
+    <pre class="usage"><span class='fu'>plot_base</span>(
+  <span class='kw'>title</span> <span class='kw'>=</span> <span class='kw'>NULL</span>,
+  <span class='kw'>xlab</span> <span class='kw'>=</span> <span class='st'>"Longitude"</span>,
+  <span class='kw'>ylab</span> <span class='kw'>=</span> <span class='st'>"Latitude"</span>,
+  <span class='kw'>color</span> <span class='kw'>=</span> <span class='kw'>NULL</span>,
+  <span class='kw'>flab</span> <span class='kw'>=</span> <span class='kw'>NULL</span>,
+  <span class='kw'>xlim</span> <span class='kw'>=</span> <span class='kw'>NULL</span>,
+  <span class='kw'>ylim</span> <span class='kw'>=</span> <span class='kw'>NULL</span>,
+  <span class='kw'>ratio</span> <span class='kw'>=</span> <span class='kw'>NULL</span>
+)</pre>
 
+    <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a>Arguments</h2>
+    <table class="ref-arguments">
+    <colgroup><col class="name" /><col class="desc" /></colgroup>
+    <tr>
+      <th>title</th>
+      <td><p>Title of the plot.</p></td>
+    </tr>
+    <tr>
+      <th>xlab</th>
+      <td><p>x-axis label.</p></td>
+    </tr>
+    <tr>
+      <th>ylab</th>
+      <td><p>y-axis label.</p></td>
+    </tr>
+    <tr>
+      <th>color</th>
+      <td><p>Label for color value in legend.</p></td>
+    </tr>
+    <tr>
+      <th>flab</th>
+      <td><p>Label for fill value in legend.</p></td>
+    </tr>
+    <tr>
+      <th>xlim</th>
+      <td><p>A vector of coordinate longitude bounds.</p></td>
+    </tr>
+    <tr>
+      <th>ylim</th>
+      <td><p>A vector of coordinate latitude bounds.</p></td>
+    </tr>
+    <tr>
+      <th>ratio</th>
+      <td><p>Plot dimensions ratio (x/y).</p></td>
+    </tr>
+    </table>
 
-    <h2 class="hasAnchor" id="format"><a class="anchor" href="#format"></a>Format</h2>
+    <h2 class="hasAnchor" id="value"><a class="anchor" href="#value"></a>Value</h2>
 
-    <p>A RasterBrick containing 4 RasterLayers.</p>
+    <p>A ggplot object.</p>
 
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="sidebar">
     <h2>Contents</h2>
     <ul class="nav nav-pills nav-stacked">
-      <li><a href="#format">Format</a></li>
+      <li><a href="#arguments">Arguments</a></li>
+      <li><a href="#value">Value</a></li>
     </ul>
 
   </div>

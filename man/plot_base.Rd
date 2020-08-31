@@ -33,7 +33,7 @@ plot_base(
 \item{ratio}{Plot dimensions ratio (x/y).}
 }
 \value{
-A GGPlot object.
+A ggplot object.
 }
 \description{
 Creates an empty plot
