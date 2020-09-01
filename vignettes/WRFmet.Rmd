@@ -17,25 +17,25 @@ knitr::opts_chunk$set(echo = TRUE)
 
 The AirFire team periodically runs meteorological forecasts using the Weather 
 Research & Forecasting (WRF) model. These "model runs" predict atmospheric
-conditions (nearly 150 variables) over the US for several dozen hours ahead. 
-AirFire model run output is stored as a collection of files containing data for 
-individual forecasted hours. For instance, a file named 
-`PNW-4km_2020082712_07.nc` would describe the PNW-4km atmosphere forecasted 7 
-hours after the start of the 2020-08-27 12pm model run. 
+conditions over the US for several dozen hours ahead. AirFire model run output 
+is stored as a collection of files containing data for individual forecasted 
+hours. For instance, a file named `PNW-4km_2020082712_07.nc` would describe the 
+PNW-4km atmosphere forecasted 7 hours after the start of the 2020-08-27 12pm 
+model run. 
 
 The WRFmet package allows users to download, read, and visualize the contents of
 these individual WRF data files.
 
 _NOTE:  Because the size of model output files, R code in this vignette is not 
-run when the pacage is built This document will contains output from commands as 
-run on August 31, 2020._
+run when the package is built This document contains output from commands run 
+on August 31, 2020._
 
 ## Loading WRF Data
 
-In order to get started, we should first determine which model runs are
-available through AirFire. This can be done using the `wrf_latestModelRun()`
-function, in which we specify a model domain and the maximum number of recent 
-model runs to be listed (defaults to 1):
+In order to start analyzing WRF output, we should first determine which model 
+runs are available through AirFire. This can be done using the 
+`wrf_latestModelRun()` function, in which we specify a model domain and the 
+maximum number of recent model runs to be listed (defaults to 1):
 
 ```
 library(WRFmet)
@@ -154,13 +154,19 @@ missing, so this is more of a catch-all plot that can do the same as
 
 So let's throw together a plot for the elevation (HGT) field of our raster:
 
-```{r}
+_NOTE: In order to build this vignette, this plot will display an example raster
+provided by WRFmet package "example_PNW"._
 
-# plot_raster(
-#   raster = raster$HGT, # Must provide a single layer
-#   title = "Elevation",
-#   ratio = 1.4
-# )
+```{r}
+library(WRFmet)
+
+plot_raster(raster = WRFmet::example_PNW$HGT)
+
+#plot_raster(
+#  raster = example_PNW$HGT #, # Must provide a single layer
+  #title = "Elevation",
+  #ratio = 1.4
+#)
 ```
 
 ...

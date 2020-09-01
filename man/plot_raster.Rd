@@ -4,56 +4,14 @@
 \alias{plot_raster}
 \title{Creates a plot for a single raster layer}
 \usage{
-plot_raster(
-  raster = NULL,
-  fillLow = "#132c43",
-  fillHigh = "#55b2f8",
-  fillNa = "transparent",
-  title = NULL,
-  xlab = NULL,
-  ylab = NULL,
-  flab = NULL,
-  xlim = NULL,
-  ylim = NULL,
-  ratio = NULL
-)
+plot_raster(raster = NULL)
 }
 \arguments{
 \item{raster}{A RasterLayer.}
-
-\item{fillLow}{Color for lowest raster value.}
-
-\item{fillHigh}{Color for highest raster value.}
-
-\item{fillNa}{Color for na raster values.}
-
-\item{title}{Title of the plot.}
-
-\item{xlab}{x-axis label.}
-
-\item{ylab}{y-axis label.}
-
-\item{flab}{Label for fill value in legend.}
-
-\item{xlim}{A vector of coordinate longitude bounds.}
-
-\item{ylim}{A vector of coordinate latitude bounds.}
-
-\item{ratio}{Plot dimensions ratio (x/y).}
 }
 \value{
 A ggplot object.
 }
 \description{
 Creates a plot for a single raster layer
-}
-\examples{
-\donttest{
-library(WRFmet)
-
-plot_raster(
-  raster = example$HGT,
-  ratio = 1.4
-)
-}
 }
