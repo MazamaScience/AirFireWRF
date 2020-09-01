@@ -127,11 +127,12 @@ missing, so this is more of a catch-all plot that can do the same as
 So let's throw together a plot for the elevation (HGT) field of our raster:
 
 ```{r}
-plot_raster(
-  raster = raster$HGT, # Must provide a single layer
-  title = "Elevation",
-  ratio = 1.4
-)
+
+# plot_raster(
+#   raster = raster$HGT, # Must provide a single layer
+#   title = "Elevation",
+#   ratio = 1.4
+# )
 ```
 
 ...

@@ -6,7 +6,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<title>Create a Raster layer for plotting — layer_raster • WRFmet</title>
+<title>Creates an empty plot — plot_base • WRFmet</title>
 
 
 <!-- jquery -->
@@ -39,8 +39,8 @@
 
 
 
-<meta property="og:title" content="Create a Raster layer for plotting — layer_raster" />
-<meta property="og:description" content="Create a Raster layer for plotting" />
+<meta property="og:title" content="Creates an empty plot — plot_base" />
+<meta property="og:description" content="Creates an empty plot" />
 
 
 
@@ -126,33 +126,66 @@
 <div class="row">
   <div class="col-md-9 contents">
     <div class="page-header">
-    <h1>Create a Raster layer for plotting</h1>
-    <small class="dont-index">Source: <a href='https://github.com/MazamaScience/WRFmet/blob/master/R/layers.R'><code>R/layers.R</code></a></small>
-    <div class="hidden name"><code>layer_raster.Rd</code></div>
+    <h1>Creates an empty plot</h1>
+    <small class="dont-index">Source: <a href='https://github.com/MazamaScience/WRFmet/blob/master/R/plots.R'><code>R/plots.R</code></a></small>
+    <div class="hidden name"><code>plot_base.Rd</code></div>
     </div>
 
     <div class="ref-description">
-    <p>Create a Raster layer for plotting</p>
+    <p>Creates an empty plot</p>
     </div>
 
-    <pre class="usage"><span class='fu'>layer_raster</span>(<span class='kw'>raster</span> <span class='kw'>=</span> <span class='kw'>NULL</span>, <span class='kw'>alpha</span> <span class='kw'>=</span> <span class='fl'>1</span>)</pre>
+    <pre class="usage"><span class='fu'>plot_base</span>(
+  <span class='kw'>title</span> <span class='kw'>=</span> <span class='kw'>NULL</span>,
+  <span class='kw'>xlab</span> <span class='kw'>=</span> <span class='st'>"Longitude"</span>,
+  <span class='kw'>ylab</span> <span class='kw'>=</span> <span class='st'>"Latitude"</span>,
+  <span class='kw'>color</span> <span class='kw'>=</span> <span class='kw'>NULL</span>,
+  <span class='kw'>flab</span> <span class='kw'>=</span> <span class='kw'>NULL</span>,
+  <span class='kw'>xlim</span> <span class='kw'>=</span> <span class='kw'>NULL</span>,
+  <span class='kw'>ylim</span> <span class='kw'>=</span> <span class='kw'>NULL</span>,
+  <span class='kw'>ratio</span> <span class='kw'>=</span> <span class='kw'>NULL</span>
+)</pre>
 
     <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a>Arguments</h2>
     <table class="ref-arguments">
     <colgroup><col class="name" /><col class="desc" /></colgroup>
     <tr>
-      <th>raster</th>
-      <td><p>A RasterLayer.</p></td>
+      <th>title</th>
+      <td><p>Title of the plot.</p></td>
     </tr>
     <tr>
-      <th>alpha</th>
-      <td><p>Transparency of layer.</p></td>
+      <th>xlab</th>
+      <td><p>x-axis label.</p></td>
+    </tr>
+    <tr>
+      <th>ylab</th>
+      <td><p>y-axis label.</p></td>
+    </tr>
+    <tr>
+      <th>color</th>
+      <td><p>Label for color value in legend.</p></td>
+    </tr>
+    <tr>
+      <th>flab</th>
+      <td><p>Label for fill value in legend.</p></td>
+    </tr>
+    <tr>
+      <th>xlim</th>
+      <td><p>A vector of coordinate longitude bounds.</p></td>
+    </tr>
+    <tr>
+      <th>ylim</th>
+      <td><p>A vector of coordinate latitude bounds.</p></td>
+    </tr>
+    <tr>
+      <th>ratio</th>
+      <td><p>Plot dimensions ratio (x/y).</p></td>
     </tr>
     </table>
 
     <h2 class="hasAnchor" id="value"><a class="anchor" href="#value"></a>Value</h2>
 
-    <p>A geom_tile ggproto object.</p>
+    <p>A GGPlot object.</p>
 
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="pkgdown-sidebar">

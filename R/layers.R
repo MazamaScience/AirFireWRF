@@ -218,7 +218,7 @@ layer_vectorField <- function(
 if (FALSE) {
   library(WRFmet)
   
-  extent <- raster::extent(WRFmet::sample_PNW)
+  extent <- raster::extent(WRFmet::example_PNW)
   xlim <- c(round(extent@xmin), round(extent@xmax))
   ylim <- c(round(extent@ymin), round(extent@ymax))
   
@@ -246,7 +246,7 @@ if (FALSE) {
       na.value = 'transparent'
     ) +
     layer_raster(
-      raster = WRFmet::sample_PNW$HGT
+      raster = WRFmet::example_PNW$HGT
     ) +
     layer_spPolys(
       spdf = waPoly,
@@ -258,8 +258,8 @@ if (FALSE) {
       size = 3
     ) +
     layer_vectorField(
-      uLayer = WRFmet::sample_PNW$U10,
-      vLayer = WRFmet::sample_PNW$V10,
+      uLayer = WRFmet::example_PNW$U10,
+      vLayer = WRFmet::example_PNW$V10,
       arrowColor = 'yellow',
       alpha = 0.9
     ) +

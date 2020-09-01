@@ -100,37 +100,38 @@
 <div id="wrf-model-run-files" class="section level2">
 <h2 class="hasAnchor">
 <a href="#wrf-model-run-files" class="anchor"></a>WRF Model Run Files</h2>
-<p>The AirFire team periodically runs forecasts using the Weather Research &amp; Forecasting (WRF) model. These “model runs” predict meteorological conditions (nearly 150 variables) over the US for several dozen hours ahead. AirFire model run output is stored as a collection of files containing data for individual forecasted hours. For instance, a file named <code>PNW-4km_2020082712_07.nc</code> would describe the PNW-4km atmosphere forecasted 7 hours after the start of the 2020-08-27 12pm model run.</p>
+<p>The AirFire team periodically runs meteorological forecasts using the Weather Research &amp; Forecasting (WRF) model. These “model runs” predict atmospheric conditions (nearly 150 variables) over the US for several dozen hours ahead. AirFire model run output is stored as a collection of files containing data for individual forecasted hours. For instance, a file named <code>PNW-4km_2020082712_07.nc</code> would describe the PNW-4km atmosphere forecasted 7 hours after the start of the 2020-08-27 12pm model run.</p>
 <p>The WRFmet package allows users to download, read, and visualize the contents of these individual WRF data files.</p>
 </div>
 <div id="loading-wrf-data" class="section level2">
 <h2 class="hasAnchor">
 <a href="#loading-wrf-data" class="anchor"></a>Loading WRF Data</h2>
-<p>In order to get started, we first have to determine which model runs are available through AirFire. This can be done using the <code><a href="../reference/wrf_latestModelRun.html">wrf_latestModelRun()</a></code> function, in which we specify a model domain and the maximum number of recent model runs to be listed (defaults to 1):</p>
+<p>In order to get started, we should first determine which model runs are available through AirFire. This can be done using the <code><a href="../reference/wrf_latestModelRun.html">wrf_latestModelRun()</a></code> function, in which we specify a model domain and the maximum number of recent model runs to be listed (defaults to 1):</p>
 <div class="sourceCode" id="cb1"><html><body><pre class="r"><span class="fu"><a href="https://rdrr.io/r/base/library.html">library</a></span>(<span class="no">WRFmet</span>)
 
 <span class="no">modelRun</span> <span class="kw">&lt;-</span> <span class="fu"><a href="../reference/wrf_latestModelRun.html">wrf_latestModelRun</a></span>(<span class="kw">modelName</span> <span class="kw">=</span> <span class="st">"PNW-4km"</span>)
 <span class="no">modelRun</span></pre></body></html></div>
-<pre><code>## [1] "2020082712"</code></pre>
-<p>So it looks like the most recent model run was initialized at 2020-08-27 12:00:00. Now we can request to download a file for a single hour from that run using <code><a href="../reference/wrf_download.html">wrf_download()</a></code>. Before we do that, however, we should first define a directory to hold WRF data. A file for a single forecasted hour can be several hundred MegaBytes, so a whole model run could take up dozens of GigaBytes. Due to the size of these files, it is nice to specify a single place to hold all this information, and we can do that using WRFmet’s <code><a href="../reference/setWRFDataDir.html">setWRFDataDir()</a></code> function:</p>
+<pre><code>## [1] "2020090112"</code></pre>
+<p>It looks like the most recent model run was initialized at 2020-09-01 12:00:00. Before we try to download files from that run though, we should first define a directory to hold all our WRF data. A file for a single forecast hour can be upwards of a hundred Megabytes, so a whole model run (AirFire’s are ~80 hours) could take up quite a bit of space. Therefore, it is nice to specify a dedicated place to hold all this information, and we can do that using WRFmet’s <code><a href="../reference/setWRFDataDir.html">setWRFDataDir()</a></code> function:</p>
 <div class="sourceCode" id="cb3"><html><body><pre class="r"><span class="fu"><a href="../reference/setWRFDataDir.html">setWRFDataDir</a></span>(<span class="st">"~/Data/WRF"</span>)</pre></body></html></div>
-<p>Now let’s request one of the hour files from the 2020-08-27 12:00:00 model run. Running <code><a href="../reference/wrf_download.html">wrf_download()</a></code> will give us a file name which we can use for later:</p>
+<p>Now let’s request one of the forecasted hours from the 2020-09-01 12:00:00 model run. Running <code><a href="../reference/wrf_download.html">wrf_download()</a></code> will give us a file name which we can use for later, and if the file already exists on our machine then it will not be downloaded again.</p>
 <div class="sourceCode" id="cb4"><html><body><pre class="r"><span class="no">wrfFile</span> <span class="kw">&lt;-</span> <span class="fu"><a href="../reference/wrf_download.html">wrf_download</a></span>(
   <span class="kw">modelName</span> <span class="kw">=</span> <span class="st">"PNW-4km"</span>,
   <span class="kw">modelRun</span> <span class="kw">=</span> <span class="no">modelRun</span>,
   <span class="kw">modelRunHour</span> <span class="kw">=</span> <span class="fl">7</span>       <span class="co"># 7 is the first hour available in most model runs</span>
 )</pre></body></html></div>
-<pre><code>## WRF model run exists at: /Users/mazama/Data/WRF/PNW-4km_2020082712_07.nc</code></pre>
+<pre><code>## WRF model run exists at: /Users/mazama/Data/WRF/PNW-4km_2020090112_07.nc</code></pre>
 <div class="sourceCode" id="cb6"><html><body><pre class="r"><span class="no">wrfFile</span></pre></body></html></div>
-<pre><code>## [1] "/Users/mazama/Data/WRF/PNW-4km_2020082712_07.nc"</code></pre>
-<p>We can see what WRF files we’ve already downloaded into our <code>WRFDataDir</code> with <code><a href="../reference/wrf_downloaded.html">wrf_downloaded()</a></code>:</p>
+<pre><code>## [1] "/Users/mazama/Data/WRF/PNW-4km_2020090112_07.nc"</code></pre>
+<p>We can see what WRF files we’ve already downloaded into our <code>WRFDataDir/</code> with <code><a href="../reference/wrf_downloaded.html">wrf_downloaded()</a></code>:</p>
 <div class="sourceCode" id="cb8"><html><body><pre class="r"><span class="fu"><a href="../reference/wrf_downloaded.html">wrf_downloaded</a></span>()</pre></body></html></div>
-<pre><code>## [1] "PNW-4km_2020082500_11.nc"         "PNW-4km_2020082612_08.nc"        
-## [3] "PNW-4km_2020082612_09.nc"         "PNW-4km_2020082712_07.nc"        
-## [5] "PNW-4km_2020082712_08.nc"         "wrfout_d3-2020071512-f07-0000.nc"
-## [7] "wrfout_d3.2020082612.f07.0000.nc" "wrfout_d3.2020082612.f08.0000.nc"
-## [9] "wrfout_d3.2020082612.f09.0000.nc"</code></pre>
-<p>So now we have access to a single hour in a WRF model run. This holds readings for over a hundred different variables in a grid across the PNW-4km domain. We can load this data in as a raster object to start analyzing and plotting its contents. In addition to the model run identifiers (domain, run, hour), we must also specify what variables we’d like to include and–if we choose–the resolution and extent of the raster.</p>
+<pre><code>##  [1] "PNW-4km_2020082500_11.nc"         "PNW-4km_2020082612_08.nc"        
+##  [3] "PNW-4km_2020082612_09.nc"         "PNW-4km_2020082712_07.nc"        
+##  [5] "PNW-4km_2020082712_08.nc"         "PNW-4km_2020082812_07.nc"        
+##  [7] "PNW-4km_2020090112_07.nc"         "wrfout_d3-2020071512-f07-0000.nc"
+##  [9] "wrfout_d3.2020082612.f07.0000.nc" "wrfout_d3.2020082612.f08.0000.nc"
+## [11] "wrfout_d3.2020082612.f09.0000.nc"</code></pre>
+<p>So now we have access to a single hour in a WRF model run. This file holds readings for over a hundred different variables in a grid across the PNW-4km domain. We can load this data in as a raster object to start analyzing and plotting its contents. In addition to the model run identifiers (domain, run, hour), we must also specify what variables we’d like to include and–if we choose–the resolution and extent of the raster.</p>
 <div class="sourceCode" id="cb10"><html><body><pre class="r"><span class="no">raster</span> <span class="kw">&lt;-</span> <span class="fu"><a href="../reference/wrf_load.html">wrf_load</a></span>(
   <span class="kw">modelName</span> <span class="kw">=</span> <span class="st">"PNW-4km"</span>,
   <span class="kw">modelRun</span> <span class="kw">=</span> <span class="no">modelRun</span>,
@@ -138,7 +139,7 @@
   <span class="kw">vars</span> <span class="kw">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span>(<span class="st">"HGT"</span>, <span class="st">"TSK"</span>), <span class="co"># Meter elevation (HGT) and Kelvin temperature (TSK)</span>
   <span class="kw">res</span> <span class="kw">=</span> <span class="fl">0.1</span>               <span class="co"># Grid cells will be .1x.1 degrees lon/lat</span>
 )</pre></body></html></div>
-<p>If the specified model run hour is not available on your machine, it will be downloaded behind the scenes (if AirFire has it). Also, if you would like to simply provide the path of a WRF file, you can pass that in with <code>wrf_load</code>’s <code>localPath</code> argument like so:</p>
+<p>If you would like to simply provide the path of a WRF file, you can pass that in with <code>wrf_load</code>’s <code>localPath</code> argument. If the specified model run hour is not on your machine, it will be downloaded behind the scenes if it is available from AirFire.</p>
 <pre><code>raster &lt;- wrf_load(
   localPath = '~/some/other/dir/PNW-4km_2020071512_07.nc',
   vars = c("HGT", "TSK"),
@@ -154,14 +155,26 @@
 ## source     : memory
 ## names      :           HGT,           TSK 
 ## min values : -5.960464e-08,  2.731600e+02 
-## max values :     3571.1672,      322.9404</code></pre>
+## max values :     3571.1672,      316.4503</code></pre>
 </div>
 <div id="plotting-wrf-data" class="section level2">
 <h2 class="hasAnchor">
 <a href="#plotting-wrf-data" class="anchor"></a>Plotting WRF Data</h2>
-<p>WRFmet provides several preset plot types for visualizing raster, vector, and spatial point/polygon data. These include:</p>
+<p>Let’s find out what these atmospheric readings actually look like. WRFmet provides several preset plotting functions for visualizing this information as rasters and vector fields with spatial point/polygon overlays. These functions include:</p>
+<ul>
+<li>
+<code><a href="../reference/plot_raster.html">plot_raster()</a></code> - Plots a single RasterLayer.</li>
+<li>
+<code>plot_standard()</code> - Plots a RasterLayer, SpatialPolygonsDataFrame, SpatialPointsDataFrame, and a vector field, in that order. Any of these can be missing, so this is more of a catch-all plot that can do the same as <code><a href="../reference/plot_raster.html">plot_raster()</a></code>, just with many more options.</li>
+</ul>
+<p>So let’s throw together a plot for the elevation (HGT) field of our raster:</p>
+<div class="sourceCode" id="cb14"><html><body><pre class="r"># plot_raster(
+#   raster = raster$HGT, # Must provide a single layer
+#   title = "Elevation",
+#   ratio = 1.4
+# )</pre></body></html></div>
 <p>…</p>
-<p>These plots are preset combinations of various building-block “layers”. Custom plots can be built by stacking these layers which function similar to GGPlot’s <code>geom_*</code> elements. This process is covered in further detail in the “Static Layered Plots” article.</p>
+<p>These plots are actually preset combinations of various building-block “layers”. Custom plots can be built by stacking these layers which function similar to GGPlot’s <code>geom_*</code> elements. This process is covered in further detail in the “Static Layered Plots” article.</p>
 </div>
   </div>
 

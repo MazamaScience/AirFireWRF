@@ -52,7 +52,7 @@ Creates a plot for a single raster layer
 library(WRFmet)
 
 plot_raster(
-  raster = sample_PNW$HGT,
+  raster = example$HGT,
   ratio = 1.4
 )
 }

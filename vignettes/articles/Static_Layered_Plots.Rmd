@@ -45,7 +45,7 @@ include the following layers:
 
 To start with, let's load the temperature and wind velocity data from a July 15,
 2020 WRF file (recent runs available [here](http://m2.airfire.org/PNW/)). WRF
-data takes up quite a bit of space, so this article will load in a sample 
+data takes up quite a bit of space, so this article will load in an example 
 dataset provided in the package. If we were to use a WRF NetCDF file already on 
 our machine though, we would first define a grid and then use `wrf_load()` to 
 create RasterBricks for our desired variables. For temperature we would specify 
@@ -81,19 +81,19 @@ windRaster <- wrf_load(
 )
 ```
 
-But for now, let's use a sample Raster already included in the package:
+But for now, let's use an example Raster already included in the package:
 
 ```{r}
 library(WRFmet)
 
-tempRaster <- raster::brick(WRFmet::sample_PNW$TSK)
-windRaster <- raster::brick(WRFmet::sample_PNW$U10, WRFmet::sample_PNW$V10)
+tempRaster <- raster::brick(WRFmet::example_PNW$TSK)
+windRaster <- raster::brick(WRFmet::example_PNW$U10, WRFmet::example_PNW$V10)
 
 # Extract the underlying grid these Rasters are using
-extent <- raster::extent(WRFmet::sample_PNW)
+extent <- raster::extent(WRFmet::example_PNW)
 xlim <- c(round(extent@xmin), round(extent@xmax))
 ylim <- c(round(extent@ymin), round(extent@ymax))
-res <- round(mean(raster::res(WRFmet::sample_PNW)), digits = 2)
+res <- round(mean(raster::res(WRFmet::example_PNW)), digits = 2)
 ```
 
 We can make some quick visualizations of these Rasters using the RasterVis
