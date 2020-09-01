@@ -32,6 +32,7 @@ layer_raster <- function(
   return(res)
 }
 
+
 #' @export
 #' @title Create a spatial polygons layer for plotting
 #'
@@ -63,6 +64,7 @@ layer_spPolys <- function(
   
   return(layer)
 }
+
 
 #' @export
 #' @title Create a state polygons layer for plotting
@@ -98,6 +100,7 @@ layer_states <- function(
   return(res)
 }
 
+
 #' @export
 #' @title Create a points layer for plotting
 #'
@@ -123,6 +126,7 @@ layer_points <- function(
   
   return(res)
 }
+
 
 #' @export
 #' @title Create a vector field layer for plotting
@@ -214,8 +218,11 @@ layer_vectorField <- function(
   return(res)
 }
 
-# Debug
+
+# ===== DEBUGGING ==============================================================
+
 if (FALSE) {
+  
   library(WRFmet)
   
   extent <- raster::extent(WRFmet::example_PNW)
@@ -276,5 +283,6 @@ if (FALSE) {
       color  = 'PM2.5'
     )
   
-  wrfMap
+  print(wrfMap)
+  
 }

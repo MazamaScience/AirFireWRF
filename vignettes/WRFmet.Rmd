@@ -26,6 +26,10 @@ hours after the start of the 2020-08-27 12pm model run.
 The WRFmet package allows users to download, read, and visualize the contents of
 these individual WRF data files.
 
+_NOTE:  Because the size of model output files, R code in this vignette is not 
+run when the pacage is built This document will contains output from commands as 
+run on August 31, 2020._
+
 ## Loading WRF Data
 
 In order to get started, we should first determine which model runs are
@@ -33,45 +37,57 @@ available through AirFire. This can be done using the `wrf_latestModelRun()`
 function, in which we specify a model domain and the maximum number of recent 
 model runs to be listed (defaults to 1):
 
-```{r}
+```
 library(WRFmet)
 
 modelRun <- wrf_latestModelRun(modelName = "PNW-4km")
 modelRun
 ```
 
+```
+[1] "2020083112"
+```
+
 It looks like the most recent model run was initialized at 
-`r lubridate::ymd_h(modelRun)`. Before we try to download files from that run 
+`"2020-08-31 12:00:00 UTC"`. Before we try to download files from that run 
 though, we should first define a directory to hold all our WRF data. A file for 
 a single forecast hour can be upwards of a hundred Megabytes, so a whole model 
 run (AirFire's are ~80 hours) could take up quite a bit of space. Therefore, it 
 is nice to specify a dedicated place to hold all this information, and we can do 
 that using WRFmet's `setWRFDataDir()` function:
 
-```{r}
+```
 setWRFDataDir("~/Data/WRF")
 ```
 
 Now let's request one of the forecasted hours from the 
-`r lubridate::ymd_h(modelRun)` model run. Running `wrf_download()` will give us 
+`"2020-08-31 12:00:00 UTC"` model run. Running `wrf_download()` will give us 
 a file name which we can use for later, and if the file already exists on our 
 machine then it will not be downloaded again.
 
-```{r}
+```
 wrfFile <- wrf_download(
   modelName = "PNW-4km",
   modelRun = modelRun,
   modelRunHour = 7       # 7 is the first hour available in most model runs
 )
 
-wrfFile
+print(wrfFile)
+```
+
+```
+[1] "/Users/jonathan/Data/WRF/PNW-4km_2020083112_07.nc"
 ```
 
 We can see what WRF files we've already downloaded into our `WRFDataDir/` with
 `wrf_downloaded()`:
 
-```{r}
+```
 wrf_downloaded()
+```
+
+```
+[1] "PNW-4km_2020083112_07.nc"
 ```
 
 So now we have access to a single hour in a WRF model run. This file holds 
@@ -81,7 +97,7 @@ plotting its contents. In addition to the model run identifiers (domain, run,
 hour), we must also specify what variables we'd like to include and--if we 
 choose--the resolution and extent of the raster.
 
-```{r}
+```
 raster <- wrf_load(
   modelName = "PNW-4km",
   modelRun = modelRun,
@@ -107,8 +123,20 @@ raster <- wrf_load(
 The output of `wrf_load()` is a `RasterBrick` with separate `RasterLayer`s for
 each specified variable.
 
-```{r}
-raster
+```
+print(raster)
+```
+
+```
+class      : RasterBrick 
+dimensions : 111, 234, 25974, 2  (nrow, ncol, ncell, nlayers)
+resolution : 0.1001554, 0.1000347  (x, y)
+extent     : -130.4868, -107.0504, 39.49399, 50.59784  (xmin, xmax, ymin, ymax)
+crs        : +proj=longlat +datum=WGS84 +ellps=WGS84 +towgs84=0,0,0 
+source     : memory
+names      :           HGT,           TSK 
+min values : -5.960464e-08,  2.731600e+02 
+max values :     3571.1672,      317.7452 
 ```
 
 ## Plotting WRF Data
