@@ -160,13 +160,12 @@ provided by WRFmet package "example_PNW"._
 ```{r}
 library(WRFmet)
 
-plot_raster(raster = WRFmet::example_PNW$HGT)
-
-#plot_raster(
-#  raster = example_PNW$HGT #, # Must provide a single layer
-  #title = "Elevation",
-  #ratio = 1.4
-#)
+plot_raster(
+  raster = WRFmet::example_PNW$HGT,
+  title = "Elevation",
+  flab = "Meters",
+  ratio = 1.4
+)
 ```
 
 ...

@@ -167,13 +167,13 @@ max values :     3571.1672,      317.7452 </code></pre>
 <p><em>NOTE: In order to build this vignette, this plot will display an example raster provided by WRFmet package “example_PNW”.</em></p>
 <div class="sourceCode" id="cb12"><html><body><pre class="r"><span class="fu"><a href="https://rdrr.io/r/base/library.html">library</a></span>(<span class="no">WRFmet</span>)
 
-<span class="fu"><a href="../reference/plot_raster.html">plot_raster</a></span>(<span class="kw">raster</span> <span class="kw">=</span> <span class="kw pkg">WRFmet</span><span class="kw ns">::</span><span class="no"><a href="../reference/example_PNW.html">example_PNW</a></span>$<span class="no">HGT</span>)</pre></body></html></div>
+<span class="fu"><a href="../reference/plot_raster.html">plot_raster</a></span>(
+  <span class="kw">raster</span> <span class="kw">=</span> <span class="kw pkg">WRFmet</span><span class="kw ns">::</span><span class="no"><a href="../reference/example_PNW.html">example_PNW</a></span>$<span class="no">HGT</span>,
+  <span class="kw">title</span> <span class="kw">=</span> <span class="st">"Elevation"</span>,
+  <span class="kw">flab</span> <span class="kw">=</span> <span class="st">"Meters"</span>,
+  <span class="kw">ratio</span> <span class="kw">=</span> <span class="fl">1.4</span>
+)</pre></body></html></div>
 <p><img src="WRFmet_files/figure-html/unnamed-chunk-1-1.png" width="700"></p>
-<div class="sourceCode" id="cb13"><html><body><pre class="r">#plot_raster(
-#  raster = example_PNW$HGT #, # Must provide a single layer
-  #title = "Elevation",
-  #ratio = 1.4
-#)</pre></body></html></div>
 <p>…</p>
 <p>These plots are actually preset combinations of various building-block “layers”. Custom plots can be built by stacking these layers which function similar to GGPlot’s <code>geom_*</code> elements. This process is covered in further detail in the “Static Layered Plots” article.</p>
 </div>

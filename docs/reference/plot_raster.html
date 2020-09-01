@@ -135,7 +135,19 @@
     <p>Creates a plot for a single raster layer</p>
     </div>
 
-    <pre class="usage"><span class='fu'>plot_raster</span>(<span class='kw'>raster</span> <span class='kw'>=</span> <span class='kw'>NULL</span>)</pre>
+    <pre class="usage"><span class='fu'>plot_raster</span>(
+  <span class='kw'>raster</span> <span class='kw'>=</span> <span class='kw'>NULL</span>,
+  <span class='kw'>fillLow</span> <span class='kw'>=</span> <span class='st'>"#132c43"</span>,
+  <span class='kw'>fillHigh</span> <span class='kw'>=</span> <span class='st'>"#55b2f8"</span>,
+  <span class='kw'>fillNa</span> <span class='kw'>=</span> <span class='st'>"transparent"</span>,
+  <span class='kw'>title</span> <span class='kw'>=</span> <span class='kw'>NULL</span>,
+  <span class='kw'>xlab</span> <span class='kw'>=</span> <span class='kw'>NULL</span>,
+  <span class='kw'>ylab</span> <span class='kw'>=</span> <span class='kw'>NULL</span>,
+  <span class='kw'>flab</span> <span class='kw'>=</span> <span class='kw'>NULL</span>,
+  <span class='kw'>xlim</span> <span class='kw'>=</span> <span class='kw'>NULL</span>,
+  <span class='kw'>ylim</span> <span class='kw'>=</span> <span class='kw'>NULL</span>,
+  <span class='kw'>ratio</span> <span class='kw'>=</span> <span class='kw'>NULL</span>
+)</pre>
 
     <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a>Arguments</h2>
     <table class="ref-arguments">
@@ -143,6 +155,46 @@
     <tr>
       <th>raster</th>
       <td><p>A RasterLayer.</p></td>
+    </tr>
+    <tr>
+      <th>fillLow</th>
+      <td><p>Color for lowest raster value.</p></td>
+    </tr>
+    <tr>
+      <th>fillHigh</th>
+      <td><p>Color for highest raster value.</p></td>
+    </tr>
+    <tr>
+      <th>fillNa</th>
+      <td><p>Color for na raster values.</p></td>
+    </tr>
+    <tr>
+      <th>title</th>
+      <td><p>Plot title.</p></td>
+    </tr>
+    <tr>
+      <th>xlab</th>
+      <td><p>x-axis label.</p></td>
+    </tr>
+    <tr>
+      <th>ylab</th>
+      <td><p>y-axis label.</p></td>
+    </tr>
+    <tr>
+      <th>flab</th>
+      <td><p>Label for fill value in legend.</p></td>
+    </tr>
+    <tr>
+      <th>xlim</th>
+      <td><p>A vector of coordinate longitude bounds.</p></td>
+    </tr>
+    <tr>
+      <th>ylim</th>
+      <td><p>A vector of coordinate latitude bounds.</p></td>
+    </tr>
+    <tr>
+      <th>ratio</th>
+      <td><p>Plot ratio.</p></td>
     </tr>
     </table>
 
