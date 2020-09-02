@@ -7,7 +7,10 @@
 #' @param modelRunHour Hour forecasted from initial time, i.e. 7.
 #' @param baseUrl Base URL for WRF output.
 #' @param localPath Absolute path to a NetCDF file not found in `WRFDataDir`.
-#' @param vars WRF variable(s) to load.
+#' @param vars WRF variable(s) to load. If \code{NULL}, the following subset
+#' specified by AirFire will be loaded: XLONG, XLAT, XLONG_U, XLAT_U, XLONG_V, 
+#' XLAT_V, U, V, U10, V10, ZNU, ZNW, LU_INDEX, Q2, T, T2, TH2, HGT, RAINNC, 
+#' CFRACT, and PBLH.
 #' @param res Resolution of raster in degrees.
 #' @param xlim A vector of coordinate longitude bounds.
 #' @param ylim A vector of coordinate latitude bounds.
@@ -98,8 +101,16 @@ wrf_load <- function(
     
   }
   
+  if ( is.null(vars) ) {
+    vars <- c(
+      "XLONG", "XLAT", "XLONG_U", "XLAT_U", "XLONG_V", "XLAT_V", "U", "V", 
+      "U10", "V10", "ZNU", "ZNW", "LU_INDEX", "Q2", "T", "T2", "TH2", "HGT", 
+      "RAINNC", "CFRACT", "PBLH"
+    )
+  }
+  
   if ( length(vars) < 1 ) {
-    stop(sprintf("Must specify at least one WRF var"))
+    stop(sprintf("Must specify at least one WRF variable"))
   }
   
   if ( !is.logical(verbose) ) verbose <- TRUE

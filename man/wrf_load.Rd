@@ -28,7 +28,10 @@ wrf_load(
 
 \item{localPath}{Absolute path to a NetCDF file not found in `WRFDataDir`.}
 
-\item{vars}{WRF variable(s) to load.}
+\item{vars}{WRF variable(s) to load. If \code{NULL}, the following subset
+specified by AirFire will be loaded: XLONG, XLAT, XLONG_U, XLAT_U, XLONG_V, 
+XLAT_V, U, V, U10, V10, ZNU, ZNW, LU_INDEX, Q2, T, T2, TH2, HGT, RAINNC, 
+CFRACT, and PBLH.}
 
 \item{res}{Resolution of raster in degrees.}
 

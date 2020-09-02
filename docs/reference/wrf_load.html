@@ -238,7 +238,10 @@ machine, then it will try to be downloaded from the AirFire database.</p>
     </tr>
     <tr>
       <th>vars</th>
-      <td><p>WRF variable(s) to load.</p></td>
+      <td><p>WRF variable(s) to load. If <code>NULL</code>, the following subset
+specified by AirFire will be loaded: XLONG, XLAT, XLONG_U, XLAT_U, XLONG_V, 
+XLAT_V, U, V, U10, V10, ZNU, ZNW, LU_INDEX, Q2, T, T2, TH2, HGT, RAINNC, 
+CFRACT, and PBLH.</p></td>
     </tr>
     <tr>
       <th>res</th>
