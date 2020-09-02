@@ -1,0 +1,112 @@
+---
+title: "Saving Data Subsets"
+author: "Mazama Science"
+date: "9/1/2020"
+output: html_document
+vignette: >
+  %\VignetteIndexEntry{Saving Data Subsets}
+  %\VignetteEngine{knitr::rmarkdown}
+  %\VignetteEncoding{UTF-8}
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+_NOTE: Because the size of model output files, R code in this vignette is not 
+run when the package is built. This document contains output from commands run 
+on September 2, 2020._
+
+## WRF Output Size
+
+The WRF model system is able to forecast a wide variety of meteorological 
+variables across large portions of the Earth's surface. This can result in hefty
+output files that take up lots of memory. For instance, an AirFire WRF model run
+for the PNW-4km domain tracks 147 variables for over 100,000 sample points 
+across the Pacific Northwest. Therefore, hourly snapshot files from these runs 
+are nearly 350MB:
+
+```
+rawBytes <- file.size("~/Data/WRF/PNW-4km_2020090112_07.nc")
+utils:::format.object_size(rawBytes, "auto", "SI")
+```
+
+```
+[1] "349.6 MB"
+```
+
+Since AirFire usually forecasts about 84 hours ahead, a single model run can 
+take up almost 30GB. The size of this output imposes a heavy speed and memory 
+limit when working with WRF data, so it is important that we try reducing the 
+size of these files as much as possible. One way we can do this is to subset the
+hourly forecast files to retain only the information we plan to use. We can also
+reduce memory usage by summarizing and compressing data. So in the case of WRF
+files, we have several options:
+
+* Removing irrelevant meteorological variables.
+* Cropping out regions not of interest.
+* Rasterizing the raw spatial points into a layered RasterBrick image.
+* Saving and compressing raster object files.
+
+Let's look at the advantages of subsetting with an example.
+
+## Subsetting Example
+
+Let's choose a WRF file--such as hour 7 from the 2020-09-01 12pm run--and 
+implement the improvements we outlined. To start with, we will retain 22 
+variables specified by the AirFire team, crop out regions like Canada and
+the Pacific Ocean, and rasterize the points onto a 0.06 degree grid:
+
+```
+library(WRFmet)
+setWRFDataDir("~/Data/WRF")
+
+modelName <- "PNW-4km"
+modelRun <- "2020090112"
+modelRunHour <- 7
+
+subset <- wrf_load(
+  modelName = modelName,
+  modelRun = modelRun,
+  modelRunHour = modelRunHour,
+  vars = c("XLAT", "XLONG", "LU_INDEX", "ZNU", "ZNW", "W", "T", "Q2", "T2", 
+          "TH2", "U10", "V10", "HGT", "RAINNC", "CFRACT", "PBLH", "XLAT_U", 
+           "XLONG_U", "XLAT_V", "XLONG_V", "U", "V"),
+  res = 0.06,
+  xlim = c(-125, -105),
+  ylim = c(39, 49)
+)
+```
+
+It takes a few seconds to load, but let's see how much space we saved:
+
+```
+subsetBytes <- object.size(subset)
+utils:::format.object_size(subsetBytes, "auto", "SI")
+```
+
+```
+[1] "8.4 MB"
+```
+
+`8.4 MB` is a significant improvement from the original file's `349.6 MB`! We 
+can do even better when we save the raster object as a `.rda` file using xz 
+compression:
+
+```
+fileName <- paste0(modelName, "_", modelRun, "_", stringr::str_pad(modelRunHour, 2, pad = "0"), ".rda")
+filePath <- file.path(getWRFDataDir(), fileName)
+
+save(subset, file = filePath, compress = "xz")
+
+fileBytes <- file.size(filePath)
+utils:::format.object_size(fileBytes, "auto", "SI")
+```
+
+```
+[1] "2.1 MB"
+```
+
+So from `349.6 MB` to `2.1 MB`? Not bad! This size is much more manageable for 
+quickly loading and working with WRF model output, and it can easily be achieved
+using existing `wrf_load()` parameters and the base R `save()` function.

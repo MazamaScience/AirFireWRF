@@ -27,7 +27,7 @@ The WRFmet package allows users to download, read, and visualize the contents of
 these individual WRF data files.
 
 _NOTE:  Because the size of model output files, R code in this vignette is not 
-run when the package is built This document contains output from commands run 
+run when the package is built. This document contains output from commands run 
 on August 31, 2020._
 
 ## Loading WRF Data

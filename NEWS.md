@@ -1,3 +1,7 @@
+# WRFmet 0.1.3
+
+* Added "Saving Data Subsets" article.
+
 # WRFmet 0.1.2
 
 * First pass at standard plotting functions `plot_base()` and `plot_raster()`.
