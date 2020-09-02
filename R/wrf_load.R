@@ -24,12 +24,12 @@
 #' 
 #' Some useful variables provided by WRF:
 #' \itemize{
-#'   \item{XLAT - Latitude (degrees North)}
-#'   \item{XLAT_U - Latitude (degrees North)}   
-#'   \item{XLAT_V - Latitude (degrees North)}
 #'   \item{XLONG - Longitude (degrees East)}
+#'   \item{XLAT - Latitude (degrees North)}
 #'   \item{XLONG_U - Longitude (degrees East)}
+#'   \item{XLAT_U - Latitude (degrees North)}
 #'   \item{XLONG_V - Longitude (degrees East)}
+#'   \item{XLAT_V - Latitude (degrees North)}
 #'   \item{U - Wind X component (m/s)}
 #'   \item{V - Wind Y component (m/s)}
 #'   \item{W - Wind Z component (m/s)}
