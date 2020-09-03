@@ -46,7 +46,9 @@ wrf_latestModelRun <- function(
   
   # ----- Download modelRun datestamps -----------------------------------------
   
-  if (modelName == "PNW-4km") {
+  if (modelName == "PNW-1.33km") {
+    modelNameWRFDir <- "PNW/1.33km/WRF"
+  } else if (modelName == "PNW-4km") {
     modelNameWRFDir <- "PNW/4km/WRF"
   } else {
     stop("No model named '", modelName, "'")

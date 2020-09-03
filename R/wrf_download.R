@@ -63,7 +63,12 @@ wrf_download <- function(
   
   paddedModelRunHour <- stringr::str_pad(modelRunHour, 2, pad = "0")
   
-  if (modelName == "PNW-4km") {
+  if (modelName == "PNW-1.33km") {
+    
+    modelNameWRFDir <- "PNW/1.33km/WRF"
+    remoteFileName <- paste0("wrfout_d4.", modelRun, ".f", paddedModelRunHour, ".0000")
+    
+  } else if (modelName == "PNW-4km") {
     
     modelNameWRFDir <- "PNW/4km/WRF"
     remoteFileName <- paste0("wrfout_d3.", modelRun, ".f", paddedModelRunHour, ".0000")

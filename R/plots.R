@@ -1,5 +1,6 @@
-#' @export
 #' @title Creates an empty plot
+#'
+#' @keywords internal
 #'
 #' @param title Title of the plot.
 #' @param xlab x-axis label.

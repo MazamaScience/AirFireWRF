@@ -38,3 +38,4 @@ A ggplot object.
 \description{
 Creates an empty plot
 }
+\keyword{internal}
