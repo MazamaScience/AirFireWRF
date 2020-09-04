@@ -6,7 +6,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<title>Creates a plot for a single raster layer — plot_raster • WRFmet</title>
+<title>Creates a comprehensive plot — plot_standard • WRFmet</title>
 
 
 <!-- jquery -->
@@ -39,8 +39,8 @@
 
 
 
-<meta property="og:title" content="Creates a plot for a single raster layer — plot_raster" />
-<meta property="og:description" content="Creates a plot for a single raster layer" />
+<meta property="og:title" content="Creates a comprehensive plot — plot_standard" />
+<meta property="og:description" content="Creates a comprehensive plot" />
 
 
 
@@ -129,20 +129,27 @@
 <div class="row">
   <div class="col-md-9 contents">
     <div class="page-header">
-    <h1>Creates a plot for a single raster layer</h1>
+    <h1>Creates a comprehensive plot</h1>
     <small class="dont-index">Source: <a href='https://github.com/MazamaScience/WRFmet/blob/master/R/plots.R'><code>R/plots.R</code></a></small>
-    <div class="hidden name"><code>plot_raster.Rd</code></div>
+    <div class="hidden name"><code>plot_standard.Rd</code></div>
     </div>
 
     <div class="ref-description">
-    <p>Creates a plot for a single raster layer</p>
+    <p>Creates a comprehensive plot</p>
     </div>
 
-    <pre class="usage"><span class='fu'>plot_raster</span>(
-  <span class='kw'>raster</span> <span class='kw'>=</span> <span class='kw'>NULL</span>,
+    <pre class="usage"><span class='fu'>plot_standard</span>(
+  <span class='kw'>bgRaster</span> <span class='kw'>=</span> <span class='kw'>NULL</span>,
+  <span class='kw'>uRaster</span> <span class='kw'>=</span> <span class='kw'>NULL</span>,
+  <span class='kw'>vRaster</span> <span class='kw'>=</span> <span class='kw'>NULL</span>,
   <span class='kw'>fillLow</span> <span class='kw'>=</span> <span class='st'>"#132c43"</span>,
   <span class='kw'>fillHigh</span> <span class='kw'>=</span> <span class='st'>"#55b2f8"</span>,
   <span class='kw'>fillNa</span> <span class='kw'>=</span> <span class='st'>"transparent"</span>,
+  <span class='kw'>arrowCount</span> <span class='kw'>=</span> <span class='fl'>1000</span>,
+  <span class='kw'>arrowScale</span> <span class='kw'>=</span> <span class='fl'>0.05</span>,
+  <span class='kw'>arrowColor</span> <span class='kw'>=</span> <span class='st'>"white"</span>,
+  <span class='kw'>arrowHead</span> <span class='kw'>=</span> <span class='fl'>0.05</span>,
+  <span class='kw'>arrowAlpha</span> <span class='kw'>=</span> <span class='fl'>1</span>,
   <span class='kw'>title</span> <span class='kw'>=</span> <span class='kw'>NULL</span>,
   <span class='kw'>xlab</span> <span class='kw'>=</span> <span class='kw'>NULL</span>,
   <span class='kw'>ylab</span> <span class='kw'>=</span> <span class='kw'>NULL</span>,
@@ -156,8 +163,16 @@
     <table class="ref-arguments">
     <colgroup><col class="name" /><col class="desc" /></colgroup>
     <tr>
-      <th>raster</th>
-      <td><p>A RasterLayer.</p></td>
+      <th>bgRaster</th>
+      <td><p>A RasterLayer for the background.</p></td>
+    </tr>
+    <tr>
+      <th>uRaster</th>
+      <td><p>A RasterLayer for longitudinal vector components.</p></td>
+    </tr>
+    <tr>
+      <th>vRaster</th>
+      <td><p>A RasterLayer for latitudinal vector components.</p></td>
     </tr>
     <tr>
       <th>fillLow</th>
@@ -170,6 +185,26 @@
     <tr>
       <th>fillNa</th>
       <td><p>Color for na raster values.</p></td>
+    </tr>
+    <tr>
+      <th>arrowCount</th>
+      <td><p>Number of arrows to draw.</p></td>
+    </tr>
+    <tr>
+      <th>arrowScale</th>
+      <td><p>Arrow length scale factor.</p></td>
+    </tr>
+    <tr>
+      <th>arrowColor</th>
+      <td><p>Arrow color.</p></td>
+    </tr>
+    <tr>
+      <th>arrowHead</th>
+      <td><p>Arrow head size.</p></td>
+    </tr>
+    <tr>
+      <th>arrowAlpha</th>
+      <td><p>Transparency of vector field layer.</p></td>
     </tr>
     <tr>
       <th>title</th>
@@ -210,12 +245,14 @@
 <span class='fu'><a href='https://rdrr.io/r/base/library.html'>library</a></span>(<span class='no'>WRFmet</span>)
 <span class='fu'><a href='setWRFDataDir.html'>setWRFDataDir</a></span>(<span class='st'>"~/Data/WRF"</span>)
 
-<span class='fu'>plot_raster</span>(
-  <span class='kw'>raster</span> <span class='kw'>=</span> <span class='no'>example_PNW</span>$<span class='no'>HGT</span>,
-  <span class='kw'>title</span> <span class='kw'>=</span> <span class='st'>"PNW Elevation"</span>,
-  <span class='kw'>flab</span> <span class='kw'>=</span> <span class='st'>"Meters"</span>,
+<span class='fu'>plot_standard</span>(
+  <span class='kw'>bgRaster</span> <span class='kw'>=</span> <span class='no'>example_PNW</span>$<span class='no'>HGT</span>,
+  <span class='kw'>uRaster</span> <span class='kw'>=</span> <span class='no'>example_PNW</span>$<span class='no'>U10</span>,
+  <span class='kw'>vRaster</span> <span class='kw'>=</span> <span class='no'>example_PNW</span>$<span class='no'>V10</span>,
+  <span class='kw'>title</span> <span class='kw'>=</span> <span class='st'>"PNW-4km 2020-07-15 12pm - Hour 7"</span>,
+  <span class='kw'>flab</span> <span class='kw'>=</span> <span class='st'>"Elev (m)"</span>,
   <span class='kw'>ratio</span> <span class='kw'>=</span> <span class='fl'>1.4</span>
-)</div><div class='img'><img src='plot_raster-1.png' alt='' width='700' height='433' /></div><div class='input'># }
+)</div><div class='output co'>#&gt; NULL</div><div class='input'># }
 </div></pre>
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="pkgdown-sidebar">

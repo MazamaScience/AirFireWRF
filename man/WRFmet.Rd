@@ -5,6 +5,6 @@
 \alias{WRFmet}
 \title{Utilities for working with WRF model output}
 \description{
-A suite of utility functions providing functionality commonly
-needed for working with WRF model output in R.
+A suite of utility functions providing functions commonly
+required for working with WRF model output in R.
 }

@@ -1,6 +1,7 @@
 # WRFmet 0.1.3
 
 * Added "Saving Data Subsets" article.
+* Renamed the `sample_PNW` dataset to `example_PNW`.
 
 # WRFmet 0.1.2
 

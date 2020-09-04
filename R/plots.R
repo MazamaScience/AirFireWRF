@@ -2,14 +2,14 @@
 #'
 #' @keywords internal
 #'
-#' @param title Title of the plot.
-#' @param xlab x-axis label.
-#' @param ylab y-axis label.
-#' @param clab Label for color value in legend.
-#' @param flab Label for fill value in legend.
+#' @param title Title of plot.
+#' @param xlab Label for x-axis.
+#' @param ylab Label for y-axis.
+#' @param clab Label for legend color scale.
+#' @param flab Label for legend fill scale.
 #' @param xlim A vector of coordinate longitude bounds.
 #' @param ylim A vector of coordinate latitude bounds.
-#' @param ratio Plot ratio.
+#' @param ratio Aspect ratio of plot.
 #'
 #' @return A ggplot object.
 
@@ -65,15 +65,30 @@ plot_base <- function(
 #' @param fillLow Color for lowest raster value.
 #' @param fillHigh Color for highest raster value.
 #' @param fillNa Color for na raster values.
-#' @param title Plot title.
-#' @param xlab x-axis label.
-#' @param ylab y-axis label.
-#' @param flab Label for fill value in legend.
+#' @param title Title of plot.
+#' @param xlab Label for x-axis.
+#' @param ylab Label for y-axis.
+#' @param flab Label for legend fill scale.
 #' @param xlim A vector of coordinate longitude bounds.
 #' @param ylim A vector of coordinate latitude bounds.
-#' @param ratio Plot ratio.
+#' @param ratio Aspect ratio of plot.
 #'
 #' @return A ggplot object.
+#' 
+#' @examples
+#' \donttest{
+#' library(WRFmet)
+#' library(raster)
+#' 
+#' setWRFDataDir("~/Data/WRF")
+#' 
+#' plot_raster(
+#'   raster = example_PNW$HGT,
+#'   title = "PNW Elevation",
+#'   flab = "Meters",
+#'   ratio = 1.4
+#' )
+#' }
 
 plot_raster <- function(
   raster = NULL,
@@ -100,7 +115,7 @@ plot_raster <- function(
       ratio = ratio
     ) +
     layer_raster(
-      raster
+      raster = raster
     ) +
     ggplot2::scale_fill_gradient(
       low = fillLow,
@@ -111,3 +126,120 @@ plot_raster <- function(
   return(plot)
   
 }
+
+#' @export
+#' @title Creates a comprehensive plot
+#'
+#' @param bgRaster A RasterLayer for the background.
+#' @param uRaster A RasterLayer for longitudinal vector components.
+#' @param vRaster A RasterLayer for latitudinal vector components.
+#' @param fillLow Color for lowest raster value.
+#' @param fillHigh Color for highest raster value.
+#' @param fillNa Color for na raster values.
+#' @param arrowCount Number of arrows to draw.
+#' @param arrowScale Arrow length scale factor.
+#' @param arrowColor Arrow color.
+#' @param arrowHead Arrow head size.
+#' @param arrowAlpha Transparency of vector field layer.
+#' @param title Title of plot.
+#' @param xlab Label for x-axis.
+#' @param ylab Label for y-axis.
+#' @param flab Label for legend fill scale.
+#' @param xlim A vector of coordinate longitude bounds.
+#' @param ylim A vector of coordinate latitude bounds.
+#' @param ratio Aspect ratio of plot.
+#'
+#' @return A ggplot object.
+#' 
+#' @examples
+#' \donttest{
+#' library(WRFmet)
+#' setWRFDataDir("~/Data/WRF")
+#' 
+#' plot_standard(
+#'   bgRaster = example_PNW$HGT,
+#'   uRaster = example_PNW$U10,
+#'   vRaster = example_PNW$V10,
+#'   title = "PNW-4km 2020-07-15 12pm - Hour 7",
+#'   flab = "Elev (m)",
+#'   ratio = 1.4
+#' )
+#' }
+
+plot_standard <- function(
+  bgRaster = NULL,
+  uRaster = NULL,
+  vRaster = NULL,
+  fillLow = "#132c43",
+  fillHigh = "#55b2f8",
+  fillNa = "transparent",
+  arrowCount = 1000,
+  arrowScale = 0.05,
+  arrowColor = "white",
+  arrowHead = 0.05,
+  arrowAlpha = 1,
+  title = NULL,
+  xlab = NULL,
+  ylab = NULL,
+  flab = NULL,
+  xlim = NULL,
+  ylim = NULL,
+  ratio = NULL
+) {
+  
+  # # Create the background raster layer
+  # if ( !(is.null(bgRaster)) ) {
+  #   rasterLayer <- layer_raster(
+  #     raster = bgRaster
+  #   )
+  # } else {
+  #   rasterLayer <- NULL
+  # }
+  # 
+  # # Create the vector field layer
+  # if ( !(is.null(uRaster)) && !(is.null(vRaster)) ) {
+  #   vectorFieldLayer <- layer_vectorField(
+  #     uLayer = uRaster,
+  #     vLayer = vRaster,
+  #     arrowCount = arrowCount,
+  #     arrowScale = arrowScale,
+  #     headSize = arrowHead,
+  #     arrowColor = arrowColor,
+  #     alpha = arrowAlpha
+  #   )
+  #   
+  #   # Have to manually set the plot scale limits
+  #   if (is.null(bgRaster) && is.null(xlim) && is.null(ylim) ) {
+  #     extent <- raster::extent(uRaster)
+  #     xlim = c(extent@xmin, extent@xmax)
+  #     ylim = c(extent@ymin, extent@ymax)
+  #   }
+  #   
+  # } else {
+  #   vectorFieldLayer <- NULL
+  # }
+  # 
+  # plot <-
+  #   plot_base(
+  #     title = title,
+  #     xlab = xlab,
+  #     ylab = ylab,
+  #     flab = flab,
+  #     xlim = xlim,
+  #     ylim = ylim,
+  #     ratio = ratio
+  #   ) +
+  #   rasterLayer +
+  #   vectorFieldLayer +
+  #   ggplot2::scale_fill_gradient(
+  #     low = fillLow,
+  #     high = fillHigh,
+  #     na.value = fillNa
+  #   )
+  # 
+  # return(plot)
+  
+}
+
+
+

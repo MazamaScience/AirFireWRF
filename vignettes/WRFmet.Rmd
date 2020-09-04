@@ -159,11 +159,14 @@ provided by WRFmet package "example_PNW"._
 
 ```{r}
 library(WRFmet)
+library(raster)
+
+raster::extent(WRFmet::example_PNW)
 
 plot_raster(
   raster = WRFmet::example_PNW$HGT,
-  title = "Elevation",
-  flab = "Meters",
+  title = "Pacific Northwest Elevation",
+  flab = "Elev (m)",
   ratio = 1.4
 )
 ```

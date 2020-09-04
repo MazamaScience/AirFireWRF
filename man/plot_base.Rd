@@ -16,21 +16,21 @@ plot_base(
 )
 }
 \arguments{
-\item{title}{Title of the plot.}
+\item{title}{Title of plot.}
 
-\item{xlab}{x-axis label.}
+\item{xlab}{Label for x-axis.}
 
-\item{ylab}{y-axis label.}
+\item{ylab}{Label for y-axis.}
 
-\item{clab}{Label for color value in legend.}
+\item{clab}{Label for legend color scale.}
 
-\item{flab}{Label for fill value in legend.}
+\item{flab}{Label for legend fill scale.}
 
 \item{xlim}{A vector of coordinate longitude bounds.}
 
 \item{ylim}{A vector of coordinate latitude bounds.}
 
-\item{ratio}{Plot ratio.}
+\item{ratio}{Aspect ratio of plot.}
 }
 \value{
 A ggplot object.

@@ -27,23 +27,38 @@ plot_raster(
 
 \item{fillNa}{Color for na raster values.}
 
-\item{title}{Plot title.}
+\item{title}{Title of plot.}
 
-\item{xlab}{x-axis label.}
+\item{xlab}{Label for x-axis.}
 
-\item{ylab}{y-axis label.}
+\item{ylab}{Label for y-axis.}
 
-\item{flab}{Label for fill value in legend.}
+\item{flab}{Label for legend fill scale.}
 
 \item{xlim}{A vector of coordinate longitude bounds.}
 
 \item{ylim}{A vector of coordinate latitude bounds.}
 
-\item{ratio}{Plot ratio.}
+\item{ratio}{Aspect ratio of plot.}
 }
 \value{
 A ggplot object.
 }
 \description{
 Creates a plot for a single raster layer
+}
+\examples{
+\donttest{
+library(WRFmet)
+library(raster)
+
+setWRFDataDir("~/Data/WRF")
+
+plot_raster(
+  raster = example_PNW$HGT,
+  title = "PNW Elevation",
+  flab = "Meters",
+  ratio = 1.4
+)
+}
 }

@@ -209,8 +209,7 @@ wrf_load <- function(
     # Define an empty raster layer to use as a reference grid
     referenceRaster <- raster::raster(nrows = rRowCount, ncols = rColCount)
     raster::extent(referenceRaster) <- raster::extent(coords)
-    #raster::crs(rbase) <- "+proj=longlat +datum=WGS84 +ellps=WGS84 +towgs84=0,0,0 +units=m"
-    
+
     # Rasterize data points onto the reference raster
     rasterLayer <- raster::rasterize(
       x = coords,

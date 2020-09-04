@@ -5,24 +5,21 @@
 \title{Create a vector field layer for plotting}
 \usage{
 layer_vectorField(
-  uvRaster = NULL,
-  uLayer = NULL,
-  vLayer = NULL,
+  uRaster = NULL,
+  vRaster = NULL,
   xlim = NULL,
   ylim = NULL,
   arrowCount = 1000,
   arrowScale = 0.05,
   arrowColor = "white",
-  headSize = 0.05,
+  arrowHead = 0.05,
   alpha = 1
 )
 }
 \arguments{
-\item{uvRaster}{A RasterBrick with 2 RasterLayers: U and V vector components.}
+\item{uRaster}{A RasterLayer for longitudinal vector components.}
 
-\item{uLayer}{A RasterLayer of U vector components.}
-
-\item{vLayer}{A RasterLayer of V vector components.}
+\item{vRaster}{A RasterLayer for latitudinal vector components.}
 
 \item{xlim}{A vector of coordinate longitude bounds.}
 
@@ -34,7 +31,7 @@ layer_vectorField(
 
 \item{arrowColor}{Arrow color.}
 
-\item{headSize}{Arrow head size.}
+\item{arrowHead}{Arrow head size.}
 
 \item{alpha}{Transparency of layer.}
 }

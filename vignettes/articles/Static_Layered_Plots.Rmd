@@ -86,14 +86,15 @@ But for now, let's use an example Raster already included in the package:
 ```{r}
 library(WRFmet)
 
-tempRaster <- raster::brick(WRFmet::example_PNW$TSK)
-windRaster <- raster::brick(WRFmet::example_PNW$U10, WRFmet::example_PNW$V10)
+tempRaster <- WRFmet::example_PNW$TSK
+windURaster <- WRFmet::example_PNW$U10
+windVRaster <- WRFmet::example_PNW$V10
 
 # Extract the underlying grid these Rasters are using
-extent <- raster::extent(WRFmet::example_PNW)
+extent <- raster::extent(tempRaster)
 xlim <- c(round(extent@xmin), round(extent@xmax))
 ylim <- c(round(extent@ymin), round(extent@ymax))
-res <- round(mean(raster::res(WRFmet::example_PNW)), digits = 2)
+res <- round(mean(raster::res(tempRaster)), digits = 2)
 ```
 
 We can make some quick visualizations of these Rasters using the RasterVis
@@ -108,7 +109,7 @@ And for wind velocity, we can use the North and East vector components in
 
 ```{r}
 rasterVis::vectorplot(
-  windRaster,
+  raster::brick(windURaster, windVRaster),
   isField = 'dXY',
   narrows = 500,
   length = 0.05,
@@ -192,11 +193,12 @@ temp_state_wind_plot <-
   temp_state_plot + 
   # Draw the wind vector field
   layer_vectorField(
-    uvRaster = windRaster,
+    uRaster = windURaster,
+    vRaster = windVRaster,
     arrowCount = 500,
     arrowColor = 'black',
     arrowScale = 0.07,
-    headSize = 0.06,
+    arrowHead = 0.06,
     alpha = 0.8
   )
 
@@ -258,11 +260,12 @@ temp_state_monitors_wind_plot <-
   ) +
   # Draw the wind vector field
   layer_vectorField(
-    uvRaster = windRaster,
+    uRaster = windURaster,
+    vRaster = windVRaster,
     arrowCount = 500,
     arrowColor = 'black',
     arrowScale = 0.08,
-    headSize = 0.06,
+    arrowHead = 0.06,
     alpha = 0.8
   )
 ```
@@ -290,11 +293,12 @@ wrfMap <-
   ) +
   # Then draw the wind vector field
   layer_vectorField(
-    uvRaster = windRaster,
+    uRaster = windURaster,
+    vRaster = windVRaster,
     arrowCount = 500,
     arrowColor = 'black',
     arrowScale = 0.08,
-    headSize = 0.06,
+    arrowHead = 0.06,
     alpha = 0.8
   ) +
   # Crop the plot area
@@ -426,11 +430,14 @@ blueskyMap <-
   ) +
   # Then draw the wind vector field
   layer_vectorField(
-    uvRaster = windRaster,
+    uRaster = windURaster,
+    vRaster = windVRaster,
     arrowCount = 500,
     arrowColor = 'black',
     arrowScale = 0.03,
-    headSize = 0.06
+    arrowHead = 0.06,
+    xlim = xlim,
+    ylim = ylim
   ) +
   ggplot2::coord_fixed(
     ratio = 1.4,
