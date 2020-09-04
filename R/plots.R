@@ -131,11 +131,17 @@ plot_raster <- function(
 #' @title Creates a comprehensive plot
 #'
 #' @param bgRaster A RasterLayer for the background.
+#' @param polys A SpatialPolygonsDataFrame.
+#' @param states Logical for including state polygons or not. 
 #' @param uRaster A RasterLayer for longitudinal vector components.
 #' @param vRaster A RasterLayer for latitudinal vector components.
 #' @param fillLow Color for lowest raster value.
 #' @param fillHigh Color for highest raster value.
 #' @param fillNa Color for na raster values.
+#' @param polyColor Color for spatial polygon outlines.
+#' @param polyFill Color for spatial polygon interiors.
+#' @param stateColor Color for state polygon outlines.
+#' @param stateFill Color for state polygon interiors.
 #' @param arrowCount Number of arrows to draw.
 #' @param arrowScale Arrow length scale factor.
 #' @param arrowColor Arrow color.
@@ -168,11 +174,17 @@ plot_raster <- function(
 
 plot_standard <- function(
   bgRaster = NULL,
+  states = FALSE,
+  polys = NULL,
   uRaster = NULL,
   vRaster = NULL,
   fillLow = "#132c43",
   fillHigh = "#55b2f8",
   fillNa = "transparent",
+  stateColor = "black",
+  stateFill = "white",
+  polyColor = "black",
+  polyFill = "white",
   arrowCount = 1000,
   arrowScale = 0.05,
   arrowColor = "white",
@@ -195,7 +207,28 @@ plot_standard <- function(
   } else {
     rasterLayer <- NULL
   }
-
+  
+  if ( !is.null(polys) ) {
+    polysLayer <- layer_spPolys(
+      spdf = polys,
+      color = polyColor,
+      fill = polyFill
+    )
+  } else {
+    polysLayer <- NULL
+  }
+  
+  if ( states ) {
+    statesLayer <- layer_states(
+      color = stateColor,
+      fill = stateFill,
+      xlim = xlim,
+      ylim = ylim
+    )
+  } else {
+    statesLayer <- NULL
+  }
+  
   # Create the vector field layer
   if ( !(is.null(uRaster)) && !(is.null(vRaster)) ) {
     vectorFieldLayer <- layer_vectorField(
@@ -214,7 +247,6 @@ plot_standard <- function(
       xlim = c(extent@xmin, extent@xmax)
       ylim = c(extent@ymin, extent@ymax)
     }
-
   } else {
     vectorFieldLayer <- NULL
   }
@@ -230,6 +262,8 @@ plot_standard <- function(
       ratio = ratio
     ) +
     rasterLayer +
+    polysLayer +
+    statesLayer +
     vectorFieldLayer +
     ggplot2::scale_fill_gradient(
       low = fillLow,

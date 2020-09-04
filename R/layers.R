@@ -78,23 +78,26 @@ layer_spPolys <- function(
   
 }
 
+
 #' @export
 #' @title Create a state polygons layer for plotting
 #'
+#' @param color Line color.
+#' @param fill Fill color.
 #' @param xlim A vector of coordinate longitude bounds.
 #' @param ylim A vector of coordinate latitude bounds.
-#' @param color Line color.
 #'
 #' @return A geom_polygon ggproto object.
 
 layer_states <- function(
+  color = "black",
+  fill = "white",
   xlim = NULL,
-  ylim = NULL,
-  color = 'black'
+  ylim = NULL
 ) {
   
   states <- ggplot2::map_data(
-    'state',
+    "state",
     xlim = xlim,
     ylim = ylim
   )
@@ -106,7 +109,7 @@ layer_states <- function(
       x = .data$long,
       group = .data$group
     ),
-    fill = 'NA',
+    fill = fill,
     color = color
   )
   
@@ -148,26 +151,26 @@ layer_points <- function(
 #'
 #' @param uRaster A RasterLayer for longitudinal vector components.
 #' @param vRaster A RasterLayer for latitudinal vector components.
-#' @param xlim A vector of coordinate longitude bounds.
-#' @param ylim A vector of coordinate latitude bounds.
 #' @param arrowCount Number of arrows to draw.
 #' @param arrowScale Arrow length scale factor.
 #' @param arrowColor Arrow color.
 #' @param arrowHead Arrow head size.
 #' @param alpha Transparency of layer.
+#' @param xlim A vector of coordinate longitude bounds.
+#' @param ylim A vector of coordinate latitude bounds.
 #'
 #' @return An annotation_custom ggproto object.
 
 layer_vectorField <- function(
   uRaster = NULL,
   vRaster = NULL,
-  xlim = NULL,
-  ylim = NULL,
   arrowCount = 1000,
   arrowScale = 0.05,
   arrowColor = 'white',
   arrowHead = 0.05,
-  alpha = 1
+  alpha = 1,
+  xlim = NULL,
+  ylim = NULL
 ) {
   
   # Removes ALL spacing around lattice plots
@@ -199,8 +202,8 @@ layer_vectorField <- function(
   uvRaster <- raster::brick(uRaster, vRaster)
   
   if ( !is.null(xlim) && !is.null(ylim) ) {
-    cropExtent <- raster::extent(c(xlim[1], xlim[2], ylim[1], ylim[2]))
-    uvRaster <- raster::crop(uvRaster, cropExtent)
+    extent <- raster::extent(c(xlim[1], xlim[2], ylim[1], ylim[2]))
+    uvRaster <- raster::crop(uvRaster, extent)
   }
   
   vectorField <- rasterVis::vectorplot(

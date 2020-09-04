@@ -161,17 +161,48 @@ provided by WRFmet package "example_PNW"._
 library(WRFmet)
 library(raster)
 
-raster::extent(WRFmet::example_PNW)
-
 plot_raster(
   raster = WRFmet::example_PNW$HGT,
-  title = "Pacific Northwest Elevation",
+  title = "PNW-4km 2020-07-15 12pm - Hour 7",
   flab = "Elev (m)",
   ratio = 1.4
 )
 ```
 
-...
+If we want to create a more complex plot, the `plot_standard()` function
+provides a full-featured tool for visualizing WRF data and other spatial 
+information. It builds a multi-layered plot including (in order, if the data is 
+provided):
+
+1. A background raster layer
+2. A spatial polygons layer
+3. A spatial points layer
+4. A U.S. states layer
+5. A vector field layer
+
+Let's try building a plot of the Pacific Northwest with:
+
+1. An elevation background raster
+2. State borders outlined in red
+3. A wind vector field
+
+```{r}
+plot_standard(
+  bgRaster = WRFmet::example_PNW$HGT,
+  states = T,
+  stateColor = "red",
+  stateFill = "transparent",
+  uRaster = WRFmet::example_PNW$U10,
+  vRaster = WRFmet::example_PNW$V10,
+  arrowScale = 0.04,
+  arrowHead = 0.03,
+  title = "PNW-4km 2020-07-15 12pm - Hour 7",
+  flab = "Elev (m)",
+  xlim = c(-125, -111),
+  ylim = c(42, 49),
+  ratio = 1.4
+)
+```
 
 These plots are actually preset combinations of various building-block "layers". Custom
 plots can be built by stacking these layers which function similar to GGPlot's
