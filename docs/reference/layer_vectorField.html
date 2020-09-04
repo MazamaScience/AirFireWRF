@@ -139,40 +139,27 @@
     </div>
 
     <pre class="usage"><span class='fu'>layer_vectorField</span>(
-  <span class='kw'>uvRaster</span> <span class='kw'>=</span> <span class='kw'>NULL</span>,
-  <span class='kw'>uLayer</span> <span class='kw'>=</span> <span class='kw'>NULL</span>,
-  <span class='kw'>vLayer</span> <span class='kw'>=</span> <span class='kw'>NULL</span>,
-  <span class='kw'>xlim</span> <span class='kw'>=</span> <span class='kw'>NULL</span>,
-  <span class='kw'>ylim</span> <span class='kw'>=</span> <span class='kw'>NULL</span>,
+  <span class='kw'>uRaster</span> <span class='kw'>=</span> <span class='kw'>NULL</span>,
+  <span class='kw'>vRaster</span> <span class='kw'>=</span> <span class='kw'>NULL</span>,
   <span class='kw'>arrowCount</span> <span class='kw'>=</span> <span class='fl'>1000</span>,
   <span class='kw'>arrowScale</span> <span class='kw'>=</span> <span class='fl'>0.05</span>,
   <span class='kw'>arrowColor</span> <span class='kw'>=</span> <span class='st'>"white"</span>,
-  <span class='kw'>headSize</span> <span class='kw'>=</span> <span class='fl'>0.05</span>,
-  <span class='kw'>alpha</span> <span class='kw'>=</span> <span class='fl'>1</span>
+  <span class='kw'>arrowHead</span> <span class='kw'>=</span> <span class='fl'>0.05</span>,
+  <span class='kw'>alpha</span> <span class='kw'>=</span> <span class='fl'>1</span>,
+  <span class='kw'>xlim</span> <span class='kw'>=</span> <span class='kw'>NULL</span>,
+  <span class='kw'>ylim</span> <span class='kw'>=</span> <span class='kw'>NULL</span>
 )</pre>
 
     <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a>Arguments</h2>
     <table class="ref-arguments">
     <colgroup><col class="name" /><col class="desc" /></colgroup>
     <tr>
-      <th>uvRaster</th>
-      <td><p>A RasterBrick with 2 RasterLayers: U and V vector components.</p></td>
+      <th>uRaster</th>
+      <td><p>A RasterLayer for longitudinal vector components.</p></td>
     </tr>
     <tr>
-      <th>uLayer</th>
-      <td><p>A RasterLayer of U vector components.</p></td>
-    </tr>
-    <tr>
-      <th>vLayer</th>
-      <td><p>A RasterLayer of V vector components.</p></td>
-    </tr>
-    <tr>
-      <th>xlim</th>
-      <td><p>A vector of coordinate longitude bounds.</p></td>
-    </tr>
-    <tr>
-      <th>ylim</th>
-      <td><p>A vector of coordinate latitude bounds.</p></td>
+      <th>vRaster</th>
+      <td><p>A RasterLayer for latitudinal vector components.</p></td>
     </tr>
     <tr>
       <th>arrowCount</th>
@@ -187,12 +174,20 @@
       <td><p>Arrow color.</p></td>
     </tr>
     <tr>
-      <th>headSize</th>
+      <th>arrowHead</th>
       <td><p>Arrow head size.</p></td>
     </tr>
     <tr>
       <th>alpha</th>
       <td><p>Transparency of layer.</p></td>
+    </tr>
+    <tr>
+      <th>xlim</th>
+      <td><p>A vector of coordinate longitude bounds.</p></td>
+    </tr>
+    <tr>
+      <th>ylim</th>
+      <td><p>A vector of coordinate latitude bounds.</p></td>
     </tr>
     </table>
 

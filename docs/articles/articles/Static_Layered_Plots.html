@@ -143,21 +143,23 @@ windRaster &lt;- wrf_load(
 )</a></code></pre>
 <p>But for now, let’s use an example Raster already included in the package:</p>
 <div class="sourceCode" id="cb2"><html><body><pre class="r"><span class="fu"><a href="https://rdrr.io/r/base/library.html">library</a></span>(<span class="no">WRFmet</span>)
+<span class="fu"><a href="https://rdrr.io/r/base/library.html">library</a></span>(<span class="no">raster</span>)
 
-<span class="no">tempRaster</span> <span class="kw">&lt;-</span> <span class="kw pkg">raster</span><span class="kw ns">::</span><span class="fu"><a href="https://rdrr.io/pkg/raster/man/brick.html">brick</a></span>(<span class="kw pkg">WRFmet</span><span class="kw ns">::</span><span class="no"><a href="../../reference/example_PNW.html">example_PNW</a></span>$<span class="no">TSK</span>)
-<span class="no">windRaster</span> <span class="kw">&lt;-</span> <span class="kw pkg">raster</span><span class="kw ns">::</span><span class="fu"><a href="https://rdrr.io/pkg/raster/man/brick.html">brick</a></span>(<span class="kw pkg">WRFmet</span><span class="kw ns">::</span><span class="no"><a href="../../reference/example_PNW.html">example_PNW</a></span>$<span class="no">U10</span>, <span class="kw pkg">WRFmet</span><span class="kw ns">::</span><span class="no"><a href="../../reference/example_PNW.html">example_PNW</a></span>$<span class="no">V10</span>)
+<span class="no">tempRaster</span> <span class="kw">&lt;-</span> <span class="kw pkg">WRFmet</span><span class="kw ns">::</span><span class="no"><a href="../../reference/example_PNW.html">example_PNW</a></span>$<span class="no">TSK</span>
+<span class="no">windURaster</span> <span class="kw">&lt;-</span> <span class="kw pkg">WRFmet</span><span class="kw ns">::</span><span class="no"><a href="../../reference/example_PNW.html">example_PNW</a></span>$<span class="no">U10</span>
+<span class="no">windVRaster</span> <span class="kw">&lt;-</span> <span class="kw pkg">WRFmet</span><span class="kw ns">::</span><span class="no"><a href="../../reference/example_PNW.html">example_PNW</a></span>$<span class="no">V10</span>
 
 <span class="co"># Extract the underlying grid these Rasters are using</span>
-<span class="no">extent</span> <span class="kw">&lt;-</span> <span class="kw pkg">raster</span><span class="kw ns">::</span><span class="fu"><a href="https://rdrr.io/pkg/raster/man/extent.html">extent</a></span>(<span class="kw pkg">WRFmet</span><span class="kw ns">::</span><span class="no"><a href="../../reference/example_PNW.html">example_PNW</a></span>)
+<span class="no">extent</span> <span class="kw">&lt;-</span> <span class="kw pkg">raster</span><span class="kw ns">::</span><span class="fu"><a href="https://rdrr.io/pkg/raster/man/extent.html">extent</a></span>(<span class="no">tempRaster</span>)
 <span class="no">xlim</span> <span class="kw">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span>(<span class="fu"><a href="https://rdrr.io/r/base/Round.html">round</a></span>(<span class="no">extent</span>@<span class="kw">xmin</span>), <span class="fu"><a href="https://rdrr.io/r/base/Round.html">round</a></span>(<span class="no">extent</span>@<span class="kw">xmax</span>))
 <span class="no">ylim</span> <span class="kw">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span>(<span class="fu"><a href="https://rdrr.io/r/base/Round.html">round</a></span>(<span class="no">extent</span>@<span class="kw">ymin</span>), <span class="fu"><a href="https://rdrr.io/r/base/Round.html">round</a></span>(<span class="no">extent</span>@<span class="kw">ymax</span>))
-<span class="no">res</span> <span class="kw">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/Round.html">round</a></span>(<span class="fu"><a href="https://rdrr.io/r/base/mean.html">mean</a></span>(<span class="kw pkg">raster</span><span class="kw ns">::</span><span class="fu"><a href="https://rdrr.io/pkg/raster/man/resolution.html">res</a></span>(<span class="kw pkg">WRFmet</span><span class="kw ns">::</span><span class="no"><a href="../../reference/example_PNW.html">example_PNW</a></span>)), <span class="kw">digits</span> <span class="kw">=</span> <span class="fl">2</span>)</pre></body></html></div>
+<span class="no">res</span> <span class="kw">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/Round.html">round</a></span>(<span class="fu"><a href="https://rdrr.io/r/base/mean.html">mean</a></span>(<span class="kw pkg">raster</span><span class="kw ns">::</span><span class="fu"><a href="https://rdrr.io/pkg/raster/man/resolution.html">res</a></span>(<span class="no">tempRaster</span>)), <span class="kw">digits</span> <span class="kw">=</span> <span class="fl">2</span>)</pre></body></html></div>
 <p>We can make some quick visualizations of these Rasters using the RasterVis package. For temperature, we can use the <code>levelPlot()</code> function:</p>
 <div class="sourceCode" id="cb3"><html><body><pre class="r"><span class="kw pkg">rasterVis</span><span class="kw ns">::</span><span class="fu"><a href="https://rdrr.io/pkg/rasterVis/man/levelplot-methods.html">levelplot</a></span>(<span class="no">tempRaster</span>, <span class="kw">main</span> <span class="kw">=</span> <span class="st">'Temperature (K)'</span>, <span class="kw">margin</span> <span class="kw">=</span> <span class="fl">FALSE</span>)</pre></body></html></div>
 <p><img src="Static_Layered_Plots_files/figure-html/unnamed-chunk-2-1.png" width="768"></p>
 <p>And for wind velocity, we can use the North and East vector components in <code>vectorplot()</code> to make a vector field:</p>
 <div class="sourceCode" id="cb4"><html><body><pre class="r"><span class="kw pkg">rasterVis</span><span class="kw ns">::</span><span class="fu"><a href="https://rdrr.io/pkg/rasterVis/man/vectorplot.html">vectorplot</a></span>(
-  <span class="no">windRaster</span>,
+  <span class="kw pkg">raster</span><span class="kw ns">::</span><span class="fu"><a href="https://rdrr.io/pkg/raster/man/brick.html">brick</a></span>(<span class="no">windURaster</span>, <span class="no">windVRaster</span>),
   <span class="kw">isField</span> <span class="kw">=</span> <span class="st">'dXY'</span>,
   <span class="kw">narrows</span> <span class="kw">=</span> <span class="fl">500</span>,
   <span class="kw">length</span> <span class="kw">=</span> <span class="fl">0.05</span>,
@@ -220,11 +222,12 @@ windRaster &lt;- wrf_load(
   <span class="no">temp_state_plot</span> +
   <span class="co"># Draw the wind vector field</span>
   <span class="fu"><a href="../../reference/layer_vectorField.html">layer_vectorField</a></span>(
-    <span class="kw">uvRaster</span> <span class="kw">=</span> <span class="no">windRaster</span>,
+    <span class="kw">uRaster</span> <span class="kw">=</span> <span class="no">windURaster</span>,
+    <span class="kw">vRaster</span> <span class="kw">=</span> <span class="no">windVRaster</span>,
     <span class="kw">arrowCount</span> <span class="kw">=</span> <span class="fl">500</span>,
     <span class="kw">arrowColor</span> <span class="kw">=</span> <span class="st">'black'</span>,
     <span class="kw">arrowScale</span> <span class="kw">=</span> <span class="fl">0.07</span>,
-    <span class="kw">headSize</span> <span class="kw">=</span> <span class="fl">0.06</span>,
+    <span class="kw">arrowHead</span> <span class="kw">=</span> <span class="fl">0.06</span>,
     <span class="kw">alpha</span> <span class="kw">=</span> <span class="fl">0.8</span>
   )
 
@@ -247,7 +250,7 @@ windRaster &lt;- wrf_load(
 <span class="no">monitorPoints</span> <span class="kw">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/data.frame.html">data.frame</a></span>(
   <span class="kw">x</span> <span class="kw">=</span> <span class="no">means</span>$<span class="no">meta</span>$<span class="no">longitude</span>,
   <span class="kw">y</span> <span class="kw">=</span> <span class="no">means</span>$<span class="no">meta</span>$<span class="no">latitude</span>,
-  <span class="kw">value</span> <span class="kw">=</span> <span class="fu"><a href="https://rdrr.io/r/base/numeric.html">as.numeric</a></span>(<span class="no">means</span>$<span class="no">data</span>[<span class="fl">1</span>, <span class="fl">2</span>:<span class="fu"><a href="https://rdrr.io/r/base/nrow.html">ncol</a></span>(<span class="no">means</span>$<span class="no">data</span>)])
+  <span class="kw">value</span> <span class="kw">=</span> <span class="fu"><a href="https://rdrr.io/r/base/numeric.html">as.numeric</a></span>(<span class="no">means</span>$<span class="no">data</span>[<span class="fl">1</span>, <span class="fl">2</span>:<span class="fu"><a href="https://rdrr.io/pkg/raster/man/ncell.html">ncol</a></span>(<span class="no">means</span>$<span class="no">data</span>)])
 )
 
 <span class="no">temp_state_monitors_wind_plot</span> <span class="kw">&lt;-</span>
@@ -277,11 +280,12 @@ windRaster &lt;- wrf_load(
   ) +
   # Draw the wind vector field
   layer_vectorField(
-    uvRaster = windRaster,
+    uRaster = windURaster,
+    vRaster = windVRaster,
     arrowCount = 500,
     arrowColor = 'black',
     arrowScale = 0.08,
-    headSize = 0.06,
+    arrowHead = 0.06,
     alpha = 0.8
   )</code></pre>
 <p>…but let’s take a step back and see what it would look like to create this entire plot at once:</p>
@@ -304,11 +308,12 @@ windRaster &lt;- wrf_load(
   ) +
   <span class="co"># Then draw the wind vector field</span>
   <span class="fu"><a href="../../reference/layer_vectorField.html">layer_vectorField</a></span>(
-    <span class="kw">uvRaster</span> <span class="kw">=</span> <span class="no">windRaster</span>,
+    <span class="kw">uRaster</span> <span class="kw">=</span> <span class="no">windURaster</span>,
+    <span class="kw">vRaster</span> <span class="kw">=</span> <span class="no">windVRaster</span>,
     <span class="kw">arrowCount</span> <span class="kw">=</span> <span class="fl">500</span>,
     <span class="kw">arrowColor</span> <span class="kw">=</span> <span class="st">'black'</span>,
     <span class="kw">arrowScale</span> <span class="kw">=</span> <span class="fl">0.08</span>,
-    <span class="kw">headSize</span> <span class="kw">=</span> <span class="fl">0.06</span>,
+    <span class="kw">arrowHead</span> <span class="kw">=</span> <span class="fl">0.06</span>,
     <span class="kw">alpha</span> <span class="kw">=</span> <span class="fl">0.8</span>
   ) +
   <span class="co"># Crop the plot area</span>
@@ -427,11 +432,14 @@ windRaster &lt;- wrf_load(
   ) +
   <span class="co"># Then draw the wind vector field</span>
   <span class="fu"><a href="../../reference/layer_vectorField.html">layer_vectorField</a></span>(
-    <span class="kw">uvRaster</span> <span class="kw">=</span> <span class="no">windRaster</span>,
+    <span class="kw">uRaster</span> <span class="kw">=</span> <span class="no">windURaster</span>,
+    <span class="kw">vRaster</span> <span class="kw">=</span> <span class="no">windVRaster</span>,
     <span class="kw">arrowCount</span> <span class="kw">=</span> <span class="fl">500</span>,
     <span class="kw">arrowColor</span> <span class="kw">=</span> <span class="st">'black'</span>,
     <span class="kw">arrowScale</span> <span class="kw">=</span> <span class="fl">0.03</span>,
-    <span class="kw">headSize</span> <span class="kw">=</span> <span class="fl">0.06</span>
+    <span class="kw">arrowHead</span> <span class="kw">=</span> <span class="fl">0.06</span>,
+    <span class="kw">xlim</span> <span class="kw">=</span> <span class="no">xlim</span>,
+    <span class="kw">ylim</span> <span class="kw">=</span> <span class="no">ylim</span>
   ) +
   <span class="kw pkg">ggplot2</span><span class="kw ns">::</span><span class="fu"><a href="https://ggplot2.tidyverse.org/reference/coord_fixed.html">coord_fixed</a></span>(
     <span class="kw">ratio</span> <span class="kw">=</span> <span class="fl">1.4</span>,
