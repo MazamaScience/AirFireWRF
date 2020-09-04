@@ -1,3 +1,11 @@
+# WRFmet 0.1.4
+
+* `layer_vectorField()` properly samples cropped rasters.
+* Added `plot_standard()` default plot.
+* Restored PNW-1.33km support and hid `plot_base()` from users.
+* `wrf_load()` now has a variable preset for AirFire.
+* Added "Saving Data Subsets"" article.
+
 # WRFmet 0.1.3
 
 * Added "Saving Data Subsets" article.
