@@ -86,6 +86,7 @@ But for now, let's use an example Raster already included in the package:
 ```{r load_data}
 library(raster)
 library(WRFmet)
+library(raster)
 
 tempRaster <- WRFmet::example_PNW$TSK
 windURaster <- WRFmet::example_PNW$U10

@@ -6,11 +6,17 @@
 \usage{
 plot_standard(
   bgRaster = NULL,
+  states = FALSE,
+  polys = NULL,
   uRaster = NULL,
   vRaster = NULL,
   fillLow = "#132c43",
   fillHigh = "#55b2f8",
   fillNa = "transparent",
+  stateColor = "black",
+  stateFill = "white",
+  polyColor = "black",
+  polyFill = "white",
   arrowCount = 1000,
   arrowScale = 0.05,
   arrowColor = "white",
@@ -28,6 +34,10 @@ plot_standard(
 \arguments{
 \item{bgRaster}{A RasterLayer for the background.}
 
+\item{states}{Logical for including state polygons or not.}
+
+\item{polys}{A SpatialPolygonsDataFrame.}
+
 \item{uRaster}{A RasterLayer for longitudinal vector components.}
 
 \item{vRaster}{A RasterLayer for latitudinal vector components.}
@@ -37,6 +47,14 @@ plot_standard(
 \item{fillHigh}{Color for highest raster value.}
 
 \item{fillNa}{Color for na raster values.}
+
+\item{stateColor}{Color for state polygon outlines.}
+
+\item{stateFill}{Color for state polygon interiors.}
+
+\item{polyColor}{Color for spatial polygon outlines.}
+
+\item{polyFill}{Color for spatial polygon interiors.}
 
 \item{arrowCount}{Number of arrows to draw.}
 

@@ -5,8 +5,9 @@
 #' @format A RasterBrick containing 4 RasterLayers.
 #' @description The \code{example_PNW} dataset contains forecasted readings for 
 #' temperature (\code{TSK}), elevation (\code{HGT}), and wind velocity 
-#' (\code{U10} & \code{V10}) across the Pacific Northwest on July 15, 2020. This
-#'  data is used in several examples in the package documentation.
+#' (\code{U10} & \code{V10}) across the Pacific Northwest 7 hours after 12pm on
+#' July 15, 2020. This data is used in several examples in the package 
+#' documentation.
 #' 
 #' This dataset was generated on 2020-09-01 by running:
 #'

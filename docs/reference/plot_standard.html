@@ -137,11 +137,17 @@
 
     <pre class="usage"><span class='fu'>plot_standard</span>(
   <span class='kw'>bgRaster</span> <span class='kw'>=</span> <span class='kw'>NULL</span>,
+  <span class='kw'>states</span> <span class='kw'>=</span> <span class='fl'>FALSE</span>,
+  <span class='kw'>polys</span> <span class='kw'>=</span> <span class='kw'>NULL</span>,
   <span class='kw'>uRaster</span> <span class='kw'>=</span> <span class='kw'>NULL</span>,
   <span class='kw'>vRaster</span> <span class='kw'>=</span> <span class='kw'>NULL</span>,
   <span class='kw'>fillLow</span> <span class='kw'>=</span> <span class='st'>"#132c43"</span>,
   <span class='kw'>fillHigh</span> <span class='kw'>=</span> <span class='st'>"#55b2f8"</span>,
   <span class='kw'>fillNa</span> <span class='kw'>=</span> <span class='st'>"transparent"</span>,
+  <span class='kw'>stateColor</span> <span class='kw'>=</span> <span class='st'>"black"</span>,
+  <span class='kw'>stateFill</span> <span class='kw'>=</span> <span class='st'>"white"</span>,
+  <span class='kw'>polyColor</span> <span class='kw'>=</span> <span class='st'>"black"</span>,
+  <span class='kw'>polyFill</span> <span class='kw'>=</span> <span class='st'>"white"</span>,
   <span class='kw'>arrowCount</span> <span class='kw'>=</span> <span class='fl'>1000</span>,
   <span class='kw'>arrowScale</span> <span class='kw'>=</span> <span class='fl'>0.05</span>,
   <span class='kw'>arrowColor</span> <span class='kw'>=</span> <span class='st'>"white"</span>,
@@ -164,6 +170,14 @@
       <td><p>A RasterLayer for the background.</p></td>
     </tr>
     <tr>
+      <th>states</th>
+      <td><p>Logical for including state polygons or not.</p></td>
+    </tr>
+    <tr>
+      <th>polys</th>
+      <td><p>A SpatialPolygonsDataFrame.</p></td>
+    </tr>
+    <tr>
       <th>uRaster</th>
       <td><p>A RasterLayer for longitudinal vector components.</p></td>
     </tr>
@@ -182,6 +196,22 @@
     <tr>
       <th>fillNa</th>
       <td><p>Color for na raster values.</p></td>
+    </tr>
+    <tr>
+      <th>stateColor</th>
+      <td><p>Color for state polygon outlines.</p></td>
+    </tr>
+    <tr>
+      <th>stateFill</th>
+      <td><p>Color for state polygon interiors.</p></td>
+    </tr>
+    <tr>
+      <th>polyColor</th>
+      <td><p>Color for spatial polygon outlines.</p></td>
+    </tr>
+    <tr>
+      <th>polyFill</th>
+      <td><p>Color for spatial polygon interiors.</p></td>
     </tr>
     <tr>
       <th>arrowCount</th>

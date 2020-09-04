@@ -7,23 +7,19 @@
 layer_vectorField(
   uRaster = NULL,
   vRaster = NULL,
-  xlim = NULL,
-  ylim = NULL,
   arrowCount = 1000,
   arrowScale = 0.05,
   arrowColor = "white",
   arrowHead = 0.05,
-  alpha = 1
+  alpha = 1,
+  xlim = NULL,
+  ylim = NULL
 )
 }
 \arguments{
 \item{uRaster}{A RasterLayer for longitudinal vector components.}
 
 \item{vRaster}{A RasterLayer for latitudinal vector components.}
-
-\item{xlim}{A vector of coordinate longitude bounds.}
-
-\item{ylim}{A vector of coordinate latitude bounds.}
 
 \item{arrowCount}{Number of arrows to draw.}
 
@@ -34,6 +30,10 @@ layer_vectorField(
 \item{arrowHead}{Arrow head size.}
 
 \item{alpha}{Transparency of layer.}
+
+\item{xlim}{A vector of coordinate longitude bounds.}
+
+\item{ylim}{A vector of coordinate latitude bounds.}
 }
 \value{
 An annotation_custom ggproto object.
