@@ -198,9 +198,10 @@ layer_vectorField <- function(
   
   uvRaster <- raster::brick(uRaster, vRaster)
   
-  # TODO: Actually use the xlim and ylim params to crop the uvRaster before
-  # calling vectorPlot. This should properly resample the raster so the output
-  # isn't just a zoomed in version of a larger vector field.
+  if ( !is.null(xlim) && !is.null(ylim) ) {
+    cropExtent <- raster::extent(c(xlim[1], xlim[2], ylim[1], ylim[2]))
+    uvRaster <- raster::crop(uvRaster, cropExtent)
+  }
   
   vectorField <- rasterVis::vectorplot(
     object = uvRaster,

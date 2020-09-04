@@ -71,7 +71,7 @@ Creates a comprehensive plot
 \examples{
 \donttest{
 library(WRFmet)
-setWRFDataDir("~/Data/WRF")
+library(raster)
 
 plot_standard(
   bgRaster = example_PNW$HGT,

@@ -154,7 +154,7 @@ plot_raster <- function(
 #' @examples
 #' \donttest{
 #' library(WRFmet)
-#' setWRFDataDir("~/Data/WRF")
+#' library(raster)
 #' 
 #' plot_standard(
 #'   bgRaster = example_PNW$HGT,
@@ -187,57 +187,57 @@ plot_standard <- function(
   ratio = NULL
 ) {
   
-  # # Create the background raster layer
-  # if ( !(is.null(bgRaster)) ) {
-  #   rasterLayer <- layer_raster(
-  #     raster = bgRaster
-  #   )
-  # } else {
-  #   rasterLayer <- NULL
-  # }
-  # 
-  # # Create the vector field layer
-  # if ( !(is.null(uRaster)) && !(is.null(vRaster)) ) {
-  #   vectorFieldLayer <- layer_vectorField(
-  #     uLayer = uRaster,
-  #     vLayer = vRaster,
-  #     arrowCount = arrowCount,
-  #     arrowScale = arrowScale,
-  #     headSize = arrowHead,
-  #     arrowColor = arrowColor,
-  #     alpha = arrowAlpha
-  #   )
-  #   
-  #   # Have to manually set the plot scale limits
-  #   if (is.null(bgRaster) && is.null(xlim) && is.null(ylim) ) {
-  #     extent <- raster::extent(uRaster)
-  #     xlim = c(extent@xmin, extent@xmax)
-  #     ylim = c(extent@ymin, extent@ymax)
-  #   }
-  #   
-  # } else {
-  #   vectorFieldLayer <- NULL
-  # }
-  # 
-  # plot <-
-  #   plot_base(
-  #     title = title,
-  #     xlab = xlab,
-  #     ylab = ylab,
-  #     flab = flab,
-  #     xlim = xlim,
-  #     ylim = ylim,
-  #     ratio = ratio
-  #   ) +
-  #   rasterLayer +
-  #   vectorFieldLayer +
-  #   ggplot2::scale_fill_gradient(
-  #     low = fillLow,
-  #     high = fillHigh,
-  #     na.value = fillNa
-  #   )
-  # 
-  # return(plot)
+  # Create the background raster layer
+  if ( !(is.null(bgRaster)) ) {
+    rasterLayer <- layer_raster(
+      raster = bgRaster
+    )
+  } else {
+    rasterLayer <- NULL
+  }
+
+  # Create the vector field layer
+  if ( !(is.null(uRaster)) && !(is.null(vRaster)) ) {
+    vectorFieldLayer <- layer_vectorField(
+      uRaster = uRaster,
+      vRaster = vRaster,
+      arrowCount = arrowCount,
+      arrowScale = arrowScale,
+      arrowHead = arrowHead,
+      arrowColor = arrowColor,
+      alpha = arrowAlpha
+    )
+
+    # Have to manually set the plot scale limits
+    if (is.null(bgRaster) && is.null(xlim) && is.null(ylim) ) {
+      extent <- raster::extent(uRaster)
+      xlim = c(extent@xmin, extent@xmax)
+      ylim = c(extent@ymin, extent@ymax)
+    }
+
+  } else {
+    vectorFieldLayer <- NULL
+  }
+
+  plot <-
+    plot_base(
+      title = title,
+      xlab = xlab,
+      ylab = ylab,
+      flab = flab,
+      xlim = xlim,
+      ylim = ylim,
+      ratio = ratio
+    ) +
+    rasterLayer +
+    vectorFieldLayer +
+    ggplot2::scale_fill_gradient(
+      low = fillLow,
+      high = fillHigh,
+      na.value = fillNa
+    )
+
+  return(plot)
   
 }
 
