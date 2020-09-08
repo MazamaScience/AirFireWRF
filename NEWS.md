@@ -1,15 +1,17 @@
 # WRFmet 0.1.4
 
 * Added ability to download and load PNW-1.33km WRF files.
-* `layer_vectorField()` 
-- No longer supports the `uvRaster` parameter.
-- Changed parameters `uLayer` and `vLayer` to `uRaster` and `vRaster`.
-- Now correctly resamples cropped u/v rasters.
 * `plot_standard()` now supports drawing both U.S. state polygons and generic 
 _SpatialPolygonDataFrame_s.
+* `wrf_load()` now has a variable preset for AirFire.
 * Removed parameters `fillLow` and `fillHigh` from `plot_standard()` and 
 `plot_raster()` to instead support parameters for 
 `ggplot2::scale_fill_gradientn()`.
+* `layer_vectorField()` 
+  * No longer supports the `uvRaster` parameter.
+  * Changed parameters `uLayer` and `vLayer` to `uRaster` and `vRaster`.
+  * Properly resamples cropped rasters.
+* Hid `plot_base()` from users.
 
 # WRFmet 0.1.3
 

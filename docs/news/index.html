@@ -137,13 +137,20 @@
 <a href="#wrfmet-014" class="anchor"></a>WRFmet 0.1.4</h1>
 <ul>
 <li>Added ability to download and load PNW-1.33km WRF files.</li>
-<li><code><a href="../reference/layer_vectorField.html">layer_vectorField()</a></code></li>
-<li>No longer supports the <code>uvRaster</code> parameter.</li>
-<li>Changed parameters <code>uLayer</code> and <code>vLayer</code> to <code>uRaster</code> and <code>vRaster</code>.</li>
-<li>Now correctly resamples cropped u/v rasters.</li>
 <li>
 <code><a href="../reference/plot_standard.html">plot_standard()</a></code> now supports drawing both U.S. state polygons and generic _SpatialPolygonDataFrame_s.</li>
+<li>
+<code><a href="../reference/wrf_load.html">wrf_load()</a></code> now has a variable preset for AirFire.</li>
 <li>Removed parameters <code>fillLow</code> and <code>fillHigh</code> from <code><a href="../reference/plot_standard.html">plot_standard()</a></code> and <code><a href="../reference/plot_raster.html">plot_raster()</a></code> to instead support parameters for <code><a href="https://ggplot2.tidyverse.org/reference/scale_gradient.html">ggplot2::scale_fill_gradientn()</a></code>.</li>
+<li>
+<code><a href="../reference/layer_vectorField.html">layer_vectorField()</a></code>
+<ul>
+<li>No longer supports the <code>uvRaster</code> parameter.</li>
+<li>Changed parameters <code>uLayer</code> and <code>vLayer</code> to <code>uRaster</code> and <code>vRaster</code>.</li>
+<li>Properly resamples cropped rasters.</li>
+</ul>
+</li>
+<li>Hid <code><a href="../reference/plot_base.html">plot_base()</a></code> from users.</li>
 </ul>
 </div>
     <div id="wrfmet-013" class="section level1">

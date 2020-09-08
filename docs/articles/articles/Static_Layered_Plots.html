@@ -142,7 +142,8 @@ windRaster &lt;- wrf_load(
   res = res
 )</a></code></pre>
 <p>But for now, let’s use an example Raster already included in the package:</p>
-<div class="sourceCode" id="cb2"><html><body><pre class="r"><span class="fu"><a href="https://rdrr.io/r/base/library.html">library</a></span>(<span class="no">WRFmet</span>)
+<div class="sourceCode" id="cb2"><html><body><pre class="r"><span class="fu"><a href="https://rdrr.io/r/base/library.html">library</a></span>(<span class="no">raster</span>)
+<span class="fu"><a href="https://rdrr.io/r/base/library.html">library</a></span>(<span class="no">WRFmet</span>)
 <span class="fu"><a href="https://rdrr.io/r/base/library.html">library</a></span>(<span class="no">raster</span>)
 
 <span class="no">tempRaster</span> <span class="kw">&lt;-</span> <span class="kw pkg">WRFmet</span><span class="kw ns">::</span><span class="no"><a href="../../reference/example_PNW.html">example_PNW</a></span>$<span class="no">TSK</span>
@@ -156,7 +157,7 @@ windRaster &lt;- wrf_load(
 <span class="no">res</span> <span class="kw">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/Round.html">round</a></span>(<span class="fu"><a href="https://rdrr.io/r/base/mean.html">mean</a></span>(<span class="kw pkg">raster</span><span class="kw ns">::</span><span class="fu"><a href="https://rdrr.io/pkg/raster/man/resolution.html">res</a></span>(<span class="no">tempRaster</span>)), <span class="kw">digits</span> <span class="kw">=</span> <span class="fl">2</span>)</pre></body></html></div>
 <p>We can make some quick visualizations of these Rasters using the RasterVis package. For temperature, we can use the <code>levelPlot()</code> function:</p>
 <div class="sourceCode" id="cb3"><html><body><pre class="r"><span class="kw pkg">rasterVis</span><span class="kw ns">::</span><span class="fu"><a href="https://rdrr.io/pkg/rasterVis/man/levelplot-methods.html">levelplot</a></span>(<span class="no">tempRaster</span>, <span class="kw">main</span> <span class="kw">=</span> <span class="st">'Temperature (K)'</span>, <span class="kw">margin</span> <span class="kw">=</span> <span class="fl">FALSE</span>)</pre></body></html></div>
-<p><img src="Static_Layered_Plots_files/figure-html/unnamed-chunk-2-1.png" width="768"></p>
+<p><img src="Static_Layered_Plots_files/figure-html/levelPlot-1.png" width="768"></p>
 <p>And for wind velocity, we can use the North and East vector components in <code>vectorplot()</code> to make a vector field:</p>
 <div class="sourceCode" id="cb4"><html><body><pre class="r"><span class="kw pkg">rasterVis</span><span class="kw ns">::</span><span class="fu"><a href="https://rdrr.io/pkg/rasterVis/man/vectorplot.html">vectorplot</a></span>(
   <span class="kw pkg">raster</span><span class="kw ns">::</span><span class="fu"><a href="https://rdrr.io/pkg/raster/man/brick.html">brick</a></span>(<span class="no">windURaster</span>, <span class="no">windVRaster</span>),
@@ -167,7 +168,7 @@ windRaster &lt;- wrf_load(
   <span class="kw">aspY</span> <span class="kw">=</span> <span class="fl">0.07</span>,
   <span class="kw">col.arrows</span> <span class="kw">=</span> <span class="st">'white'</span>
 )</pre></body></html></div>
-<p><img src="Static_Layered_Plots_files/figure-html/unnamed-chunk-3-1.png" width="768"></p>
+<p><img src="Static_Layered_Plots_files/figure-html/vectorPlot-1.png" width="768"></p>
 <p>It would be nice if we could combine these plots along with additional features like state borders and points for air quality monitors. We can do this using WRFmet’s layered plotting capabilities. WRFmet provides a several helpful <code>layer_*()</code> functions which produce GGPlot elements much like <code>geom_*()</code>. The layers currently available are:</p>
 <ul>
 <li><code>layer_raster</code></li>
@@ -399,7 +400,7 @@ windRaster &lt;- wrf_load(
 </ol>
 <div class="sourceCode" id="cb12"><html><body><pre class="r"><span class="co"># Define a new grid extent</span>
 <span class="no">xlim</span> <span class="kw">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span>(-<span class="fl">120</span>, -<span class="fl">118</span>)
-<span class="no">ylim</span><span class="kw">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span>(<span class="fl">46</span>, <span class="fl">47</span>)
+<span class="no">ylim</span> <span class="kw">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span>(<span class="fl">46</span>, <span class="fl">47</span>)
 
 <span class="co"># Load model run</span>
 <span class="no">rasterList</span> <span class="kw">&lt;-</span> <span class="kw pkg">AirFireModeling</span><span class="kw ns">::</span><span class="fu"><a href="https://rdrr.io/pkg/AirFireModeling/man/raster_load.html">raster_load</a></span>(

@@ -36,8 +36,8 @@ utils:::format.object_size(rawBytes, "auto", "SI")
 ```
 
 Since AirFire usually forecasts about 84 hours ahead, a single model run can 
-take up almost 30GB. The size of this output imposes a heavy speed and memory 
-limit when working with WRF data, so it is important that we try reducing the 
+take up almost 30GB. The size of this output imposes a heavy IO and memory 
+burden when working with WRF data, so it is important that we try reducing the 
 size of these files as much as possible. One way we can do this is to subset the
 hourly forecast files to retain only the information we plan to use. We can also
 reduce memory usage by summarizing and compressing data. So in the case of WRF
@@ -52,9 +52,9 @@ Let's look at the advantages of subsetting with an example.
 
 ## Subsetting Example
 
-Let's choose a WRF file--such as hour 7 from the 2020-09-01 12pm run--and 
+Let's choose a WRF file -- such as hour 7 from the 2020-09-01 12pm run -- and 
 implement the improvements we outlined. To start with, we will retain 21 
-variables specified by the AirFire team, crop out regions like Canada and
+variables of interest to the AirFire team, crop out regions like Canada and
 the Pacific Ocean, and rasterize the points onto a 0.06 degree grid:
 
 ```

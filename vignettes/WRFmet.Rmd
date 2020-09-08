@@ -15,18 +15,18 @@ knitr::opts_chunk$set(echo = TRUE)
 
 ## WRF Model Run Files
 
-The AirFire team periodically runs meteorological forecasts using the Weather 
-Research & Forecasting (WRF) model. These "model runs" predict atmospheric
-conditions over the US for several dozen hours ahead. AirFire model run output 
-is stored as a collection of files containing data for individual forecasted 
-hours. For instance, a file named `PNW-4km_2020082712_07.nc` would describe the 
-PNW-4km atmosphere forecasted 7 hours after the start of the 2020-08-27 12pm 
-model run. 
+The USFS [AirFire](https://www.airfire.org) team uses meteorological forecasts 
+produced by the Weather Research & Forecasting (WRF) model. These "model runs" 
+predict atmospheric conditions over the US for several dozen hours ahead. Output
+from each WRF model run is stored as a collection of files containing data for 
+individual forecast hours. For instance, a file named `PNW-4km_2020082712_07.nc` 
+would describe the PNW-4km atmosphere forecasted 7 hours after the start of the 
+2020-08-27 12pm model run. 
 
-The WRFmet package allows users to download, read, and visualize the contents of
-these individual WRF data files.
+The **WRFmet** package allows users to download, read, and visualize the 
+contents of these individual WRF data files.
 
-_NOTE:  Because the size of model output files, R code in this vignette is not 
+_NOTE:  Because WRF output files are very large, R code in this vignette is not 
 run when the package is built. This document contains output from commands run 
 on August 31, 2020._
 
@@ -48,13 +48,13 @@ modelRun
 [1] "2020083112"
 ```
 
-It looks like the most recent model run was initialized at 
+The most recent model run was initialized at 
 `"2020-08-31 12:00:00 UTC"`. Before we try to download files from that run 
 though, we should first define a directory to hold all our WRF data. A file for 
 a single forecast hour can be upwards of a hundred Megabytes, so a whole model 
-run (AirFire's are ~80 hours) could take up quite a bit of space. Therefore, it 
-is nice to specify a dedicated place to hold all this information, and we can do 
-that using WRFmet's `setWRFDataDir()` function:
+run (AirFire's are typically 84 hours) could take up quite a bit of space. 
+Therefore, it is nice to specify a dedicated place to hold all this information, 
+and we can do that using WRFmet's `setWRFDataDir()` function:
 
 ```
 setWRFDataDir("~/Data/WRF")
@@ -94,8 +94,8 @@ So now we have access to a single hour in a WRF model run. This file holds
 readings for over a hundred different variables in a grid across the PNW-4km 
 domain. We can load this data in as a raster object to start analyzing and 
 plotting its contents. In addition to the model run identifiers (domain, run, 
-hour), we must also specify what variables we'd like to include and--if we 
-choose--the resolution and extent of the raster.
+hour), we must also specify what variables we'd like to include and -- if we 
+choose  --  the resolution and extent of the raster that will be created.
 
 ```
 raster <- wrf_load(
@@ -120,8 +120,8 @@ raster <- wrf_load(
 )
 ```
 
-The output of `wrf_load()` is a `RasterBrick` with separate `RasterLayer`s for
-each specified variable.
+The output of `wrf_load()` is a **raster** package _RasterBrick_ object with 
+a separate _RasterLayer_ for each specified variable.
 
 ```
 print(raster)
@@ -146,9 +146,9 @@ provides several preset plotting functions for visualizing this information as
 rasters and vector fields with spatial point/polygon overlays. These functions
 include:
 
-* `plot_raster()` - Plots a single RasterLayer.
-* `plot_standard()` - Plots a RasterLayer, SpatialPolygonsDataFrame, 
-SpatialPointsDataFrame, and a vector field, in that order. Any of these can be 
+* `plot_raster()` - Plots a single _RasterLayer_.
+* `plot_standard()` - Plots a _RasterLayer_, _SpatialPolygonsDataFrame_, 
+_SpatialPointsDataFrame_, and a vector field, in that order. Any of these can be 
 missing, so this is more of a catch-all plot that can do the same as 
 `plot_raster()`, just with many more options.
 
@@ -204,7 +204,7 @@ plot_standard(
 )
 ```
 
-These plots are actually preset combinations of various building-block "layers". Custom
-plots can be built by stacking these layers which function similar to GGPlot's
-`geom_*` elements. This process is covered in further detail in the "Static 
-Layered Plots" article.
+These plots are actually preset combinations of various building-block "layers". 
+Custom plots can be built by stacking these layers which function similar to 
+**ggplot**'s `geom_*` elements. This process is covered in further detail in the 
+"Static Layered Plots" article.

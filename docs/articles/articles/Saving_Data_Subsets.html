@@ -108,7 +108,7 @@
 <pre><code>rawBytes &lt;- file.size("~/Data/WRF/PNW-4km_2020090112_07.nc")
 utils:::format.object_size(rawBytes, "auto", "SI")</code></pre>
 <pre><code>[1] "349.6 MB"</code></pre>
-<p>Since AirFire usually forecasts about 84 hours ahead, a single model run can take up almost 30GB. The size of this output imposes a heavy speed and memory limit when working with WRF data, so it is important that we try reducing the size of these files as much as possible. One way we can do this is to subset the hourly forecast files to retain only the information we plan to use. We can also reduce memory usage by summarizing and compressing data. So in the case of WRF files, we have several options:</p>
+<p>Since AirFire usually forecasts about 84 hours ahead, a single model run can take up almost 30GB. The size of this output imposes a heavy IO and memory burden when working with WRF data, so it is important that we try reducing the size of these files as much as possible. One way we can do this is to subset the hourly forecast files to retain only the information we plan to use. We can also reduce memory usage by summarizing and compressing data. So in the case of WRF files, we have several options:</p>
 <ul>
 <li>Removing irrelevant meteorological variables.</li>
 <li>Cropping out regions not of interest.</li>
@@ -120,7 +120,7 @@ utils:::format.object_size(rawBytes, "auto", "SI")</code></pre>
 <div id="subsetting-example" class="section level2">
 <h2 class="hasAnchor">
 <a href="#subsetting-example" class="anchor"></a>Subsetting Example</h2>
-<p>Let’s choose a WRF file–such as hour 7 from the 2020-09-01 12pm run–and implement the improvements we outlined. To start with, we will retain 21 variables specified by the AirFire team, crop out regions like Canada and the Pacific Ocean, and rasterize the points onto a 0.06 degree grid:</p>
+<p>Let’s choose a WRF file – such as hour 7 from the 2020-09-01 12pm run – and implement the improvements we outlined. To start with, we will retain 21 variables of interest to the AirFire team, crop out regions like Canada and the Pacific Ocean, and rasterize the points onto a 0.06 degree grid:</p>
 <pre><code><a href="https://rdrr.io/pkg/WRFmet/man">library(WRFmet)
 setWRFDataDir("~/Data/WRF")
 

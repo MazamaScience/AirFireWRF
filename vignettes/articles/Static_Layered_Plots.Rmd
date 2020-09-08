@@ -83,7 +83,8 @@ windRaster <- wrf_load(
 
 But for now, let's use an example Raster already included in the package:
 
-```{r}
+```{r load_data}
+library(raster)
 library(WRFmet)
 library(raster)
 
@@ -101,14 +102,14 @@ res <- round(mean(raster::res(tempRaster)), digits = 2)
 We can make some quick visualizations of these Rasters using the RasterVis
 package. For temperature, we can use the `levelPlot()` function:
 
-```{r}
+```{r levelPlot}
 rasterVis::levelplot(tempRaster, main = 'Temperature (K)', margin = FALSE)
 ```
 
 And for wind velocity, we can use the North and East vector components in
 `vectorplot()` to make a vector field:
 
-```{r}
+```{r vectorPlot}
 rasterVis::vectorplot(
   raster::brick(windURaster, windVRaster),
   isField = 'dXY',
@@ -394,7 +395,7 @@ the lower-valued cells and cap the high ones at 500.
 ```{r zoomed_bluesky_plot_setup}
 # Define a new grid extent
 xlim <- c(-120, -118)
-ylim<- c(46, 47)
+ylim <- c(46, 47)
 
 # Load model run
 rasterList <- AirFireModeling::raster_load(
