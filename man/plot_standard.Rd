@@ -5,14 +5,15 @@
 \title{Creates a comprehensive plot}
 \usage{
 plot_standard(
+  ...,
   bgRaster = NULL,
   states = FALSE,
   polys = NULL,
   uRaster = NULL,
   vRaster = NULL,
-  fillLow = "#132c43",
-  fillHigh = "#55b2f8",
-  fillNa = "transparent",
+  bgRasterColors = grDevices::terrain.colors(10),
+  bgRasterValues = NULL,
+  bgRasterNaColor = "transparent",
   stateColor = "black",
   stateFill = "white",
   polyColor = "black",
@@ -32,6 +33,8 @@ plot_standard(
 )
 }
 \arguments{
+\item{...}{Arguments passed on to ggplot2::continuous_scale()}
+
 \item{bgRaster}{A RasterLayer for the background.}
 
 \item{states}{Logical for including state polygons or not.}
@@ -42,11 +45,13 @@ plot_standard(
 
 \item{vRaster}{A RasterLayer for latitudinal vector components.}
 
-\item{fillLow}{Color for lowest raster value.}
+\item{bgRasterColors}{Vector of colours to use for the bgRaster's n-colour 
+gradient.}
 
-\item{fillHigh}{Color for highest raster value.}
+\item{bgRasterValues}{A vector of positions (between 0 and 1) for each color in the 
+colors vector.}
 
-\item{fillNa}{Color for na raster values.}
+\item{bgRasterNaColor}{Color for na ngRaster values.}
 
 \item{stateColor}{Color for state polygon outlines.}
 
@@ -95,8 +100,14 @@ plot_standard(
   bgRaster = example_PNW$HGT,
   uRaster = example_PNW$U10,
   vRaster = example_PNW$V10,
+  states = TRUE,
+  stateColor = "red",
+  stateFill = "transparent",
+  arrowColor = "black",
   title = "PNW-4km 2020-07-15 12pm - Hour 7",
   flab = "Elev (m)",
+  xlim = c(-125, -111),
+  ylim = c(42, 49),
   ratio = 1.4
 )
 }

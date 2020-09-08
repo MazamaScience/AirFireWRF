@@ -61,9 +61,11 @@ plot_base <- function(
 #' @export
 #' @title Creates a plot for a single raster layer
 #'
+#' @param ... Arguments passed on to ggplot2::continuous_scale()
 #' @param raster A RasterLayer.
-#' @param fillLow Color for lowest raster value.
-#' @param fillHigh Color for highest raster value.
+#' @param colors A vector of colours to use for n-colour gradient.
+#' @param values A vector of positions (between 0 and 1) for each color in the 
+#' colors vector.
 #' @param fillNa Color for na raster values.
 #' @param title Title of plot.
 #' @param xlab Label for x-axis.
@@ -80,8 +82,6 @@ plot_base <- function(
 #' library(WRFmet)
 #' library(raster)
 #' 
-#' setWRFDataDir("~/Data/WRF")
-#' 
 #' plot_raster(
 #'   raster = example_PNW$HGT,
 #'   title = "PNW Elevation",
@@ -91,9 +91,10 @@ plot_base <- function(
 #' }
 
 plot_raster <- function(
+  ...,
   raster = NULL,
-  fillLow = "#132c43",
-  fillHigh = "#55b2f8",
+  colors = grDevices::terrain.colors(10),
+  values = NULL,
   fillNa = "transparent",
   title = NULL,
   xlab = NULL,
@@ -117,9 +118,10 @@ plot_raster <- function(
     layer_raster(
       raster = raster
     ) +
-    ggplot2::scale_fill_gradient(
-      low = fillLow,
-      high = fillHigh,
+    ggplot2::scale_fill_gradientn(
+      ...,
+      colors = colors,
+      values = values,
       na.value = fillNa
     )
       
@@ -130,14 +132,17 @@ plot_raster <- function(
 #' @export
 #' @title Creates a comprehensive plot
 #'
+#' @param ... Arguments passed on to ggplot2::continuous_scale()
 #' @param bgRaster A RasterLayer for the background.
 #' @param polys A SpatialPolygonsDataFrame.
 #' @param states Logical for including state polygons or not. 
 #' @param uRaster A RasterLayer for longitudinal vector components.
 #' @param vRaster A RasterLayer for latitudinal vector components.
-#' @param fillLow Color for lowest raster value.
-#' @param fillHigh Color for highest raster value.
-#' @param fillNa Color for na raster values.
+#' @param bgRasterColors Vector of colours to use for the bgRaster's n-colour 
+#' gradient.
+#' @param bgRasterValues A vector of positions (between 0 and 1) for each color in the 
+#' colors vector.
+#' @param bgRasterNaColor Color for na ngRaster values.
 #' @param polyColor Color for spatial polygon outlines.
 #' @param polyFill Color for spatial polygon interiors.
 #' @param stateColor Color for state polygon outlines.
@@ -166,21 +171,28 @@ plot_raster <- function(
 #'   bgRaster = example_PNW$HGT,
 #'   uRaster = example_PNW$U10,
 #'   vRaster = example_PNW$V10,
+#'   states = TRUE,
+#'   stateColor = "red",
+#'   stateFill = "transparent",
+#'   arrowColor = "black",
 #'   title = "PNW-4km 2020-07-15 12pm - Hour 7",
 #'   flab = "Elev (m)",
+#'   xlim = c(-125, -111),
+#'   ylim = c(42, 49),
 #'   ratio = 1.4
 #' )
 #' }
 
 plot_standard <- function(
+  ...,
   bgRaster = NULL,
   states = FALSE,
   polys = NULL,
   uRaster = NULL,
   vRaster = NULL,
-  fillLow = "#132c43",
-  fillHigh = "#55b2f8",
-  fillNa = "transparent",
+  bgRasterColors = grDevices::terrain.colors(10),
+  bgRasterValues = NULL,
+  bgRasterNaColor = "transparent",
   stateColor = "black",
   stateFill = "white",
   polyColor = "black",
@@ -238,7 +250,9 @@ plot_standard <- function(
       arrowScale = arrowScale,
       arrowHead = arrowHead,
       arrowColor = arrowColor,
-      alpha = arrowAlpha
+      alpha = arrowAlpha,
+      xlim = xlim,
+      ylim = ylim
     )
 
     # Have to manually set the plot scale limits
@@ -265,10 +279,11 @@ plot_standard <- function(
     polysLayer +
     statesLayer +
     vectorFieldLayer +
-    ggplot2::scale_fill_gradient(
-      low = fillLow,
-      high = fillHigh,
-      na.value = fillNa
+    ggplot2::scale_fill_gradientn(
+      ...,
+      colors = bgRasterColors,
+      values = bgRasterValues,
+      na.value = bgRasterNaColor
     )
 
   return(plot)

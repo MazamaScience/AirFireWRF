@@ -5,9 +5,10 @@
 \title{Creates a plot for a single raster layer}
 \usage{
 plot_raster(
+  ...,
   raster = NULL,
-  fillLow = "#132c43",
-  fillHigh = "#55b2f8",
+  colors = grDevices::terrain.colors(10),
+  values = NULL,
   fillNa = "transparent",
   title = NULL,
   xlab = NULL,
@@ -19,11 +20,14 @@ plot_raster(
 )
 }
 \arguments{
+\item{...}{Arguments passed on to ggplot2::continuous_scale()}
+
 \item{raster}{A RasterLayer.}
 
-\item{fillLow}{Color for lowest raster value.}
+\item{colors}{A vector of colours to use for n-colour gradient.}
 
-\item{fillHigh}{Color for highest raster value.}
+\item{values}{A vector of positions (between 0 and 1) for each color in the 
+colors vector.}
 
 \item{fillNa}{Color for na raster values.}
 
@@ -51,8 +55,6 @@ Creates a plot for a single raster layer
 \donttest{
 library(WRFmet)
 library(raster)
-
-setWRFDataDir("~/Data/WRF")
 
 plot_raster(
   raster = example_PNW$HGT,

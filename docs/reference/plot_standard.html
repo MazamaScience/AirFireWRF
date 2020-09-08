@@ -72,7 +72,7 @@
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">WRFmet</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.1.3</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.1.4</span>
       </span>
     </div>
 
@@ -139,14 +139,15 @@
     </div>
 
     <pre class="usage"><span class='fu'>plot_standard</span>(
+  <span class='no'>...</span>,
   <span class='kw'>bgRaster</span> <span class='kw'>=</span> <span class='kw'>NULL</span>,
   <span class='kw'>states</span> <span class='kw'>=</span> <span class='fl'>FALSE</span>,
   <span class='kw'>polys</span> <span class='kw'>=</span> <span class='kw'>NULL</span>,
   <span class='kw'>uRaster</span> <span class='kw'>=</span> <span class='kw'>NULL</span>,
   <span class='kw'>vRaster</span> <span class='kw'>=</span> <span class='kw'>NULL</span>,
-  <span class='kw'>fillLow</span> <span class='kw'>=</span> <span class='st'>"#132c43"</span>,
-  <span class='kw'>fillHigh</span> <span class='kw'>=</span> <span class='st'>"#55b2f8"</span>,
-  <span class='kw'>fillNa</span> <span class='kw'>=</span> <span class='st'>"transparent"</span>,
+  <span class='kw'>bgRasterColors</span> <span class='kw'>=</span> <span class='kw pkg'>grDevices</span><span class='kw ns'>::</span><span class='fu'><a href='https://rdrr.io/r/grDevices/palettes.html'>terrain.colors</a></span>(<span class='fl'>10</span>),
+  <span class='kw'>bgRasterValues</span> <span class='kw'>=</span> <span class='kw'>NULL</span>,
+  <span class='kw'>bgRasterNaColor</span> <span class='kw'>=</span> <span class='st'>"transparent"</span>,
   <span class='kw'>stateColor</span> <span class='kw'>=</span> <span class='st'>"black"</span>,
   <span class='kw'>stateFill</span> <span class='kw'>=</span> <span class='st'>"white"</span>,
   <span class='kw'>polyColor</span> <span class='kw'>=</span> <span class='st'>"black"</span>,
@@ -169,6 +170,10 @@
     <table class="ref-arguments">
     <colgroup><col class="name" /><col class="desc" /></colgroup>
     <tr>
+      <th>...</th>
+      <td><p>Arguments passed on to ggplot2::continuous_scale()</p></td>
+    </tr>
+    <tr>
       <th>bgRaster</th>
       <td><p>A RasterLayer for the background.</p></td>
     </tr>
@@ -189,16 +194,18 @@
       <td><p>A RasterLayer for latitudinal vector components.</p></td>
     </tr>
     <tr>
-      <th>fillLow</th>
-      <td><p>Color for lowest raster value.</p></td>
+      <th>bgRasterColors</th>
+      <td><p>Vector of colours to use for the bgRaster's n-colour 
+gradient.</p></td>
     </tr>
     <tr>
-      <th>fillHigh</th>
-      <td><p>Color for highest raster value.</p></td>
+      <th>bgRasterValues</th>
+      <td><p>A vector of positions (between 0 and 1) for each color in the 
+colors vector.</p></td>
     </tr>
     <tr>
-      <th>fillNa</th>
-      <td><p>Color for na raster values.</p></td>
+      <th>bgRasterNaColor</th>
+      <td><p>Color for na ngRaster values.</p></td>
     </tr>
     <tr>
       <th>stateColor</th>
@@ -279,8 +286,14 @@
   <span class='kw'>bgRaster</span> <span class='kw'>=</span> <span class='no'>example_PNW</span>$<span class='no'>HGT</span>,
   <span class='kw'>uRaster</span> <span class='kw'>=</span> <span class='no'>example_PNW</span>$<span class='no'>U10</span>,
   <span class='kw'>vRaster</span> <span class='kw'>=</span> <span class='no'>example_PNW</span>$<span class='no'>V10</span>,
+  <span class='kw'>states</span> <span class='kw'>=</span> <span class='fl'>TRUE</span>,
+  <span class='kw'>stateColor</span> <span class='kw'>=</span> <span class='st'>"red"</span>,
+  <span class='kw'>stateFill</span> <span class='kw'>=</span> <span class='st'>"transparent"</span>,
+  <span class='kw'>arrowColor</span> <span class='kw'>=</span> <span class='st'>"black"</span>,
   <span class='kw'>title</span> <span class='kw'>=</span> <span class='st'>"PNW-4km 2020-07-15 12pm - Hour 7"</span>,
   <span class='kw'>flab</span> <span class='kw'>=</span> <span class='st'>"Elev (m)"</span>,
+  <span class='kw'>xlim</span> <span class='kw'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span>(-<span class='fl'>125</span>, -<span class='fl'>111</span>),
+  <span class='kw'>ylim</span> <span class='kw'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span>(<span class='fl'>42</span>, <span class='fl'>49</span>),
   <span class='kw'>ratio</span> <span class='kw'>=</span> <span class='fl'>1.4</span>
 )</div><div class='img'><img src='plot_standard-1.png' alt='' width='700' height='433' /></div><div class='input'># }
 </div></pre>
