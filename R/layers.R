@@ -55,8 +55,8 @@ layer_raster <- function(
 
 layer_spPolys <- function(
   spdf = NULL,
-  color = 'black',
-  fill = 'white'
+  color = "black",
+  fill = "transparent"
 ) {
   
   spdf@data$id <- rownames(spdf@data)
@@ -91,7 +91,7 @@ layer_spPolys <- function(
 
 layer_states <- function(
   color = "black",
-  fill = "white",
+  fill = "transparent",
   xlim = NULL,
   ylim = NULL
 ) {

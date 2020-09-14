@@ -63,12 +63,30 @@ rasterBrick <- wrf_load(
 )
 
 
-plot_standard(
+gg <- plot_standard(
   bgRaster = rasterBrick$HGT,
   uRaster = rasterBrick$U10,
   vRaster = rasterBrick$V10,
   title = sprintf("%s %s -- Hour %d", modelName, modelRun, modelRunHour),
   flab = "Elev (m)"
 )
+
+gg
+
+gg  +
+  layer_states(
+    xlim = c(-125, -116),
+    ylim = c(45, 50)
+  )
+
+library(MazamaSpatialUtils)
+setSpatialDataDir("~/Data/Spatial")
+loadSpatialData("USCensusStates_05")
+WA <- subset(USCensusStates_05, stateCode == "WA")
+
+
+gg +
+  layer_spPolys(WA, fill = 'transparent')
+
 
 

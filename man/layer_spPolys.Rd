@@ -4,7 +4,7 @@
 \alias{layer_spPolys}
 \title{Create a spatial polygons layer for plotting}
 \usage{
-layer_spPolys(spdf = NULL, color = "black", fill = "white")
+layer_spPolys(spdf = NULL, color = "black", fill = "transparent")
 }
 \arguments{
 \item{spdf}{A SpatialPolygonsDataFrame.}

@@ -4,7 +4,7 @@
 \alias{layer_states}
 \title{Create a state polygons layer for plotting}
 \usage{
-layer_states(color = "black", fill = "white", xlim = NULL, ylim = NULL)
+layer_states(color = "black", fill = "transparent", xlim = NULL, ylim = NULL)
 }
 \arguments{
 \item{color}{Line color.}
