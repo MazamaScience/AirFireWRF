@@ -162,23 +162,31 @@ max values :     3571.1672,      317.7452 </code></pre>
 <p>Let’s find out what these atmospheric readings actually look like. WRFmet provides several preset plotting functions for visualizing this information as rasters and vector fields with spatial point/polygon overlays. These functions include:</p>
 <ul>
 <li>
-<code><a href="../reference/plot_raster.html">plot_raster()</a></code> - Plots a single <em>RasterLayer</em>.</li>
+<code><a href="../reference/wrf_rasterPlot.html">wrf_rasterPlot()</a></code> - Plots a single <em>RasterLayer</em>.</li>
 <li>
-<code><a href="../reference/plot_standard.html">plot_standard()</a></code> - Plots a <em>RasterLayer</em>, <em>SpatialPolygonsDataFrame</em>, <em>SpatialPointsDataFrame</em>, and a vector field, in that order. Any of these can be missing, so this is more of a catch-all plot that can do the same as <code><a href="../reference/plot_raster.html">plot_raster()</a></code>, just with many more options.</li>
+<code><a href="../reference/wrf_standardPlot.html">wrf_standardPlot()</a></code> - Plots a <em>RasterLayer</em>, <em>SpatialPolygonsDataFrame</em>, <em>SpatialPointsDataFrame</em>, and a vector field, in that order. Any of these can be missing, so this is more of a catch-all plot that can do the same as <code><a href="../reference/wrf_rasterPlot.html">wrf_rasterPlot()</a></code>, just with many more options.</li>
 </ul>
 <p>So let’s throw together a plot for the elevation (HGT) field of our raster:</p>
 <p><em>NOTE: In order to build this vignette, this plot will display an example raster provided by WRFmet package “example_PNW”.</em></p>
 <div class="sourceCode" id="cb12"><html><body><pre class="r"><span class="fu"><a href="https://rdrr.io/r/base/library.html">library</a></span>(<span class="no">WRFmet</span>)
 <span class="fu"><a href="https://rdrr.io/r/base/library.html">library</a></span>(<span class="no">raster</span>)</pre></body></html></div>
 <pre><code>## Loading required package: sp</code></pre>
-<div class="sourceCode" id="cb14"><html><body><pre class="r"><span class="fu"><a href="../reference/plot_raster.html">plot_raster</a></span>(
+<div class="sourceCode" id="cb14"><html><body><pre class="r"><span class="fu"><a href="../reference/wrf_rasterPlot.html">wrf_rasterPlot</a></span>(
   <span class="kw">raster</span> <span class="kw">=</span> <span class="kw pkg">WRFmet</span><span class="kw ns">::</span><span class="no"><a href="../reference/example_PNW.html">example_PNW</a></span>$<span class="no">HGT</span>,
-  <span class="kw">title</span> <span class="kw">=</span> <span class="st">"PNW-4km 2020-07-15 12pm - Hour 7"</span>,
+  <span class="kw">title</span> <span class="kw">=</span> <span class="st">"PNW Elevation"</span>,
   <span class="kw">flab</span> <span class="kw">=</span> <span class="st">"Elev (m)"</span>,
   <span class="kw">ratio</span> <span class="kw">=</span> <span class="fl">1.4</span>
 )</pre></body></html></div>
 <p><img src="WRFmet_files/figure-html/unnamed-chunk-1-1.png" width="700"></p>
-<p>If we want to create a more complex plot, the <code><a href="../reference/plot_standard.html">plot_standard()</a></code> function provides a full-featured tool for visualizing WRF data and other spatial information. It builds a multi-layered plot including (in order, if the data is provided):</p>
+<p>If you prefer, you can also specify the source raster and variable separately using the <code>varName</code> parameter:</p>
+<pre><code><a href="../reference/wrf_rasterPlot.html">wrf_rasterPlot(
+  raster = WRFmet::example_PNW,
+  varName = "HGT",
+  title = "PNW Elevation",
+  flab = "Elev (m)",
+  ratio = 1.4
+)</a></code></pre>
+<p>If we want to create a more complex plot, the <code>plot_standard()</code> function provides a full-featured tool for visualizing WRF data and other spatial information. It builds a multi-layered plot including (in order, if the data is provided):</p>
 <ol style="list-style-type: decimal">
 <li>A background raster layer</li>
 <li>A spatial polygons layer</li>
@@ -192,16 +200,16 @@ max values :     3571.1672,      317.7452 </code></pre>
 <li>State borders outlined in red</li>
 <li>A wind vector field</li>
 </ol>
-<div class="sourceCode" id="cb15"><html><body><pre class="r"><span class="fu"><a href="../reference/plot_standard.html">plot_standard</a></span>(
-  <span class="kw">bgRaster</span> <span class="kw">=</span> <span class="kw pkg">WRFmet</span><span class="kw ns">::</span><span class="no"><a href="../reference/example_PNW.html">example_PNW</a></span>$<span class="no">HGT</span>,
-  <span class="kw">states</span> <span class="kw">=</span> <span class="no">T</span>,
+<div class="sourceCode" id="cb16"><html><body><pre class="r"><span class="fu"><a href="../reference/wrf_standardPlot.html">wrf_standardPlot</a></span>(
+  <span class="kw">raster</span> <span class="kw">=</span> <span class="no">example_PNW</span>,
+  <span class="kw">bgName</span> <span class="kw">=</span> <span class="st">"HGT"</span>,
+  <span class="kw">uName</span> <span class="kw">=</span> <span class="st">"U10"</span>,
+  <span class="kw">vName</span> <span class="kw">=</span> <span class="st">"V10"</span>,
+  <span class="kw">states</span> <span class="kw">=</span> <span class="fl">TRUE</span>,
   <span class="kw">stateColor</span> <span class="kw">=</span> <span class="st">"red"</span>,
   <span class="kw">stateFill</span> <span class="kw">=</span> <span class="st">"transparent"</span>,
-  <span class="kw">uRaster</span> <span class="kw">=</span> <span class="kw pkg">WRFmet</span><span class="kw ns">::</span><span class="no"><a href="../reference/example_PNW.html">example_PNW</a></span>$<span class="no">U10</span>,
-  <span class="kw">vRaster</span> <span class="kw">=</span> <span class="kw pkg">WRFmet</span><span class="kw ns">::</span><span class="no"><a href="../reference/example_PNW.html">example_PNW</a></span>$<span class="no">V10</span>,
-  <span class="kw">arrowScale</span> <span class="kw">=</span> <span class="fl">0.04</span>,
-  <span class="kw">arrowHead</span> <span class="kw">=</span> <span class="fl">0.03</span>,
-  <span class="kw">title</span> <span class="kw">=</span> <span class="st">"PNW-4km 2020-07-15 12pm - Hour 7"</span>,
+  <span class="kw">arrowColor</span> <span class="kw">=</span> <span class="st">"black"</span>,
+  <span class="kw">title</span> <span class="kw">=</span> <span class="st">"PNW Elevation &amp; Wind Velocity"</span>,
   <span class="kw">flab</span> <span class="kw">=</span> <span class="st">"Elev (m)"</span>,
   <span class="kw">xlim</span> <span class="kw">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span>(-<span class="fl">125</span>, -<span class="fl">111</span>),
   <span class="kw">ylim</span> <span class="kw">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span>(<span class="fl">42</span>, <span class="fl">49</span>),

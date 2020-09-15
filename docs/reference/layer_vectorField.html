@@ -139,8 +139,9 @@
     </div>
 
     <pre class="usage"><span class='fu'>layer_vectorField</span>(
-  <span class='kw'>uRaster</span> <span class='kw'>=</span> <span class='kw'>NULL</span>,
-  <span class='kw'>vRaster</span> <span class='kw'>=</span> <span class='kw'>NULL</span>,
+  <span class='kw'>raster</span> <span class='kw'>=</span> <span class='kw'>NULL</span>,
+  <span class='kw'>uName</span> <span class='kw'>=</span> <span class='kw'>NULL</span>,
+  <span class='kw'>vName</span> <span class='kw'>=</span> <span class='kw'>NULL</span>,
   <span class='kw'>arrowCount</span> <span class='kw'>=</span> <span class='fl'>1000</span>,
   <span class='kw'>arrowScale</span> <span class='kw'>=</span> <span class='fl'>0.05</span>,
   <span class='kw'>arrowColor</span> <span class='kw'>=</span> <span class='st'>"white"</span>,
@@ -154,12 +155,16 @@
     <table class="ref-arguments">
     <colgroup><col class="name" /><col class="desc" /></colgroup>
     <tr>
-      <th>uRaster</th>
-      <td><p>A RasterLayer for longitudinal vector components.</p></td>
+      <th>raster</th>
+      <td><p>A RasterBrick with layers for u/v vector components.</p></td>
     </tr>
     <tr>
-      <th>vRaster</th>
-      <td><p>A RasterLayer for latitudinal vector components.</p></td>
+      <th>uName</th>
+      <td><p>The name of the u component layer.</p></td>
+    </tr>
+    <tr>
+      <th>vName</th>
+      <td><p>The name of the v component layer.</p></td>
     </tr>
     <tr>
       <th>arrowCount</th>

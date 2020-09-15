@@ -3,29 +3,45 @@
 #' 
 #' @title Create a Raster layer for plotting
 #'
-#' @param raster A RasterLayer or a RasterBrick with one layer.
+#' @param raster A RasterBrick or RasterLayer.
+#' @param varName The name of a raster variable.
 #' @param alpha Transparency of layer.
 #'
 #' @return A geom_tile ggproto object.
 
 layer_raster <- function(
   raster = NULL,
+  varName = NULL,
   alpha = 1
 ) {
 
+  # ----- Validate parameters --------------------------------------------------
+  
   if ( is.null(raster) ) {
-    stop("Raster must not be NULL")
+    stop("Must provide a raster")
   }
   
-  if ( !("RasterLayer" %in% class(raster)) &&
-       !(("RasterBrick" %in% class(raster)) && raster::nlayers(raster) == 1) ) {
-    stop("Raster must be a RasterLayer or a RasterBrick with one layer")
+  if ( "RasterBrick" %in% class(raster) ) {
+    if ( raster::nlayers(raster) > 1 ) {
+      
+      if ( is.null(varName) ) {
+        stop("Must provide a variable name when raster has multiple layers")
+      }
+      
+      rasterLayer <- raster[[varName]]
+    } else {
+      rasterLayer <- raster
+    }
+  } else if ( "RasterLayer" %in% class(raster) ) {
+    rasterLayer <- raster
+  } else {
+    stop("Must provide either a RasterBrick or RasterLayer")
   }
   
-  # TODO: Look into potentially using ggspatial::layer_spatial
-  # https://paleolimbot.github.io/ggspatial/
-  coords <- raster::xyFromCell(raster, seq_len(raster::ncell(raster)))
-  readings <- raster::stack(as.data.frame(raster::getValues(raster)))
+  # ----- Create layer ---------------------------------------------------------
+  
+  coords <- raster::xyFromCell(rasterLayer, seq_len(raster::ncell(rasterLayer)))
+  readings <- raster::stack(as.data.frame(raster::getValues(rasterLayer)))
   names(readings) <- c("value", "variable")
   
   df <- cbind(coords, readings)
@@ -149,8 +165,9 @@ layer_points <- function(
 #' @export
 #' @title Create a vector field layer for plotting
 #'
-#' @param uRaster A RasterLayer for longitudinal vector components.
-#' @param vRaster A RasterLayer for latitudinal vector components.
+#' @param raster A RasterBrick with layers for u/v vector components.
+#' @param uName The name of the u component layer.
+#' @param vName The name of the v component layer.
 #' @param arrowCount Number of arrows to draw.
 #' @param arrowScale Arrow length scale factor.
 #' @param arrowColor Arrow color.
@@ -162,8 +179,9 @@ layer_points <- function(
 #' @return An annotation_custom ggproto object.
 
 layer_vectorField <- function(
-  uRaster = NULL,
-  vRaster = NULL,
+  raster = NULL,
+  uName = NULL,
+  vName = NULL,
   arrowCount = 1000,
   arrowScale = 0.05,
   arrowColor = 'white',
@@ -195,11 +213,15 @@ layer_vectorField <- function(
     axis.line = list(col = 'transparent')
   )
   
-  if ( is.null(uRaster) || is.null(vRaster) ) {
-    stop("Must provide a uRaster and a vRaster")
+  if ( is.null(raster) ) {
+    stop("Must provide a raster")
   }
   
-  uvRaster <- raster::brick(uRaster, vRaster)
+  if ( is.null(uName) || is.null(vName) ) {
+    stop("Must provide uName and vName")
+  }
+  
+  uvRaster <- raster::brick(raster[[uName]], raster[[vName]])
   
   if ( !is.null(xlim) && !is.null(ylim) ) {
     extent <- raster::extent(c(xlim[1], xlim[2], ylim[1], ylim[2]))
@@ -286,8 +308,9 @@ if (FALSE) {
       size = 3
     ) +
     layer_vectorField(
-      uRaster = WRFmet::example_PNW$U10,
-      vRaster = WRFmet::example_PNW$V10,
+      raster = WRFmet::example_PNW,
+      uName = "U10",
+      vName = "V10",
       arrowColor = 'yellow',
       alpha = 0.9
     ) +

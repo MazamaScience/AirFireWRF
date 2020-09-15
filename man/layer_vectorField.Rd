@@ -5,8 +5,9 @@
 \title{Create a vector field layer for plotting}
 \usage{
 layer_vectorField(
-  uRaster = NULL,
-  vRaster = NULL,
+  raster = NULL,
+  uName = NULL,
+  vName = NULL,
   arrowCount = 1000,
   arrowScale = 0.05,
   arrowColor = "white",
@@ -17,9 +18,11 @@ layer_vectorField(
 )
 }
 \arguments{
-\item{uRaster}{A RasterLayer for longitudinal vector components.}
+\item{raster}{A RasterBrick with layers for u/v vector components.}
 
-\item{vRaster}{A RasterLayer for latitudinal vector components.}
+\item{uName}{The name of the u component layer.}
+
+\item{vName}{The name of the v component layer.}
 
 \item{arrowCount}{Number of arrows to draw.}
 

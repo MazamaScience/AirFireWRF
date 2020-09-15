@@ -13,7 +13,7 @@
 #'
 #' @return A ggplot object.
 
-plot_base <- function(
+wrf_basePlot <- function(
   title = NULL,
   xlab = "Longitude",
   ylab = "Latitude",
@@ -62,11 +62,12 @@ plot_base <- function(
 #' @title Creates a plot for a single raster layer
 #'
 #' @param ... Arguments passed on to ggplot2::continuous_scale()
-#' @param raster A RasterLayer.
+#' @param raster A RasterBrick or RasterLayer.
+#' @param varName The name of a raster variable.
 #' @param colors A vector of colours to use for n-colour gradient.
 #' @param values A vector of positions (between 0 and 1) for each color in the 
 #' colors vector.
-#' @param fillNa Color for na raster values.
+#' @param naColor Color for na raster values.
 #' @param title Title of plot.
 #' @param xlab Label for x-axis.
 #' @param ylab Label for y-axis.
@@ -82,20 +83,21 @@ plot_base <- function(
 #' library(WRFmet)
 #' library(raster)
 #' 
-#' plot_raster(
+#' wrf_rasterPlot(
 #'   raster = example_PNW$HGT,
 #'   title = "PNW Elevation",
-#'   flab = "Meters",
+#'   flab = "Elev (m)",
 #'   ratio = 1.4
 #' )
 #' }
 
-plot_raster <- function(
+wrf_rasterPlot <- function(
   ...,
   raster = NULL,
+  varName = NULL,
   colors = grDevices::terrain.colors(10),
   values = NULL,
-  fillNa = "transparent",
+  naColor = "transparent",
   title = NULL,
   xlab = NULL,
   ylab = NULL,
@@ -105,8 +107,16 @@ plot_raster <- function(
   ratio = NULL
 ) {
   
+  # ----- Validate parameters --------------------------------------------------
+  
+  if ( is.null(title) && !is.null(raster) ) {
+    title <- raster@title
+  }
+  
+  # ----- Create layers --------------------------------------------------------
+  
   plot <-
-    plot_base(
+    wrf_basePlot(
       title = title,
       xlab = xlab,
       ylab = ylab,
@@ -116,13 +126,14 @@ plot_raster <- function(
       ratio = ratio
     ) +
     layer_raster(
-      raster = raster
+      raster = raster,
+      varName = varName
     ) +
     ggplot2::scale_fill_gradientn(
       ...,
       colors = colors,
       values = values,
-      na.value = fillNa
+      na.value = naColor
     )
       
   return(plot)
@@ -133,16 +144,17 @@ plot_raster <- function(
 #' @title Creates a comprehensive plot
 #'
 #' @param ... Arguments passed on to ggplot2::continuous_scale()
-#' @param bgRaster A RasterLayer for the background.
+#' @param raster A RasterBrick with layers for WRF variables.
 #' @param polys A SpatialPolygonsDataFrame.
-#' @param states Logical for including state polygons or not. 
-#' @param uRaster A RasterLayer for longitudinal vector components.
-#' @param vRaster A RasterLayer for latitudinal vector components.
-#' @param bgRasterColors Vector of colours to use for the bgRaster's n-colour 
-#' gradient.
-#' @param bgRasterValues A vector of positions (between 0 and 1) for each color in the 
-#' colors vector.
-#' @param bgRasterNaColor Color for na ngRaster values.
+#' @param states Logical for including state polygons or not.
+#' @param bgName The name of the background raster layer.
+#' @param uName The name of the u component raster layer.
+#' @param vName The name of the v component raster layer.
+#' @param bgRasterColors Vector of colors to use for the background raster's 
+#' n-color gradient.
+#' @param bgRasterValues A vector of positions (between 0 and 1) for each color 
+#' in the bgRasterColors vector.
+#' @param bgRasterNaColor Color for na background raster values.
 #' @param polyColor Color for spatial polygon outlines.
 #' @param polyFill Color for spatial polygon interiors.
 #' @param stateColor Color for state polygon outlines.
@@ -167,15 +179,16 @@ plot_raster <- function(
 #' library(WRFmet)
 #' library(raster)
 #' 
-#' plot_standard(
-#'   bgRaster = example_PNW$HGT,
-#'   uRaster = example_PNW$U10,
-#'   vRaster = example_PNW$V10,
+#' wrf_standardPlot(
+#'   raster = example_PNW,
+#'   bgName = "HGT",
+#'   uName = "U10",
+#'   vName = "V10",
 #'   states = TRUE,
 #'   stateColor = "red",
 #'   stateFill = "transparent",
 #'   arrowColor = "black",
-#'   title = "PNW-4km 2020-07-15 12pm - Hour 7",
+#'   title = "PNW Elevation & Wind Velocity",
 #'   flab = "Elev (m)",
 #'   xlim = c(-125, -111),
 #'   ylim = c(42, 49),
@@ -183,13 +196,14 @@ plot_raster <- function(
 #' )
 #' }
 
-plot_standard <- function(
+wrf_standardPlot <- function(
   ...,
-  bgRaster = NULL,
+  raster = NULL,
   states = FALSE,
   polys = NULL,
-  uRaster = NULL,
-  vRaster = NULL,
+  bgName = NULL,
+  uName = NULL,
+  vName = NULL,
   bgRasterColors = grDevices::terrain.colors(10),
   bgRasterValues = NULL,
   bgRasterNaColor = "transparent",
@@ -211,41 +225,54 @@ plot_standard <- function(
   ratio = NULL
 ) {
   
-  # Create the background raster layer
-  if ( !(is.null(bgRaster)) ) {
-    rasterLayer <- layer_raster(
-      raster = bgRaster
-    )
-  } else {
-    rasterLayer <- NULL
+  # ----- Validate parameters --------------------------------------------------
+  
+  if ( is.null(title) && !is.null(raster) ) {
+    title <- raster@title
   }
   
-  if ( !is.null(polys) ) {
+  # ----- Create layers --------------------------------------------------------
+  
+  # Create the background raster layer
+  if ( is.null(bgName) ) {
+    rasterLayer <- NULL
+  } else {
+    rasterLayer <- layer_raster(
+      raster = raster[[bgName]]
+    )
+  }
+  
+  # Create the spatial polygons layer
+  if ( is.null(polys) ) {
+    polysLayer <- NULL
+  } else {
     polysLayer <- layer_spPolys(
       spdf = polys,
       color = polyColor,
       fill = polyFill
     )
-  } else {
-    polysLayer <- NULL
   }
   
-  if ( states ) {
+  # Create the states polygons layer
+  if ( !states ) {
+    statesLayer <- NULL
+  } else {
     statesLayer <- layer_states(
       color = stateColor,
       fill = stateFill,
       xlim = xlim,
       ylim = ylim
     )
-  } else {
-    statesLayer <- NULL
   }
   
   # Create the vector field layer
-  if ( !(is.null(uRaster)) && !(is.null(vRaster)) ) {
+  if ( is.null(uName) || is.null(vName) ) {
+    vectorFieldLayer <- NULL
+  } else {
     vectorFieldLayer <- layer_vectorField(
-      uRaster = uRaster,
-      vRaster = vRaster,
+      raster = raster,
+      uName = uName,
+      vName = vName,
       arrowCount = arrowCount,
       arrowScale = arrowScale,
       arrowHead = arrowHead,
@@ -254,19 +281,20 @@ plot_standard <- function(
       xlim = xlim,
       ylim = ylim
     )
-
-    # Have to manually set the plot scale limits
-    if (is.null(bgRaster) && is.null(xlim) && is.null(ylim) ) {
-      extent <- raster::extent(uRaster)
+    
+    # Manually set the plot scale limits when there is no background raster 
+    # layer
+    if (is.null(xlim) && is.null(ylim) ) {
+      extent <- raster::extent(raster)
       xlim = c(extent@xmin, extent@xmax)
       ylim = c(extent@ymin, extent@ymax)
     }
-  } else {
-    vectorFieldLayer <- NULL
   }
+  
+  # ----- Build the plot -------------------------------------------------------
 
   plot <-
-    plot_base(
+    wrf_basePlot(
       title = title,
       xlab = xlab,
       ylab = ylab,
@@ -289,6 +317,3 @@ plot_standard <- function(
   return(plot)
   
 }
-
-
-

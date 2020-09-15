@@ -132,6 +132,26 @@
       <small>Source: <a href='https://github.com/MazamaScience/WRFmet/blob/master/NEWS.md'><code>NEWS.md</code></a></small>
     </div>
 
+    <div id="wrfmet-017" class="section level1">
+<h1 class="page-header" data-toc-text="0.1.7">
+<a href="#wrfmet-017" class="anchor"></a>WRFmet 0.1.7</h1>
+<ul>
+<li>Changed layer_vectorField() to take in a single raster object <code>raster</code> and the names of its u and v layers: <code>uName</code> and <code>vName</code>.</li>
+<li>Changed layer_raster() to take in an optional <code>varName</code> parameter in case the given raster is a multilayer <em>RasterBrick</em>.</li>
+<li>Changed the names of <code>plot_base()</code>, <code>plot_raster()</code>, and <code>plot_standard()</code> to <code><a href="../reference/wrf_basePlot.html">wrf_basePlot()</a></code>, <code><a href="../reference/wrf_rasterPlot.html">wrf_rasterPlot()</a></code>, and <code><a href="../reference/wrf_standardPlot.html">wrf_standardPlot()</a></code> respectively.</li>
+<li>
+<code><a href="../reference/wrf_rasterPlot.html">wrf_rasterPlot()</a></code> and <code><a href="../reference/wrf_standardPlot.html">wrf_standardPlot()</a></code> plot titles default to their raster title.</li>
+<li>Updated all vignettes and functions, and examples to properly use these new parameters and function names.</li>
+</ul>
+</div>
+    <div id="wrfmet-016" class="section level1">
+<h1 class="page-header" data-toc-text="0.1.6">
+<a href="#wrfmet-016" class="anchor"></a>WRFmet 0.1.6</h1>
+<ul>
+<li>
+<code><a href="../reference/wrf_load.html">wrf_load()</a></code> now sets the title of the loaded <em>RasterBrick</em> to the format: “[model domain] yyyy-mm-dd hh[am/pm], Hour [forecast hour]”</li>
+</ul>
+</div>
     <div id="wrfmet-015" class="section level1">
 <h1 class="page-header" data-toc-text="0.1.5">
 <a href="#wrfmet-015" class="anchor"></a>WRFmet 0.1.5</h1>
@@ -145,10 +165,10 @@
 <ul>
 <li>Added ability to download and load PNW-1.33km WRF files.</li>
 <li>
-<code><a href="../reference/plot_standard.html">plot_standard()</a></code> now supports drawing both U.S. state polygons and generic _SpatialPolygonDataFrame_s.</li>
+<code>plot_standard()</code> now supports drawing both U.S. state polygons and generic _SpatialPolygonDataFrame_s.</li>
 <li>
 <code><a href="../reference/wrf_load.html">wrf_load()</a></code> now has a variable preset for AirFire.</li>
-<li>Removed parameters <code>fillLow</code> and <code>fillHigh</code> from <code><a href="../reference/plot_standard.html">plot_standard()</a></code> and <code><a href="../reference/plot_raster.html">plot_raster()</a></code> to instead support parameters for <code><a href="https://ggplot2.tidyverse.org/reference/scale_gradient.html">ggplot2::scale_fill_gradientn()</a></code>.</li>
+<li>Removed parameters <code>fillLow</code> and <code>fillHigh</code> from <code>plot_standard()</code> and <code>plot_raster()</code> to instead support parameters for <code><a href="https://ggplot2.tidyverse.org/reference/scale_gradient.html">ggplot2::scale_fill_gradientn()</a></code>.</li>
 <li>
 <code><a href="../reference/layer_vectorField.html">layer_vectorField()</a></code>
 <ul>
@@ -157,7 +177,7 @@
 <li>Properly resamples cropped rasters.</li>
 </ul>
 </li>
-<li>Hid <code><a href="../reference/plot_base.html">plot_base()</a></code> from users.</li>
+<li>Hid <code>plot_base()</code> from users.</li>
 </ul>
 </div>
     <div id="wrfmet-013" class="section level1">
@@ -172,7 +192,7 @@
 <h1 class="page-header" data-toc-text="0.1.2">
 <a href="#wrfmet-012" class="anchor"></a>WRFmet 0.1.2</h1>
 <ul>
-<li>First pass at standard plotting functions <code><a href="../reference/plot_base.html">plot_base()</a></code> and <code><a href="../reference/plot_raster.html">plot_raster()</a></code>.</li>
+<li>First pass at standard plotting functions <code>plot_base()</code> and <code>plot_raster()</code>.</li>
 <li>Added <code>layer_~()</code> functions to build up ggplot plots: <code><a href="../reference/layer_raster.html">layer_raster()</a></code>, <code><a href="../reference/layer_spPolys.html">layer_spPolys()</a></code>, <code><a href="../reference/layer_states.html">layer_states()</a></code>, <code><a href="../reference/layer_points.html">layer_points()</a></code>, <code><a href="../reference/layer_vectorField.html">layer_vectorField()</a></code>.</li>
 <li>Added <code><a href="../reference/wrf_download.html">wrf_download()</a></code> and <code><a href="../reference/wrf_downloaded.html">wrf_downloaded()</a></code>.</li>
 <li>Added <code><a href="../reference/wrf_latestModelRun.html">wrf_latestModelRun()</a></code> to list available model runs.</li>

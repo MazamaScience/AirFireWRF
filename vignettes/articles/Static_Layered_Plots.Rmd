@@ -88,22 +88,20 @@ library(raster)
 library(WRFmet)
 library(raster)
 
-tempRaster <- WRFmet::example_PNW$TSK
-windURaster <- WRFmet::example_PNW$U10
-windVRaster <- WRFmet::example_PNW$V10
+raster <- WRFmet::example_PNW
 
 # Extract the underlying grid these Rasters are using
-extent <- raster::extent(tempRaster)
+extent <- raster::extent(raster)
 xlim <- c(round(extent@xmin), round(extent@xmax))
 ylim <- c(round(extent@ymin), round(extent@ymax))
-res <- round(mean(raster::res(tempRaster)), digits = 2)
+res <- round(mean(raster::res(raster)), digits = 2)
 ```
 
 We can make some quick visualizations of these Rasters using the RasterVis
 package. For temperature, we can use the `levelPlot()` function:
 
 ```{r levelPlot}
-rasterVis::levelplot(tempRaster, main = 'Temperature (K)', margin = FALSE)
+rasterVis::levelplot(raster[["TSK"]], main = 'Temperature (K)', margin = FALSE)
 ```
 
 And for wind velocity, we can use the North and East vector components in
@@ -111,7 +109,7 @@ And for wind velocity, we can use the North and East vector components in
 
 ```{r vectorPlot}
 rasterVis::vectorplot(
-  raster::brick(windURaster, windVRaster),
+  raster::brick(raster[["U10"]], raster[["V10"]]),
   isField = 'dXY',
   narrows = 500,
   length = 0.05,
@@ -145,7 +143,7 @@ temp_plot <-
   ggplot2::ggplot() +
   # Draw the temperature raster
   layer_raster(
-    raster = tempRaster
+    raster = raster[["TSK"]]
   ) +
   # Crop the plot area
   ggplot2::coord_fixed(
@@ -195,8 +193,9 @@ temp_state_wind_plot <-
   temp_state_plot + 
   # Draw the wind vector field
   layer_vectorField(
-    uRaster = windURaster,
-    vRaster = windVRaster,
+    raster = raster,
+    uName = "U10",
+    vName = "V10",
     arrowCount = 500,
     arrowColor = 'black',
     arrowScale = 0.07,
@@ -262,8 +261,9 @@ temp_state_monitors_wind_plot <-
   ) +
   # Draw the wind vector field
   layer_vectorField(
-    uRaster = windURaster,
-    vRaster = windVRaster,
+    raster = raster,
+    uName = "U10",
+    vName = "V10",
     arrowCount = 500,
     arrowColor = 'black',
     arrowScale = 0.08,
@@ -281,7 +281,7 @@ wrfMap <-
   ggplot2::ggplot() +
   # Draw the temperature raster
   layer_raster(
-    raster = tempRaster
+    raster = raster[["TSK"]]
   ) +
   # Then draw state borders
   layer_states(
@@ -295,8 +295,9 @@ wrfMap <-
   ) +
   # Then draw the wind vector field
   layer_vectorField(
-    uRaster = windURaster,
-    vRaster = windVRaster,
+    raster = raster,
+    uName = "U10",
+    vName = "V10",
     arrowCount = 500,
     arrowColor = 'black',
     arrowScale = 0.08,
@@ -432,8 +433,9 @@ blueskyMap <-
   ) +
   # Then draw the wind vector field
   layer_vectorField(
-    uRaster = windURaster,
-    vRaster = windVRaster,
+    raster = raster,
+    uName = "U10",
+    vName = "V10",
     arrowCount = 500,
     arrowColor = 'black',
     arrowScale = 0.03,

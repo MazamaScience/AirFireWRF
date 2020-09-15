@@ -146,11 +146,11 @@ provides several preset plotting functions for visualizing this information as
 rasters and vector fields with spatial point/polygon overlays. These functions
 include:
 
-* `plot_raster()` - Plots a single _RasterLayer_.
-* `plot_standard()` - Plots a _RasterLayer_, _SpatialPolygonsDataFrame_, 
+* `wrf_rasterPlot()` - Plots a single _RasterLayer_.
+* `wrf_standardPlot()` - Plots a _RasterLayer_, _SpatialPolygonsDataFrame_, 
 _SpatialPointsDataFrame_, and a vector field, in that order. Any of these can be 
 missing, so this is more of a catch-all plot that can do the same as 
-`plot_raster()`, just with many more options.
+`wrf_rasterPlot()`, just with many more options.
 
 So let's throw together a plot for the elevation (HGT) field of our raster:
 
@@ -161,9 +161,22 @@ provided by WRFmet package "example_PNW"._
 library(WRFmet)
 library(raster)
 
-plot_raster(
+wrf_rasterPlot(
   raster = WRFmet::example_PNW$HGT,
-  title = "PNW-4km 2020-07-15 12pm - Hour 7",
+  title = "PNW Elevation",
+  flab = "Elev (m)",
+  ratio = 1.4
+)
+```
+
+If you prefer, you can also specify the source raster and variable separately 
+using the `varName` parameter:
+
+```
+wrf_rasterPlot(
+  raster = WRFmet::example_PNW,
+  varName = "HGT",
+  title = "PNW Elevation",
   flab = "Elev (m)",
   ratio = 1.4
 )
@@ -187,16 +200,16 @@ Let's try building a plot of the Pacific Northwest with:
 3. A wind vector field
 
 ```{r}
-plot_standard(
-  bgRaster = WRFmet::example_PNW$HGT,
-  states = T,
+wrf_standardPlot(
+  raster = example_PNW,
+  bgName = "HGT",
+  uName = "U10",
+  vName = "V10",
+  states = TRUE,
   stateColor = "red",
   stateFill = "transparent",
-  uRaster = WRFmet::example_PNW$U10,
-  vRaster = WRFmet::example_PNW$V10,
-  arrowScale = 0.04,
-  arrowHead = 0.03,
-  title = "PNW-4km 2020-07-15 12pm - Hour 7",
+  arrowColor = "black",
+  title = "PNW Elevation & Wind Velocity",
   flab = "Elev (m)",
   xlim = c(-125, -111),
   ylim = c(42, 49),
