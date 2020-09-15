@@ -6,7 +6,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<title>Create a state polygons layer for plotting — layer_states • WRFmet</title>
+<title>Returns attributes from a netCDF file — nc_getAttributes • WRFmet</title>
 
 
 <!-- jquery -->
@@ -39,8 +39,8 @@
 
 
 
-<meta property="og:title" content="Create a state polygons layer for plotting — layer_states" />
-<meta property="og:description" content="Create a state polygons layer for plotting" />
+<meta property="og:title" content="Returns attributes from a netCDF file — nc_getAttributes" />
+<meta property="og:description" content="Returns attributes from a netCDF files" />
 
 
 
@@ -129,41 +129,42 @@
 <div class="row">
   <div class="col-md-9 contents">
     <div class="page-header">
-    <h1>Create a state polygons layer for plotting</h1>
-    <small class="dont-index">Source: <a href='https://github.com/MazamaScience/WRFmet/blob/master/R/layers.R'><code>R/layers.R</code></a></small>
-    <div class="hidden name"><code>layer_states.Rd</code></div>
+    <h1>Returns attributes from a netCDF file</h1>
+    <small class="dont-index">Source: <a href='https://github.com/MazamaScience/WRFmet/blob/master/R/nc_getAttributes.R'><code>R/nc_getAttributes.R</code></a></small>
+    <div class="hidden name"><code>nc_getAttributes.Rd</code></div>
     </div>
 
     <div class="ref-description">
-    <p>Create a state polygons layer for plotting</p>
+    <p>Returns attributes from a netCDF files</p>
     </div>
 
-    <pre class="usage"><span class='fu'>layer_states</span>(<span class='kw'>color</span> <span class='kw'>=</span> <span class='st'>"black"</span>, <span class='kw'>fill</span> <span class='kw'>=</span> <span class='st'>"transparent"</span>, <span class='kw'>xlim</span> <span class='kw'>=</span> <span class='kw'>NULL</span>, <span class='kw'>ylim</span> <span class='kw'>=</span> <span class='kw'>NULL</span>)</pre>
+    <pre class="usage"><span class='fu'>nc_getAttributes</span>(<span class='no'>nc</span>, <span class='kw'>varid</span> <span class='kw'>=</span> <span class='fl'>0</span>, <span class='kw'>print</span> <span class='kw'>=</span> <span class='fl'>TRUE</span>)</pre>
 
     <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a>Arguments</h2>
     <table class="ref-arguments">
     <colgroup><col class="name" /><col class="desc" /></colgroup>
     <tr>
-      <th>color</th>
-      <td><p>Line color.</p></td>
+      <th>nc</th>
+      <td><p>An object of class ncdf4 (as returned from nc_open), indicating 
+what file to read from.</p></td>
     </tr>
     <tr>
-      <th>fill</th>
-      <td><p>Fill color.</p></td>
+      <th>varid</th>
+      <td><p>The variable whose attribute is to be read. Can be a character 
+string with the variable's name or an object of class ncvar4. As a special 
+case, if <code>varid == 0</code>, then a global (file) attribute will be read 
+rather than a particular variable's attribute.</p></td>
     </tr>
     <tr>
-      <th>xlim</th>
-      <td><p>A vector of coordinate longitude bounds.</p></td>
-    </tr>
-    <tr>
-      <th>ylim</th>
-      <td><p>A vector of coordinate latitude bounds.</p></td>
+      <th>print</th>
+      <td><p>Logical specifying whether human readable output should be
+printed to the console.</p></td>
     </tr>
     </table>
 
     <h2 class="hasAnchor" id="value"><a class="anchor" href="#value"></a>Value</h2>
 
-    <p>A geom_polygon ggproto object.</p>
+    <p>A named list of netCDF attributes is returned invisibly.</p>
 
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="pkgdown-sidebar">

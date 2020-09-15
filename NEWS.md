@@ -1,6 +1,6 @@
 # WRFmet 0.1.5
 
-* Chaned default polygon fill from 'white' to 'transparent' for `layer_states()`
+* Changed default polygon fill from 'white' to 'transparent' for `layer_states()`
 and `layer_spPolys()`.
 
 # WRFmet 0.1.4
