@@ -1,3 +1,7 @@
+# WRFmet 0.1.8
+
+* example_PNW raster now has a proper title.
+
 # WRFmet 0.1.7
 
 * Changed layer_vectorField() to take in a single raster object `raster` and the
