@@ -173,15 +173,15 @@ max values :     3571.1672,      317.7452 </code></pre>
 <pre><code>## Loading required package: sp</code></pre>
 <div class="sourceCode" id="cb14"><html><body><pre class="r"><span class="fu"><a href="../reference/wrf_rasterPlot.html">wrf_rasterPlot</a></span>(
   <span class="kw">raster</span> <span class="kw">=</span> <span class="kw pkg">WRFmet</span><span class="kw ns">::</span><span class="no"><a href="../reference/example_PNW.html">example_PNW</a></span>$<span class="no">HGT</span>,
+  <span class="kw">varName</span> <span class="kw">=</span> <span class="st">"HGT"</span>,
   <span class="kw">title</span> <span class="kw">=</span> <span class="st">"PNW Elevation"</span>,
   <span class="kw">flab</span> <span class="kw">=</span> <span class="st">"Elev (m)"</span>,
   <span class="kw">ratio</span> <span class="kw">=</span> <span class="fl">1.4</span>
 )</pre></body></html></div>
 <p><img src="WRFmet_files/figure-html/unnamed-chunk-1-1.png" width="700"></p>
-<p>If you prefer, you can also specify the source raster and variable separately using the <code>varName</code> parameter:</p>
+<p><code>varName</code> specifies which <em>RasterLayer</em> in a <em>RasterBrick</em> to display. You can also simply provide a single <em>RasterLayer</em> like so:</p>
 <pre><code><a href="../reference/wrf_rasterPlot.html">wrf_rasterPlot(
-  raster = WRFmet::example_PNW,
-  varName = "HGT",
+  raster = WRFmet::example_PNW$HGT,
   title = "PNW Elevation",
   flab = "Elev (m)",
   ratio = 1.4

@@ -163,19 +163,19 @@ library(raster)
 
 wrf_rasterPlot(
   raster = WRFmet::example_PNW$HGT,
+  varName = "HGT",
   title = "PNW Elevation",
   flab = "Elev (m)",
   ratio = 1.4
 )
 ```
 
-If you prefer, you can also specify the source raster and variable separately 
-using the `varName` parameter:
+`varName` specifies which *RasterLayer* in a *RasterBrick* to display. You can 
+also simply provide a single *RasterLayer* like so:
 
 ```
 wrf_rasterPlot(
-  raster = WRFmet::example_PNW,
-  varName = "HGT",
+  raster = WRFmet::example_PNW$HGT,
   title = "PNW Elevation",
   flab = "Elev (m)",
   ratio = 1.4

@@ -227,24 +227,6 @@ wrf_load <- function(
   # Solidify the RasterStack into a more efficient/fast RasterBrick
   rasterBrick <- raster::brick(rasterStack)
   
-  ncAttributes <- nc_getAttributes(nc, print = FALSE)
-  
-  # Generate the RasterBrick title
-  # "PNW-4km_2020090812_07.nc"
-  # "PNW-4km 2020-09-08 12pm, Hour 7"
-  modelNameSubstring <- stringr::str_extract(basename(filePath), "^.*(?=_\\d{10})")
-  modelRunSubstring <- stringr::str_extract(basename(filePath), "\\d{10}(?=_)")
-  modelRunHourSubstring <- stringr::str_extract(basename(filePath), "\\d{2}(?=\\.nc$)")
-  
-  datetime <- lubridate::ymd_h(modelRunSubstring)
-  timeLabel <- strftime(datetime, format = "%Y-%m-%d %I %p", tz = "UTC")
-  
-  title <- paste0(
-    modelNameSubstring, " ",
-    timeLabel, ", forecast hour ", 
-    modelRunHourSubstring
-  )
-  
   # ----- Crop RasterBrick -----------------------------------------------------
   
   if ( is.null(xlim) && is.null(ylim) ) {
@@ -284,6 +266,21 @@ wrf_load <- function(
     result <- raster::crop(rasterBrick, ext)
     
   }
+  
+  # ----- Set final raster title -----------------------------------------------
+  
+  # Generate title from file name
+  # Ex. "PNW-4km_2020090812_07.nc" -> "PNW-4km 2020-09-08 12pm, Hour 7"
+  fileName <- basename(filePath)
+  
+  modelNameStr <- stringr::str_extract(fileName, "^.*(?=_\\d{10})")
+  modelRunStr <- stringr::str_extract(fileName, "\\d{10}(?=_)")
+  modelRunHourStr <- stringr::str_extract(fileName, "\\d{2}(?=\\.nc$)")
+  
+  datetime <- lubridate::ymd_h(modelRunStr)
+  timeStr <- strftime(datetime, format = "%Y-%m-%d %I %p", tz = "UTC")
+  
+  title <- paste0(modelNameStr, " ", timeStr, ", forecast hour ", modelRunHourStr)
   
   result@title <- title
   
