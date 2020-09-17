@@ -1,3 +1,11 @@
+# WRFmet 0.1.9
+
+* Added new plot layer function: `layer_contours()`.
+* Changed `layer_spPolys()`'s `spdf` parameter to `polygons`.
+* Added `arrowWidth` as a parameter to `layer_vectorField()`.
+* Added `lineWidth` as a parameter to `layer_states()`.
+* Added `lineWidth` as a parameter to `layer_spPolys()`.
+
 # WRFmet 0.1.8
 
 * example_PNW raster now has a proper title.

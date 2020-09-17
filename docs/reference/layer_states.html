@@ -138,18 +138,28 @@
     <p>Create a state polygons layer for plotting</p>
     </div>
 
-    <pre class="usage"><span class='fu'>layer_states</span>(<span class='kw'>color</span> <span class='kw'>=</span> <span class='st'>"black"</span>, <span class='kw'>fill</span> <span class='kw'>=</span> <span class='st'>"transparent"</span>, <span class='kw'>xlim</span> <span class='kw'>=</span> <span class='kw'>NULL</span>, <span class='kw'>ylim</span> <span class='kw'>=</span> <span class='kw'>NULL</span>)</pre>
+    <pre class="usage"><span class='fu'>layer_states</span>(
+  <span class='kw'>lineWidth</span> <span class='kw'>=</span> <span class='fl'>0.5</span>,
+  <span class='kw'>color</span> <span class='kw'>=</span> <span class='st'>"black"</span>,
+  <span class='kw'>fill</span> <span class='kw'>=</span> <span class='st'>"transparent"</span>,
+  <span class='kw'>xlim</span> <span class='kw'>=</span> <span class='kw'>NULL</span>,
+  <span class='kw'>ylim</span> <span class='kw'>=</span> <span class='kw'>NULL</span>
+)</pre>
 
     <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a>Arguments</h2>
     <table class="ref-arguments">
     <colgroup><col class="name" /><col class="desc" /></colgroup>
     <tr>
+      <th>lineWidth</th>
+      <td><p>Line width of state borders.</p></td>
+    </tr>
+    <tr>
       <th>color</th>
-      <td><p>Line color.</p></td>
+      <td><p>Line color of state borders.</p></td>
     </tr>
     <tr>
       <th>fill</th>
-      <td><p>Fill color.</p></td>
+      <td><p>Fill color of state polygons.</p></td>
     </tr>
     <tr>
       <th>xlim</th>

@@ -52,9 +52,82 @@ layer_raster <- function(
       x = .data$x,
       y = .data$y,
       fill = .data$value
-    )
+    ),
+    alpha = alpha
   )
 
+  return(layer)
+  
+}
+
+#' @export
+#' @title Create a contour lines layer for plotting
+#'
+#' @param raster A RasterBrick or RasterLayer
+#' @param varName The name of a raster variable.
+#' @param breaks A numerical vector of contour line levels.
+#' @param lineWidth Width of contour lines.
+#' @param color Color of contour lines.
+#' @param alpha Transparency of layer.
+#' @param ... Additional parameters for ggplot2::geom_contour()
+#'
+#' @return A geom_contour ggproto object.
+
+layer_contours <- function(
+  raster = NULL,
+  varName = NULL,
+  breaks = NULL,
+  lineWidth = 0.5,
+  color = "black",
+  alpha = 1,
+  ...
+) {
+  
+  # ----- Validate parameters --------------------------------------------------
+  
+  if ( is.null(raster) ) {
+    stop("Must provide a raster")
+  }
+  
+  if ( "RasterBrick" %in% class(raster) ) {
+    if ( raster::nlayers(raster) > 1 ) {
+      
+      if ( is.null(varName) ) {
+        stop("Must provide a variable name when raster has multiple layers")
+      }
+      
+      rasterLayer <- raster[[varName]]
+    } else {
+      rasterLayer <- raster
+    }
+  } else if ( "RasterLayer" %in% class(raster) ) {
+    rasterLayer <- raster
+  } else {
+    stop("Must provide either a RasterBrick or RasterLayer")
+  }
+  
+  # ----- Create layer ---------------------------------------------------------
+  
+  coords <- raster::xyFromCell(rasterLayer, seq_len(raster::ncell(rasterLayer)))
+  readings <- raster::stack(as.data.frame(raster::getValues(rasterLayer)))
+  names(readings) <- c("value", "variable")
+  
+  df <- cbind(coords, readings)
+  
+  layer <- ggplot2::geom_contour(
+    data = df,
+    ggplot2::aes(
+      x = .data$x,
+      y = .data$y,
+      z = .data$value
+    ),
+    breaks = breaks,
+    size = lineWidth,
+    color = color,
+    alpha = alpha,
+    ...
+  )
+  
   return(layer)
   
 }
@@ -63,21 +136,23 @@ layer_raster <- function(
 #' @export
 #' @title Create a spatial polygons layer for plotting
 #'
-#' @param spdf A SpatialPolygonsDataFrame.
+#' @param polygons A SpatialPolygonsDataFrame.
+#' @param lineWidth Line width of polygon outlines.
 #' @param color Outline color.
 #' @param fill Fill color.
 #'
 #' @return A geom_polygon ggproto object.
 
 layer_spPolys <- function(
-  spdf = NULL,
+  polygons = NULL,
+  lineWidth = 0.5,
   color = "black",
   fill = "transparent"
 ) {
   
-  spdf@data$id <- rownames(spdf@data)
-  points <- ggplot2::fortify(spdf, region = 'id')
-  df <- merge(points, spdf@data, by = 'id')
+  polygons@data$id <- rownames(polygons@data)
+  points <- ggplot2::fortify(polygons, region = 'id')
+  df <- merge(points, polygons@data, by = 'id')
   
   layer <- ggplot2::geom_polygon(
     data = df,
@@ -86,6 +161,7 @@ layer_spPolys <- function(
       y = .data$lat,
       group = .data$group
     ),
+    size = lineWidth,
     color = color,
     fill = fill
   )
@@ -98,14 +174,16 @@ layer_spPolys <- function(
 #' @export
 #' @title Create a state polygons layer for plotting
 #'
-#' @param color Line color.
-#' @param fill Fill color.
+#' @param lineWidth Line width of state borders.
+#' @param color Line color of state borders.
+#' @param fill Fill color of state polygons.
 #' @param xlim A vector of coordinate longitude bounds.
 #' @param ylim A vector of coordinate latitude bounds.
 #'
 #' @return A geom_polygon ggproto object.
 
 layer_states <- function(
+  lineWidth = 0.5,
   color = "black",
   fill = "transparent",
   xlim = NULL,
@@ -125,6 +203,7 @@ layer_states <- function(
       x = .data$long,
       group = .data$group
     ),
+    size = lineWidth,
     fill = fill,
     color = color
   )
@@ -170,8 +249,9 @@ layer_points <- function(
 #' @param vName The name of the v component layer.
 #' @param arrowCount Number of arrows to draw.
 #' @param arrowScale Arrow length scale factor.
-#' @param arrowColor Arrow color.
+#' @param arrowWidth Line width of arrows.
 #' @param arrowHead Arrow head size.
+#' @param arrowColor Arrow color.
 #' @param alpha Transparency of layer.
 #' @param xlim A vector of coordinate longitude bounds.
 #' @param ylim A vector of coordinate latitude bounds.
@@ -184,8 +264,9 @@ layer_vectorField <- function(
   vName = NULL,
   arrowCount = 1000,
   arrowScale = 0.05,
-  arrowColor = 'white',
   arrowHead = 0.05,
+  arrowWidth = 0.8,
+  arrowColor = 'white',
   alpha = 1,
   xlim = NULL,
   ylim = NULL
@@ -233,6 +314,7 @@ layer_vectorField <- function(
     isField = "dXY",
     region = FALSE,
     narrows = arrowCount,
+    lwd.arrows = arrowWidth,
     length = arrowHead,
     aspX = arrowScale,
     aspY = arrowScale,
@@ -273,9 +355,9 @@ if (FALSE) {
   ylim <- c(round(extent@ymin), round(extent@ymax))
   
   points <- data.frame(
-    x = c(-120, -118, -112),
-    y = c(43, 47, 48),
-    value = c(20, 110, 68)
+    x = runif(10, min = -125, max = -111),
+    y = runif(10, min = 42, max = 49),
+    value = runif(10, min = 0, max = 100)
   )
   
   MazamaSpatialUtils::setSpatialDataDir('~/Data/Spatial')
@@ -283,23 +365,21 @@ if (FALSE) {
   
   waPoly <- USCensusStates[USCensusStates@data$stateCode == 'WA',]
   
-  wrfMap <- 
-    ggplot2::ggplot() +
-    ggplot2::scale_fill_gradient(
-      low = 'black',
-      high = 'gray70',
-      na.value = 'transparent'
+  ggplot2::ggplot() +
+    ggplot2::scale_fill_gradientn(
+      colors = grDevices::terrain.colors(10),
+      na.value = "transparent"
     ) +
     ggplot2::scale_color_gradient(
-      low = 'green',
-      high = 'red',
+      low = 'white',
+      high = 'black',
       na.value = 'transparent'
     ) +
     layer_raster(
       raster = WRFmet::example_PNW$HGT
     ) +
     layer_spPolys(
-      spdf = waPoly,
+      polygons = waPoly,
       fill = 'transparent',
       color = 'red'
     ) +
@@ -307,11 +387,15 @@ if (FALSE) {
       points = points,
       size = 3
     ) +
+    layer_contours(
+      raster = WRFmet::example_PNW$HGT,
+      breaks = c(100, 1500, 2500)
+    ) +
     layer_vectorField(
       raster = WRFmet::example_PNW,
       uName = "U10",
       vName = "V10",
-      arrowColor = 'yellow',
+      arrowColor = 'black',
       alpha = 0.9
     ) +
     ggplot2::coord_fixed(
@@ -326,7 +410,5 @@ if (FALSE) {
       fill = 'Elev (m)',
       color  = 'PM2.5'
     )
-  
-  print(wrfMap)
-  
+
 }

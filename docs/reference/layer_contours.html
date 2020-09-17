@@ -6,7 +6,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<title>List downloaded WRF model run files — wrf_downloaded • WRFmet</title>
+<title>Create a contour lines layer for plotting — layer_contours • WRFmet</title>
 
 
 <!-- jquery -->
@@ -39,8 +39,8 @@
 
 
 
-<meta property="og:title" content="List downloaded WRF model run files — wrf_downloaded" />
-<meta property="og:description" content="List downloaded WRF model run files" />
+<meta property="og:title" content="Create a contour lines layer for plotting — layer_contours" />
+<meta property="og:description" content="Create a contour lines layer for plotting" />
 
 
 
@@ -129,19 +129,22 @@
 <div class="row">
   <div class="col-md-9 contents">
     <div class="page-header">
-    <h1>List downloaded WRF model run files</h1>
-    <small class="dont-index">Source: <a href='https://github.com/MazamaScience/WRFmet/blob/master/R/wrf_downloaded.R'><code>R/wrf_downloaded.R</code></a></small>
-    <div class="hidden name"><code>wrf_downloaded.Rd</code></div>
+    <h1>Create a contour lines layer for plotting</h1>
+    <small class="dont-index">Source: <a href='https://github.com/MazamaScience/WRFmet/blob/master/R/layers.R'><code>R/layers.R</code></a></small>
+    <div class="hidden name"><code>layer_contours.Rd</code></div>
     </div>
 
     <div class="ref-description">
-    <p>List downloaded WRF model run files</p>
+    <p>Create a contour lines layer for plotting</p>
     </div>
 
-    <pre class="usage"><span class='fu'>wrf_downloaded</span>(
-  <span class='kw'>WRFDataDir</span> <span class='kw'>=</span> <span class='fu'><a href='getWRFDataDir.html'>getWRFDataDir</a></span>(),
-  <span class='kw'>pattern</span> <span class='kw'>=</span> <span class='st'>".nc"</span>,
-  <span class='kw'>full</span> <span class='kw'>=</span> <span class='fl'>FALSE</span>,
+    <pre class="usage"><span class='fu'>layer_contours</span>(
+  <span class='kw'>raster</span> <span class='kw'>=</span> <span class='kw'>NULL</span>,
+  <span class='kw'>varName</span> <span class='kw'>=</span> <span class='kw'>NULL</span>,
+  <span class='kw'>breaks</span> <span class='kw'>=</span> <span class='kw'>NULL</span>,
+  <span class='kw'>lineWidth</span> <span class='kw'>=</span> <span class='fl'>0.5</span>,
+  <span class='kw'>color</span> <span class='kw'>=</span> <span class='st'>"black"</span>,
+  <span class='kw'>alpha</span> <span class='kw'>=</span> <span class='fl'>1</span>,
   <span class='no'>...</span>
 )</pre>
 
@@ -149,44 +152,39 @@
     <table class="ref-arguments">
     <colgroup><col class="name" /><col class="desc" /></colgroup>
     <tr>
-      <th>WRFDataDir</th>
-      <td><p>Directory in which model run files are located.</p></td>
+      <th>raster</th>
+      <td><p>A RasterBrick or RasterLayer</p></td>
     </tr>
     <tr>
-      <th>pattern</th>
-      <td><p>A regex pattern to use for filtering model files.</p></td>
+      <th>varName</th>
+      <td><p>The name of a raster variable.</p></td>
     </tr>
     <tr>
-      <th>full</th>
-      <td><p>Logical. Show the full path of the model (used for local loading).</p></td>
+      <th>breaks</th>
+      <td><p>A numerical vector of contour line levels.</p></td>
+    </tr>
+    <tr>
+      <th>lineWidth</th>
+      <td><p>Width of contour lines.</p></td>
+    </tr>
+    <tr>
+      <th>color</th>
+      <td><p>Color of contour lines.</p></td>
+    </tr>
+    <tr>
+      <th>alpha</th>
+      <td><p>Transparency of layer.</p></td>
     </tr>
     <tr>
       <th>...</th>
-      <td><p>Additional arguments to be passed to <code><a href='https://rdrr.io/r/base/list.files.html'>list.files()</a></code>.</p></td>
+      <td><p>Additional parameters for ggplot2::geom_contour()</p></td>
     </tr>
     </table>
 
     <h2 class="hasAnchor" id="value"><a class="anchor" href="#value"></a>Value</h2>
 
-    <p>A list of downloaded model run files</p>
+    <p>A geom_contour ggproto object.</p>
 
-    <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
-    <pre class="examples"><div class='input'><span class='co'># \donttest{</span>
-<span class='fu'><a href='https://rdrr.io/r/base/library.html'>library</a></span>(<span class='no'>WRFmet</span>)
-<span class='fu'><a href='setWRFDataDir.html'>setWRFDataDir</a></span>(<span class='st'>"~/Data/WRF"</span>)
-
-<span class='no'>modelRun</span> <span class='kw'>&lt;-</span> <span class='fu'><a href='wrf_latestModelRun.html'>wrf_latestModelRun</a></span>(<span class='st'>"PNW-4km"</span>)
-<span class='no'>filePath</span> <span class='kw'>&lt;-</span> <span class='fu'><a href='wrf_download.html'>wrf_download</a></span>(<span class='st'>"PNW-4km"</span>, <span class='no'>modelRun</span>, <span class='fl'>7</span>)</div><div class='output co'>#&gt; <span class='message'>WRF model run exists at: /Users/mazama/Data/WRF/PNW-4km_2020091712_07.nc</span></div><div class='input'><span class='fu'>wrf_downloaded</span>()</div><div class='output co'>#&gt;  [1] "PNW-1.33km_2020082612_07.nc"      "PNW-4km_2020082500_11.nc"        
-#&gt;  [3] "PNW-4km_2020082612_08.nc"         "PNW-4km_2020082612_09.nc"        
-#&gt;  [5] "PNW-4km_2020082712_07.nc"         "PNW-4km_2020082712_08.nc"        
-#&gt;  [7] "PNW-4km_2020082812_07.nc"         "PNW-4km_2020090112_07.nc"        
-#&gt;  [9] "PNW-4km_2020090212_07.nc"         "PNW-4km_2020090312_07.nc"        
-#&gt; [11] "PNW-4km_2020090412_07.nc"         "PNW-4km_2020090812_07.nc"        
-#&gt; [13] "PNW-4km_2020091512_07.nc"         "PNW-4km_2020091612_07.nc"        
-#&gt; [15] "PNW-4km_2020091712_07.nc"         "wrfout_d3-2020071512-f07-0000.nc"
-#&gt; [17] "wrfout_d3.2020082612.f07.0000.nc" "wrfout_d3.2020082612.f08.0000.nc"
-#&gt; [19] "wrfout_d3.2020082612.f09.0000.nc"</div><div class='input'># }
-</div></pre>
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="pkgdown-sidebar">
     <nav id="toc" data-toggle="toc" class="sticky-top">

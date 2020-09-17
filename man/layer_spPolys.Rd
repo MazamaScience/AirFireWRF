@@ -4,10 +4,17 @@
 \alias{layer_spPolys}
 \title{Create a spatial polygons layer for plotting}
 \usage{
-layer_spPolys(spdf = NULL, color = "black", fill = "transparent")
+layer_spPolys(
+  polygons = NULL,
+  lineWidth = 0.5,
+  color = "black",
+  fill = "transparent"
+)
 }
 \arguments{
-\item{spdf}{A SpatialPolygonsDataFrame.}
+\item{polygons}{A SpatialPolygonsDataFrame.}
+
+\item{lineWidth}{Line width of polygon outlines.}
 
 \item{color}{Outline color.}
 

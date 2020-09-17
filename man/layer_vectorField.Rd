@@ -10,8 +10,9 @@ layer_vectorField(
   vName = NULL,
   arrowCount = 1000,
   arrowScale = 0.05,
-  arrowColor = "white",
   arrowHead = 0.05,
+  arrowWidth = 0.8,
+  arrowColor = "white",
   alpha = 1,
   xlim = NULL,
   ylim = NULL
@@ -28,9 +29,11 @@ layer_vectorField(
 
 \item{arrowScale}{Arrow length scale factor.}
 
-\item{arrowColor}{Arrow color.}
-
 \item{arrowHead}{Arrow head size.}
+
+\item{arrowWidth}{Line width of arrows.}
+
+\item{arrowColor}{Arrow color.}
 
 \item{alpha}{Transparency of layer.}
 

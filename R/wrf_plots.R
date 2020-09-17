@@ -247,7 +247,7 @@ wrf_standardPlot <- function(
     polysLayer <- NULL
   } else {
     polysLayer <- layer_spPolys(
-      spdf = polys,
+      polygons = polys,
       color = polyColor,
       fill = polyFill
     )

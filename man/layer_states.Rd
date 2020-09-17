@@ -4,12 +4,20 @@
 \alias{layer_states}
 \title{Create a state polygons layer for plotting}
 \usage{
-layer_states(color = "black", fill = "transparent", xlim = NULL, ylim = NULL)
+layer_states(
+  lineWidth = 0.5,
+  color = "black",
+  fill = "transparent",
+  xlim = NULL,
+  ylim = NULL
+)
 }
 \arguments{
-\item{color}{Line color.}
+\item{lineWidth}{Line width of state borders.}
 
-\item{fill}{Fill color.}
+\item{color}{Line color of state borders.}
+
+\item{fill}{Fill color of state polygons.}
 
 \item{xlim}{A vector of coordinate longitude bounds.}
 

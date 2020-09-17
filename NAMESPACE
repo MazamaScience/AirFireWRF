@@ -2,6 +2,7 @@
 
 export("%>%")
 export(getWRFDataDir)
+export(layer_contours)
 export(layer_points)
 export(layer_raster)
 export(layer_spPolys)

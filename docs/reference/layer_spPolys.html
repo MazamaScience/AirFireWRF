@@ -138,14 +138,23 @@
     <p>Create a spatial polygons layer for plotting</p>
     </div>
 
-    <pre class="usage"><span class='fu'>layer_spPolys</span>(<span class='kw'>spdf</span> <span class='kw'>=</span> <span class='kw'>NULL</span>, <span class='kw'>color</span> <span class='kw'>=</span> <span class='st'>"black"</span>, <span class='kw'>fill</span> <span class='kw'>=</span> <span class='st'>"transparent"</span>)</pre>
+    <pre class="usage"><span class='fu'>layer_spPolys</span>(
+  <span class='kw'>polygons</span> <span class='kw'>=</span> <span class='kw'>NULL</span>,
+  <span class='kw'>lineWidth</span> <span class='kw'>=</span> <span class='fl'>0.5</span>,
+  <span class='kw'>color</span> <span class='kw'>=</span> <span class='st'>"black"</span>,
+  <span class='kw'>fill</span> <span class='kw'>=</span> <span class='st'>"transparent"</span>
+)</pre>
 
     <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a>Arguments</h2>
     <table class="ref-arguments">
     <colgroup><col class="name" /><col class="desc" /></colgroup>
     <tr>
-      <th>spdf</th>
+      <th>polygons</th>
       <td><p>A SpatialPolygonsDataFrame.</p></td>
+    </tr>
+    <tr>
+      <th>lineWidth</th>
+      <td><p>Line width of polygon outlines.</p></td>
     </tr>
     <tr>
       <th>color</th>
