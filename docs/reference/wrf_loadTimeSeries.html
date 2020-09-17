@@ -6,7 +6,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<title>List downloaded WRF model run files — wrf_downloaded • WRFmet</title>
+<title>Load time series WRF model run data — wrf_loadTimeSeries • WRFmet</title>
 
 
 <!-- jquery -->
@@ -39,8 +39,15 @@
 
 
 
-<meta property="og:title" content="List downloaded WRF model run files — wrf_downloaded" />
-<meta property="og:description" content="List downloaded WRF model run files" />
+<meta property="og:title" content="Load time series WRF model run data — wrf_loadTimeSeries" />
+<meta property="og:description" content="Loads time series WRF model run data as a raster package 
+RasterBrick. If the specified data does not exist on the user's 
+machine, then it will try to be downloaded from the AirFire database.
+On 2020-09-17, available model identifiers include the following:
+PNW-1.33km
+PNW-4km
+
+" />
 
 
 
@@ -129,65 +136,91 @@
 <div class="row">
   <div class="col-md-9 contents">
     <div class="page-header">
-    <h1>List downloaded WRF model run files</h1>
-    <small class="dont-index">Source: <a href='https://github.com/MazamaScience/WRFmet/blob/master/R/wrf_downloaded.R'><code>R/wrf_downloaded.R</code></a></small>
-    <div class="hidden name"><code>wrf_downloaded.Rd</code></div>
+    <h1>Load time series WRF model run data</h1>
+    <small class="dont-index">Source: <a href='https://github.com/MazamaScience/WRFmet/blob/master/R/wrf_loadTimeSeries.R'><code>R/wrf_loadTimeSeries.R</code></a></small>
+    <div class="hidden name"><code>wrf_loadTimeSeries.Rd</code></div>
     </div>
 
     <div class="ref-description">
-    <p>List downloaded WRF model run files</p>
+    <p>Loads time series WRF model run data as a <span class="pkg">raster</span> package 
+<em>RasterBrick</em>. If the specified data does not exist on the user's 
+machine, then it will try to be downloaded from the AirFire database.</p>
+<p>On 2020-09-17, available model identifiers include the following:</p><ul>
+<li><p>PNW-1.33km</p></li>
+<li><p>PNW-4km</p></li>
+</ul>
+
     </div>
 
-    <pre class="usage"><span class='fu'>wrf_downloaded</span>(
-  <span class='kw'>WRFDataDir</span> <span class='kw'>=</span> <span class='fu'><a href='getWRFDataDir.html'>getWRFDataDir</a></span>(),
-  <span class='kw'>pattern</span> <span class='kw'>=</span> <span class='st'>".nc"</span>,
-  <span class='kw'>full</span> <span class='kw'>=</span> <span class='fl'>FALSE</span>,
-  <span class='no'>...</span>
+    <pre class="usage"><span class='fu'>wrf_loadTimeSeries</span>(
+  <span class='kw'>modelName</span> <span class='kw'>=</span> <span class='kw'>NULL</span>,
+  <span class='kw'>modelRun</span> <span class='kw'>=</span> <span class='kw'>NULL</span>,
+  <span class='kw'>modelRunHours</span> <span class='kw'>=</span> <span class='kw'>NULL</span>,
+  <span class='kw'>baseUrl</span> <span class='kw'>=</span> <span class='st'>"http://m2.airfire.org"</span>,
+  <span class='kw'>varName</span> <span class='kw'>=</span> <span class='kw'>NULL</span>,
+  <span class='kw'>res</span> <span class='kw'>=</span> <span class='kw'>NULL</span>,
+  <span class='kw'>xlim</span> <span class='kw'>=</span> <span class='kw'>NULL</span>,
+  <span class='kw'>ylim</span> <span class='kw'>=</span> <span class='kw'>NULL</span>
 )</pre>
 
     <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a>Arguments</h2>
     <table class="ref-arguments">
     <colgroup><col class="name" /><col class="desc" /></colgroup>
     <tr>
-      <th>WRFDataDir</th>
-      <td><p>Directory in which model run files are located.</p></td>
+      <th>modelName</th>
+      <td><p>Model identifier.</p></td>
     </tr>
     <tr>
-      <th>pattern</th>
-      <td><p>A regex pattern to use for filtering model files.</p></td>
+      <th>modelRun</th>
+      <td><p>Model initialization timestamp as "YYYYMMDDHH".</p></td>
     </tr>
     <tr>
-      <th>full</th>
-      <td><p>Logical. Show the full path of the model (used for local loading).</p></td>
+      <th>modelRunHours</th>
+      <td><p>Vector of hours forecasted from init time, i.e. 7:24.</p></td>
     </tr>
     <tr>
-      <th>...</th>
-      <td><p>Additional arguments to be passed to <code><a href='https://rdrr.io/r/base/list.files.html'>list.files()</a></code>.</p></td>
+      <th>baseUrl</th>
+      <td><p>Base URL for WRF output.</p></td>
+    </tr>
+    <tr>
+      <th>varName</th>
+      <td><p>WRF variable to load.</p></td>
+    </tr>
+    <tr>
+      <th>res</th>
+      <td><p>Resolution of raster in degrees.</p></td>
+    </tr>
+    <tr>
+      <th>xlim</th>
+      <td><p>A vector of coordinate longitude bounds.</p></td>
+    </tr>
+    <tr>
+      <th>ylim</th>
+      <td><p>A vector of coordinate latitude bounds.</p></td>
     </tr>
     </table>
 
     <h2 class="hasAnchor" id="value"><a class="anchor" href="#value"></a>Value</h2>
 
-    <p>A list of downloaded model run files</p>
+    <p>A <span class="pkg">raster</span> package <em>RasterBrick</em> object.</p>
 
     <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
-    <pre class="examples"><div class='input'><span class='co'># \donttest{</span>
-<span class='fu'><a href='https://rdrr.io/r/base/library.html'>library</a></span>(<span class='no'>WRFmet</span>)
-<span class='fu'><a href='setWRFDataDir.html'>setWRFDataDir</a></span>(<span class='st'>"~/Data/WRF"</span>)
+    <pre class="examples"><div class='input'># \donttest{
+# library(WRFmet)
+# setWRFDataDir("~/Data/WRF")
 
-<span class='no'>modelRun</span> <span class='kw'>&lt;-</span> <span class='fu'><a href='wrf_latestModelRun.html'>wrf_latestModelRun</a></span>(<span class='st'>"PNW-4km"</span>)
-<span class='no'>filePath</span> <span class='kw'>&lt;-</span> <span class='fu'><a href='wrf_download.html'>wrf_download</a></span>(<span class='st'>"PNW-4km"</span>, <span class='no'>modelRun</span>, <span class='fl'>7</span>)</div><div class='output co'>#&gt; <span class='message'>WRF model run exists at: /Users/mazama/Data/WRF/PNW-4km_2020091712_07.nc</span></div><div class='input'><span class='fu'>wrf_downloaded</span>()</div><div class='output co'>#&gt;  [1] "PNW-1.33km_2020082612_07.nc"      "PNW-1.33km_2020091712_07.nc"     
-#&gt;  [3] "PNW-1.33km_2020091712_08.nc"      "PNW-1.33km_2020091712_09.nc"     
-#&gt;  [5] "PNW-1.33km_2020091712_10.nc"      "PNW-4km_2020082500_11.nc"        
-#&gt;  [7] "PNW-4km_2020082612_08.nc"         "PNW-4km_2020082612_09.nc"        
-#&gt;  [9] "PNW-4km_2020082712_07.nc"         "PNW-4km_2020082712_08.nc"        
-#&gt; [11] "PNW-4km_2020082812_07.nc"         "PNW-4km_2020090112_07.nc"        
-#&gt; [13] "PNW-4km_2020090212_07.nc"         "PNW-4km_2020090312_07.nc"        
-#&gt; [15] "PNW-4km_2020090412_07.nc"         "PNW-4km_2020090812_07.nc"        
-#&gt; [17] "PNW-4km_2020091512_07.nc"         "PNW-4km_2020091612_07.nc"        
-#&gt; [19] "PNW-4km_2020091712_07.nc"         "wrfout_d3-2020071512-f07-0000.nc"
-#&gt; [21] "wrfout_d3.2020082612.f07.0000.nc" "wrfout_d3.2020082612.f08.0000.nc"
-#&gt; [23] "wrfout_d3.2020082612.f09.0000.nc"</div><div class='input'># }
+#tempTimeSeries &lt;- wrf_loadTimeSeries(
+# modelName = "PNW-1.33km",
+# modelRun = "2020091712",
+# modelRunHours = 7:10,
+# varName = "TSK",
+# res = 0.05,
+#  xlim = c(-125, -117),
+# ylim = c(45, 49)
+# )
+
+# rasterVis::levelplot(tempTimeSeries)
+# }
 </div></pre>
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="pkgdown-sidebar">

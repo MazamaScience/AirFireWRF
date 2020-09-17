@@ -20,8 +20,9 @@
 #' \emph{RasterBrick}. If the specified data does not exist on the user's 
 #' machine, then it will try to be downloaded from the AirFire database.
 #' 
-#' On 2020-08-27, available model identifiers include the following:
+#' On 2020-09-03, available model identifiers include the following:
 #' \itemize{
+#'   \item{PNW-1.33km}
 #'   \item{PNW-4km}
 #' }
 #' 

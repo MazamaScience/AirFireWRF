@@ -1,3 +1,7 @@
+# WRFmet 0.1.10
+
+* First pass at `wrf_loadTimeSeries()`.
+
 # WRFmet 0.1.9
 
 * Added new plot layer function: `layer_contours()`.
