@@ -9,17 +9,24 @@ wrf_standardPlot(
   states = FALSE,
   polys = NULL,
   bgName = NULL,
+  ctrName = NULL,
   uName = NULL,
   vName = NULL,
   bgRasterColors = grDevices::terrain.colors(10),
   bgRasterValues = NULL,
   bgRasterNaColor = "transparent",
+  stateWidth = 0.5,
   stateColor = "red",
   stateFill = "transparent",
+  polyWidth = 0.5,
   polyColor = "red",
   polyFill = "transparent",
+  ctrBreaks = NULL,
+  ctrWidth = 0.25,
+  ctrColor = "black",
   arrowCount = 1000,
   arrowScale = 0.05,
+  arrowWidth = 0.8,
   arrowColor = "black",
   arrowHead = 0.05,
   arrowAlpha = 1,
@@ -41,6 +48,8 @@ wrf_standardPlot(
 
 \item{bgName}{The name of the background raster layer.}
 
+\item{ctrName}{The name of the contour raster layer.}
+
 \item{uName}{The name of the u component raster layer.}
 
 \item{vName}{The name of the v component raster layer.}
@@ -53,23 +62,29 @@ in the bgRasterColors vector.}
 
 \item{bgRasterNaColor}{Color for na background raster values.}
 
+\item{stateWidth}{Line thickness of state polygon outlines.}
+
 \item{stateColor}{Color for state polygon outlines.}
 
 \item{stateFill}{Color for state polygon interiors.}
+
+\item{polyWidth}{Line thickness of spatial polygon outlines.}
 
 \item{polyColor}{Color for spatial polygon outlines.}
 
 \item{polyFill}{Color for spatial polygon interiors.}
 
-\item{arrowCount}{Number of arrows to draw.}
+\item{arrowCount}{Number of vector field arrows to draw.}
 
-\item{arrowScale}{Arrow length scale factor.}
+\item{arrowScale}{Scale factor of vector field arrow body length.}
 
-\item{arrowColor}{Arrow color.}
+\item{arrowWidth}{Line thickness of vector field arrows.}
 
-\item{arrowHead}{Arrow head size.}
+\item{arrowColor}{Color of vector field arrows.}
 
-\item{arrowAlpha}{Transparency of vector field layer.}
+\item{arrowHead}{Size of vector field arrowheads.}
+
+\item{arrowAlpha}{Transparency of vector field arrows.}
 
 \item{title}{Title of plot.}
 
@@ -102,7 +117,7 @@ wrf_standardPlot(
   uName = "U10",
   vName = "V10",
   states = TRUE,
-  arrowAlpha = 0.65,
+  arrowAlpha = 0.75,
   title = "PNW Elevation & Wind Velocity",
   flab = "Elev (m)",
   xlim = c(-125, -111),

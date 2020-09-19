@@ -143,17 +143,24 @@
   <span class='kw'>states</span> <span class='kw'>=</span> <span class='fl'>FALSE</span>,
   <span class='kw'>polys</span> <span class='kw'>=</span> <span class='kw'>NULL</span>,
   <span class='kw'>bgName</span> <span class='kw'>=</span> <span class='kw'>NULL</span>,
+  <span class='kw'>ctrName</span> <span class='kw'>=</span> <span class='kw'>NULL</span>,
   <span class='kw'>uName</span> <span class='kw'>=</span> <span class='kw'>NULL</span>,
   <span class='kw'>vName</span> <span class='kw'>=</span> <span class='kw'>NULL</span>,
   <span class='kw'>bgRasterColors</span> <span class='kw'>=</span> <span class='kw pkg'>grDevices</span><span class='kw ns'>::</span><span class='fu'><a href='https://rdrr.io/r/grDevices/palettes.html'>terrain.colors</a></span>(<span class='fl'>10</span>),
   <span class='kw'>bgRasterValues</span> <span class='kw'>=</span> <span class='kw'>NULL</span>,
   <span class='kw'>bgRasterNaColor</span> <span class='kw'>=</span> <span class='st'>"transparent"</span>,
+  <span class='kw'>stateWidth</span> <span class='kw'>=</span> <span class='fl'>0.5</span>,
   <span class='kw'>stateColor</span> <span class='kw'>=</span> <span class='st'>"red"</span>,
   <span class='kw'>stateFill</span> <span class='kw'>=</span> <span class='st'>"transparent"</span>,
+  <span class='kw'>polyWidth</span> <span class='kw'>=</span> <span class='fl'>0.5</span>,
   <span class='kw'>polyColor</span> <span class='kw'>=</span> <span class='st'>"red"</span>,
   <span class='kw'>polyFill</span> <span class='kw'>=</span> <span class='st'>"transparent"</span>,
+  <span class='kw'>ctrBreaks</span> <span class='kw'>=</span> <span class='kw'>NULL</span>,
+  <span class='kw'>ctrWidth</span> <span class='kw'>=</span> <span class='fl'>0.25</span>,
+  <span class='kw'>ctrColor</span> <span class='kw'>=</span> <span class='st'>"black"</span>,
   <span class='kw'>arrowCount</span> <span class='kw'>=</span> <span class='fl'>1000</span>,
   <span class='kw'>arrowScale</span> <span class='kw'>=</span> <span class='fl'>0.05</span>,
+  <span class='kw'>arrowWidth</span> <span class='kw'>=</span> <span class='fl'>0.8</span>,
   <span class='kw'>arrowColor</span> <span class='kw'>=</span> <span class='st'>"black"</span>,
   <span class='kw'>arrowHead</span> <span class='kw'>=</span> <span class='fl'>0.05</span>,
   <span class='kw'>arrowAlpha</span> <span class='kw'>=</span> <span class='fl'>1</span>,
@@ -186,6 +193,10 @@
       <td><p>The name of the background raster layer.</p></td>
     </tr>
     <tr>
+      <th>ctrName</th>
+      <td><p>The name of the contour raster layer.</p></td>
+    </tr>
+    <tr>
       <th>uName</th>
       <td><p>The name of the u component raster layer.</p></td>
     </tr>
@@ -208,12 +219,20 @@ in the bgRasterColors vector.</p></td>
       <td><p>Color for na background raster values.</p></td>
     </tr>
     <tr>
+      <th>stateWidth</th>
+      <td><p>Line thickness of state polygon outlines.</p></td>
+    </tr>
+    <tr>
       <th>stateColor</th>
       <td><p>Color for state polygon outlines.</p></td>
     </tr>
     <tr>
       <th>stateFill</th>
       <td><p>Color for state polygon interiors.</p></td>
+    </tr>
+    <tr>
+      <th>polyWidth</th>
+      <td><p>Line thickness of spatial polygon outlines.</p></td>
     </tr>
     <tr>
       <th>polyColor</th>
@@ -225,23 +244,27 @@ in the bgRasterColors vector.</p></td>
     </tr>
     <tr>
       <th>arrowCount</th>
-      <td><p>Number of arrows to draw.</p></td>
+      <td><p>Number of vector field arrows to draw.</p></td>
     </tr>
     <tr>
       <th>arrowScale</th>
-      <td><p>Arrow length scale factor.</p></td>
+      <td><p>Scale factor of vector field arrow body length.</p></td>
+    </tr>
+    <tr>
+      <th>arrowWidth</th>
+      <td><p>Line thickness of vector field arrows.</p></td>
     </tr>
     <tr>
       <th>arrowColor</th>
-      <td><p>Arrow color.</p></td>
+      <td><p>Color of vector field arrows.</p></td>
     </tr>
     <tr>
       <th>arrowHead</th>
-      <td><p>Arrow head size.</p></td>
+      <td><p>Size of vector field arrowheads.</p></td>
     </tr>
     <tr>
       <th>arrowAlpha</th>
-      <td><p>Transparency of vector field layer.</p></td>
+      <td><p>Transparency of vector field arrows.</p></td>
     </tr>
     <tr>
       <th>title</th>
@@ -288,7 +311,7 @@ in the bgRasterColors vector.</p></td>
   <span class='kw'>uName</span> <span class='kw'>=</span> <span class='st'>"U10"</span>,
   <span class='kw'>vName</span> <span class='kw'>=</span> <span class='st'>"V10"</span>,
   <span class='kw'>states</span> <span class='kw'>=</span> <span class='fl'>TRUE</span>,
-  <span class='kw'>arrowAlpha</span> <span class='kw'>=</span> <span class='fl'>0.65</span>,
+  <span class='kw'>arrowAlpha</span> <span class='kw'>=</span> <span class='fl'>0.75</span>,
   <span class='kw'>title</span> <span class='kw'>=</span> <span class='st'>"PNW Elevation &amp; Wind Velocity"</span>,
   <span class='kw'>flab</span> <span class='kw'>=</span> <span class='st'>"Elev (m)"</span>,
   <span class='kw'>xlim</span> <span class='kw'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span>(-<span class='fl'>125</span>, -<span class='fl'>111</span>),

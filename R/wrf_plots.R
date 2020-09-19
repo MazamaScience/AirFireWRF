@@ -144,6 +144,7 @@ wrf_rasterPlot <- function(
 #' @param polys A SpatialPolygonsDataFrame.
 #' @param states Logical for including state polygons or not.
 #' @param bgName The name of the background raster layer.
+#' @param ctrName The name of the contour raster layer.
 #' @param uName The name of the u component raster layer.
 #' @param vName The name of the v component raster layer.
 #' @param bgRasterColors Vector of colors to use for the background raster's 
@@ -151,15 +152,18 @@ wrf_rasterPlot <- function(
 #' @param bgRasterValues A vector of positions (between 0 and 1) for each color 
 #' in the bgRasterColors vector.
 #' @param bgRasterNaColor Color for na background raster values.
+#' @param polyWidth Line thickness of spatial polygon outlines.
 #' @param polyColor Color for spatial polygon outlines.
 #' @param polyFill Color for spatial polygon interiors.
+#' @param stateWidth Line thickness of state polygon outlines.
 #' @param stateColor Color for state polygon outlines.
 #' @param stateFill Color for state polygon interiors.
-#' @param arrowCount Number of arrows to draw.
-#' @param arrowScale Arrow length scale factor.
-#' @param arrowColor Arrow color.
-#' @param arrowHead Arrow head size.
-#' @param arrowAlpha Transparency of vector field layer.
+#' @param arrowCount Number of vector field arrows to draw.
+#' @param arrowScale Scale factor of vector field arrow body length.
+#' @param arrowWidth Line thickness of vector field arrows.
+#' @param arrowColor Color of vector field arrows.
+#' @param arrowHead Size of vector field arrowheads.
+#' @param arrowAlpha Transparency of vector field arrows.
 #' @param title Title of plot.
 #' @param xlab Label for x-axis.
 #' @param ylab Label for y-axis.
@@ -181,7 +185,7 @@ wrf_rasterPlot <- function(
 #'   uName = "U10",
 #'   vName = "V10",
 #'   states = TRUE,
-#'   arrowAlpha = 0.65,
+#'   arrowAlpha = 0.75,
 #'   title = "PNW Elevation & Wind Velocity",
 #'   flab = "Elev (m)",
 #'   xlim = c(-125, -111),
@@ -195,17 +199,24 @@ wrf_standardPlot <- function(
   states = FALSE,
   polys = NULL,
   bgName = NULL,
+  ctrName = NULL,
   uName = NULL,
   vName = NULL,
   bgRasterColors = grDevices::terrain.colors(10),
   bgRasterValues = NULL,
   bgRasterNaColor = "transparent",
+  stateWidth = 0.5,
   stateColor = "red",
   stateFill = "transparent",
+  polyWidth = 0.5,
   polyColor = "red",
   polyFill = "transparent",
+  ctrBreaks = NULL,
+  ctrWidth = 0.25,
+  ctrColor = "black",
   arrowCount = 1000,
   arrowScale = 0.05,
+  arrowWidth = 0.8,
   arrowColor = "black",
   arrowHead = 0.05,
   arrowAlpha = 1,
@@ -242,7 +253,8 @@ wrf_standardPlot <- function(
     polysLayer <- layer_spPolys(
       polygons = polys,
       color = polyColor,
-      fill = polyFill
+      fill = polyFill,
+      lineWidth = polyWidth
     )
   }
   
@@ -253,8 +265,22 @@ wrf_standardPlot <- function(
     statesLayer <- layer_states(
       color = stateColor,
       fill = stateFill,
+      lineWidth = stateWidth,
       xlim = xlim,
       ylim = ylim
+    )
+  }
+  
+  # Create the contour layer
+  if ( is.null(ctrName) ) {
+    contourLayer <- NULL
+  } else {
+    contourLayer <- layer_contours(
+      raster = raster,
+      varName = ctrName,
+      breaks = ctrBreaks,
+      color = ctrColor,
+      lineWidth = ctrWidth
     )
   }
   
@@ -269,6 +295,7 @@ wrf_standardPlot <- function(
       arrowCount = arrowCount,
       arrowScale = arrowScale,
       arrowHead = arrowHead,
+      arrowWidth = arrowWidth,
       arrowColor = arrowColor,
       alpha = arrowAlpha,
       xlim = xlim,
@@ -277,7 +304,7 @@ wrf_standardPlot <- function(
     
     # Manually set the plot scale limits when there is no background raster 
     # layer
-    if (is.null(xlim) && is.null(ylim) ) {
+    if ( is.null(xlim) && is.null(ylim) ) {
       extent <- raster::extent(raster)
       xlim = c(extent@xmin, extent@xmax)
       ylim = c(extent@ymin, extent@ymax)
@@ -299,6 +326,7 @@ wrf_standardPlot <- function(
     rasterLayer +
     polysLayer +
     statesLayer +
+    contourLayer + 
     vectorFieldLayer +
     ggplot2::scale_fill_gradientn(
       colors = bgRasterColors,
