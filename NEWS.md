@@ -1,3 +1,16 @@
+# WRFmet 0.1.11
+
+* `wrf_standardPlot()` can now plot a contour layer.
+* Added line thickness parameters in `wrf_standardPlot()` for the spatial and 
+state polygon layers.
+* Updated `wrf_standardPlot()` layer color defaults:
+  * Spatial polygons: `color` -> "red", `fill` -> "transparent".
+  * State polygons: `color` -> "red", `fill` -> "transparent".
+  * Vector field: `arrowColor` -> "black"
+* Removed the `...` parameter from both `wrf_raster()` and `wrf_standardPlot()`
+since it was more confusing than helpful (only held additional arguments to
+`ggplot2::scale_fill_gradientn()`).
+
 # WRFmet 0.1.10
 
 * First pass at `wrf_loadTimeSeries()`.

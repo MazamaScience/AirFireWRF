@@ -60,19 +60,25 @@ n-color gradient.}
 \item{bgRasterValues}{A vector of positions (between 0 and 1) for each color 
 in the bgRasterColors vector.}
 
-\item{bgRasterNaColor}{Color for na background raster values.}
+\item{bgRasterNaColor}{Color of na background raster values.}
 
 \item{stateWidth}{Line thickness of state polygon outlines.}
 
-\item{stateColor}{Color for state polygon outlines.}
+\item{stateColor}{Color of state polygon outlines.}
 
-\item{stateFill}{Color for state polygon interiors.}
+\item{stateFill}{Color of state polygon interiors.}
 
 \item{polyWidth}{Line thickness of spatial polygon outlines.}
 
-\item{polyColor}{Color for spatial polygon outlines.}
+\item{polyColor}{Color of spatial polygon outlines.}
 
-\item{polyFill}{Color for spatial polygon interiors.}
+\item{polyFill}{Color of spatial polygon interiors.}
+
+\item{ctrBreaks}{A numerical vector of contour line levels.}
+
+\item{ctrWidth}{Line thickness of contours.}
+
+\item{ctrColor}{Color of contour lines.}
 
 \item{arrowCount}{Number of vector field arrows to draw.}
 

@@ -71,7 +71,7 @@
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">WRFmet</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.1.4</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.1.11</span>
       </span>
     </div>
 
@@ -132,6 +132,23 @@
       <small>Source: <a href='https://github.com/MazamaScience/WRFmet/blob/master/NEWS.md'><code>NEWS.md</code></a></small>
     </div>
 
+    <div id="wrfmet-0111" class="section level1">
+<h1 class="page-header" data-toc-text="0.1.11">
+<a href="#wrfmet-0111" class="anchor"></a>WRFmet 0.1.11</h1>
+<ul>
+<li>
+<code><a href="../reference/wrf_standardPlot.html">wrf_standardPlot()</a></code> can now plot a contour layer.</li>
+<li>Added line thickness parameters in <code><a href="../reference/wrf_standardPlot.html">wrf_standardPlot()</a></code> for the spatial and state polygon layers.</li>
+<li>Updated <code><a href="../reference/wrf_standardPlot.html">wrf_standardPlot()</a></code> layer color defaults:
+<ul>
+<li>Spatial polygons: <code>color</code> -&gt; “red”, <code>fill</code> -&gt; “transparent”.</li>
+<li>State polygons: <code>color</code> -&gt; “red”, <code>fill</code> -&gt; “transparent”.</li>
+<li>Vector field: <code>arrowColor</code> -&gt; “black”</li>
+</ul>
+</li>
+<li>Removed the <code>...</code> parameter from both <code>wrf_raster()</code> and <code><a href="../reference/wrf_standardPlot.html">wrf_standardPlot()</a></code> since it was more confusing than helpful (only held additional arguments to <code><a href="https://ggplot2.tidyverse.org/reference/scale_gradient.html">ggplot2::scale_fill_gradientn()</a></code>).</li>
+</ul>
+</div>
     <div id="wrfmet-0110" class="section level1">
 <h1 class="page-header" data-toc-text="0.1.10">
 <a href="#wrfmet-0110" class="anchor"></a>WRFmet 0.1.10</h1>

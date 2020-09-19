@@ -151,13 +151,16 @@ wrf_rasterPlot <- function(
 #' n-color gradient.
 #' @param bgRasterValues A vector of positions (between 0 and 1) for each color 
 #' in the bgRasterColors vector.
-#' @param bgRasterNaColor Color for na background raster values.
+#' @param bgRasterNaColor Color of na background raster values.
 #' @param polyWidth Line thickness of spatial polygon outlines.
-#' @param polyColor Color for spatial polygon outlines.
-#' @param polyFill Color for spatial polygon interiors.
+#' @param polyColor Color of spatial polygon outlines.
+#' @param polyFill Color of spatial polygon interiors.
 #' @param stateWidth Line thickness of state polygon outlines.
-#' @param stateColor Color for state polygon outlines.
-#' @param stateFill Color for state polygon interiors.
+#' @param stateColor Color of state polygon outlines.
+#' @param stateFill Color of state polygon interiors.
+#' @param ctrBreaks A numerical vector of contour line levels.
+#' @param ctrWidth Line thickness of contours.
+#' @param ctrColor Color of contour lines.
 #' @param arrowCount Number of vector field arrows to draw.
 #' @param arrowScale Scale factor of vector field arrow body length.
 #' @param arrowWidth Line thickness of vector field arrows.
