@@ -63,7 +63,7 @@
 #'   modelName = "PNW-4km",
 #'   modelRun = "2020082612",
 #'   modelRunHour = 9,
-#'   vars = "TSK",
+#'   vars = c("HGT", "TSK", "U10", "V10"),
 #'   res = 0.1,
 #'   xlim = c(-125, -116),
 #'   ylim = c(45, 50)
@@ -225,8 +225,8 @@ wrf_load <- function(
   # Combine the separate variable layers into a RasterStack
   rasterStack <- raster::stack(rasterLayers)
   
-  # Solidify the RasterStack into a more efficient/fast RasterBrick
-  rasterBrick <- raster::brick(rasterStack)
+  # Combine the separate variable layers into a RasterBrick
+  rasterBrick <- raster::brick(rasterLayers)
   
   # ----- Crop RasterBrick -----------------------------------------------------
   

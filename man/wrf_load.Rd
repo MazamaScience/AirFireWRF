@@ -90,7 +90,7 @@ raster <- wrf_load(
   modelName = "PNW-4km",
   modelRun = "2020082612",
   modelRunHour = 9,
-  vars = "TSK",
+  vars = c("HGT", "TSK", "U10", "V10"),
   res = 0.1,
   xlim = c(-125, -116),
   ylim = c(45, 50)
