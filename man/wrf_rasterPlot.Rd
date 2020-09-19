@@ -5,7 +5,6 @@
 \title{Creates a plot for a single raster layer}
 \usage{
 wrf_rasterPlot(
-  ...,
   raster = NULL,
   varName = NULL,
   colors = grDevices::terrain.colors(10),
@@ -21,8 +20,6 @@ wrf_rasterPlot(
 )
 }
 \arguments{
-\item{...}{Arguments passed on to ggplot2::continuous_scale()}
-
 \item{raster}{A RasterBrick or RasterLayer.}
 
 \item{varName}{The name of a raster variable.}
@@ -60,8 +57,8 @@ library(WRFmet)
 library(raster)
 
 wrf_rasterPlot(
-  raster = example_PNW$HGT,
-  title = "PNW Elevation",
+  raster = example_PNW,
+  varName = "HGT",
   flab = "Elev (m)",
   ratio = 1.4
 )

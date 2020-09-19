@@ -5,7 +5,6 @@
 \title{Creates a comprehensive plot}
 \usage{
 wrf_standardPlot(
-  ...,
   raster = NULL,
   states = FALSE,
   polys = NULL,
@@ -34,8 +33,6 @@ wrf_standardPlot(
 )
 }
 \arguments{
-\item{...}{Arguments passed on to ggplot2::continuous_scale()}
-
 \item{raster}{A RasterBrick with layers for WRF variables.}
 
 \item{states}{Logical for including state polygons or not.}
@@ -108,6 +105,7 @@ wrf_standardPlot(
   stateColor = "red",
   stateFill = "transparent",
   arrowColor = "black",
+  arrowAlpha = 0.6,
   title = "PNW Elevation & Wind Velocity",
   flab = "Elev (m)",
   xlim = c(-125, -111),

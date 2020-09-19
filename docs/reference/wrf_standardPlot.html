@@ -139,7 +139,6 @@
     </div>
 
     <pre class="usage"><span class='fu'>wrf_standardPlot</span>(
-  <span class='no'>...</span>,
   <span class='kw'>raster</span> <span class='kw'>=</span> <span class='kw'>NULL</span>,
   <span class='kw'>states</span> <span class='kw'>=</span> <span class='fl'>FALSE</span>,
   <span class='kw'>polys</span> <span class='kw'>=</span> <span class='kw'>NULL</span>,
@@ -170,10 +169,6 @@
     <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a>Arguments</h2>
     <table class="ref-arguments">
     <colgroup><col class="name" /><col class="desc" /></colgroup>
-    <tr>
-      <th>...</th>
-      <td><p>Arguments passed on to ggplot2::continuous_scale()</p></td>
-    </tr>
     <tr>
       <th>raster</th>
       <td><p>A RasterBrick with layers for WRF variables.</p></td>
@@ -296,6 +291,7 @@ in the bgRasterColors vector.</p></td>
   <span class='kw'>stateColor</span> <span class='kw'>=</span> <span class='st'>"red"</span>,
   <span class='kw'>stateFill</span> <span class='kw'>=</span> <span class='st'>"transparent"</span>,
   <span class='kw'>arrowColor</span> <span class='kw'>=</span> <span class='st'>"black"</span>,
+  <span class='kw'>arrowAlpha</span> <span class='kw'>=</span> <span class='fl'>0.6</span>,
   <span class='kw'>title</span> <span class='kw'>=</span> <span class='st'>"PNW Elevation &amp; Wind Velocity"</span>,
   <span class='kw'>flab</span> <span class='kw'>=</span> <span class='st'>"Elev (m)"</span>,
   <span class='kw'>xlim</span> <span class='kw'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span>(-<span class='fl'>125</span>, -<span class='fl'>111</span>),

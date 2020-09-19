@@ -61,7 +61,6 @@ wrf_basePlot <- function(
 #' @export
 #' @title Creates a plot for a single raster layer
 #'
-#' @param ... Arguments passed on to ggplot2::continuous_scale()
 #' @param raster A RasterBrick or RasterLayer.
 #' @param varName The name of a raster variable.
 #' @param colors A vector of colours to use for n-colour gradient.
@@ -84,15 +83,14 @@ wrf_basePlot <- function(
 #' library(raster)
 #' 
 #' wrf_rasterPlot(
-#'   raster = example_PNW$HGT,
-#'   title = "PNW Elevation",
+#'   raster = example_PNW,
+#'   varName = "HGT",
 #'   flab = "Elev (m)",
 #'   ratio = 1.4
 #' )
 #' }
 
 wrf_rasterPlot <- function(
-  ...,
   raster = NULL,
   varName = NULL,
   colors = grDevices::terrain.colors(10),
@@ -130,7 +128,6 @@ wrf_rasterPlot <- function(
       varName = varName
     ) +
     ggplot2::scale_fill_gradientn(
-      ...,
       colors = colors,
       values = values,
       na.value = naColor
@@ -143,7 +140,6 @@ wrf_rasterPlot <- function(
 #' @export
 #' @title Creates a comprehensive plot
 #'
-#' @param ... Arguments passed on to ggplot2::continuous_scale()
 #' @param raster A RasterBrick with layers for WRF variables.
 #' @param polys A SpatialPolygonsDataFrame.
 #' @param states Logical for including state polygons or not.
@@ -188,6 +184,7 @@ wrf_rasterPlot <- function(
 #'   stateColor = "red",
 #'   stateFill = "transparent",
 #'   arrowColor = "black",
+#'   arrowAlpha = 0.6,
 #'   title = "PNW Elevation & Wind Velocity",
 #'   flab = "Elev (m)",
 #'   xlim = c(-125, -111),
@@ -197,7 +194,6 @@ wrf_rasterPlot <- function(
 #' }
 
 wrf_standardPlot <- function(
-  ...,
   raster = NULL,
   states = FALSE,
   polys = NULL,
@@ -308,7 +304,6 @@ wrf_standardPlot <- function(
     statesLayer +
     vectorFieldLayer +
     ggplot2::scale_fill_gradientn(
-      ...,
       colors = bgRasterColors,
       values = bgRasterValues,
       na.value = bgRasterNaColor
