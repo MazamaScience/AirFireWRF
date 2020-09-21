@@ -51,6 +51,22 @@ rasterBrick <- wrf_load(
 
 raster::labels(rasterBrick)
 
+gg <- wrf_standardPlot(
+  raster = rasterBrick,
+  bgName = "Q2",
+  uName = "U10",
+  vName = "V10",
+  #ctrName = "T",
+  states = TRUE,
+  title = sprintf("%s %s -- Hour %d", modelName, modelRun, modelRunHour),
+  flab = "Q2",
+  ratio = 1.4
+)
+
+print(gg)
+
+
+
 # How about a special subset
 rasterBrick <- wrf_load(
   modelName = modelName,
@@ -63,30 +79,16 @@ rasterBrick <- wrf_load(
 )
 
 
-gg <- plot_standard(
-  bgRaster = rasterBrick$HGT,
-  uRaster = rasterBrick$U10,
-  vRaster = rasterBrick$V10,
+gg <- wrf_standardPlot(
+  raster = rasterBrick,
+  bgName = "HGT",
+  uName = "U10",
+  vName = "V10",
+  ctrName = "T",
+  states = TRUE,
   title = sprintf("%s %s -- Hour %d", modelName, modelRun, modelRunHour),
-  flab = "Elev (m)"
+  flab = "Elev (m)",
+  ratio = 1.4
 )
 
-gg
-
-gg  +
-  layer_states(
-    xlim = c(-125, -116),
-    ylim = c(45, 50)
-  )
-
-library(MazamaSpatialUtils)
-setSpatialDataDir("~/Data/Spatial")
-loadSpatialData("USCensusStates_05")
-WA <- subset(USCensusStates_05, stateCode == "WA")
-
-
-gg +
-  layer_spPolys(WA, fill = 'transparent')
-
-
-
+print(gg)

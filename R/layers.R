@@ -265,8 +265,8 @@ layer_vectorField <- function(
   arrowCount = 1000,
   arrowScale = 0.05,
   arrowHead = 0.05,
-  arrowWidth = 0.8,
-  arrowColor = 'white',
+  arrowWidth = 1.2,
+  arrowColor = 'dodgerblue',
   alpha = 1,
   xlim = NULL,
   ylim = NULL

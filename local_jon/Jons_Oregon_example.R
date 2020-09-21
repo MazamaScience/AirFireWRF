@@ -69,23 +69,27 @@ gg <- AirFireModeling::raster_ggmap(bsHour12)
 
 gg +
   layer_vectorField(
-    uRaster = wrfUV$U10,
-    vRaster = wrfUV$V10,
-    arrowColor = "blue"
+    wrfUV,
+    "U10",
+    "V10",
+    arrowColor = "dodgerblue",
+    arrowWidth = 1.5
   ) + 
   ggtitle(sprintf("Smoke and Winds for run %d, hour %d", modelRun, modelRunHour))
 
 # ----- Plot #2 ----------------------------------------------------------------
 
-plot_standard(
-  bgRaster = bsHour12,
-  uRaster = wrfUV$U10,
-  vRaster = wrfUV$V10,
-  title = sprintf("%s %s -- Hour %d", modelName, modelRun, modelRunHour),
-  flab = "PM2.5"
-) +
-  ###layer_spPolys(OR, fill = 'transparent')
-  layer_states(fill = 'transparent', xlim = xlim, ylim = ylim)
+# NOTE:  wrf_standardPlot() can only use variables from the WRF output
+
+# plot_standard(
+#   bgRaster = bsHour12,
+#   uRaster = wrfUV$U10,
+#   vRaster = wrfUV$V10,
+#   title = sprintf("%s %s -- Hour %d", modelName, modelRun, modelRunHour),
+#   flab = "PM2.5"
+# ) +
+#   ###layer_spPolys(OR, fill = 'transparent')
+#   layer_states(fill = 'transparent', xlim = xlim, ylim = ylim)
 
 # ----- Plot #3 ----------------------------------------------------------------
 
@@ -146,10 +150,55 @@ wrfUV <- wrf_load(
 
 AirFireModeling::raster_ggmap(bsHour12) +
   layer_vectorField(
-    uRaster = wrfUV$U10,
-    vRaster = wrfUV$V10,
-    arrowColor = "blue"
+    wrfUV,
+    "U10",
+    "V10",
+    arrowColor = "dodgerblue",
+    arrowWidth = 1.5
   ) + 
   ggtitle(sprintf("Smoke and Winds for run %d, hour %d", modelRun, modelRunHour))
 
 
+# ----- Plot #5 ----------------------------------------------------------------
+
+smokeRaster <- bsHour12
+
+blueskyMap <- 
+  ggplot2::ggplot() +
+  # Set raster color palette
+  ggplot2::scale_fill_gradientn(
+    colors = c('green', 'yellow', 'orange', 'red', 'maroon'),
+    na.value = 'transparent'
+  ) +
+  layer_raster(
+    raster = smokeRaster
+  ) +
+  # layer_states(
+  #   xlim = xlim,
+  #   ylim = ylim
+  # ) +
+  # Then draw the wind vector field
+  layer_vectorField(
+    raster = wrfUV,
+    uName = "U10",
+    vName = "V10",
+    arrowCount = 500,
+    arrowColor = 'black',
+    arrowScale = 0.03,
+    arrowHead = 0.06,
+    xlim = xlim,
+    ylim = ylim
+  ) +
+  ggplot2::coord_fixed(
+    ratio = 1.4,
+    xlim = xlim,
+    ylim = ylim
+  ) +
+  ggplot2::labs(
+    title = 'Air Quality & Wind Map',
+    x = 'Longitude',
+    y = 'Latitude',
+    fill = 'Air quality (pm 2.5)'
+  )
+
+blueskyMap

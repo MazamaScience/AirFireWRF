@@ -1,3 +1,7 @@
+# WRFmet 0.1.12
+
+* Tweak to color and line width in `layer_vectorField()`.
+
 # WRFmet 0.1.11
 
 * `wrf_standardPlot()` can now plot a contour layer.
