@@ -7,7 +7,7 @@
 #' @param modelRunHour Hour forecasted from initial time, i.e. 7.
 #' @param baseUrl Base URL for WRF output.
 #' @param localPath Absolute path to a NetCDF file not found in `WRFDataDir`.
-#' @param vars WRF variable(s) to load. If \code{NULL}, the following subset
+#' @param varNames WRF variable(s) to load. If \code{NULL}, the following subset
 #' specified by AirFire will be loaded: XLONG, XLAT, XLONG_U, XLAT_U, XLONG_V, 
 #' XLAT_V, U, V, U10, V10, ZNU, ZNW, LU_INDEX, Q2, T, T2, TH2, HGT, RAINNC, 
 #' CFRACT, and PBLH.
@@ -63,7 +63,7 @@
 #'   modelName = "PNW-4km",
 #'   modelRun = "2020082612",
 #'   modelRunHour = 9,
-#'   vars = c("HGT", "TSK", "U10", "V10"),
+#'   varNames = c("HGT", "TSK", "U10", "V10"),
 #'   res = 0.1,
 #'   xlim = c(-125, -116),
 #'   ylim = c(45, 50)
@@ -78,7 +78,7 @@ wrf_load <- function(
   modelRunHour = NULL,
   baseUrl = "http://m2.airfire.org",
   localPath = NULL,
-  vars = NULL,
+  varNames = NULL,
   res = NULL,
   xlim = NULL,
   ylim = NULL,
@@ -102,15 +102,15 @@ wrf_load <- function(
     
   }
   
-  if ( is.null(vars) ) {
-    vars <- c(
+  if ( is.null(varNames) ) {
+    varNames <- c(
       "XLONG", "XLAT", "XLONG_U", "XLAT_U", "XLONG_V", "XLAT_V", "U", "V", 
       "U10", "V10", "ZNU", "ZNW", "LU_INDEX", "Q2", "T", "T2", "TH2", "HGT", 
       "RAINNC", "CFRACT", "PBLH"
     )
   }
   
-  if ( length(vars) < 1 ) {
+  if ( length(varNames) < 1 ) {
     stop(sprintf("Must specify at least one WRF variable"))
   }
   
@@ -198,11 +198,11 @@ wrf_load <- function(
   
   # ----- Read in variable data ------------------------------------------------
   
-  # TODO: Make sure all the specified vars share the same grid dimensions
+  # TODO: Make sure all the specified varNames share the same grid dimensions
   
-  rasterLayers <- sapply(vars, function(var) {
+  rasterLayers <- sapply(varNames, function(varName) {
     # Read in the variable values
-    varValues <- ncdf4::ncvar_get(nc, varid = var)
+    varValues <- ncdf4::ncvar_get(nc, varid = varName)
     
     # TODO: Let users provide a reference raster as an argument, that way they
     # could, for instance, rasterize WRF points onto a BlueSky model grid

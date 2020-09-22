@@ -9,7 +9,7 @@ rasterRes <- 0.06
 
 elevRaster <- wrf_createRaster(
   nc = nc,
-  vars = 'HGT',
+  varNames = 'HGT',
   xlim = xlim,
   ylim = ylim,
   res = rasterRes
@@ -17,7 +17,7 @@ elevRaster <- wrf_createRaster(
 
 windRaster <- wrf_createRaster(
   nc = nc,
-  vars = c('U10', 'V10'),
+  varNames = c('U10', 'V10'),
   xlim = xlim,
   ylim = ylim,
   res = rasterRes

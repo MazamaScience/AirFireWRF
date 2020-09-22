@@ -104,7 +104,7 @@ PBLH - Planetary boundary layer height (m)
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">WRFmet</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.1.11</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.1.12</span>
       </span>
     </div>
 
@@ -208,7 +208,7 @@ machine, then it will try to be downloaded from the AirFire database.</p>
   <span class='kw'>modelRunHour</span> <span class='kw'>=</span> <span class='kw'>NULL</span>,
   <span class='kw'>baseUrl</span> <span class='kw'>=</span> <span class='st'>"http://m2.airfire.org"</span>,
   <span class='kw'>localPath</span> <span class='kw'>=</span> <span class='kw'>NULL</span>,
-  <span class='kw'>vars</span> <span class='kw'>=</span> <span class='kw'>NULL</span>,
+  <span class='kw'>varNames</span> <span class='kw'>=</span> <span class='kw'>NULL</span>,
   <span class='kw'>res</span> <span class='kw'>=</span> <span class='kw'>NULL</span>,
   <span class='kw'>xlim</span> <span class='kw'>=</span> <span class='kw'>NULL</span>,
   <span class='kw'>ylim</span> <span class='kw'>=</span> <span class='kw'>NULL</span>,
@@ -239,7 +239,7 @@ machine, then it will try to be downloaded from the AirFire database.</p>
       <td><p>Absolute path to a NetCDF file not found in `WRFDataDir`.</p></td>
     </tr>
     <tr>
-      <th>vars</th>
+      <th>varNames</th>
       <td><p>WRF variable(s) to load. If <code>NULL</code>, the following subset
 specified by AirFire will be loaded: XLONG, XLAT, XLONG_U, XLAT_U, XLONG_V, 
 XLAT_V, U, V, U10, V10, ZNU, ZNW, LU_INDEX, Q2, T, T2, TH2, HGT, RAINNC, 
@@ -276,7 +276,7 @@ CFRACT, and PBLH.</p></td>
   <span class='kw'>modelName</span> <span class='kw'>=</span> <span class='st'>"PNW-4km"</span>,
   <span class='kw'>modelRun</span> <span class='kw'>=</span> <span class='st'>"2020082612"</span>,
   <span class='kw'>modelRunHour</span> <span class='kw'>=</span> <span class='fl'>9</span>,
-  <span class='kw'>vars</span> <span class='kw'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span>(<span class='st'>"HGT"</span>, <span class='st'>"TSK"</span>, <span class='st'>"U10"</span>, <span class='st'>"V10"</span>),
+  <span class='kw'>varNames</span> <span class='kw'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span>(<span class='st'>"HGT"</span>, <span class='st'>"TSK"</span>, <span class='st'>"U10"</span>, <span class='st'>"V10"</span>),
   <span class='kw'>res</span> <span class='kw'>=</span> <span class='fl'>0.1</span>,
   <span class='kw'>xlim</span> <span class='kw'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span>(-<span class='fl'>125</span>, -<span class='fl'>116</span>),
   <span class='kw'>ylim</span> <span class='kw'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span>(<span class='fl'>45</span>, <span class='fl'>50</span>)

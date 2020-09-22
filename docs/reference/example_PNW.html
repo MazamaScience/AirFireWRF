@@ -51,7 +51,7 @@ library(WRFmet)
 
 example_PNW &amp;amp;lt;- wrf_load(
   localPath = '~/Data/WRF/wrfout_d3-2020071512-f07-0000.nc',
-  vars = c('HGT', 'TSK', 'U10', 'V10'),
+  varNames = c('HGT', 'TSK', 'U10', 'V10'),
   res = 0.06,
   xlim = c(-125, -111),
   ylim = c(42, 49)
@@ -90,7 +90,7 @@ save(example_PNW, file = &quot;data/example_PNW.rda&quot;, compress = &quot;xz&q
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">WRFmet</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.1.11</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.1.12</span>
       </span>
     </div>
 
@@ -164,7 +164,7 @@ documentation.</p>
 
 <span class='no'>example_PNW</span> <span class='kw'>&amp;</span><span class='no'>lt</span>;- <span class='fu'><a href='wrf_load.html'>wrf_load</a></span>(
   <span class='kw'>localPath</span> <span class='kw'>=</span> <span class='st'>'~/Data/WRF/wrfout_d3-2020071512-f07-0000.nc'</span>,
-  <span class='kw'>vars</span> <span class='kw'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span>(<span class='st'>'HGT'</span>, <span class='st'>'TSK'</span>, <span class='st'>'U10'</span>, <span class='st'>'V10'</span>),
+  <span class='kw'>varNames</span> <span class='kw'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span>(<span class='st'>'HGT'</span>, <span class='st'>'TSK'</span>, <span class='st'>'U10'</span>, <span class='st'>'V10'</span>),
   <span class='kw'>res</span> <span class='kw'>=</span> <span class='fl'>0.06</span>,
   <span class='kw'>xlim</span> <span class='kw'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span>(-<span class='fl'>125</span>, -<span class='fl'>111</span>),
   <span class='kw'>ylim</span> <span class='kw'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span>(<span class='fl'>42</span>, <span class='fl'>49</span>)

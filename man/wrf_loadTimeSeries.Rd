@@ -51,6 +51,7 @@ On 2020-09-17, available model identifiers include the following:
 # library(WRFmet)
 # setWRFDataDir("~/Data/WRF")
 
+# Takes a ridiculously long time to download 4 ~1GB files
 #tempTimeSeries <- wrf_loadTimeSeries(
 # modelName = "PNW-1.33km",
 # modelRun = "2020091712",

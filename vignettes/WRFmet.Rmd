@@ -102,7 +102,7 @@ raster <- wrf_load(
   modelName = "PNW-4km",
   modelRun = modelRun,
   modelRunHour = 7,
-  vars = c("HGT", "TSK"), # Meter elevation (HGT) and Kelvin temperature (TSK)
+  varName = c("HGT", "TSK"), # Meter elevation (HGT) and Kelvin temperature (TSK)
   res = 0.1               # Grid cells will be .1x.1 degrees lon/lat
 )
 ```
@@ -115,7 +115,7 @@ from AirFire.
 ```
 raster <- wrf_load(
   localPath = '~/some/other/dir/PNW-4km_2020071512_07.nc',
-  vars = c("HGT", "TSK"),
+  varName = c("HGT", "TSK"),
   res = 0.1
 )
 ```

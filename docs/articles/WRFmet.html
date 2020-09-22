@@ -31,7 +31,7 @@
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">WRFmet</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.1.11</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.1.12</span>
       </span>
     </div>
 
@@ -135,13 +135,13 @@ print(wrfFile)</code></pre>
   modelName = "PNW-4km",
   modelRun = modelRun,
   modelRunHour = 7,
-  vars = c("HGT", "TSK"), # Meter elevation (HGT) and Kelvin temperature (TSK)
+  varName = c("HGT", "TSK"), # Meter elevation (HGT) and Kelvin temperature (TSK)
   res = 0.1               # Grid cells will be .1x.1 degrees lon/lat
 )</code></pre>
 <p>If you would like to simply provide the path of a WRF file, you can pass that in with <code>wrf_load</code>’s <code>localPath</code> argument. If the specified model run hour is not on your machine, it will be downloaded behind the scenes if it is available from AirFire.</p>
 <pre><code>raster &lt;- wrf_load(
   localPath = '~/some/other/dir/PNW-4km_2020071512_07.nc',
-  vars = c("HGT", "TSK"),
+  varName = c("HGT", "TSK"),
   res = 0.1
 )</code></pre>
 <p>The output of <code><a href="../reference/wrf_load.html">wrf_load()</a></code> is a <strong>raster</strong> package <em>RasterBrick</em> object with a separate <em>RasterLayer</em> for each specified variable.</p>

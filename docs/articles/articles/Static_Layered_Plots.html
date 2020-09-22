@@ -31,7 +31,7 @@
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../../index.html">WRFmet</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.1.11</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.1.12</span>
       </span>
     </div>
 
@@ -127,7 +127,7 @@ res &lt;- 0.06
 # A RasterBrick with a single layer for elevation
 tempRaster &lt;- wrf_load(
   localPath = '~/Data/WRF/wrfout_d3-2020071512-f07-0000.nc',
-  vars = 'T2',
+  varName = 'T2',
   xlim = xlim,
   ylim = ylim,
   res = res
@@ -136,7 +136,7 @@ tempRaster &lt;- wrf_load(
 # A RasterBrick with layers for both U and V wind vector components
 windRaster &lt;- wrf_load(
   localPath = '~/Data/WRF/wrfout_d3-2020071512-f07-0000.nc',
-  vars = c('U10', 'V10'),
+  varName = c('U10', 'V10'),
   xlim = xlim,
   ylim = ylim,
   res = res
