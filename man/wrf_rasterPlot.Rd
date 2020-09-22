@@ -7,6 +7,9 @@
 wrf_rasterPlot(
   raster = NULL,
   varName = NULL,
+  breaks = NULL,
+  palette = "Blues",
+  paletteDir = 1,
   colors = grDevices::terrain.colors(10),
   values = NULL,
   naColor = "transparent",
@@ -23,6 +26,12 @@ wrf_rasterPlot(
 \item{raster}{A RasterBrick or RasterLayer.}
 
 \item{varName}{The name of a raster variable.}
+
+\item{breaks}{A vector of raster values to use as palette breaks.}
+
+\item{palette}{The name of a Brewer palette.}
+
+\item{paletteDir}{Direction of the Brewer palette (1 = standard, -1 = reverse)}
 
 \item{colors}{A vector of colors to use for n-color gradient.}
 
@@ -50,6 +59,11 @@ A ggplot object.
 }
 \description{
 Creates a plot for a single raster layer
+}
+\details{
+The raster defaults to a gradient fill color scale when 
+\code{breaks} is not specified. Otherwise, it will be colored using a 
+discrete Brewer palette.
 }
 \examples{
 \donttest{

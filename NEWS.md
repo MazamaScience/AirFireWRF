@@ -1,3 +1,11 @@
+# WRMmet 0.1.13
+
+* Changed the `wrf_load()` `vars` parameter to `varNames` for consistency with
+plot function parameters.
+* `layer_raster()` can now fill according to discrete value ranges.
+* `wrf_rasterPlot()` and `wrf_standardPlot()` now support discrete value ranges 
+and Brewer palettes to color their rasters.
+
 # WRFmet 0.1.12
 
 * Tweak to color and line width in `layer_vectorField()`.

@@ -12,6 +12,9 @@ wrf_standardPlot(
   ctrName = NULL,
   uName = NULL,
   vName = NULL,
+  bgRasterBreaks = NULL,
+  bgRasterPalette = "Blues",
+  bgRasterPaletteDir = 1,
   bgRasterColors = grDevices::terrain.colors(10),
   bgRasterValues = NULL,
   bgRasterNaColor = "transparent",
@@ -53,6 +56,12 @@ wrf_standardPlot(
 \item{uName}{The name of the u component raster layer.}
 
 \item{vName}{The name of the v component raster layer.}
+
+\item{bgRasterBreaks}{A vector of raster values to use as palette breaks.}
+
+\item{bgRasterPalette}{The name of a Brewer palette.}
+
+\item{bgRasterPaletteDir}{Direction of the Brewer palette (1 = standard, -1 = reverse)}
 
 \item{bgRasterColors}{Vector of colors to use for the background raster's 
 n-color gradient.}
@@ -111,6 +120,11 @@ A ggplot object.
 }
 \description{
 Creates a comprehensive plot
+}
+\details{
+The background raster defaults to a gradient fill color scale when 
+\code{breaks} is not specified. Otherwise, it will be colored using a 
+discrete Brewer palette.
 }
 \examples{
 \donttest{

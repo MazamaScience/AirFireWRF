@@ -63,6 +63,9 @@ wrf_basePlot <- function(
 #'
 #' @param raster A RasterBrick or RasterLayer.
 #' @param varName The name of a raster variable.
+#' @param breaks A vector of raster values to use as palette breaks.
+#' @param palette The name of a Brewer palette.
+#' @param paletteDir Direction of the Brewer palette (1 = standard, -1 = reverse)
 #' @param colors A vector of colors to use for n-color gradient.
 #' @param values A vector of positions (between 0 and 1) for each color in the 
 #' colors vector.
@@ -74,6 +77,10 @@ wrf_basePlot <- function(
 #' @param xlim A vector of coordinate longitude bounds.
 #' @param ylim A vector of coordinate latitude bounds.
 #' @param ratio Aspect ratio of plot.
+#'
+#' @details The raster defaults to a gradient fill color scale when 
+#' \code{breaks} is not specified. Otherwise, it will be colored using a 
+#' discrete Brewer palette.
 #'
 #' @return A ggplot object.
 #' 
@@ -93,6 +100,9 @@ wrf_basePlot <- function(
 wrf_rasterPlot <- function(
   raster = NULL,
   varName = NULL,
+  breaks = NULL,
+  palette = "Blues",
+  paletteDir = 1,
   colors = grDevices::terrain.colors(10),
   values = NULL,
   naColor = "transparent",
@@ -107,8 +117,33 @@ wrf_rasterPlot <- function(
   
   # ----- Validate parameters --------------------------------------------------
   
+  if ( is.null(raster) ) {
+    stop("Must provide a RasterLayer or a RasterBrick with a variable name")
+  }
+  
   if ( is.null(title) && !is.null(raster) ) {
     title <- raster@title
+  }
+  
+  # ----- Create scale ---------------------------------------------------------
+  
+  # Default to a gradient fill scale if no breaks are specified
+  if ( is.null(breaks) ) {
+    
+    fillScale <- ggplot2::scale_fill_gradientn(
+      colors = colors,
+      values = values,
+      na.value = naColor
+    )
+    
+  } else {
+    
+    fillScale <- ggplot2::scale_fill_brewer(
+      palette = palette,
+      direction = paletteDir,
+      na.value = naColor
+    )
+    
   }
   
   # ----- Create layers --------------------------------------------------------
@@ -125,13 +160,11 @@ wrf_rasterPlot <- function(
     ) +
     layer_raster(
       raster = raster,
-      varName = varName
+      varName = varName,
+      breaks = breaks,
+      alpha = 1
     ) +
-    ggplot2::scale_fill_gradientn(
-      colors = colors,
-      values = values,
-      na.value = naColor
-    )
+    fillScale
       
   return(plot)
   
@@ -147,6 +180,9 @@ wrf_rasterPlot <- function(
 #' @param ctrName The name of the contour raster layer.
 #' @param uName The name of the u component raster layer.
 #' @param vName The name of the v component raster layer.
+#' @param bgRasterBreaks A vector of raster values to use as palette breaks.
+#' @param bgRasterPalette The name of a Brewer palette.
+#' @param bgRasterPaletteDir Direction of the Brewer palette (1 = standard, -1 = reverse)
 #' @param bgRasterColors Vector of colors to use for the background raster's 
 #' n-color gradient.
 #' @param bgRasterValues A vector of positions (between 0 and 1) for each color 
@@ -174,8 +210,13 @@ wrf_rasterPlot <- function(
 #' @param xlim A vector of coordinate longitude bounds.
 #' @param ylim A vector of coordinate latitude bounds.
 #' @param ratio Aspect ratio of plot.
+#' 
+#' @details The background raster defaults to a gradient fill color scale when 
+#' \code{breaks} is not specified. Otherwise, it will be colored using a 
+#' discrete Brewer palette.
 #'
 #' @return A ggplot object.
+#' 
 #' 
 #' @examples
 #' \donttest{
@@ -205,6 +246,9 @@ wrf_standardPlot <- function(
   ctrName = NULL,
   uName = NULL,
   vName = NULL,
+  bgRasterBreaks = NULL,
+  bgRasterPalette = "Blues",
+  bgRasterPaletteDir = 1,
   bgRasterColors = grDevices::terrain.colors(10),
   bgRasterValues = NULL,
   bgRasterNaColor = "transparent",
@@ -238,6 +282,27 @@ wrf_standardPlot <- function(
     title <- raster@title
   }
   
+  # ----- Create scales --------------------------------------------------------
+  
+  # Default to a gradient fill scale if no bg raster breaks are specified
+  if ( is.null(bgRasterBreaks) ) {
+    
+    fillScale <- ggplot2::scale_fill_gradientn(
+      colors = bgRasterColors,
+      values = bgRasterValues,
+      na.value = bgRasterNaColor
+    )
+    
+  } else {
+    
+    fillScale <- ggplot2::scale_fill_brewer(
+      palette = bgRasterPalette,
+      direction = bgRasterPaletteDir,
+      na.value = bgRasterNaColor
+    )
+    
+  }
+  
   # ----- Create layers --------------------------------------------------------
   
   # Create the background raster layer
@@ -245,7 +310,8 @@ wrf_standardPlot <- function(
     rasterLayer <- NULL
   } else {
     rasterLayer <- layer_raster(
-      raster = raster[[bgName]]
+      raster = raster[[bgName]],
+      breaks = bgRasterBreaks
     )
   }
   
@@ -331,11 +397,7 @@ wrf_standardPlot <- function(
     statesLayer +
     contourLayer + 
     vectorFieldLayer +
-    ggplot2::scale_fill_gradientn(
-      colors = bgRasterColors,
-      values = bgRasterValues,
-      na.value = bgRasterNaColor
-    )
+    fillScale
 
   return(plot)
   

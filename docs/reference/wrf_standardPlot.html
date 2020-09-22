@@ -72,7 +72,7 @@
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">WRFmet</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.1.12</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.1.13</span>
       </span>
     </div>
 
@@ -146,6 +146,9 @@
   <span class='kw'>ctrName</span> <span class='kw'>=</span> <span class='kw'>NULL</span>,
   <span class='kw'>uName</span> <span class='kw'>=</span> <span class='kw'>NULL</span>,
   <span class='kw'>vName</span> <span class='kw'>=</span> <span class='kw'>NULL</span>,
+  <span class='kw'>bgRasterBreaks</span> <span class='kw'>=</span> <span class='kw'>NULL</span>,
+  <span class='kw'>bgRasterPalette</span> <span class='kw'>=</span> <span class='st'>"Blues"</span>,
+  <span class='kw'>bgRasterPaletteDir</span> <span class='kw'>=</span> <span class='fl'>1</span>,
   <span class='kw'>bgRasterColors</span> <span class='kw'>=</span> <span class='kw pkg'>grDevices</span><span class='kw ns'>::</span><span class='fu'><a href='https://rdrr.io/r/grDevices/palettes.html'>terrain.colors</a></span>(<span class='fl'>10</span>),
   <span class='kw'>bgRasterValues</span> <span class='kw'>=</span> <span class='kw'>NULL</span>,
   <span class='kw'>bgRasterNaColor</span> <span class='kw'>=</span> <span class='st'>"transparent"</span>,
@@ -203,6 +206,18 @@
     <tr>
       <th>vName</th>
       <td><p>The name of the v component raster layer.</p></td>
+    </tr>
+    <tr>
+      <th>bgRasterBreaks</th>
+      <td><p>A vector of raster values to use as palette breaks.</p></td>
+    </tr>
+    <tr>
+      <th>bgRasterPalette</th>
+      <td><p>The name of a Brewer palette.</p></td>
+    </tr>
+    <tr>
+      <th>bgRasterPaletteDir</th>
+      <td><p>Direction of the Brewer palette (1 = standard, -1 = reverse)</p></td>
     </tr>
     <tr>
       <th>bgRasterColors</th>
@@ -311,6 +326,11 @@ in the bgRasterColors vector.</p></td>
     <h2 class="hasAnchor" id="value"><a class="anchor" href="#value"></a>Value</h2>
 
     <p>A ggplot object.</p>
+    <h2 class="hasAnchor" id="details"><a class="anchor" href="#details"></a>Details</h2>
+
+    <p>The background raster defaults to a gradient fill color scale when 
+<code>breaks</code> is not specified. Otherwise, it will be colored using a 
+discrete Brewer palette.</p>
 
     <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
     <pre class="examples"><div class='input'><span class='co'># \donttest{</span>
