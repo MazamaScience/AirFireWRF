@@ -24,7 +24,7 @@ wrf_rasterPlot(
 
 \item{varName}{The name of a raster variable.}
 
-\item{colors}{A vector of colours to use for n-colour gradient.}
+\item{colors}{A vector of colors to use for n-color gradient.}
 
 \item{values}{A vector of positions (between 0 and 1) for each color in the 
 colors vector.}

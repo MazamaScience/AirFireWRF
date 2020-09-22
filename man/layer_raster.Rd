@@ -4,12 +4,14 @@
 \alias{layer_raster}
 \title{Create a Raster layer for plotting}
 \usage{
-layer_raster(raster = NULL, varName = NULL, alpha = 1)
+layer_raster(raster = NULL, varName = NULL, breaks = NULL, alpha = 1)
 }
 \arguments{
 \item{raster}{A RasterBrick or RasterLayer.}
 
 \item{varName}{The name of a raster variable.}
+
+\item{breaks}{A vector of raster values to use as palette breaks.}
 
 \item{alpha}{Transparency of layer.}
 }

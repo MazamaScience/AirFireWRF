@@ -5,6 +5,7 @@
 #'
 #' @param raster A RasterBrick or RasterLayer.
 #' @param varName The name of a raster variable.
+#' @param breaks A vector of raster values to use as palette breaks.
 #' @param alpha Transparency of layer.
 #'
 #' @return A geom_tile ggproto object.
@@ -12,6 +13,7 @@
 layer_raster <- function(
   raster = NULL,
   varName = NULL,
+  breaks = NULL,
   alpha = 1
 ) {
 
@@ -51,7 +53,11 @@ layer_raster <- function(
     ggplot2::aes(
       x = .data$x,
       y = .data$y,
-      fill = .data$value
+      fill = if ( is.null(breaks) ) {
+        .data$value
+        } else {
+          cut(.data$value, breaks, include.lowest = TRUE)
+        }
     ),
     alpha = alpha
   )
@@ -266,7 +272,7 @@ layer_vectorField <- function(
   arrowScale = 0.05,
   arrowHead = 0.05,
   arrowWidth = 1.2,
-  arrowColor = 'dodgerblue',
+  arrowColor = "dodgerblue",
   alpha = 1,
   xlim = NULL,
   ylim = NULL
@@ -291,7 +297,7 @@ layer_vectorField <- function(
       axis.key.padding = 0,
       right.padding = 0
     ),
-    axis.line = list(col = 'transparent')
+    axis.line = list(col = "transparent")
   )
   
   if ( is.null(raster) ) {

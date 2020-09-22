@@ -63,7 +63,7 @@ wrf_basePlot <- function(
 #'
 #' @param raster A RasterBrick or RasterLayer.
 #' @param varName The name of a raster variable.
-#' @param colors A vector of colours to use for n-colour gradient.
+#' @param colors A vector of colors to use for n-color gradient.
 #' @param values A vector of positions (between 0 and 1) for each color in the 
 #' colors vector.
 #' @param naColor Color for na raster values.
