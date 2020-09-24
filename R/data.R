@@ -12,7 +12,7 @@
 #' This dataset was generated on 2020-09-01 by running:
 #'
 #' \preformatted{
-#' library(WRFmet)
+#' library(AirFireWRF)
 #'
 #' example_PNW <- wrf_load(
 #'   localPath = '~/Data/WRF/wrfout_d3-2020071512-f07-0000.nc',

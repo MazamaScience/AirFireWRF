@@ -25,7 +25,7 @@
 #'
 #' @examples
 #' \donttest{
-#' # library(WRFmet)
+#' # library(AirFireWRF)
 #' # setWRFDataDir("~/Data/WRF")
 #' 
 #' # Takes a ridiculously long time to download 4 ~1GB files

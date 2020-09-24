@@ -1,5 +1,5 @@
 
-library(WRFmet)
+library(AirFireWRF)
 
 nc <- ncdf4::nc_open('~/Data/WRF/wrfout_d3-2020071512-f07-0000.nc')
 

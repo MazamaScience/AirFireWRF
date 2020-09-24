@@ -49,8 +49,8 @@ AirFireModeling::raster_ggmap(bsHour12)
 # ----- WRF Data ---------------------------------------------------------------
 
 library(ggplot2)
-library(WRFmet)
-WRFmet::setWRFDataDir("~/Data/WRF")
+library(AirFireWRF)
+AirFireWRF::setWRFDataDir("~/Data/WRF")
 
 # Basic test of a single raster layer
 wrfUV <- wrf_load(

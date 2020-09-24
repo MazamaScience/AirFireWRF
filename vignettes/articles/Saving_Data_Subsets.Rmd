@@ -58,7 +58,7 @@ variables of interest to the AirFire team, crop out regions like Canada and
 the Pacific Ocean, and rasterize the points onto a 0.06 degree grid:
 
 ```
-library(WRFmet)
+library(AirFireWRF)
 setWRFDataDir("~/Data/WRF")
 
 modelName <- "PNW-4km"

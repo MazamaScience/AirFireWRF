@@ -128,7 +128,7 @@ discrete Brewer palette.
 }
 \examples{
 \donttest{
-library(WRFmet)
+library(AirFireWRF)
 library(raster)
 
 wrf_standardPlot(

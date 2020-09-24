@@ -1,8 +1,8 @@
-# Jon's first work with WRFmet
+# Jon's first work with AirFireWRF
 #
 
 library(raster)
-library(WRFmet)
+library(AirFireWRF)
 setWRFDataDir("~/Data/WRF")
 
 # NOTE:  My desktop machine sometimes doesn't recognized m2.airfire.org

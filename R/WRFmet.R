@@ -1,5 +1,5 @@
 #' @docType package
-#' @name WRFmet
+#' @name AirFireWRF
 #' @title Utilities for working with WRF model output
 #' @description A suite of utility functions providing functions commonly
 #' required for working with WRF model output in R.
@@ -7,8 +7,8 @@ NULL
 
 # ----- Internal Package State -------------------------------------------------
 
-WRFmetEnv <- new.env(parent = emptyenv())
-WRFmetEnv$dataDir <- NULL
+AirFireWRFEnv <- new.env(parent = emptyenv())
+AirFireWRFEnv$dataDir <- NULL
 
 # ----- Data Directory Configuration -------------------------------------------
 
@@ -34,13 +34,13 @@ NULL
 #' @seealso \link{setWRFDataDir}
 
 getWRFDataDir <- function() {
-  if ( is.null(WRFmetEnv$dataDir) ) {
+  if ( is.null(AirFireWRFEnv$dataDir) ) {
     stop(paste0(
       "No data directory found. ",
       "Please set a data directory with setWRFDataDir('~/Data/WRF')"
     ), call. = FALSE)
   } else {
-    return(WRFmetEnv$dataDir)
+    return(AirFireWRFEnv$dataDir)
   }
 }
 
@@ -54,11 +54,11 @@ getWRFDataDir <- function() {
 #' @seealso \link{getWRFDataDir}
 
 setWRFDataDir <- function(dataDir) {
-  old <- WRFmetEnv$dataDir
+  old <- AirFireWRFEnv$dataDir
   dataDir <- path.expand(dataDir)
   tryCatch({
     if (!file.exists(dataDir)) dir.create(dataDir)
-    WRFmetEnv$dataDir <- dataDir
+    AirFireWRFEnv$dataDir <- dataDir
   }, warning = function(warn) {
     warning("Invalid path name.")
   }, error   = function(err) {
@@ -77,6 +77,6 @@ setWRFDataDir <- function(dataDir) {
 #' @seealso setWRFDataDir
 
 removeWRFDataDir <- function() {
-  old <- WRFmetEnv$dataDir
-  WRFmetEnv$dataDir <- NULL
+  old <- AirFireWRFEnv$dataDir
+  AirFireWRFEnv$dataDir <- NULL
 }

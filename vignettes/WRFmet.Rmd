@@ -1,10 +1,10 @@
 ---
-title: "WRFmet"
+title: "AirFireWRF"
 author: "Mazama Science"
 date: "8/19/2020"
 output: html_document
 vignette: >
-  %\VignetteIndexEntry{WRFmet}
+  %\VignetteIndexEntry{AirFireWRF}
   %\VignetteEngine{knitr::rmarkdown}
   %\VignetteEncoding{UTF-8}
 ---
@@ -23,7 +23,7 @@ individual forecast hours. For instance, a file named `PNW-4km_2020082712_07.nc`
 would describe the PNW-4km atmosphere forecasted 7 hours after the start of the 
 2020-08-27 12pm model run. 
 
-The **WRFmet** package allows users to download, read, and visualize the 
+The **AirFireWRF** package allows users to download, read, and visualize the 
 contents of these individual WRF data files.
 
 _NOTE:  Because WRF output files are very large, R code in this vignette is not 
@@ -38,7 +38,7 @@ runs are available through AirFire. This can be done using the
 maximum number of recent model runs to be listed (defaults to 1):
 
 ```
-library(WRFmet)
+library(AirFireWRF)
 
 modelRun <- wrf_latestModelRun(modelName = "PNW-4km")
 modelRun
@@ -54,7 +54,7 @@ though, we should first define a directory to hold all our WRF data. A file for
 a single forecast hour can be upwards of a hundred Megabytes, so a whole model 
 run (AirFire's are typically 84 hours) could take up quite a bit of space. 
 Therefore, it is nice to specify a dedicated place to hold all this information, 
-and we can do that using WRFmet's `setWRFDataDir()` function:
+and we can do that using AirFireWRF's `setWRFDataDir()` function:
 
 ```
 setWRFDataDir("~/Data/WRF")
@@ -141,7 +141,7 @@ max values :     3571.1672,      317.7452
 
 ## Plotting WRF Data
 
-Let's find out what these atmospheric readings actually look like. WRFmet 
+Let's find out what these atmospheric readings actually look like. AirFireWRF 
 provides several preset plotting functions for visualizing this information as 
 rasters and vector fields with spatial point/polygon overlays. These functions
 include:
@@ -155,14 +155,14 @@ missing, so this is more of a catch-all plot that can do the same as
 So let's throw together a plot for the elevation (HGT) field of our raster:
 
 _NOTE: In order to build this vignette, this plot will display an example raster
-provided by WRFmet package "example_PNW"._
+provided by AirFireWRF package "example_PNW"._
 
 ```{r}
-library(WRFmet)
+library(AirFireWRF)
 library(raster)
 
 wrf_rasterPlot(
-  raster = WRFmet::example_PNW$HGT,
+  raster = AirFireWRF::example_PNW$HGT,
   varName = "HGT",
   title = "PNW Elevation",
   flab = "Elev (m)",
@@ -175,7 +175,7 @@ also simply provide a single *RasterLayer* like so:
 
 ```
 wrf_rasterPlot(
-  raster = WRFmet::example_PNW$HGT,
+  raster = AirFireWRF::example_PNW$HGT,
   title = "PNW Elevation",
   flab = "Elev (m)",
   ratio = 1.4

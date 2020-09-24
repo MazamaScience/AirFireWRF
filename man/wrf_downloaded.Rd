@@ -28,7 +28,7 @@ List downloaded WRF model run files
 }
 \examples{
 \donttest{
-library(WRFmet)
+library(AirFireWRF)
 setWRFDataDir("~/Data/WRF")
 
 modelRun <- wrf_latestModelRun("PNW-4km")

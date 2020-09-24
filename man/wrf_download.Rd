@@ -35,7 +35,7 @@ On 2020-08-27, available model identifiers include the following:
 }
 \examples{
 \donttest{
-library(WRFmet)
+library(AirFireWRF)
 setWRFDataDir('~/Data/WRF')
 
 modelRun <- wrf_latestModelRun("PNW-4km")

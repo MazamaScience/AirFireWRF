@@ -354,9 +354,9 @@ layer_vectorField <- function(
 
 if (FALSE) {
   
-  library(WRFmet)
+  library(AirFireWRF)
   
-  extent <- raster::extent(WRFmet::example_PNW)
+  extent <- raster::extent(AirFireWRF::example_PNW)
   xlim <- c(round(extent@xmin), round(extent@xmax))
   ylim <- c(round(extent@ymin), round(extent@ymax))
   
@@ -382,7 +382,7 @@ if (FALSE) {
       na.value = 'transparent'
     ) +
     layer_raster(
-      raster = WRFmet::example_PNW$HGT
+      raster = AirFireWRF::example_PNW$HGT
     ) +
     layer_spPolys(
       polygons = waPoly,
@@ -394,11 +394,11 @@ if (FALSE) {
       size = 3
     ) +
     layer_contours(
-      raster = WRFmet::example_PNW$HGT,
+      raster = AirFireWRF::example_PNW$HGT,
       breaks = c(100, 1500, 2500)
     ) +
     layer_vectorField(
-      raster = WRFmet::example_PNW,
+      raster = AirFireWRF::example_PNW,
       uName = "U10",
       vName = "V10",
       arrowColor = 'black',

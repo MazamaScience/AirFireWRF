@@ -20,7 +20,7 @@
 #'
 #' @examples
 #' \donttest{
-#' library(WRFmet)
+#' library(AirFireWRF)
 #' wrf_latestModelRun("PNW-4km")
 #' }
 

@@ -83,7 +83,7 @@ Some useful variables provided by WRF:
 }
 \examples{
 \donttest{
-library(WRFmet)
+library(AirFireWRF)
 setWRFDataDir("~/Data/WRF")
 
 raster <- wrf_load(

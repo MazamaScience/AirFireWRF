@@ -86,7 +86,7 @@ wrf_basePlot <- function(
 #' 
 #' @examples
 #' \donttest{
-#' library(WRFmet)
+#' library(AirFireWRF)
 #' library(raster)
 #' 
 #' wrf_rasterPlot(
@@ -220,7 +220,7 @@ wrf_rasterPlot <- function(
 #' 
 #' @examples
 #' \donttest{
-#' library(WRFmet)
+#' library(AirFireWRF)
 #' library(raster)
 #' 
 #' wrf_standardPlot(

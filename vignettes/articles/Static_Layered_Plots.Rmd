@@ -20,14 +20,14 @@ knitr::opts_chunk$set(
 ```
 
 This article will walk through the process of plotting meteorological data using
-the WRFmet package.
+the AirFireWRF package.
 
 ## Plotting Outline
 
 The Weather Research and Forecast (WRF) model is used to predict meteorological 
 conditions over the Earth. These forecasts output grids of spatial points that 
 that track variables like temperature, wind velocity, moisture levels, and many 
-others. The WRFmet package provides an easy way to convert these collections of 
+others. The AirFireWRF package provides an easy way to convert these collections of 
 points into Raster objects so they can then be plotted with additional features.
 For instance, you can build a plot with a Raster for a WRF variable, a vector 
 field for WRF vector components, and layers for spatial points and polygons. 
@@ -55,7 +55,7 @@ vector components) which give us a RasterBrick with two layers. Here is an
 example of what that would look like:
 
 ```
-library(WRFmet)
+library(AirFireWRF)
 
 # Define a common Raster grid
 xlim <- c(-125, -111)
@@ -85,10 +85,10 @@ But for now, let's use an example Raster already included in the package:
 
 ```{r load_data}
 library(raster)
-library(WRFmet)
+library(AirFireWRF)
 library(raster)
 
-raster <- WRFmet::example_PNW
+raster <- AirFireWRF::example_PNW
 
 # Extract the underlying grid these Rasters are using
 extent <- raster::extent(raster)
@@ -121,7 +121,7 @@ rasterVis::vectorplot(
 
 It would be nice if we could combine these plots along with additional features
 like state borders and points for air quality monitors. We can do this using
-WRFmet's layered plotting capabilities. WRFmet provides a several helpful
+AirFireWRF's layered plotting capabilities. AirFireWRF provides a several helpful
 `layer_*()` functions which produce GGPlot elements much like `geom_*()`. The 
 layers currently available are:
 
@@ -336,7 +336,7 @@ wrfMap
 ## BlueSky Plotting Example
 
 The `layer_raster()` function can work with Rasters other than those we create 
-through WRFmet. For instance, we can also plot BlueSky air quality Rasters 
+through AirFireWRF. For instance, we can also plot BlueSky air quality Rasters 
 from the AirFireModeling package:
 
 ```{r bluesky_plot}

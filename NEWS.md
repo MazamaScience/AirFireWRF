@@ -1,4 +1,4 @@
-# WRMmet 0.1.13
+# AirFireWRF 0.1.13
 
 * Changed the `wrf_load()` `vars` parameter to `varNames` for consistency with
 plot function parameters.
@@ -6,11 +6,11 @@ plot function parameters.
 * `wrf_rasterPlot()` and `wrf_standardPlot()` now support discrete value ranges 
 and Brewer palettes to color their rasters.
 
-# WRFmet 0.1.12
+# AirFireWRF 0.1.12
 
 * Tweak to color and line width in `layer_vectorField()`.
 
-# WRFmet 0.1.11
+# AirFireWRF 0.1.11
 
 * `wrf_standardPlot()` can now plot a contour layer.
 * Added line thickness parameters in `wrf_standardPlot()` for the spatial and 
@@ -23,11 +23,11 @@ state polygon layers.
 since it was more confusing than helpful (only held additional arguments to
 `ggplot2::scale_fill_gradientn()`).
 
-# WRFmet 0.1.10
+# AirFireWRF 0.1.10
 
 * First pass at `wrf_loadTimeSeries()`.
 
-# WRFmet 0.1.9
+# AirFireWRF 0.1.9
 
 * Added new plot layer function: `layer_contours()`.
 * Changed `layer_spPolys()`'s `spdf` parameter to `polygons`.
@@ -35,11 +35,11 @@ since it was more confusing than helpful (only held additional arguments to
 * Added `lineWidth` as a parameter to `layer_states()`.
 * Added `lineWidth` as a parameter to `layer_spPolys()`.
 
-# WRFmet 0.1.8
+# AirFireWRF 0.1.8
 
 * example_PNW raster now has a proper title.
 
-# WRFmet 0.1.7
+# AirFireWRF 0.1.7
 
 * Changed layer_vectorField() to take in a single raster object `raster` and the
 names of its u and v layers: `uName` and `vName`.
@@ -52,17 +52,17 @@ raster title.
 * Updated all vignettes and functions, and examples to properly use these new 
 parameters and function names.
 
-# WRFmet 0.1.6
+# AirFireWRF 0.1.6
 
 * `wrf_load()` now sets the title of the loaded *RasterBrick* to the format:
 "[model domain] yyyy-mm-dd hh[am/pm], Hour [forecast hour]"
 
-# WRFmet 0.1.5
+# AirFireWRF 0.1.5
 
 * Changed default polygon fill from 'white' to 'transparent' for `layer_states()`
 and `layer_spPolys()`.
 
-# WRFmet 0.1.4
+# AirFireWRF 0.1.4
 
 * Added ability to download and load PNW-1.33km WRF files.
 * `plot_standard()` now supports drawing both U.S. state polygons and generic 
@@ -77,12 +77,12 @@ _SpatialPolygonDataFrame_s.
   * Properly resamples cropped rasters.
 * Hid `plot_base()` from users.
 
-# WRFmet 0.1.3
+# AirFireWRF 0.1.3
 
 * Added "Saving Data Subsets" article.
 * Renamed the `sample_PNW` dataset to `example_PNW`.
 
-# WRFmet 0.1.2
+# AirFireWRF 0.1.2
 
 * First pass at standard plotting functions `plot_base()` and `plot_raster()`.
 * Added `layer_~()` functions to build up ggplot plots: `layer_raster()`,
@@ -90,10 +90,10 @@ _SpatialPolygonDataFrame_s.
 * Added `wrf_download()` and `wrf_downloaded()`.
 * Added `wrf_latestModelRun()` to list available model runs.
 
-# WRFmet 0.1.1
+# AirFireWRF 0.1.1
 
 * Added "Static Layered Plots" article.
 
-# WRFmet 0.1.0
+# AirFireWRF 0.1.0
 
 * Initial Release
