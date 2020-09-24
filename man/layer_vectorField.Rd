@@ -2,7 +2,7 @@
 % Please edit documentation in R/layers.R
 \name{layer_vectorField}
 \alias{layer_vectorField}
-\title{Create a vector field layer for plotting}
+\title{Create a plot layer for a vector field}
 \usage{
 layer_vectorField(
   raster = NULL,
@@ -27,13 +27,13 @@ layer_vectorField(
 
 \item{arrowCount}{Number of arrows to draw.}
 
-\item{arrowScale}{Arrow length scale factor.}
+\item{arrowScale}{Scale factor of arrow length.}
 
-\item{arrowHead}{Arrow head size.}
+\item{arrowHead}{Size of arrow head.}
 
 \item{arrowWidth}{Line width of arrows.}
 
-\item{arrowColor}{Arrow color.}
+\item{arrowColor}{Color of arrows.}
 
 \item{alpha}{Transparency of layer.}
 
@@ -45,5 +45,5 @@ layer_vectorField(
 An annotation_custom ggproto object.
 }
 \description{
-Create a vector field layer for plotting
+Create a plot layer for a vector field
 }

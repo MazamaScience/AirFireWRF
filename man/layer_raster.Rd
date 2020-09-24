@@ -2,7 +2,7 @@
 % Please edit documentation in R/layers.R
 \name{layer_raster}
 \alias{layer_raster}
-\title{Create a Raster layer for plotting}
+\title{Create a plot layer for a raster}
 \usage{
 layer_raster(raster = NULL, varName = NULL, breaks = NULL, alpha = 1)
 }
@@ -19,5 +19,5 @@ layer_raster(raster = NULL, varName = NULL, breaks = NULL, alpha = 1)
 A geom_tile ggproto object.
 }
 \description{
-Create a Raster layer for plotting
+Create a plot layer for a raster
 }

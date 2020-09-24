@@ -6,7 +6,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<title>Load time series WRF model run data — wrf_loadTimeSeries • AirFireWRF</title>
+<title>Create a plot layer for state county polygons — layer_counties • AirFireWRF</title>
 
 
 <!-- jquery -->
@@ -39,15 +39,8 @@
 
 
 
-<meta property="og:title" content="Load time series WRF model run data — wrf_loadTimeSeries" />
-<meta property="og:description" content="Loads time series WRF model run data as a raster package 
-RasterBrick. If the specified data does not exist on the user's 
-machine, then it will try to be downloaded from the AirFire database.
-On 2020-09-17, available model identifiers include the following:
-PNW-1.33km
-PNW-4km
-
-" />
+<meta property="og:title" content="Create a plot layer for state county polygons — layer_counties" />
+<meta property="og:description" content="Create a plot layer for state county polygons" />
 
 
 
@@ -136,29 +129,19 @@ PNW-4km
 <div class="row">
   <div class="col-md-9 contents">
     <div class="page-header">
-    <h1>Load time series WRF model run data</h1>
-    <small class="dont-index">Source: <a href='https://github.com/MazamaScience/AirFireWRF/blob/master/R/wrf_loadTimeSeries.R'><code>R/wrf_loadTimeSeries.R</code></a></small>
-    <div class="hidden name"><code>wrf_loadTimeSeries.Rd</code></div>
+    <h1>Create a plot layer for state county polygons</h1>
+    <small class="dont-index">Source: <a href='https://github.com/MazamaScience/AirFireWRF/blob/master/R/layers.R'><code>R/layers.R</code></a></small>
+    <div class="hidden name"><code>layer_counties.Rd</code></div>
     </div>
 
     <div class="ref-description">
-    <p>Loads time series WRF model run data as a <span class="pkg">raster</span> package 
-<em>RasterBrick</em>. If the specified data does not exist on the user's 
-machine, then it will try to be downloaded from the AirFire database.</p>
-<p>On 2020-09-17, available model identifiers include the following:</p><ul>
-<li><p>PNW-1.33km</p></li>
-<li><p>PNW-4km</p></li>
-</ul>
-
+    <p>Create a plot layer for state county polygons</p>
     </div>
 
-    <pre class="usage"><span class='fu'>wrf_loadTimeSeries</span>(
-  <span class='kw'>modelName</span> <span class='kw'>=</span> <span class='kw'>NULL</span>,
-  <span class='kw'>modelRun</span> <span class='kw'>=</span> <span class='kw'>NULL</span>,
-  <span class='kw'>modelRunHours</span> <span class='kw'>=</span> <span class='kw'>NULL</span>,
-  <span class='kw'>baseUrl</span> <span class='kw'>=</span> <span class='st'>"http://m2.airfire.org"</span>,
-  <span class='kw'>varName</span> <span class='kw'>=</span> <span class='kw'>NULL</span>,
-  <span class='kw'>res</span> <span class='kw'>=</span> <span class='kw'>NULL</span>,
+    <pre class="usage"><span class='fu'>layer_counties</span>(
+  <span class='kw'>lineWidth</span> <span class='kw'>=</span> <span class='fl'>0.5</span>,
+  <span class='kw'>color</span> <span class='kw'>=</span> <span class='st'>"black"</span>,
+  <span class='kw'>fill</span> <span class='kw'>=</span> <span class='st'>"transparent"</span>,
   <span class='kw'>xlim</span> <span class='kw'>=</span> <span class='kw'>NULL</span>,
   <span class='kw'>ylim</span> <span class='kw'>=</span> <span class='kw'>NULL</span>
 )</pre>
@@ -167,28 +150,16 @@ machine, then it will try to be downloaded from the AirFire database.</p>
     <table class="ref-arguments">
     <colgroup><col class="name" /><col class="desc" /></colgroup>
     <tr>
-      <th>modelName</th>
-      <td><p>Model identifier.</p></td>
+      <th>lineWidth</th>
+      <td><p>Line width of county borders.</p></td>
     </tr>
     <tr>
-      <th>modelRun</th>
-      <td><p>Model initialization timestamp as "YYYYMMDDHH".</p></td>
+      <th>color</th>
+      <td><p>Line color of county borders.</p></td>
     </tr>
     <tr>
-      <th>modelRunHours</th>
-      <td><p>Vector of hours forecasted from init time, i.e. 7:24.</p></td>
-    </tr>
-    <tr>
-      <th>baseUrl</th>
-      <td><p>Base URL for WRF output.</p></td>
-    </tr>
-    <tr>
-      <th>varName</th>
-      <td><p>WRF variable to load.</p></td>
-    </tr>
-    <tr>
-      <th>res</th>
-      <td><p>Resolution of raster in degrees.</p></td>
+      <th>fill</th>
+      <td><p>Fill color of county polygons.</p></td>
     </tr>
     <tr>
       <th>xlim</th>
@@ -202,26 +173,8 @@ machine, then it will try to be downloaded from the AirFire database.</p>
 
     <h2 class="hasAnchor" id="value"><a class="anchor" href="#value"></a>Value</h2>
 
-    <p>A <span class="pkg">raster</span> package <em>RasterBrick</em> object.</p>
+    <p>A geom_polygon ggproto object.</p>
 
-    <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
-    <pre class="examples"><div class='input'><span class='co'># \donttest{</span>
-<span class='fu'><a href='https://rdrr.io/r/base/library.html'>library</a></span>(<span class='no'>AirFireWRF</span>)
-<span class='fu'><a href='setWRFDataDir.html'>setWRFDataDir</a></span>(<span class='st'>"~/Data/WRF"</span>)
-
-<span class='co'># Takes a ridiculously long time to download 4 ~1GB files</span>
-<span class='no'>tempTimeSeries</span> <span class='kw'>&lt;-</span> <span class='fu'>wrf_loadTimeSeries</span>(
- <span class='kw'>modelName</span> <span class='kw'>=</span> <span class='st'>"PNW-4km"</span>,
- <span class='kw'>modelRun</span> <span class='kw'>=</span> <span class='st'>"2020092412"</span>,
- <span class='kw'>modelRunHours</span> <span class='kw'>=</span> <span class='fl'>7</span>:<span class='fl'>10</span>,
- <span class='kw'>varName</span> <span class='kw'>=</span> <span class='st'>"TSK"</span>,
- <span class='kw'>res</span> <span class='kw'>=</span> <span class='fl'>0.05</span>,
-  <span class='kw'>xlim</span> <span class='kw'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span>(-<span class='fl'>125</span>, -<span class='fl'>117</span>),
- <span class='kw'>ylim</span> <span class='kw'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span>(<span class='fl'>45</span>, <span class='fl'>49</span>)
-)</div><div class='output co'>#&gt; <span class='message'>WRF model run exists at: /Users/mazama/Data/WRF/PNW-4km_2020092412_07.nc</span></div><div class='output co'>#&gt; <span class='message'>WRF model run exists at: /Users/mazama/Data/WRF/PNW-4km_2020092412_08.nc</span></div><div class='output co'>#&gt; <span class='message'>WRF model run exists at: /Users/mazama/Data/WRF/PNW-4km_2020092412_09.nc</span></div><div class='output co'>#&gt; <span class='message'>WRF model run exists at: /Users/mazama/Data/WRF/PNW-4km_2020092412_10.nc</span></div><div class='input'>
-# rasterVis::levelplot(tempTimeSeries)
-# }
-</div></pre>
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="pkgdown-sidebar">
     <nav id="toc" data-toggle="toc" class="sticky-top">

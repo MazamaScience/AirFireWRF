@@ -25,19 +25,19 @@
 #'
 #' @examples
 #' \donttest{
-#' # library(AirFireWRF)
-#' # setWRFDataDir("~/Data/WRF")
+#' library(AirFireWRF)
+#' setWRFDataDir("~/Data/WRF")
 #' 
 #' # Takes a ridiculously long time to download 4 ~1GB files
-#' #tempTimeSeries <- wrf_loadTimeSeries(
-#' # modelName = "PNW-1.33km",
-#' # modelRun = "2020091712",
-#' # modelRunHours = 7:10,
-#' # varName = "TSK",
-#' # res = 0.05,
-#' #  xlim = c(-125, -117),
-#' # ylim = c(45, 49)
-#' # )
+#' tempTimeSeries <- wrf_loadTimeSeries(
+#'  modelName = "PNW-4km",
+#'  modelRun = "2020092412",
+#'  modelRunHours = 7:10,
+#'  varName = "TSK",
+#'  res = 0.05,
+#'   xlim = c(-125, -117),
+#'  ylim = c(45, 49)
+#' )
 #'
 #' # rasterVis::levelplot(tempTimeSeries)
 #' }

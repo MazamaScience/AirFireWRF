@@ -2,7 +2,7 @@
 % Please edit documentation in R/layers.R
 \name{layer_points}
 \alias{layer_points}
-\title{Create a points layer for plotting}
+\title{Create a plot layer for spatial points}
 \usage{
 layer_points(points = NULL, size = 1)
 }
@@ -15,5 +15,5 @@ layer_points(points = NULL, size = 1)
 A geom_point ggproto object.
 }
 \description{
-Create a points layer for plotting
+Create a plot layer for spatial points
 }

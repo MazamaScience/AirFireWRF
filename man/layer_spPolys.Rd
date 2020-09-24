@@ -2,7 +2,7 @@
 % Please edit documentation in R/layers.R
 \name{layer_spPolys}
 \alias{layer_spPolys}
-\title{Create a spatial polygons layer for plotting}
+\title{Create a plot layer for spatial polygons}
 \usage{
 layer_spPolys(
   polygons = NULL,
@@ -24,5 +24,5 @@ layer_spPolys(
 A geom_polygon ggproto object.
 }
 \description{
-Create a spatial polygons layer for plotting
+Create a plot layer for spatial polygons
 }

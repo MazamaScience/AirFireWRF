@@ -1,7 +1,7 @@
 #' @export
 #' @importFrom rlang .data
 #' 
-#' @title Create a Raster layer for plotting
+#' @title Create a plot layer for a raster
 #'
 #' @param raster A RasterBrick or RasterLayer.
 #' @param varName The name of a raster variable.
@@ -67,7 +67,7 @@ layer_raster <- function(
 }
 
 #' @export
-#' @title Create a contour lines layer for plotting
+#' @title Create a plot layer for contour lines
 #'
 #' @param raster A RasterBrick or RasterLayer
 #' @param varName The name of a raster variable.
@@ -140,7 +140,7 @@ layer_contours <- function(
 
 
 #' @export
-#' @title Create a spatial polygons layer for plotting
+#' @title Create a plot layer for spatial polygons
 #'
 #' @param polygons A SpatialPolygonsDataFrame.
 #' @param lineWidth Line width of polygon outlines.
@@ -178,7 +178,7 @@ layer_spPolys <- function(
 
 
 #' @export
-#' @title Create a state polygons layer for plotting
+#' @title Create a plot layer for state polygons
 #'
 #' @param lineWidth Line width of state borders.
 #' @param color Line color of state borders.
@@ -197,7 +197,7 @@ layer_states <- function(
 ) {
   
   states <- ggplot2::map_data(
-    "state",
+    map = "state",
     xlim = xlim,
     ylim = ylim
   )
@@ -220,7 +220,49 @@ layer_states <- function(
 
 
 #' @export
-#' @title Create a points layer for plotting
+#' @title Create a plot layer for state county polygons
+#'
+#' @param lineWidth Line width of county borders.
+#' @param color Line color of county borders.
+#' @param fill Fill color of county polygons.
+#' @param xlim A vector of coordinate longitude bounds.
+#' @param ylim A vector of coordinate latitude bounds.
+#'
+#' @return A geom_polygon ggproto object.
+
+layer_counties <- function(
+  lineWidth = 0.5,
+  color = "black",
+  fill = "transparent",
+  xlim = NULL,
+  ylim = NULL
+) {
+  
+  counties <- ggplot2::map_data(
+    map = "county",
+    xlim = xlim,
+    ylim = ylim
+  )
+  
+  layer <- ggplot2::geom_polygon(
+    data = counties,
+    ggplot2::aes(
+      y = .data$lat,
+      x = .data$long,
+      group = .data$group
+    ),
+    size = lineWidth,
+    fill = fill,
+    color = color
+  )
+  
+  return(layer)
+  
+}
+
+
+#' @export
+#' @title Create a plot layer for spatial points
 #'
 #' @param points A SpatialPointsDataFrame of coordinates and data.
 #' @param size Point size.
@@ -248,16 +290,16 @@ layer_points <- function(
 
 
 #' @export
-#' @title Create a vector field layer for plotting
+#' @title Create a plot layer for a vector field
 #'
 #' @param raster A RasterBrick with layers for u/v vector components.
 #' @param uName The name of the u component layer.
 #' @param vName The name of the v component layer.
 #' @param arrowCount Number of arrows to draw.
-#' @param arrowScale Arrow length scale factor.
+#' @param arrowScale Scale factor of arrow length.
 #' @param arrowWidth Line width of arrows.
-#' @param arrowHead Arrow head size.
-#' @param arrowColor Arrow color.
+#' @param arrowHead Size of arrow head.
+#' @param arrowColor Color of arrows.
 #' @param alpha Transparency of layer.
 #' @param xlim A vector of coordinate longitude bounds.
 #' @param ylim A vector of coordinate latitude bounds.

@@ -2,7 +2,7 @@
 % Please edit documentation in R/layers.R
 \name{layer_contours}
 \alias{layer_contours}
-\title{Create a contour lines layer for plotting}
+\title{Create a plot layer for contour lines}
 \usage{
 layer_contours(
   raster = NULL,
@@ -33,5 +33,5 @@ layer_contours(
 A geom_contour ggproto object.
 }
 \description{
-Create a contour lines layer for plotting
+Create a plot layer for contour lines
 }
