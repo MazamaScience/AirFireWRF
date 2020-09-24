@@ -1,3 +1,7 @@
+# AirFireWRF 0.1.14
+
+* Changed package name and all instances of "WRFmet" to "AirFireWRF".
+
 # AirFireWRF 0.1.13
 
 * Changed the `wrf_load()` `vars` parameter to `varNames` for consistency with

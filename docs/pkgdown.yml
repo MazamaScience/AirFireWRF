@@ -2,8 +2,8 @@ pandoc: 2.7.3
 pkgdown: 1.5.1
 pkgdown_sha: ~
 articles:
-  AirFireWRF: AirFireWRF.html
+  WRFmet: WRFmet.html
   Saving_Data_Subsets: articles/Saving_Data_Subsets.html
   Static_Layered_Plots: articles/Static_Layered_Plots.html
-last_built: 2020-09-22T18:56Z
+last_built: 2020-09-24T16:26Z
 

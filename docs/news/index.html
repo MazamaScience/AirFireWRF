@@ -71,7 +71,7 @@
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">AirFireWRF</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.1.13</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.1.14</span>
       </span>
     </div>
 
@@ -84,9 +84,6 @@
   </a>
 </li>
 <li>
-  <a href="../articles/AirFireWRF.html">Get started</a>
-</li>
-<li>
   <a href="../reference/index.html">Reference</a>
 </li>
 <li class="dropdown">
@@ -96,6 +93,9 @@
     <span class="caret"></span>
   </a>
   <ul class="dropdown-menu" role="menu">
+    <li>
+      <a href="../articles/WRFmet.html">AirFireWRF</a>
+    </li>
     <li>
       <a href="../articles/articles/Saving_Data_Subsets.html">Saving Data Subsets</a>
     </li>
@@ -132,9 +132,16 @@
       <small>Source: <a href='https://github.com/MazamaScience/AirFireWRF/blob/master/NEWS.md'><code>NEWS.md</code></a></small>
     </div>
 
-    <div id="wrmmet-0113" class="section level1">
+    <div id="airfirewrf-0114" class="section level1">
+<h1 class="page-header" data-toc-text="0.1.14">
+<a href="#airfirewrf-0114" class="anchor"></a>AirFireWRF 0.1.14</h1>
+<ul>
+<li>Changed package name and all instances of “WRFmet” to “AirFireWRF”.</li>
+</ul>
+</div>
+    <div id="airfirewrf-0113" class="section level1">
 <h1 class="page-header" data-toc-text="0.1.13">
-<a href="#wrmmet-0113" class="anchor"></a>WRMmet 0.1.13</h1>
+<a href="#airfirewrf-0113" class="anchor"></a>AirFireWRF 0.1.13</h1>
 <ul>
 <li>Changed the <code><a href="../reference/wrf_load.html">wrf_load()</a></code> <code>vars</code> parameter to <code>varNames</code> for consistency with plot function parameters.</li>
 <li>
@@ -143,16 +150,16 @@
 <code><a href="../reference/wrf_rasterPlot.html">wrf_rasterPlot()</a></code> and <code><a href="../reference/wrf_standardPlot.html">wrf_standardPlot()</a></code> now support discrete value ranges and Brewer palettes to color their rasters.</li>
 </ul>
 </div>
-    <div id="AirFireWRF-0112" class="section level1">
+    <div id="airfirewrf-0112" class="section level1">
 <h1 class="page-header" data-toc-text="0.1.12">
-<a href="#AirFireWRF-0112" class="anchor"></a>AirFireWRF 0.1.12</h1>
+<a href="#airfirewrf-0112" class="anchor"></a>AirFireWRF 0.1.12</h1>
 <ul>
 <li>Tweak to color and line width in <code><a href="../reference/layer_vectorField.html">layer_vectorField()</a></code>.</li>
 </ul>
 </div>
-    <div id="AirFireWRF-0111" class="section level1">
+    <div id="airfirewrf-0111" class="section level1">
 <h1 class="page-header" data-toc-text="0.1.11">
-<a href="#AirFireWRF-0111" class="anchor"></a>AirFireWRF 0.1.11</h1>
+<a href="#airfirewrf-0111" class="anchor"></a>AirFireWRF 0.1.11</h1>
 <ul>
 <li>
 <code><a href="../reference/wrf_standardPlot.html">wrf_standardPlot()</a></code> can now plot a contour layer.</li>
@@ -167,16 +174,16 @@
 <li>Removed the <code>...</code> parameter from both <code>wrf_raster()</code> and <code><a href="../reference/wrf_standardPlot.html">wrf_standardPlot()</a></code> since it was more confusing than helpful (only held additional arguments to <code><a href="https://ggplot2.tidyverse.org/reference/scale_gradient.html">ggplot2::scale_fill_gradientn()</a></code>).</li>
 </ul>
 </div>
-    <div id="AirFireWRF-0110" class="section level1">
+    <div id="airfirewrf-0110" class="section level1">
 <h1 class="page-header" data-toc-text="0.1.10">
-<a href="#AirFireWRF-0110" class="anchor"></a>AirFireWRF 0.1.10</h1>
+<a href="#airfirewrf-0110" class="anchor"></a>AirFireWRF 0.1.10</h1>
 <ul>
 <li>First pass at <code><a href="../reference/wrf_loadTimeSeries.html">wrf_loadTimeSeries()</a></code>.</li>
 </ul>
 </div>
-    <div id="AirFireWRF-019" class="section level1">
+    <div id="airfirewrf-019" class="section level1">
 <h1 class="page-header" data-toc-text="0.1.9">
-<a href="#AirFireWRF-019" class="anchor"></a>AirFireWRF 0.1.9</h1>
+<a href="#airfirewrf-019" class="anchor"></a>AirFireWRF 0.1.9</h1>
 <ul>
 <li>Added new plot layer function: <code><a href="../reference/layer_contours.html">layer_contours()</a></code>.</li>
 <li>Changed <code><a href="../reference/layer_spPolys.html">layer_spPolys()</a></code>’s <code>spdf</code> parameter to <code>polygons</code>.</li>
@@ -185,16 +192,16 @@
 <li>Added <code>lineWidth</code> as a parameter to <code><a href="../reference/layer_spPolys.html">layer_spPolys()</a></code>.</li>
 </ul>
 </div>
-    <div id="AirFireWRF-018" class="section level1">
+    <div id="airfirewrf-018" class="section level1">
 <h1 class="page-header" data-toc-text="0.1.8">
-<a href="#AirFireWRF-018" class="anchor"></a>AirFireWRF 0.1.8</h1>
+<a href="#airfirewrf-018" class="anchor"></a>AirFireWRF 0.1.8</h1>
 <ul>
 <li>example_PNW raster now has a proper title.</li>
 </ul>
 </div>
-    <div id="AirFireWRF-017" class="section level1">
+    <div id="airfirewrf-017" class="section level1">
 <h1 class="page-header" data-toc-text="0.1.7">
-<a href="#AirFireWRF-017" class="anchor"></a>AirFireWRF 0.1.7</h1>
+<a href="#airfirewrf-017" class="anchor"></a>AirFireWRF 0.1.7</h1>
 <ul>
 <li>Changed layer_vectorField() to take in a single raster object <code>raster</code> and the names of its u and v layers: <code>uName</code> and <code>vName</code>.</li>
 <li>Changed layer_raster() to take in an optional <code>varName</code> parameter in case the given raster is a multilayer <em>RasterBrick</em>.</li>
@@ -204,24 +211,24 @@
 <li>Updated all vignettes and functions, and examples to properly use these new parameters and function names.</li>
 </ul>
 </div>
-    <div id="AirFireWRF-016" class="section level1">
+    <div id="airfirewrf-016" class="section level1">
 <h1 class="page-header" data-toc-text="0.1.6">
-<a href="#AirFireWRF-016" class="anchor"></a>AirFireWRF 0.1.6</h1>
+<a href="#airfirewrf-016" class="anchor"></a>AirFireWRF 0.1.6</h1>
 <ul>
 <li>
 <code><a href="../reference/wrf_load.html">wrf_load()</a></code> now sets the title of the loaded <em>RasterBrick</em> to the format: “[model domain] yyyy-mm-dd hh[am/pm], Hour [forecast hour]”</li>
 </ul>
 </div>
-    <div id="AirFireWRF-015" class="section level1">
+    <div id="airfirewrf-015" class="section level1">
 <h1 class="page-header" data-toc-text="0.1.5">
-<a href="#AirFireWRF-015" class="anchor"></a>AirFireWRF 0.1.5</h1>
+<a href="#airfirewrf-015" class="anchor"></a>AirFireWRF 0.1.5</h1>
 <ul>
 <li>Changed default polygon fill from ‘white’ to ‘transparent’ for <code><a href="../reference/layer_states.html">layer_states()</a></code> and <code><a href="../reference/layer_spPolys.html">layer_spPolys()</a></code>.</li>
 </ul>
 </div>
-    <div id="AirFireWRF-014" class="section level1">
+    <div id="airfirewrf-014" class="section level1">
 <h1 class="page-header" data-toc-text="0.1.4">
-<a href="#AirFireWRF-014" class="anchor"></a>AirFireWRF 0.1.4</h1>
+<a href="#airfirewrf-014" class="anchor"></a>AirFireWRF 0.1.4</h1>
 <ul>
 <li>Added ability to download and load PNW-1.33km WRF files.</li>
 <li>
@@ -240,17 +247,17 @@
 <li>Hid <code>plot_base()</code> from users.</li>
 </ul>
 </div>
-    <div id="AirFireWRF-013" class="section level1">
+    <div id="airfirewrf-013" class="section level1">
 <h1 class="page-header" data-toc-text="0.1.3">
-<a href="#AirFireWRF-013" class="anchor"></a>AirFireWRF 0.1.3</h1>
+<a href="#airfirewrf-013" class="anchor"></a>AirFireWRF 0.1.3</h1>
 <ul>
 <li>Added “Saving Data Subsets” article.</li>
 <li>Renamed the <code>sample_PNW</code> dataset to <code>example_PNW</code>.</li>
 </ul>
 </div>
-    <div id="AirFireWRF-012" class="section level1">
+    <div id="airfirewrf-012" class="section level1">
 <h1 class="page-header" data-toc-text="0.1.2">
-<a href="#AirFireWRF-012" class="anchor"></a>AirFireWRF 0.1.2</h1>
+<a href="#airfirewrf-012" class="anchor"></a>AirFireWRF 0.1.2</h1>
 <ul>
 <li>First pass at standard plotting functions <code>plot_base()</code> and <code>plot_raster()</code>.</li>
 <li>Added <code>layer_~()</code> functions to build up ggplot plots: <code><a href="../reference/layer_raster.html">layer_raster()</a></code>, <code><a href="../reference/layer_spPolys.html">layer_spPolys()</a></code>, <code><a href="../reference/layer_states.html">layer_states()</a></code>, <code><a href="../reference/layer_points.html">layer_points()</a></code>, <code><a href="../reference/layer_vectorField.html">layer_vectorField()</a></code>.</li>
@@ -258,16 +265,16 @@
 <li>Added <code><a href="../reference/wrf_latestModelRun.html">wrf_latestModelRun()</a></code> to list available model runs.</li>
 </ul>
 </div>
-    <div id="AirFireWRF-011" class="section level1">
+    <div id="airfirewrf-011" class="section level1">
 <h1 class="page-header" data-toc-text="0.1.1">
-<a href="#AirFireWRF-011" class="anchor"></a>AirFireWRF 0.1.1</h1>
+<a href="#airfirewrf-011" class="anchor"></a>AirFireWRF 0.1.1</h1>
 <ul>
 <li>Added “Static Layered Plots” article.</li>
 </ul>
 </div>
-    <div id="AirFireWRF-010" class="section level1">
+    <div id="airfirewrf-010" class="section level1">
 <h1 class="page-header" data-toc-text="0.1.0">
-<a href="#AirFireWRF-010" class="anchor"></a>AirFireWRF 0.1.0</h1>
+<a href="#airfirewrf-010" class="anchor"></a>AirFireWRF 0.1.0</h1>
 <ul>
 <li>Initial Release</li>
 </ul>

@@ -72,7 +72,7 @@
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">AirFireWRF</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.1.13</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.1.14</span>
       </span>
     </div>
 
@@ -85,9 +85,6 @@
   </a>
 </li>
 <li>
-  <a href="../articles/AirFireWRF.html">Get started</a>
-</li>
-<li>
   <a href="../reference/index.html">Reference</a>
 </li>
 <li class="dropdown">
@@ -97,6 +94,9 @@
     <span class="caret"></span>
   </a>
   <ul class="dropdown-menu" role="menu">
+    <li>
+      <a href="../articles/WRFmet.html">AirFireWRF</a>
+    </li>
     <li>
       <a href="../articles/articles/Saving_Data_Subsets.html">Saving Data Subsets</a>
     </li>
@@ -176,7 +176,7 @@
 <span class='fu'><a href='setWRFDataDir.html'>setWRFDataDir</a></span>(<span class='st'>"~/Data/WRF"</span>)
 
 <span class='no'>modelRun</span> <span class='kw'>&lt;-</span> <span class='fu'><a href='wrf_latestModelRun.html'>wrf_latestModelRun</a></span>(<span class='st'>"PNW-4km"</span>)
-<span class='no'>filePath</span> <span class='kw'>&lt;-</span> <span class='fu'><a href='wrf_download.html'>wrf_download</a></span>(<span class='st'>"PNW-4km"</span>, <span class='no'>modelRun</span>, <span class='fl'>7</span>)</div><div class='output co'>#&gt; <span class='message'>WRF model run exists at: /Users/mazama/Data/WRF/PNW-4km_2020092212_07.nc</span></div><div class='input'><span class='fu'>wrf_downloaded</span>()</div><div class='output co'>#&gt;  [1] "PNW-1.33km_2020082612_07.nc"      "PNW-1.33km_2020091712_07.nc"     
+<span class='no'>filePath</span> <span class='kw'>&lt;-</span> <span class='fu'><a href='wrf_download.html'>wrf_download</a></span>(<span class='st'>"PNW-4km"</span>, <span class='no'>modelRun</span>, <span class='fl'>7</span>)</div><div class='output co'>#&gt; <span class='message'>WRF model run exists at: /Users/mazama/Data/WRF/PNW-4km_2020092412_07.nc</span></div><div class='input'><span class='fu'>wrf_downloaded</span>()</div><div class='output co'>#&gt;  [1] "PNW-1.33km_2020082612_07.nc"      "PNW-1.33km_2020091712_07.nc"     
 #&gt;  [3] "PNW-1.33km_2020091712_08.nc"      "PNW-1.33km_2020091712_09.nc"     
 #&gt;  [5] "PNW-1.33km_2020091712_10.nc"      "PNW-4km_2020082500_11.nc"        
 #&gt;  [7] "PNW-4km_2020082612_08.nc"         "PNW-4km_2020082612_09.nc"        
@@ -186,9 +186,9 @@
 #&gt; [15] "PNW-4km_2020090412_07.nc"         "PNW-4km_2020090812_07.nc"        
 #&gt; [17] "PNW-4km_2020091512_07.nc"         "PNW-4km_2020091612_07.nc"        
 #&gt; [19] "PNW-4km_2020091712_07.nc"         "PNW-4km_2020091912_07.nc"        
-#&gt; [21] "PNW-4km_2020092212_07.nc"         "wrfout_d3-2020071512-f07-0000.nc"
-#&gt; [23] "wrfout_d3.2020082612.f07.0000.nc" "wrfout_d3.2020082612.f08.0000.nc"
-#&gt; [25] "wrfout_d3.2020082612.f09.0000.nc"</div><div class='input'># }
+#&gt; [21] "PNW-4km_2020092212_07.nc"         "PNW-4km_2020092412_07.nc"        
+#&gt; [23] "wrfout_d3-2020071512-f07-0000.nc" "wrfout_d3.2020082612.f07.0000.nc"
+#&gt; [25] "wrfout_d3.2020082612.f08.0000.nc" "wrfout_d3.2020082612.f09.0000.nc"</div><div class='input'># }
 </div></pre>
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="pkgdown-sidebar">
