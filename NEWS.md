@@ -1,3 +1,9 @@
+# AirFireWRF 0.1.15
+
+* Added a modified (but unpublished) version `wrf_load()` in `local_tate/` that
+allows the user to provide a reference raster whose grid can be used to 
+rasterize WRF spatial data points.
+
 # AirFireWRF 0.1.14
 
 * Changed package name and all instances of "WRFmet" to "AirFireWRF".

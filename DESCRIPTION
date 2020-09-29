@@ -1,6 +1,6 @@
 Type: Package
 Package: AirFireWRF
-Version: 0.1.14
+Version: 0.1.15
 Title: Utilities for working with WRF atmospheric model data
 Authors@R: c(
     person("Jonathan", "Callahan", email="jonathan.s.callahan@gmail.com", role=c("aut","cre")),
