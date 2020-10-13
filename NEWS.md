@@ -1,3 +1,8 @@
+# AirFireWRF 0.1.16
+
+* Removed plotting functionality and documentation, which is now provided in the
+**AirFirePlots** package.
+
 # AirFireWRF 0.1.15
 
 * Added a modified (but unpublished) version `wrf_load()` in `local_tate/` that

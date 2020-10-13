@@ -45,17 +45,20 @@ temperature (TSK), elevation (HGT), and wind velocity
 (U10 &amp;amp; V10) across the Pacific Northwest 7 hours after 12pm on
 July 15, 2020. This data is used in several examples in the package 
 documentation.
-This dataset was generated on 2020-09-01 by running:
+This dataset was generated on 2020-09-29 by running:
 
 library(AirFireWRF)
 
 example_PNW &amp;amp;lt;- wrf_load(
-  localPath = '~/Data/WRF/wrfout_d3-2020071512-f07-0000.nc',
+  localPath = &quot;~/Data/WRF/wrfout_d3-2020071512-f07-0000.nc&quot;,
   varNames = c('HGT', 'TSK', 'U10', 'V10'),
   res = 0.06,
   xlim = c(-125, -111),
   ylim = c(42, 49)
 )
+
+# Have to manually set the title since the filename format is outdated
+example_PNW@title &amp;amp;lt;- &quot;PNW-4km 2020-07-15 12 PM, forecast hour 7&quot;
 
 save(example_PNW, file = &quot;data/example_PNW.rda&quot;, compress = &quot;xz&quot;)
 " />
@@ -118,9 +121,6 @@ save(example_PNW, file = &quot;data/example_PNW.rda&quot;, compress = &quot;xz&q
     <li>
       <a href="../articles/articles/Saving_Data_Subsets.html">Saving Data Subsets</a>
     </li>
-    <li>
-      <a href="../articles/articles/Static_Layered_Plots.html">Static Layered Plots</a>
-    </li>
   </ul>
 </li>
 <li>
@@ -158,17 +158,20 @@ temperature (<code>TSK</code>), elevation (<code>HGT</code>), and wind velocity
 (<code>U10</code> &amp; <code>V10</code>) across the Pacific Northwest 7 hours after 12pm on
 July 15, 2020. This data is used in several examples in the package 
 documentation.</p>
-<p>This dataset was generated on 2020-09-01 by running:</p>
+<p>This dataset was generated on 2020-09-29 by running:</p>
 <pre>
 <span class='fu'><a href='https://rdrr.io/r/base/library.html'>library</a></span>(<span class='no'>AirFireWRF</span>)
 
 <span class='no'>example_PNW</span> <span class='kw'>&amp;</span><span class='no'>lt</span>;- <span class='fu'><a href='wrf_load.html'>wrf_load</a></span>(
-  <span class='kw'>localPath</span> <span class='kw'>=</span> <span class='st'>'~/Data/WRF/wrfout_d3-2020071512-f07-0000.nc'</span>,
+  <span class='kw'>localPath</span> <span class='kw'>=</span> <span class='st'>"~/Data/WRF/wrfout_d3-2020071512-f07-0000.nc"</span>,
   <span class='kw'>varNames</span> <span class='kw'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span>(<span class='st'>'HGT'</span>, <span class='st'>'TSK'</span>, <span class='st'>'U10'</span>, <span class='st'>'V10'</span>),
   <span class='kw'>res</span> <span class='kw'>=</span> <span class='fl'>0.06</span>,
   <span class='kw'>xlim</span> <span class='kw'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span>(-<span class='fl'>125</span>, -<span class='fl'>111</span>),
   <span class='kw'>ylim</span> <span class='kw'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span>(<span class='fl'>42</span>, <span class='fl'>49</span>)
 )
+
+<span class='co'># Have to manually set the title since the filename format is outdated</span>
+<span class='no'>example_PNW</span>@<span class='kw'>title</span> <span class='kw'>&amp;</span><span class='no'>lt</span>;- <span class='st'>"PNW-4km 2020-07-15 12 PM, forecast hour 7"</span>
 
 <span class='fu'><a href='https://rdrr.io/r/base/save.html'>save</a></span>(<span class='no'>example_PNW</span>, <span class='kw'>file</span> <span class='kw'>=</span> <span class='st'>"data/example_PNW.rda"</span>, <span class='kw'>compress</span> <span class='kw'>=</span> <span class='st'>"xz"</span>)</pre>
 

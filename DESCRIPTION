@@ -1,6 +1,6 @@
 Type: Package
 Package: AirFireWRF
-Version: 0.1.15
+Version: 0.1.16
 Title: Utilities for working with WRF atmospheric model data
 Authors@R: c(
     person("Jonathan", "Callahan", email="jonathan.s.callahan@gmail.com", role=c("aut","cre")),
@@ -18,19 +18,13 @@ Depends:
     R (>= 3.5.0)
 Imports:
     AirFireModeling,
-    cowplot,
     dplyr,
     geosphere,
-    ggplot2,
-    ggplotify,
     lubridate,
     magrittr,
     MazamaCoreUtils,
     ncdf4,
-    PWFSLSmoke,
     raster,
-    rasterVis,
-    RColorBrewer,
     readr,
     rlang,
     stringr

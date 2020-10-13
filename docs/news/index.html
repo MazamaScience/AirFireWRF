@@ -99,9 +99,6 @@
     <li>
       <a href="../articles/articles/Saving_Data_Subsets.html">Saving Data Subsets</a>
     </li>
-    <li>
-      <a href="../articles/articles/Static_Layered_Plots.html">Static Layered Plots</a>
-    </li>
   </ul>
 </li>
 <li>
@@ -152,16 +149,16 @@
 <ul>
 <li>Changed the <code><a href="../reference/wrf_load.html">wrf_load()</a></code> <code>vars</code> parameter to <code>varNames</code> for consistency with plot function parameters.</li>
 <li>
-<code><a href="../reference/layer_raster.html">layer_raster()</a></code> can now fill according to discrete value ranges.</li>
+<code>layer_raster()</code> can now fill according to discrete value ranges.</li>
 <li>
-<code><a href="../reference/wrf_rasterPlot.html">wrf_rasterPlot()</a></code> and <code><a href="../reference/wrf_standardPlot.html">wrf_standardPlot()</a></code> now support discrete value ranges and Brewer palettes to color their rasters.</li>
+<code>wrf_rasterPlot()</code> and <code>wrf_standardPlot()</code> now support discrete value ranges and Brewer palettes to color their rasters.</li>
 </ul>
 </div>
     <div id="airfirewrf-0112" class="section level1">
 <h1 class="page-header" data-toc-text="0.1.12">
 <a href="#airfirewrf-0112" class="anchor"></a>AirFireWRF 0.1.12</h1>
 <ul>
-<li>Tweak to color and line width in <code><a href="../reference/layer_vectorField.html">layer_vectorField()</a></code>.</li>
+<li>Tweak to color and line width in <code>layer_vectorField()</code>.</li>
 </ul>
 </div>
     <div id="airfirewrf-0111" class="section level1">
@@ -169,16 +166,16 @@
 <a href="#airfirewrf-0111" class="anchor"></a>AirFireWRF 0.1.11</h1>
 <ul>
 <li>
-<code><a href="../reference/wrf_standardPlot.html">wrf_standardPlot()</a></code> can now plot a contour layer.</li>
-<li>Added line thickness parameters in <code><a href="../reference/wrf_standardPlot.html">wrf_standardPlot()</a></code> for the spatial and state polygon layers.</li>
-<li>Updated <code><a href="../reference/wrf_standardPlot.html">wrf_standardPlot()</a></code> layer color defaults:
+<code>wrf_standardPlot()</code> can now plot a contour layer.</li>
+<li>Added line thickness parameters in <code>wrf_standardPlot()</code> for the spatial and state polygon layers.</li>
+<li>Updated <code>wrf_standardPlot()</code> layer color defaults:
 <ul>
 <li>Spatial polygons: <code>color</code> -&gt; “red”, <code>fill</code> -&gt; “transparent”.</li>
 <li>State polygons: <code>color</code> -&gt; “red”, <code>fill</code> -&gt; “transparent”.</li>
 <li>Vector field: <code>arrowColor</code> -&gt; “black”</li>
 </ul>
 </li>
-<li>Removed the <code>...</code> parameter from both <code>wrf_raster()</code> and <code><a href="../reference/wrf_standardPlot.html">wrf_standardPlot()</a></code> since it was more confusing than helpful (only held additional arguments to <code><a href="https://ggplot2.tidyverse.org/reference/scale_gradient.html">ggplot2::scale_fill_gradientn()</a></code>).</li>
+<li>Removed the <code>...</code> parameter from both <code>wrf_raster()</code> and <code>wrf_standardPlot()</code> since it was more confusing than helpful (only held additional arguments to <code><a href="https://ggplot2.tidyverse.org/reference/scale_gradient.html">ggplot2::scale_fill_gradientn()</a></code>).</li>
 </ul>
 </div>
     <div id="airfirewrf-0110" class="section level1">
@@ -192,11 +189,11 @@
 <h1 class="page-header" data-toc-text="0.1.9">
 <a href="#airfirewrf-019" class="anchor"></a>AirFireWRF 0.1.9</h1>
 <ul>
-<li>Added new plot layer function: <code><a href="../reference/layer_contours.html">layer_contours()</a></code>.</li>
-<li>Changed <code><a href="../reference/layer_spPolys.html">layer_spPolys()</a></code>’s <code>spdf</code> parameter to <code>polygons</code>.</li>
-<li>Added <code>arrowWidth</code> as a parameter to <code><a href="../reference/layer_vectorField.html">layer_vectorField()</a></code>.</li>
-<li>Added <code>lineWidth</code> as a parameter to <code><a href="../reference/layer_states.html">layer_states()</a></code>.</li>
-<li>Added <code>lineWidth</code> as a parameter to <code><a href="../reference/layer_spPolys.html">layer_spPolys()</a></code>.</li>
+<li>Added new plot layer function: <code>layer_contours()</code>.</li>
+<li>Changed <code>layer_spPolys()</code>’s <code>spdf</code> parameter to <code>polygons</code>.</li>
+<li>Added <code>arrowWidth</code> as a parameter to <code>layer_vectorField()</code>.</li>
+<li>Added <code>lineWidth</code> as a parameter to <code>layer_states()</code>.</li>
+<li>Added <code>lineWidth</code> as a parameter to <code>layer_spPolys()</code>.</li>
 </ul>
 </div>
     <div id="airfirewrf-018" class="section level1">
@@ -212,9 +209,9 @@
 <ul>
 <li>Changed layer_vectorField() to take in a single raster object <code>raster</code> and the names of its u and v layers: <code>uName</code> and <code>vName</code>.</li>
 <li>Changed layer_raster() to take in an optional <code>varName</code> parameter in case the given raster is a multilayer <em>RasterBrick</em>.</li>
-<li>Changed the names of <code>plot_base()</code>, <code>plot_raster()</code>, and <code>plot_standard()</code> to <code><a href="../reference/wrf_basePlot.html">wrf_basePlot()</a></code>, <code><a href="../reference/wrf_rasterPlot.html">wrf_rasterPlot()</a></code>, and <code><a href="../reference/wrf_standardPlot.html">wrf_standardPlot()</a></code> respectively.</li>
+<li>Changed the names of <code>plot_base()</code>, <code>plot_raster()</code>, and <code>plot_standard()</code> to <code>wrf_basePlot()</code>, <code>wrf_rasterPlot()</code>, and <code>wrf_standardPlot()</code> respectively.</li>
 <li>
-<code><a href="../reference/wrf_rasterPlot.html">wrf_rasterPlot()</a></code> and <code><a href="../reference/wrf_standardPlot.html">wrf_standardPlot()</a></code> plot titles default to their raster title.</li>
+<code>wrf_rasterPlot()</code> and <code>wrf_standardPlot()</code> plot titles default to their raster title.</li>
 <li>Updated all vignettes and functions, and examples to properly use these new parameters and function names.</li>
 </ul>
 </div>
@@ -230,7 +227,7 @@
 <h1 class="page-header" data-toc-text="0.1.5">
 <a href="#airfirewrf-015" class="anchor"></a>AirFireWRF 0.1.5</h1>
 <ul>
-<li>Changed default polygon fill from ‘white’ to ‘transparent’ for <code><a href="../reference/layer_states.html">layer_states()</a></code> and <code><a href="../reference/layer_spPolys.html">layer_spPolys()</a></code>.</li>
+<li>Changed default polygon fill from ‘white’ to ‘transparent’ for <code>layer_states()</code> and <code>layer_spPolys()</code>.</li>
 </ul>
 </div>
     <div id="airfirewrf-014" class="section level1">
@@ -244,7 +241,7 @@
 <code><a href="../reference/wrf_load.html">wrf_load()</a></code> now has a variable preset for AirFire.</li>
 <li>Removed parameters <code>fillLow</code> and <code>fillHigh</code> from <code>plot_standard()</code> and <code>plot_raster()</code> to instead support parameters for <code><a href="https://ggplot2.tidyverse.org/reference/scale_gradient.html">ggplot2::scale_fill_gradientn()</a></code>.</li>
 <li>
-<code><a href="../reference/layer_vectorField.html">layer_vectorField()</a></code>
+<code>layer_vectorField()</code>
 <ul>
 <li>No longer supports the <code>uvRaster</code> parameter.</li>
 <li>Changed parameters <code>uLayer</code> and <code>vLayer</code> to <code>uRaster</code> and <code>vRaster</code>.</li>
@@ -267,7 +264,7 @@
 <a href="#airfirewrf-012" class="anchor"></a>AirFireWRF 0.1.2</h1>
 <ul>
 <li>First pass at standard plotting functions <code>plot_base()</code> and <code>plot_raster()</code>.</li>
-<li>Added <code>layer_~()</code> functions to build up ggplot plots: <code><a href="../reference/layer_raster.html">layer_raster()</a></code>, <code><a href="../reference/layer_spPolys.html">layer_spPolys()</a></code>, <code><a href="../reference/layer_states.html">layer_states()</a></code>, <code><a href="../reference/layer_points.html">layer_points()</a></code>, <code><a href="../reference/layer_vectorField.html">layer_vectorField()</a></code>.</li>
+<li>Added <code>layer_~()</code> functions to build up ggplot plots: <code>layer_raster()</code>, <code>layer_spPolys()</code>, <code>layer_states()</code>, <code>layer_points()</code>, <code>layer_vectorField()</code>.</li>
 <li>Added <code><a href="../reference/wrf_download.html">wrf_download()</a></code> and <code><a href="../reference/wrf_downloaded.html">wrf_downloaded()</a></code>.</li>
 <li>Added <code><a href="../reference/wrf_latestModelRun.html">wrf_latestModelRun()</a></code> to list available model runs.</li>
 </ul>
