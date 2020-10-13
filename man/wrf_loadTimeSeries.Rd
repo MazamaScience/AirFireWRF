@@ -53,15 +53,15 @@ setWRFDataDir("~/Data/WRF")
 
 # Takes a ridiculously long time to download 4 ~1GB files
 tempTimeSeries <- wrf_loadTimeSeries(
- modelName = "PNW-4km",
- modelRun = "2020092412",
- modelRunHours = 7:10,
- varName = "TSK",
- res = 0.05,
+  modelName = "PNW-4km",
+  modelRun = "2020101012",
+  modelRunHours = 7:10,
+  varName = "TSK",
+  res = 0.1,
   xlim = c(-125, -117),
- ylim = c(45, 49)
+  ylim = c(45.5, 49)
 )
 
-# rasterVis::levelplot(tempTimeSeries)
+tempTimeSeries
 }
 }

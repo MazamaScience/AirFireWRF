@@ -2,6 +2,8 @@
 
 * Removed plotting functionality and documentation, which is now provided in the
 **AirFirePlots** package.
+* *RasterBricks* produced by `wrf_loadTimeSeries()` now have titles and 
+abbreviated layer names.
 
 # AirFireWRF 0.1.15
 

@@ -79,7 +79,7 @@ PNW-4km
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">AirFireWRF</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.1.15</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.1.16</span>
       </span>
     </div>
 
@@ -208,16 +208,24 @@ machine, then it will try to be downloaded from the AirFire database.</p>
 
 <span class='co'># Takes a ridiculously long time to download 4 ~1GB files</span>
 <span class='no'>tempTimeSeries</span> <span class='kw'>&lt;-</span> <span class='fu'>wrf_loadTimeSeries</span>(
- <span class='kw'>modelName</span> <span class='kw'>=</span> <span class='st'>"PNW-4km"</span>,
- <span class='kw'>modelRun</span> <span class='kw'>=</span> <span class='st'>"2020092412"</span>,
- <span class='kw'>modelRunHours</span> <span class='kw'>=</span> <span class='fl'>7</span>:<span class='fl'>10</span>,
- <span class='kw'>varName</span> <span class='kw'>=</span> <span class='st'>"TSK"</span>,
- <span class='kw'>res</span> <span class='kw'>=</span> <span class='fl'>0.05</span>,
+  <span class='kw'>modelName</span> <span class='kw'>=</span> <span class='st'>"PNW-4km"</span>,
+  <span class='kw'>modelRun</span> <span class='kw'>=</span> <span class='st'>"2020101012"</span>,
+  <span class='kw'>modelRunHours</span> <span class='kw'>=</span> <span class='fl'>7</span>:<span class='fl'>10</span>,
+  <span class='kw'>varName</span> <span class='kw'>=</span> <span class='st'>"TSK"</span>,
+  <span class='kw'>res</span> <span class='kw'>=</span> <span class='fl'>0.1</span>,
   <span class='kw'>xlim</span> <span class='kw'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span>(-<span class='fl'>125</span>, -<span class='fl'>117</span>),
- <span class='kw'>ylim</span> <span class='kw'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span>(<span class='fl'>45</span>, <span class='fl'>49</span>)
-)</div><div class='output co'>#&gt; <span class='message'>WRF model run exists at: /Users/mazama/Data/WRF/PNW-4km_2020092412_07.nc</span></div><div class='output co'>#&gt; <span class='message'>WRF model run exists at: /Users/mazama/Data/WRF/PNW-4km_2020092412_08.nc</span></div><div class='output co'>#&gt; <span class='message'>WRF model run exists at: /Users/mazama/Data/WRF/PNW-4km_2020092412_09.nc</span></div><div class='output co'>#&gt; <span class='message'>WRF model run exists at: /Users/mazama/Data/WRF/PNW-4km_2020092412_10.nc</span></div><div class='input'>
-# rasterVis::levelplot(tempTimeSeries)
-# }
+  <span class='kw'>ylim</span> <span class='kw'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span>(<span class='fl'>45.5</span>, <span class='fl'>49</span>)
+)</div><div class='output co'>#&gt; <span class='message'>WRF model run exists at: /Users/mazama/Data/WRF/PNW-4km_2020101012_07.nc</span></div><div class='output co'>#&gt; <span class='message'>WRF model run exists at: /Users/mazama/Data/WRF/PNW-4km_2020101012_08.nc</span></div><div class='output co'>#&gt; <span class='message'>WRF model run exists at: /Users/mazama/Data/WRF/PNW-4km_2020101012_09.nc</span></div><div class='output co'>#&gt; <span class='message'>WRF model run exists at: /Users/mazama/Data/WRF/PNW-4km_2020101012_10.nc</span></div><div class='input'>
+<span class='no'>tempTimeSeries</span></div><div class='output co'>#&gt; class      : RasterBrick 
+#&gt; dimensions : 36, 81, 2916, 4  (nrow, ncol, ncell, nlayers)
+#&gt; resolution : 0.1001554, 0.1000347  (x, y)
+#&gt; extent     : -125.0784, -116.9658, 45.49607, 49.09732  (xmin, xmax, ymin, ymax)
+#&gt; crs        : +proj=longlat +datum=WGS84 +ellps=WGS84 +towgs84=0,0,0 
+#&gt; source     : memory
+#&gt; names      :    hr_07,    hr_08,    hr_09,    hr_10 
+#&gt; min values : 270.2040, 269.7638, 269.9378, 269.0775 
+#&gt; max values : 297.0681, 297.4525, 297.4276, 296.2824 
+#&gt; </div><div class='input'># }
 </div></pre>
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="pkgdown-sidebar">

@@ -30,16 +30,16 @@
 #' 
 #' # Takes a ridiculously long time to download 4 ~1GB files
 #' tempTimeSeries <- wrf_loadTimeSeries(
-#'  modelName = "PNW-4km",
-#'  modelRun = "2020092412",
-#'  modelRunHours = 7:10,
-#'  varName = "TSK",
-#'  res = 0.05,
+#'   modelName = "PNW-4km",
+#'   modelRun = "2020101012",
+#'   modelRunHours = 7:10,
+#'   varName = "TSK",
+#'   res = 0.1,
 #'   xlim = c(-125, -117),
-#'  ylim = c(45, 49)
+#'   ylim = c(45.5, 49)
 #' )
 #'
-#' # rasterVis::levelplot(tempTimeSeries)
+#' tempTimeSeries
 #' }
 
 wrf_loadTimeSeries <- function(
@@ -133,9 +133,19 @@ wrf_loadTimeSeries <- function(
   
   # Consolidate hour RasterLayers into a RasterBrick
   rasterBrick <- raster::brick(rasterLayers)
-  names(rasterBrick) <- paste0("hour_", modelRunHours)
+  names(rasterBrick) <- paste0(
+    "hr_",
+    stringr::str_pad(modelRunHours, 2, pad = "0")
+  )
   
   # TODO: Set raster brick title
+  
+  rasterBrick@title <- paste0(
+    modelName, " ",
+    modelRun, " hrs ", 
+    modelRunHours[1], "-", modelRunHours[length(modelRunHours)], " ",
+    varName
+  )
   
   return(rasterBrick)
   
