@@ -30,7 +30,7 @@ wrf_download <- function(
   modelName = NULL,
   modelRun = NULL,
   modelRunHour = NULL,
-  baseUrl = "http://m2.airfire.org",
+  baseUrl = "http://m2.airfire.org", # http://128.95.182.72
   verbose = TRUE
 ) {
   

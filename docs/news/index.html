@@ -10,27 +10,23 @@
 
 
 <!-- jquery -->
-<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.4.1/jquery.min.js" integrity="sha256-CSXorXvZcTkaix6Yvo6HppcZGetbYMGWSFlBw8HfCJo=" crossorigin="anonymous"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.min.js" integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8=" crossorigin="anonymous"></script>
 <!-- Bootstrap -->
 
-<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.4.1/css/bootstrap.min.css" integrity="sha256-bZLfwXAP04zRMK2BjiO8iu9pf4FbLqX6zitd+tIvLhE=" crossorigin="anonymous" />
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha256-916EbMg70RQy9LHiGkXzG8hSg9EdNy97GazNG/aiY1w=" crossorigin="anonymous" />
 
-<script src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.4.1/js/bootstrap.min.js" integrity="sha256-nuL8/2cJ5NDSSwnKD8VqreErSWHtnEP9E7AySL+1ev4=" crossorigin="anonymous"></script>
-
-<!-- bootstrap-toc -->
-<link rel="stylesheet" href="../bootstrap-toc.css">
-<script src="../bootstrap-toc.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha256-U5ZEeKfGNOja007MMD3YBI0A3OSZOQbeG6z2f2Y0hu8=" crossorigin="anonymous"></script>
 
 <!-- Font Awesome icons -->
-<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.12.1/css/all.min.css" integrity="sha256-mmgLkCYLUQbXn0B1SRqzHar6dCnv9oZFPEC1g1cwlkk=" crossorigin="anonymous" />
-<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.12.1/css/v4-shims.min.css" integrity="sha256-wZjR52fzng1pJHwx4aV2AO3yyTOXrcDW7jBpJtTwVxw=" crossorigin="anonymous" />
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.7.1/css/all.min.css" integrity="sha256-nAmazAk6vS34Xqo0BSrTb+abbtFlgsFK7NKSi6o7Y78=" crossorigin="anonymous" />
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.7.1/css/v4-shims.min.css" integrity="sha256-6qHlizsOWFskGlwVOKuns+D1nB6ssZrHQrNj1wGplHc=" crossorigin="anonymous" />
 
 <!-- clipboard.js -->
-<script src="https://cdnjs.cloudflare.com/ajax/libs/clipboard.js/2.0.6/clipboard.min.js" integrity="sha256-inc5kl9MA1hkeYUt+EC3BhlIgyp/2jDIyBLS6k3UxPI=" crossorigin="anonymous"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/clipboard.js/2.0.4/clipboard.min.js" integrity="sha256-FiZwavyI2V6+EXO1U+xzLG3IKldpiTFf3153ea9zikQ=" crossorigin="anonymous"></script>
 
 <!-- headroom.js -->
-<script src="https://cdnjs.cloudflare.com/ajax/libs/headroom/0.11.0/headroom.min.js" integrity="sha256-AsUX4SJE1+yuDu5+mAVzJbuYNPHj/WroHuZ8Ir/CkE0=" crossorigin="anonymous"></script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/headroom/0.11.0/jQuery.headroom.min.js" integrity="sha256-ZX/yNShbjqsohH1k95liqY9Gd8uOiE1S4vZc+9KQ1K4=" crossorigin="anonymous"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/headroom/0.9.4/headroom.min.js" integrity="sha256-DJFC1kqIhelURkuza0AvYal5RxMtpzLjFhsnVIeuk+U=" crossorigin="anonymous"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/headroom/0.9.4/jQuery.headroom.min.js" integrity="sha256-ZX/yNShbjqsohH1k95liqY9Gd8uOiE1S4vZc+9KQ1K4=" crossorigin="anonymous"></script>
 
 <!-- pkgdown -->
 <link href="../pkgdown.css" rel="stylesheet">
@@ -57,7 +53,7 @@
 
   </head>
 
-  <body data-spy="scroll" data-target="#toc">
+  <body>
     <div class="container template-news">
       <header>
       <div class="navbar navbar-default navbar-fixed-top" role="navigation">
@@ -71,7 +67,7 @@
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">AirFireWRF</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.1.16</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.2.0</span>
       </span>
     </div>
 
@@ -107,7 +103,7 @@
       </ul>
       <ul class="nav navbar-nav navbar-right">
         <li>
-  <a href="https://github.com/MazamaScience/AirFireWRF/">
+  <a href="https://github.com/MazamaScience/AirFireWRF">
     <span class="fab fa fab fa-github fa-lg"></span>
      
   </a>
@@ -125,36 +121,46 @@
 <div class="row">
   <div class="col-md-9 contents">
     <div class="page-header">
-      <h1 data-toc-skip>Changelog <small></small></h1>
+      <h1>Changelog <small></small></h1>
       <small>Source: <a href='https://github.com/MazamaScience/AirFireWRF/blob/master/NEWS.md'><code>NEWS.md</code></a></small>
     </div>
 
-    <div id="airfirewrf-0116" class="section level1">
-<h1 class="page-header" data-toc-text="0.1.16">
-<a href="#airfirewrf-0116" class="anchor"></a>AirFireWRF 0.1.16</h1>
+    <div id="airfirewrf-0-2-0" class="section level1">
+<h1 class="page-header">
+<a href="#airfirewrf-0-2-0" class="anchor"></a>AirFireWRF 0.2.0</h1>
+<p>This version is for data access only. All plotting functionality has been moved to the **AirFirePlots package.</p>
+<ul>
+<li>Version bump to 0.2</li>
+<li>Minor cleanup.</li>
+<li>Removed <code>wrf_loadTimeSeries()</code> as it takes a ridiculously long time to download enough files to make a timeseries.</li>
+</ul>
+</div>
+    <div id="airfirewrf-0-1-16" class="section level1">
+<h1 class="page-header">
+<a href="#airfirewrf-0-1-16" class="anchor"></a>AirFireWRF 0.1.16</h1>
 <ul>
 <li>Removed plotting functionality and documentation, which is now provided in the <strong>AirFirePlots</strong> package.</li>
 <li>
-<em>RasterBricks</em> produced by <code><a href="../reference/wrf_loadTimeSeries.html">wrf_loadTimeSeries()</a></code> now have titles and abbreviated layer names.</li>
+<em>RasterBricks</em> produced by <code>wrf_loadTimeSeries()</code> now have titles and abbreviated layer names.</li>
 </ul>
 </div>
-    <div id="airfirewrf-0115" class="section level1">
-<h1 class="page-header" data-toc-text="0.1.15">
-<a href="#airfirewrf-0115" class="anchor"></a>AirFireWRF 0.1.15</h1>
+    <div id="airfirewrf-0-1-15" class="section level1">
+<h1 class="page-header">
+<a href="#airfirewrf-0-1-15" class="anchor"></a>AirFireWRF 0.1.15</h1>
 <ul>
 <li>Added a modified (but unpublished) version <code><a href="../reference/wrf_load.html">wrf_load()</a></code> in <code>local_tate/</code> that allows the user to provide a reference raster whose grid can be used to rasterize WRF spatial data points.</li>
 </ul>
 </div>
-    <div id="airfirewrf-0114" class="section level1">
-<h1 class="page-header" data-toc-text="0.1.14">
-<a href="#airfirewrf-0114" class="anchor"></a>AirFireWRF 0.1.14</h1>
+    <div id="airfirewrf-0-1-14" class="section level1">
+<h1 class="page-header">
+<a href="#airfirewrf-0-1-14" class="anchor"></a>AirFireWRF 0.1.14</h1>
 <ul>
 <li>Changed package name and all instances of “WRFmet” to “AirFireWRF”.</li>
 </ul>
 </div>
-    <div id="airfirewrf-0113" class="section level1">
-<h1 class="page-header" data-toc-text="0.1.13">
-<a href="#airfirewrf-0113" class="anchor"></a>AirFireWRF 0.1.13</h1>
+    <div id="airfirewrf-0-1-13" class="section level1">
+<h1 class="page-header">
+<a href="#airfirewrf-0-1-13" class="anchor"></a>AirFireWRF 0.1.13</h1>
 <ul>
 <li>Changed the <code><a href="../reference/wrf_load.html">wrf_load()</a></code> <code>vars</code> parameter to <code>varNames</code> for consistency with plot function parameters.</li>
 <li>
@@ -163,16 +169,16 @@
 <code>wrf_rasterPlot()</code> and <code>wrf_standardPlot()</code> now support discrete value ranges and Brewer palettes to color their rasters.</li>
 </ul>
 </div>
-    <div id="airfirewrf-0112" class="section level1">
-<h1 class="page-header" data-toc-text="0.1.12">
-<a href="#airfirewrf-0112" class="anchor"></a>AirFireWRF 0.1.12</h1>
+    <div id="airfirewrf-0-1-12" class="section level1">
+<h1 class="page-header">
+<a href="#airfirewrf-0-1-12" class="anchor"></a>AirFireWRF 0.1.12</h1>
 <ul>
 <li>Tweak to color and line width in <code>layer_vectorField()</code>.</li>
 </ul>
 </div>
-    <div id="airfirewrf-0111" class="section level1">
-<h1 class="page-header" data-toc-text="0.1.11">
-<a href="#airfirewrf-0111" class="anchor"></a>AirFireWRF 0.1.11</h1>
+    <div id="airfirewrf-0-1-11" class="section level1">
+<h1 class="page-header">
+<a href="#airfirewrf-0-1-11" class="anchor"></a>AirFireWRF 0.1.11</h1>
 <ul>
 <li>
 <code>wrf_standardPlot()</code> can now plot a contour layer.</li>
@@ -187,16 +193,16 @@
 <li>Removed the <code>...</code> parameter from both <code>wrf_raster()</code> and <code>wrf_standardPlot()</code> since it was more confusing than helpful (only held additional arguments to <code><a href="https://ggplot2.tidyverse.org/reference/scale_gradient.html">ggplot2::scale_fill_gradientn()</a></code>).</li>
 </ul>
 </div>
-    <div id="airfirewrf-0110" class="section level1">
-<h1 class="page-header" data-toc-text="0.1.10">
-<a href="#airfirewrf-0110" class="anchor"></a>AirFireWRF 0.1.10</h1>
+    <div id="airfirewrf-0-1-10" class="section level1">
+<h1 class="page-header">
+<a href="#airfirewrf-0-1-10" class="anchor"></a>AirFireWRF 0.1.10</h1>
 <ul>
-<li>First pass at <code><a href="../reference/wrf_loadTimeSeries.html">wrf_loadTimeSeries()</a></code>.</li>
+<li>First pass at <code>wrf_loadTimeSeries()</code>.</li>
 </ul>
 </div>
-    <div id="airfirewrf-019" class="section level1">
-<h1 class="page-header" data-toc-text="0.1.9">
-<a href="#airfirewrf-019" class="anchor"></a>AirFireWRF 0.1.9</h1>
+    <div id="airfirewrf-0-1-9" class="section level1">
+<h1 class="page-header">
+<a href="#airfirewrf-0-1-9" class="anchor"></a>AirFireWRF 0.1.9</h1>
 <ul>
 <li>Added new plot layer function: <code>layer_contours()</code>.</li>
 <li>Changed <code>layer_spPolys()</code>’s <code>spdf</code> parameter to <code>polygons</code>.</li>
@@ -205,16 +211,16 @@
 <li>Added <code>lineWidth</code> as a parameter to <code>layer_spPolys()</code>.</li>
 </ul>
 </div>
-    <div id="airfirewrf-018" class="section level1">
-<h1 class="page-header" data-toc-text="0.1.8">
-<a href="#airfirewrf-018" class="anchor"></a>AirFireWRF 0.1.8</h1>
+    <div id="airfirewrf-0-1-8" class="section level1">
+<h1 class="page-header">
+<a href="#airfirewrf-0-1-8" class="anchor"></a>AirFireWRF 0.1.8</h1>
 <ul>
 <li>example_PNW raster now has a proper title.</li>
 </ul>
 </div>
-    <div id="airfirewrf-017" class="section level1">
-<h1 class="page-header" data-toc-text="0.1.7">
-<a href="#airfirewrf-017" class="anchor"></a>AirFireWRF 0.1.7</h1>
+    <div id="airfirewrf-0-1-7" class="section level1">
+<h1 class="page-header">
+<a href="#airfirewrf-0-1-7" class="anchor"></a>AirFireWRF 0.1.7</h1>
 <ul>
 <li>Changed layer_vectorField() to take in a single raster object <code>raster</code> and the names of its u and v layers: <code>uName</code> and <code>vName</code>.</li>
 <li>Changed layer_raster() to take in an optional <code>varName</code> parameter in case the given raster is a multilayer <em>RasterBrick</em>.</li>
@@ -224,24 +230,24 @@
 <li>Updated all vignettes and functions, and examples to properly use these new parameters and function names.</li>
 </ul>
 </div>
-    <div id="airfirewrf-016" class="section level1">
-<h1 class="page-header" data-toc-text="0.1.6">
-<a href="#airfirewrf-016" class="anchor"></a>AirFireWRF 0.1.6</h1>
+    <div id="airfirewrf-0-1-6" class="section level1">
+<h1 class="page-header">
+<a href="#airfirewrf-0-1-6" class="anchor"></a>AirFireWRF 0.1.6</h1>
 <ul>
 <li>
 <code><a href="../reference/wrf_load.html">wrf_load()</a></code> now sets the title of the loaded <em>RasterBrick</em> to the format: “[model domain] yyyy-mm-dd hh[am/pm], Hour [forecast hour]”</li>
 </ul>
 </div>
-    <div id="airfirewrf-015" class="section level1">
-<h1 class="page-header" data-toc-text="0.1.5">
-<a href="#airfirewrf-015" class="anchor"></a>AirFireWRF 0.1.5</h1>
+    <div id="airfirewrf-0-1-5" class="section level1">
+<h1 class="page-header">
+<a href="#airfirewrf-0-1-5" class="anchor"></a>AirFireWRF 0.1.5</h1>
 <ul>
 <li>Changed default polygon fill from ‘white’ to ‘transparent’ for <code>layer_states()</code> and <code>layer_spPolys()</code>.</li>
 </ul>
 </div>
-    <div id="airfirewrf-014" class="section level1">
-<h1 class="page-header" data-toc-text="0.1.4">
-<a href="#airfirewrf-014" class="anchor"></a>AirFireWRF 0.1.4</h1>
+    <div id="airfirewrf-0-1-4" class="section level1">
+<h1 class="page-header">
+<a href="#airfirewrf-0-1-4" class="anchor"></a>AirFireWRF 0.1.4</h1>
 <ul>
 <li>Added ability to download and load PNW-1.33km WRF files.</li>
 <li>
@@ -260,17 +266,17 @@
 <li>Hid <code>plot_base()</code> from users.</li>
 </ul>
 </div>
-    <div id="airfirewrf-013" class="section level1">
-<h1 class="page-header" data-toc-text="0.1.3">
-<a href="#airfirewrf-013" class="anchor"></a>AirFireWRF 0.1.3</h1>
+    <div id="airfirewrf-0-1-3" class="section level1">
+<h1 class="page-header">
+<a href="#airfirewrf-0-1-3" class="anchor"></a>AirFireWRF 0.1.3</h1>
 <ul>
 <li>Added “Saving Data Subsets” article.</li>
 <li>Renamed the <code>sample_PNW</code> dataset to <code>example_PNW</code>.</li>
 </ul>
 </div>
-    <div id="airfirewrf-012" class="section level1">
-<h1 class="page-header" data-toc-text="0.1.2">
-<a href="#airfirewrf-012" class="anchor"></a>AirFireWRF 0.1.2</h1>
+    <div id="airfirewrf-0-1-2" class="section level1">
+<h1 class="page-header">
+<a href="#airfirewrf-0-1-2" class="anchor"></a>AirFireWRF 0.1.2</h1>
 <ul>
 <li>First pass at standard plotting functions <code>plot_base()</code> and <code>plot_raster()</code>.</li>
 <li>Added <code>layer_~()</code> functions to build up ggplot plots: <code>layer_raster()</code>, <code>layer_spPolys()</code>, <code>layer_states()</code>, <code>layer_points()</code>, <code>layer_vectorField()</code>.</li>
@@ -278,26 +284,46 @@
 <li>Added <code><a href="../reference/wrf_latestModelRun.html">wrf_latestModelRun()</a></code> to list available model runs.</li>
 </ul>
 </div>
-    <div id="airfirewrf-011" class="section level1">
-<h1 class="page-header" data-toc-text="0.1.1">
-<a href="#airfirewrf-011" class="anchor"></a>AirFireWRF 0.1.1</h1>
+    <div id="airfirewrf-0-1-1" class="section level1">
+<h1 class="page-header">
+<a href="#airfirewrf-0-1-1" class="anchor"></a>AirFireWRF 0.1.1</h1>
 <ul>
 <li>Added “Static Layered Plots” article.</li>
 </ul>
 </div>
-    <div id="airfirewrf-010" class="section level1">
-<h1 class="page-header" data-toc-text="0.1.0">
-<a href="#airfirewrf-010" class="anchor"></a>AirFireWRF 0.1.0</h1>
+    <div id="airfirewrf-0-1-0" class="section level1">
+<h1 class="page-header">
+<a href="#airfirewrf-0-1-0" class="anchor"></a>AirFireWRF 0.1.0</h1>
 <ul>
 <li>Initial Release</li>
 </ul>
 </div>
   </div>
 
-  <div class="col-md-3 hidden-xs hidden-sm" id="pkgdown-sidebar">
-    <nav id="toc" data-toggle="toc" class="sticky-top">
-      <h2 data-toc-skip>Contents</h2>
-    </nav>
+  <div class="col-md-3 hidden-xs hidden-sm" id="sidebar">
+    <div id="tocnav">
+      <h2>Contents</h2>
+      <ul class="nav nav-pills nav-stacked">
+        <li><a href="#airfirewrf-0-2-0">0.2.0</a></li>
+        <li><a href="#airfirewrf-0-1-16">0.1.16</a></li>
+        <li><a href="#airfirewrf-0-1-15">0.1.15</a></li>
+        <li><a href="#airfirewrf-0-1-14">0.1.14</a></li>
+        <li><a href="#airfirewrf-0-1-13">0.1.13</a></li>
+        <li><a href="#airfirewrf-0-1-12">0.1.12</a></li>
+        <li><a href="#airfirewrf-0-1-11">0.1.11</a></li>
+        <li><a href="#airfirewrf-0-1-10">0.1.10</a></li>
+        <li><a href="#airfirewrf-0-1-9">0.1.9</a></li>
+        <li><a href="#airfirewrf-0-1-8">0.1.8</a></li>
+        <li><a href="#airfirewrf-0-1-7">0.1.7</a></li>
+        <li><a href="#airfirewrf-0-1-6">0.1.6</a></li>
+        <li><a href="#airfirewrf-0-1-5">0.1.5</a></li>
+        <li><a href="#airfirewrf-0-1-4">0.1.4</a></li>
+        <li><a href="#airfirewrf-0-1-3">0.1.3</a></li>
+        <li><a href="#airfirewrf-0-1-2">0.1.2</a></li>
+        <li><a href="#airfirewrf-0-1-1">0.1.1</a></li>
+        <li><a href="#airfirewrf-0-1-0">0.1.0</a></li>
+      </ul>
+    </div>
   </div>
 
 </div>
@@ -309,7 +335,7 @@
 </div>
 
 <div class="pkgdown">
-  <p>Site built with <a href="https://pkgdown.r-lib.org/">pkgdown</a> 1.5.1.</p>
+  <p>Site built with <a href="https://pkgdown.r-lib.org/">pkgdown</a> 1.4.1.</p>
 </div>
 
       </footer>

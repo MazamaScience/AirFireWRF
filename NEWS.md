@@ -1,3 +1,13 @@
+# AirFireWRF 0.2.0
+
+This version is for data access only. All plotting functionality has been moved
+to the **AirFirePlots package.
+
+* Version bump to 0.2
+* Minor cleanup.
+* Removed `wrf_loadTimeSeries()` as it takes a ridiculously long time to
+download enough files to make a timeseries.
+
 # AirFireWRF 0.1.16
 
 * Removed plotting functionality and documentation, which is now provided in the

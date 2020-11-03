@@ -31,7 +31,7 @@
 #' # Takes a ridiculously long time to download 4 ~1GB files
 #' tempTimeSeries <- wrf_loadTimeSeries(
 #'   modelName = "PNW-4km",
-#'   modelRun = "2020101012",
+#'   modelRun = "2020082612",
 #'   modelRunHours = 7:10,
 #'   varName = "TSK",
 #'   res = 0.1,
